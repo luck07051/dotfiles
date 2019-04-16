@@ -55,19 +55,18 @@ else
   setopt PROMPT_SUBST  # enable function in prompt
   PS1="%B%F{cyan}%4~%f%b%(?.%F{white}.%F{red})$%f "
   PS2=">"
-  zsh_add_file "functions/timer.zsh"
-  zsh_add_file "functions/vcs.zsh"
-  RPS1='${vcs} %B%F{8}${timer}%f%b'
+  # zsh_add_file "functions/timer.zsh"
+  # zsh_add_file "functions/vcs.zsh"
+  # RPS1='${vcs} ${timer}'
 fi
 
 # cd Alternatives
-[ -x "$(which zoxide)" ] &&
+type zoxide >/dev/null &&
   eval "$(zoxide init zsh --cmd cd)"
 
 # fzf config
 [ -f "$XDG_CONFIG_HOME/fzf/config.sh" ] &&
   source "$XDG_CONFIG_HOME/fzf/config.sh"
-
 
 # Alias
 zsh_add_file "functions/abbr.zsh"

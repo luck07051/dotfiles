@@ -40,6 +40,9 @@ lf() {
   cd "$(cat /tmp/lfcd)"
 }
 
+type fzf-fm >/dev/null &&
+  source fzf-fm
+
 # Confirm before overwriting something
 alias cp='cp -iv'
 alias mv='mv -iv'
