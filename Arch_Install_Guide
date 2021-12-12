@@ -1,0 +1,129 @@
+# Check Internet
+$ ping google.com
+
+# Update the System Clock
+$ timedatectl set-ntp true
+
+# Partition the Disks
+## list disks
+$ fdisk -l
+## partition the disk you want to
+$ fdisk /dev/the_disk_you_want_to_partition
+you will neet:
+1. EFI:		550M	EFI System
+2. swap:	2G	Linux swap
+3. root:	..	Linux filesystem
+
+# Format the Partitions
+$ mkfs.fat -F32 /dev/[EFI]
+$ mkswap /dev/[swap]
+$ mkfs.ext4 /dev/[root]
+
+# Mount the File Systems
+$ mount /dev/[root] /mnt
+$ swapon /dev/[swap]
+
+# Install the Base System
+$ pacstrap /mnt base linux linux-firmware
+
+# Generate File System Table
+$ genfstab -U /mnt >> /mnt/etc/fstab
+
+# Change root Into New System
+$ arch-chroot /mnt
+
+# Set the Time Zone
+$ ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+
+# Set Hardware Clock
+$ hwclock --systohc
+
+# Install Text Editor
+$ pacman -S vim
+
+# Set Locales
+$ vim /etc/locale.gen
+uncomment you needed locales
+$ locale-gen
+
+# Set the Host Name
+$ vim /etc/hostname
+# Set the Host Conf
+$ vim /etc/hosts
+
+# Set Password for Root 
+$ passwd
+# Add Normal User and Password
+$ useradd -m [user]
+$ passwd [user]
+
+# Add [user] to Groups (for sudo)
+$ usermod -aG wheel,audio,video,optical,storage [user]
+# Install sudo
+$ pacman -S sudo
+# Edit the File to Allow sudo Can Execute Any Command
+$ visudo
+uncomment the line: %wheel ALL=(ALL) ALL
+
+# Install grub and Other
+$ pacman -S grub
+$ pacman -S efibootmgr dosfstools os-prober mtools
+$ mkdir /boot/EFI
+$ mount /dev/[EFI] /boot/EFI
+$ grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
+$ grub-mkconfig -o /boot/grub/grub.cfg
+
+# Install Internet Manager
+$ pacman -S networkmanager
+$ systemctl enable NetworkManager
+
+# Reboot
+$ exit
+$ umount -R /mnt
+$ reboot 
+Remember to remove the installation medium
+
+
+
+#====================application====================#
+base-devel
+git
+openssh
+
+zsh
+xorg
+xorg-xinit
+//nvidea
+
+alsl-utils
+
+Qtile
+firefox
+
+picom
+nitrogen
+ranger
+sxiv
+
+yay
+yay -> st
+//yay -> font-manager
+yay -> nerd-fonts-complete
+    -> adobe-source-han-sans-otc-fonts
+    -> noto-fonts-cjk
+yay -> zsh-syntax-highlighting-git
+
+
+
+$ git clone https://aur.archlinux.org/yay-git.git
+$ cd yay-git
+$ makepkg -si
+ 
+$ mkdir -p ~/.config/qtile/
+$ cp /usr/share/doc/<qtile_dir>/default_config.py ~/.config/qtile/config.py
+
+
+git init --bare $HOME/.cfg
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config config --local status.showUntrackedFiles no
+echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.bashrc
