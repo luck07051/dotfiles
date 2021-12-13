@@ -85,7 +85,7 @@ Remember to remove the installation medium
 
 
 
-#====================application====================#
+#========================================#
 base-devel
 git
 openssh
@@ -123,7 +123,7 @@ $ mkdir -p ~/.config/qtile/
 $ cp /usr/share/doc/<qtile_dir>/default_config.py ~/.config/qtile/config.py
 
 
-git init --bare $HOME/.cfg
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+git init --bare $HOME/dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
 echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.bashrc
