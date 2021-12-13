@@ -1,10 +1,10 @@
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt autocd beep
 bindkey -v
-# End of lines configured by zsh-newuser-install
+
+export TERM="xterm-256color"
 
 # for bare Git repository
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
@@ -17,6 +17,9 @@ alias q='startx'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu yes select
 
+
+
+
 #===================Plug=====================#
 source ~/.zplug/init.zsh
 
@@ -27,6 +30,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
+
 
 zplug "zpm-zsh/ls"
 
