@@ -1,7 +1,7 @@
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -32,104 +32,86 @@ keys = [
         lazy.restart(),
         desc="Restart Qtile"),
 
+    Key([mod, "control"], "q",
+        lazy.shutdown(),
+        desc="Shutdown Qtile"),
 
-    # Switch Between Windows #
-    Key([mod], "w",
-        lazy.to_screen(0),
-        desc="Keyboard focus to monitor 1"
-        ),
-    Key([mod], "e",
-        lazy.to_screen(1),
-        desc="Keyboard focus to monitor 2"
-        ),
-    Key([mod], "r",
-        lazy.to_screen(2),
-        desc="Keyboard focus to monitor 3"
-        ),
+    Key([mod], "Tab", 
+        lazy.next_layout(),
+        desc="Toggle between layouts"),
 
 
-    # Switch Between Monitor
+    # Monitor #
+    Key([mod], "u", lazy.to_screen(0), desc="Focus to monitor 1"),
+    Key([mod], "i", lazy.to_screen(1), desc="Focus to monitor 2"),
+    Key([mod], "o", lazy.to_screen(2), desc="Focus to monitor 3"),
 
 
-    # Switch between windows
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(),
-        desc="Move window focus to other window"),
+    # Windows #
+    Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
+    Key([mod], "k", lazy.layout.up(),    desc="Move focus to up in current stack"),
 
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
-        desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
-        desc="Move window to the right"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
-        desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod], "h",
+        lazy.layout.shrink(),
+        lazy.layout.decrease_nmaster(),
+        desc="Shrink window (MonadTall), decrease number in master pane (Tile)"),
+    Key([mod], "l",
+        lazy.layout.grow(),
+        lazy.layout.increase_nmaster(),
+        desc="Expand window (MonadTall), increase number in master pane (Tile)"),
 
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(),
-        desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(),
-        desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(),
-        desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),  desc="Move windows down in current stack"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(),    desc="Move windows down in current stack"),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),  desc="Move windows down in current stack"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move windows down in current stack"),
 
 
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    # Group #
 
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
+    Key([mod], "m",
+        lazy.layout.maximize(),
+        desc="toggle window between minimum and maximum sizes"),
+
+    Key([mod, "shift"], "f",
+        lazy.window.toggle_floating(),
+        desc="toggle floating"),
+
+    Key([mod], "f",
+        lazy.window.toggle_fullscreen(),
+        desc="toggle fullscreen"),
+
 ]
 
-groups = [Group(i) for i in "123456789"]
 
-for i in groups:
-    keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
-            desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
-    ])
+#====================GROUPS====================#
+groups = [
+    Group("a"),
+    Group("b"),
+    Group("c")]
 
+# mod + index Number : Switch to Group[index]
+# mod + shift + index Number : Send active window to another Group
+from libqtile.dgroups import simple_key_binder
+dgroups_key_binder = simple_key_binder(mod)
+
+
+
+#====================LAYOUT====================#
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": "FFC0CB",
-                "border_normal": "333745"
-                }
+                "border_focus": "#FFC0CB",
+                "border_normal": "#2F3340"}
 
 layouts = [
-    layout.Columns(**layout_theme),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.MonadTall(**layout_theme, border_on_single="true"),
+    layout.Max(**layout_theme),
+    layout.Floating(**layout_theme)
 ]
 
+
+
+#====================WIDGET====================#
 widget_defaults = dict(
     font='MesloLGS Nerd Font',
     fontsize=11,
@@ -145,23 +127,17 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
                 widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-                widget.QuickExit(),
             ],
             24,
         ),
     ),
 ]
 
+
+
+#====================MISC====================#
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
