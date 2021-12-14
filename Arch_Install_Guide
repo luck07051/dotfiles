@@ -91,13 +91,15 @@ git
 openssh
 
 zsh
+zplug
 xorg
 xorg-xinit
 //nvidea
 
 alsl-utils
+setxkbmap
 
-Qtile
+qtile
 firefox
 
 picom
@@ -106,6 +108,8 @@ ranger
 sxiv
 
 exa
+
+vundle
 
 yay
 yay -> st

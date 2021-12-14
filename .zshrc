@@ -7,8 +7,14 @@ SAVEHIST=10000
 unsetopt autocd beep
 # set vim mode
 bindkey -v      
-# getting proper colors
+# prompt
+prompt="[%F{blue}%~%f]%F{blue}%# "
+
+
+#====================EXPORT====================#
 export TERM="xterm-256color"
+export DEITOR="vim"
+export LANG=en_US.UTF-8
 
 
 #====================ALIAS====================#
@@ -32,11 +38,14 @@ alias lt='exa -aT --icons --group-directories-first --color=always'
 
 # pacman and yay
 
+# git
+alias gs="git status"
 
 
 
 #===================Plug=====================#
 source ~/.zplug/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # zplug "romkatv/powerlevel10k", as:theme
 
@@ -57,4 +66,4 @@ if ! zplug check --verbose; then
     fi
 fi
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load #--verbose
