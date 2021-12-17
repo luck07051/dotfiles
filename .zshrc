@@ -15,6 +15,7 @@ prompt="[%F{blue}%~%f]%F{blue}%# "
 export TERM="xterm-256color"
 export DEITOR="vim"
 export LANG=en_US.UTF-8
+export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 
 
 #====================ALIAS====================#
@@ -43,7 +44,7 @@ alias gs="git status"
 
 
 
-#===================Plug=====================#
+#===================PLUG=====================#
 source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
@@ -67,3 +68,11 @@ if ! zplug check --verbose; then
 fi
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
+
+
+#====================MISC====================#
+# the shell-color-scripts is placed in /opt/shell-color-scripts/colorscripts
+# not use 'colorbars debian elfman hex illumina pukeskull rupees spectrum thebat tux'
+colorscript random
+
+#screenfetch

@@ -53,5 +53,7 @@ setxkbmap -option ctrl:nocaps
 
 nitrogen --restore &
 picom &
+
+exec xmonad
 #exec i3
-exec qtile start
+#exec qtile start

@@ -102,7 +102,7 @@ setxkbmap
 
 qtile
 i3
-xmonad xmonad-contrib
+xmonad xmonad-contrib xmobar
 tmux
 firefox
 
@@ -112,6 +112,7 @@ ranger
 sxiv
 
 exa
+colorscript
 
 vundle
 
