@@ -53,5 +53,5 @@ setxkbmap -option ctrl:nocaps
 
 nitrogen --restore &
 picom &
-exec i3
-#exec qtile start
+#exec i3
+exec qtile start
