@@ -19,25 +19,27 @@ export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 
 
 #====================ALIAS====================#
-alias res='source ~/.zshrc'
+alias res="source ~/.zshrc"
 # for quick login window manager
-alias q='startx'
-# for bare Git repository
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias q="startx"
+# for bare Git repository to manager my dotfiles
+alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # confirm before overwriting something
 alias cp="cp -i"
-alias mv='mv -i'
-alias rm='rm -i'
-
+alias mv="mv -i"
+alias rm="rm -i"
 
 # ls
-alias ls='exa --icons --group-directories-first --color=always'
-alias la='exa -a --icons --group-directories-first --color=always'
-alias ll='exa -al --icons --group-directories-first --color=always'
-alias lt='exa -aT --icons --group-directories-first --color=always'
+alias ls="exa --icons --group-directories-first --color=always"
+alias la="exa -a --icons --group-directories-first --color=always"
+alias ll="exa -al --icons --group-directories-first --color=always"
+alias lt="exa -aT --icons --group-directories-first --color=always"
 
 # pacman and yay
+#alias pacman="sudo pacman"
+alias pacup="sudo pacman -Syy"
+
 
 # git
 alias gs="git status"
@@ -46,15 +48,15 @@ alias gs="git status"
 
 #===================PLUG=====================#
 source ~/.zplug/init.zsh
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
 # zplug "romkatv/powerlevel10k", as:theme
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 zplug "zsh-users/zsh-completions"
-    zstyle ':completion:*' menu yes select
-    zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+    zstyle ":completion:*" menu yes select
+    zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
 
@@ -71,6 +73,9 @@ zplug load #--verbose
 
 
 #====================MISC====================#
+# Remap caps lock to Ctrl
+setxkbmap -option ctrl:nocaps
+
 # the shell-color-scripts is placed in /opt/shell-color-scripts/colorscripts
 # not use 'colorbars debian elfman hex illumina pukeskull rupees spectrum thebat tux'
 colorscript random

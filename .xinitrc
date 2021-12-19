@@ -48,12 +48,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# Remap caps lock to Ctrl
-setxkbmap -option ctrl:nocaps
 
-nitrogen --restore &
-picom &
-
-exec xmonad
+export PATH="${PATH}:$HOME/.local/bin"
+export XDG_CONFIG_HOME="$HOME/.config"
+#===Start Window Manager===#
+#exec xmonad
 #exec i3
-#exec qtile start
+exec qtile start
