@@ -182,7 +182,7 @@ colors:
   # Default colors
   primary:
     background: '#1d1f21'
-    foreground: '#b6beb9'
+    foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #
@@ -201,7 +201,7 @@ colors:
   # affected cell, or hexadecimal colors like #ff00ff.
   cursor:
    text: CellBackground
-   cursor: '#b6beb9'
+   cursor: '#c5c8c6'
 
   # Vi mode cursor colors
   #
@@ -288,7 +288,7 @@ colors:
     blue:    '0x7aa6da'
     magenta: '0xf2a5ca'
     cyan:    '0x498b93'
-    white:   '0xb6beb9'
+    white:   '0xc5c8c6'
 
 
   # Dim colors
