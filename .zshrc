@@ -40,6 +40,8 @@ alias lt="exa -aT --icons --group-directories-first --color=always"
 #alias pacman="sudo pacman"
 alias pacup="sudo pacman -Syy"
 
+# grep
+alias grep="grep --color=auto"
 
 # git
 alias gs="git status"
@@ -50,8 +52,6 @@ alias gs="git status"
 source ~/.zplug/init.zsh
 zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
-# zplug "romkatv/powerlevel10k", as:theme
-
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 zplug "zsh-users/zsh-completions"
@@ -59,6 +59,7 @@ zplug "zsh-users/zsh-completions"
     zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
+
 
 
 # Install plugins if there are plugins that have not been installed
@@ -76,8 +77,13 @@ zplug load #--verbose
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
 
+# install by 
+# $ yay -S shell-color-scripts
 # the shell-color-scripts is placed in /opt/shell-color-scripts/colorscripts
 # not use 'colorbars debian elfman hex illumina pukeskull rupees spectrum thebat tux'
 colorscript random
 
-#screenfetch
+# use starship prompt
+# install by 
+# $ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+eval "$(starship init zsh)"

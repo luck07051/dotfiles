@@ -24,7 +24,7 @@ def spawn_specific_app(qtile):
 keys = [
     #===Basic Stuff===#
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "d", lazy.spawn("dmenu_run -p '>> '"), desc="Run Launcher"),
+    Key([mod], "d", lazy.spawn("dmenu_run -l 20"), desc="Run Launcher"),
 
     Key([mod], "y", spawn_specific_app, desc="open specific app depend on group"),
     Key([mod], "q", lazy.window.kill(), desc="Kill active windows"),
@@ -261,10 +261,10 @@ myMainWidget = [
             foreground = colors[1],
             channel = "Master",
             text = "Vol",
+            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
             ),
         widget.Volume(
             foreground = colors[1],
-            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
             ),
         widget.Sep(
             foreground = colors[3],
@@ -379,6 +379,8 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class = 'ssh-askpass'),  # ssh-askpass
     Match(title = 'branchdialog'),  # gitk
     Match(title = 'pinentry'),  # GPG key password entry
+
+    Match(wm_class = 'pavucontrol'),  # Volume Controler
 ])
 
 dgroups_key_binder = None

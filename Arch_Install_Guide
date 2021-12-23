@@ -101,6 +101,7 @@ xorg-xinit
 xorg-fonts-misc
 alsl-utils
 setxkbmap
+wget
 
 qtile
 exa
@@ -145,9 +146,9 @@ colorscript
 ncpamixer
 
 # pip
-gcc
-python3-dev
-python-pip
+# install pip
+$ sudo pacman -S gcc python3-dev python-pip
+
 pip install psutil  #for qtile wigets
 
 
