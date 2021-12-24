@@ -127,8 +127,21 @@ sxiv
 ncmpcpp
 
 zsh
+# changing your default shell
+$ chsh -l
+$ chsh -s full-path-to-shell
+
 zplug
-vundle
+# install zplug
+# https://github.com/zplug/zplug
+$ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+$ zplug install
+vim-plug
+# install vim-plug
+# https://github.com/junegunn/vim-plug
+$ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+:PlugInstall
 
 pavucontrol
 
@@ -138,6 +151,8 @@ pavucontrol
 $ git clone https://aur.archlinux.org/yay-git.git
 $ cd yay-git
 $ makepkg -si
+# rm yay-git
+
 nerd-fonts-complete
 #adobe-source-han-sans-otc-fonts
 #noto-fonts-cjk
@@ -145,11 +160,13 @@ zsh-syntax-highlighting-git
 colorscript
 ncpamixer
 
+
+
 # pip
 # install pip
 $ sudo pacman -S gcc python3-dev python-pip
 
-pip install psutil  #for qtile wigets
+pip install psutil  # for qtile wigets
 
 
  

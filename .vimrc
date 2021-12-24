@@ -2,23 +2,17 @@ set nocompatible
 set t_RV=
 filetype off
 set encoding=utf-8
+filetype plugin indent on
 
 
 "====================PLUGIN===================="
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 "===Basic==="
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" :PluginInstall
+call plug#end()
+" :PlugInstall
 
 
 
