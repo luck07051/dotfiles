@@ -101,7 +101,9 @@ xorg-xinit
 xorg-fonts-misc
 alsl-utils
 setxkbmap
-wget
+bluez
+bluez-utils
+//wget
 
 qtile
 exa
@@ -136,6 +138,7 @@ zplug
 # https://github.com/zplug/zplug
 $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 $ zplug install
+
 vim-plug
 # install vim-plug
 # https://github.com/junegunn/vim-plug
@@ -167,6 +170,7 @@ ncpamixer
 $ sudo pacman -S gcc python3-dev python-pip
 
 pip install psutil  # for qtile wigets
+pip install dbus-next
 
 
  
@@ -189,3 +193,8 @@ vim /etc/pulse/default.pa.d/load-audio-drivers-statically.pa
     unload-module module-detect
     load-module module-alsa-sink device=dmix
     load-module module-alsa-source device=dsnoop
+
+# steam
+https://www.chrisatmachine.com/Linux/08-steam-on-linux/
+# if text is corrupt
+pacman -S  lib32-fontconfig ttf-liberation wqy-zenhei

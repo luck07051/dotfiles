@@ -15,7 +15,7 @@ prompt="[%F{blue}%~%f]%F{blue}%# "
 export TERM="xterm-256color"
 export DEITOR="vim"
 export LANG=en_US.UTF-8
-export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
+export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 
 
 #====================ALIAS====================#
@@ -34,7 +34,6 @@ alias rm="rm -i"
 alias ls="exa --icons --group-directories-first --color=always"
 alias la="exa -a --icons --group-directories-first --color=always"
 alias ll="exa -al --icons --group-directories-first --color=always"
-alias lt="exa -aT --icons --group-directories-first --color=always"
 
 # pacman and yay
 #alias pacman="sudo pacman"

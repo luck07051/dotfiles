@@ -1,3 +1,5 @@
+# format = "$directory$git_branch$git_state$git_status$time"
+
 [line_break]
 disabled = false
 

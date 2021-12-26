@@ -1,20 +1,7 @@
 set nocompatible
 set t_RV=
-filetype off
 set encoding=utf-8
 filetype plugin indent on
-
-
-"====================PLUGIN===================="
-call plug#begin('~/.vim/plugged')
-
-"===Basic==="
-Plug 'itchyny/lightline.vim'
-
-call plug#end()
-" :PlugInstall
-
-
 
 "====================GENERAL===================="
 "===Basic===" 
@@ -117,6 +104,15 @@ endfunction
 
 
 "====================PLUGIN===================="
+call plug#begin('~/.vim/plugged')
+"===Basic==="
+Plug 'itchyny/lightline.vim'
+" Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'ap/vim-css-color'
+
+call plug#end()
+" :PlugInstall
+
 
 "===lightline==="
 " Set lightline theme
