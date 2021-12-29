@@ -3,7 +3,7 @@ import subprocess
 
 from typing import List  # noqa: F401
 
-from libqtile import qtile, bar, layout, widget, hook
+from libqtile import qtile, bar, layout, widget, hook, extension
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 
@@ -18,12 +18,10 @@ import widgets
 #====================KEY BINDING====================#
 keys = [
     #===Basic Stuff===#
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "d", lazy.spawn("dmenu_run -l 20"), desc="Run Launcher"),
-
+    Key([mod], "space", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn("rofi -show run -theme ui_theme"), desc="Run Launcher"),
     Key([mod], "q", lazy.window.kill(), desc="Kill active windows"),
 
-    Key([mod], "y", functions.spawn_specific_app, desc="open specific app depend on group"),
 
 
     Key([mod, "control"], "s", lazy.restart(), desc="Restart Qtile"),
@@ -61,7 +59,6 @@ keys = [
     ]),
 
     #===Group===#
-
     Key([mod, "shift"], "f",
         lazy.window.toggle_floating(),
         desc="toggle floating"),
@@ -73,12 +70,22 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 
 
-    #===Open App===#
-    KeyChord([mod], "space", [
-        Key([], "b", lazy.spawn(browser)),
-        Key([], "d", lazy.spawn("discord")),
-        Key([], "m", lazy.spawn(terminal + " -e ncmpcpp")),
-    ]),
+    #===Special===#
+    Key([mod], "n", functions.spawn_specific_app, desc="open specific app depend on group"),
+
+    Key([mod], "semicolon", lazy.run_extension(extension.CommandSet(
+    commands={
+        "browser": browser,
+        "discord": "discord",
+        "music": terminal +  " -e ncmpcpp",
+        "filemanager": terminal + " -e ranger",
+        "steam": "steam",
+        },
+    #pre_commands=['[ $(mocp -i | wc -l) -lt 1 ] && mocp -S'],
+    dmenu_command = "rofi -dmen -theme ui_theme",
+    fontsize = 14,
+    ))),
+
 
 ]
 
@@ -91,7 +98,7 @@ groups_name = ["1","2","3","4","5"]
 groups = [
     Group(
         name = groups_name[0],
-        label = "B  ",
+        label = "B  ",
         matches = [Match(wm_class = browser)],
         spawn = (browser),
         ),
@@ -103,15 +110,17 @@ groups = [
         ),
     Group(
         name = groups_name[2], 
-        label = "C  ",
+        label = "M ﱘ ",
         ),
     Group(
         name = groups_name[3], 
-        label = "M  ",
+        label = "D ﭮ ",
+        matches = [Match(wm_class = "discord")],
         ),
     Group(
         name = groups_name[4], 
-        label = "D ﭮ ",
+        label = "G  ",
+        layout = "max",
         ),
 ]
 
@@ -145,7 +154,7 @@ layouts = [
 
 #====================WIDGET====================#
 widget_defaults = dict(
-    font = 'MesloLGM Nerd Font Bold',
+    font = 'MesloLGL Nerd Font bold', 
     fontsize = 12,
 )
 

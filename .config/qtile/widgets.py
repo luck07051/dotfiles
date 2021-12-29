@@ -19,6 +19,7 @@ myMainWidget = [
             other_current_screen_border = colors[3],
             other_screen_border = colors[3],
 
+            font = "Ubuntu Nerd Font",
             margin_y = 3,
             margin_x = 0,
             padding_y = 5,
@@ -117,13 +118,19 @@ myMainWidget = [
             linewidth = 2,
             padding = 0,
             ),
-        widget.CheckUpdates(
-            foreground = colors[1],
-            update_interval = 1800,
-            distro = "Arch",
-            display_format = "{updates} Updates",
-            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
-            ),
+        #widget.CheckUpdates(
+        #    foreground = colors[1],
+        #    update_interval = 1800,
+        #    distro = "Arch",
+        #    display_format = "{updates} Updates",
+        #    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+        #    ),
+        #widget.Sep(
+        #    foreground = colors[3],
+        #    size_percent = 90,
+        #    linewidth = 2,
+        #    padding = 0,
+        #    ),
         widget.Clock(
             foreground = colors[1],
             format = ' %b %d %Y - %H:%M',

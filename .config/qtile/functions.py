@@ -11,10 +11,10 @@ def spawn_specific_app(qtile):
         qtile.cmd_spawn(terminal)
 
     elif current_group.name == "3":
-        qtile.cmd_spawn(terminal)
-
-    elif current_group.name == "4":
         qtile.cmd_spawn(terminal + " -e ncmpcpp")
 
-    elif current_group.name == "5":
+    elif current_group.name == "4":
         qtile.cmd_spawn("discord")
+
+    elif current_group.name == "5":
+        qtile.cmd_spawn("steam")
