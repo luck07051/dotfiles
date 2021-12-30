@@ -20,10 +20,11 @@ myMainWidget = [
             other_screen_border = colors[3],
 
             font = "Ubuntu Nerd Font",
+            fontsize = 15,
             margin_y = 3,
             margin_x = 0,
             padding_y = 5,
-            padding_x = 3,
+            padding_x = 10,
 
             rounded = False,
             spacing = 5,
@@ -152,6 +153,8 @@ mySecondWidget = [
             other_current_screen_border = colors[3],
             other_screen_border = colors[3],
 
+            font = "Ubuntu Nerd Font",
+            fontsize = 15,
             margin_y = 3,
             margin_x = 0,
             padding_y = 5,

@@ -17,7 +17,7 @@ export DEITOR="vim"
 export LANG=en_US.UTF-8
 export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 export XDG_CONFIG_HOME="$HOME/.config"
-export PATH="${PATH}:$HOME/.local/bin"
+export PATH="${PATH}:$HOME/.local/bin:$HOME/.config/rofi/scripts"
 
 
 #====================ALIAS====================#

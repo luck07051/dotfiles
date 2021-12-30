@@ -5,7 +5,7 @@ xorg xorg-xinit xorg-fonts-misc
 alsl-utils
 zsh
 .bluez bluez-utils
-#wget
+wget
 
 #===Necessary===#
 qtile
@@ -19,6 +19,8 @@ nitrogen
 htop
 exa
 bat
+slop  # for screenshot
+xclip  # for screenshot
 
 #dmenu
 #i3-gaps
@@ -72,6 +74,7 @@ nerd-fonts-complete
 zsh-syntax-highlighting-git
 colorscript
 ncpamixer
+ffcast  # for screenshot
 
 #===pip===#
 # install pip

@@ -15,7 +15,7 @@ configuration {
   font: "JetBrainsMono Nerd Font Medium 10";
 
   drun {
-    display-name: "";
+    display-name: " ";
   }
 
   run {
@@ -24,6 +24,10 @@ configuration {
 
   window {
     display-name: "";
+  }
+
+  combi {
+    display-name: "";
   }
 
   timeout {
@@ -71,14 +75,12 @@ prompt {
 }
 
 listview {
-  lines: 8;
+  lines: 10;
 }
-
 
 element {
   children: [element-icon, element-text];
 }
-
 
 element-icon {
   padding: 10px 10px;

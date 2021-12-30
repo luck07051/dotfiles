@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+get_options() {
+    echo "  Power"
+    echo "  Screen Shot"
+}
+
+main() {
+    choice=$( (get_options) | rofi -dmenu -theme ui_theme)
+
+    if [[ -z "${choice// }" ]]; then
+        exit 1
+    fi
+
+    case $choice in
+        '  Power')
+            rofi -show power -modi power:power-menu -theme ui_theme
+            ;;
+        '  Screen Shot')
+            rofi-screenshot
+            ;;
+    esac
+
+    set -e
+}
+
+main $1 &
+
+exit 0
+
+!/bin/bash

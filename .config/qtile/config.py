@@ -19,16 +19,15 @@ import widgets
 keys = [
     #===Basic Stuff===#
     Key([mod], "space", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "Return", lazy.spawn("rofi -show run -theme ui_theme"), desc="Run Launcher"),
     Key([mod], "q", lazy.window.kill(), desc="Kill active windows"),
 
+    Key([mod], "Return", lazy.spawn("rofi -show combi -theme ui_theme"), desc="Run Launcher"),
+    Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Run rofi menu"),
 
 
     Key([mod, "control"], "s", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Logout Qtile"),
 
-    Key([mod, "control"], "r", lazy.spawn("reboot"), desc="Reboot"),
-    Key([mod, "control"], "d", lazy.spawn("shutdown now"), desc="Shutdown"),
 
 
     #===Monitor===#
@@ -71,20 +70,7 @@ keys = [
 
 
     #===Special===#
-    Key([mod], "n", functions.spawn_specific_app, desc="open specific app depend on group"),
-
-    Key([mod], "semicolon", lazy.run_extension(extension.CommandSet(
-    commands={
-        "browser": browser,
-        "discord": "discord",
-        "music": terminal +  " -e ncmpcpp",
-        "filemanager": terminal + " -e ranger",
-        "steam": "steam",
-        },
-    #pre_commands=['[ $(mocp -i | wc -l) -lt 1 ] && mocp -S'],
-    dmenu_command = "rofi -dmen -theme ui_theme",
-    fontsize = 14,
-    ))),
+    # Key([mod], "n", functions.spawn_specific_app, desc="open specific app depend on group"),
 
 
 ]
@@ -93,33 +79,37 @@ keys = [
 
 
 #====================GROUPS====================#
-groups_name = ["1","2","3","4","5"]
+groups_name = ["1", "2", "3", "4", "5", "6"]
 
 groups = [
     Group(
         name = groups_name[0],
-        label = "B  ",
+        label = "",
         matches = [Match(wm_class = browser)],
         spawn = (browser),
         ),
     Group(
         name = groups_name[1], 
-        label = "T  ",
+        label = "",
         matches = [Match(wm_class = terminal)],
         spawn = (terminal),
         ),
     Group(
         name = groups_name[2], 
-        label = "M ﱘ ",
+        label = "",
         ),
     Group(
         name = groups_name[3], 
-        label = "D ﭮ ",
-        matches = [Match(wm_class = "discord")],
+        label = "ﱘ",
         ),
     Group(
         name = groups_name[4], 
-        label = "G  ",
+        label = "ﭮ",
+        matches = [Match(wm_class = "discord")],
+        ),
+    Group(
+        name = groups_name[5], 
+        label = "",
         layout = "max",
         ),
 ]
