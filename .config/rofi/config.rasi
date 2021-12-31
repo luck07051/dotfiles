@@ -2,15 +2,17 @@ configuration {
 	font: "MesloLGM Nerd Font 14";
         modi: "window,run,ssh,drun,combi";
         combi-modi: [drun];
+	terminal: "alacritty";
 
         icon-theme: "Papirus-Dark";
         show-icons: true;
 
 
-        ml-row-up: "ScrollUp,Control+k";
-        ml-row-down: "ScrollDown,Control+j";
-
         // remove for Control+j and Control+k
 	kb-accept-entry: "Control+m,Return,KP_Enter";
 	kb-remove-to-eol: "";
+
+        ml-row-up: "ScrollUp,Control+k";
+        ml-row-down: "ScrollDown,Control+j";
+
 }
