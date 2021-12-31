@@ -12,6 +12,7 @@ terminal = "alacritty"
 browser = "firefox"
 
 import widgets
+from color import ColorScheme
 
 
 #====================KEY BINDING====================#
@@ -130,8 +131,8 @@ for i in groups_name:
 #====================LAYOUT====================#
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": "#F5BAD0",
-                "border_normal": "#1d1f21"}
+                "border_focus": ColorScheme[5],
+                "border_normal": ColorScheme[0]}
 
 layouts = [
     layout.MonadTall(**layout_theme, border_on_single = "true"),

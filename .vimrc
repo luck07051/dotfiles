@@ -14,8 +14,8 @@ set scrolloff=3         " keep 3 line when scrolling
 
 "===Theme==="
 set background=dark     " dark back ground
-"colorscheme lucius      " theme
-colorscheme ui_theme      " theme
+colorscheme lucius      " theme
+"colorscheme ui_theme      " theme
 syntax enable           " open syntax highlight
 
 
