@@ -21,13 +21,13 @@ keys = [
     Key([mod], "space", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "q", lazy.window.kill(), desc="Kill active windows"),
 
-    Key([mod], "Return", lazy.spawn("rofi -show combi -theme ui_theme"), desc="Run Launcher"),
-    Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Run rofi menu"),
+    Key([mod], "Return", lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
+    Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
+    Key([mod], "g", lazy.spawn("rofi-qtile-menu"), desc="Open qtile menu"),
 
 
     Key([mod, "control"], "s", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Logout Qtile"),
-
 
 
     #===Monitor===#

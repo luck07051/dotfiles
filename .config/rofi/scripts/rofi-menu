@@ -6,17 +6,20 @@ get_options() {
 }
 
 main() {
-    choice=$( (get_options) | rofi -dmenu -theme ui_theme)
+    # Get choice from rofi
+    choice=$( (get_options) | rofi -dmenu -i -theme ui_theme -p '')
 
+    # If user has not picked anything, exit
     if [[ -z "${choice// }" ]]; then
         exit 1
     fi
 
+    # Run the selected command
     case $choice in
-        '  Power')
+        "  Power")
             rofi -show power -modi power:power-menu -theme ui_theme
             ;;
-        '  Screen Shot')
+        "  Screen Shot")
             rofi-screenshot
             ;;
     esac

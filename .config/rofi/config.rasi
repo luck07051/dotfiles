@@ -7,7 +7,6 @@ configuration {
         show-icons: true;
 
 
-
         ml-row-up: "ScrollUp,Control+k";
         ml-row-down: "ScrollDown,Control+j";
 

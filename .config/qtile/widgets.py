@@ -158,7 +158,7 @@ mySecondWidget = [
             margin_y = 3,
             margin_x = 0,
             padding_y = 5,
-            padding_x = 3,
+            padding_x = 10,
 
             rounded = False,
             spacing = 5,
