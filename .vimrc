@@ -14,8 +14,11 @@ set scrolloff=3         " keep 3 line when scrolling
 
 "===Theme==="
 set background=dark     " dark back ground
-colorscheme lucius      " theme
+"colorscheme lucius      " theme
+colorscheme ui_theme      " theme
 syntax enable           " open syntax highlight
+
+
 
 "===Search==="
 set hlsearch            " highlight search result
@@ -109,6 +112,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'ap/vim-css-color'
+Plug 'guns/xterm-color-table.vim'
 
 call plug#end()
 " :PlugInstall

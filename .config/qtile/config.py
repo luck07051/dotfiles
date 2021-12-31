@@ -11,7 +11,6 @@ mod = "mod4"
 terminal = "alacritty"
 browser = "firefox"
 
-import functions
 import widgets
 
 
@@ -130,9 +129,9 @@ for i in groups_name:
 
 #====================LAYOUT====================#
 layout_theme = {"border_width": 2,
-                "margin": 6,
-                "border_focus": "#FFC0CB",
-                "border_normal": "#2F3340"}
+                "margin": 8,
+                "border_focus": "#F5BAD0",
+                "border_normal": "#1d1f21"}
 
 layouts = [
     layout.MonadTall(**layout_theme, border_on_single = "true"),
@@ -149,10 +148,6 @@ widget_defaults = dict(
 )
 
 extension_defaults = widget_defaults.copy()
-
-colors = [  "#1d1f21", "#c1c8c6",
-            "#777777", "#555555",
-            "#ffc0cb"]
 
 
 screens = [

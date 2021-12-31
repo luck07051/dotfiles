@@ -2,7 +2,7 @@ from libqtile import qtile, bar, widget
 
 colors = [  "#1d1f21", "#c1c8c6",
             "#777777", "#555555",
-            "#ffc0cb"]
+            "#f5bad0"]
 
 myMainWidget = [
         widget.GroupBox(
