@@ -17,3 +17,7 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PF949494" #white
     clear #for background artifacting
 fi
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi

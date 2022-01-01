@@ -110,9 +110,10 @@ endfunction
 call plug#begin('~/.vim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
-" Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+
+Plug 'suan/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+
 Plug 'ap/vim-css-color'
-Plug 'guns/xterm-color-table.vim'
 
 call plug#end()
 " :PlugInstall
@@ -123,3 +124,6 @@ call plug#end()
 let g:lightline = { 'colorscheme': 'darcula' } 
 set noshowmode          " dont show mode below
 
+"===instant markdown==="
+" use surf broser
+let g:instant_markdown_browser = "surf"

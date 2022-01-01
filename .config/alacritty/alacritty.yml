@@ -54,9 +54,9 @@ colors:
     red:     '#ff8787'
     green:   '#87d787'
     yellow:  '#d7af5f'
-    blue:    '#87afaf'
+    blue:    '#5fafd7'
     magenta: '#d787d7'
-    cyan:    '#5f5fd7'
+    cyan:    '#87afaf'
     white:   '#949494'
 
 

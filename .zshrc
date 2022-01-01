@@ -23,8 +23,6 @@ export PATH="${PATH}:$HOME/.config/rofi/scripts"
 
 #====================ALIAS====================#
 alias res="source ~/.zshrc"
-# for quick login window manager
-alias q="startx"
 # for bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
