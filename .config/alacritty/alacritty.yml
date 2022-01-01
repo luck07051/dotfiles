@@ -50,14 +50,15 @@ colors:
 
   # Bright colors
   bright:
-    black:   '#303030'
-    red:     '#444444'
-    green:   '#585858'
-    yellow:  '#6c6c6c'
-    blue:    '#808080'
-    magenta: '#949494'
-    cyan:    '#a8a8a8'
-    white:   '#bcbcbc'
+    black:   '#585858'
+    red:     '#ff8787'
+    green:   '#87d787'
+    yellow:  '#d7af5f'
+    blue:    '#87afaf'
+    magenta: '#d787d7'
+    cyan:    '#5f5fd7'
+    white:   '#949494'
+
 
 
 

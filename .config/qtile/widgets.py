@@ -7,29 +7,29 @@ myMainWidget = [
             background = ColorScheme[0],
             foreground = ColorScheme[7],
             active = ColorScheme[7],
-            inactive = ColorScheme[10],
+            inactive = ColorScheme[8],
 
             borderwidth = 3,
             highlight_method = "line",
-            highlight_color = ColorScheme[10],
+            highlight_color = ColorScheme[8],
             this_current_screen_border = ColorScheme[5],
             this_screen_border = ColorScheme[5],
-            other_current_screen_border = ColorScheme[10],
-            other_screen_border = ColorScheme[10],
+            other_current_screen_border = ColorScheme[8],
+            other_screen_border = ColorScheme[8],
 
             font = "Ubuntu Nerd Font",
             fontsize = 15,
             margin_y = 3,
             margin_x = 0,
             padding_y = 5,
-            padding_x = 10,
+            padding_x = 8,
 
             rounded = False,
             spacing = 5,
             disable_drag = True
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -38,7 +38,7 @@ myMainWidget = [
             foreground = ColorScheme[7],
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -47,7 +47,7 @@ myMainWidget = [
             foreground = ColorScheme[7],
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -57,7 +57,7 @@ myMainWidget = [
             format = "CUP {load_percent:4.1f}%"
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -68,7 +68,7 @@ myMainWidget = [
             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -79,7 +79,7 @@ myMainWidget = [
         #    format = "NET {down}↓↑{up}",
         #    ),
         #widget.Sep(
-        #    foreground = ColorScheme[10],
+        #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
         #    padding = 0,
@@ -88,7 +88,7 @@ myMainWidget = [
         #    foreground = ColorScheme[7],
         #    ),
         #widget.Sep(
-        #    foreground = ColorScheme[10],
+        #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
         #    padding = 0,
@@ -97,7 +97,7 @@ myMainWidget = [
         #    foreground = ColorScheme[7],
         #    ),
         #widget.Sep(
-        #    foreground = ColorScheme[10],
+        #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
         #    padding = 0,
@@ -112,7 +112,7 @@ myMainWidget = [
             foreground = ColorScheme[7],
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -125,7 +125,7 @@ myMainWidget = [
         #    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
         #    ),
         #widget.Sep(
-        #    foreground = ColorScheme[10],
+        #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
         #    padding = 0,
@@ -141,15 +141,15 @@ mySecondWidget = [
             background = ColorScheme[0],
             foreground = ColorScheme[7],
             active = ColorScheme[7],
-            inactive = ColorScheme[10],
+            inactive = ColorScheme[8],
 
             borderwidth = 3,
             highlight_method = "line",
-            highlight_color = ColorScheme[10],
+            highlight_color = ColorScheme[8],
             this_current_screen_border = ColorScheme[5],
             this_screen_border = ColorScheme[5],
-            other_current_screen_border = ColorScheme[10],
-            other_screen_border = ColorScheme[10],
+            other_current_screen_border = ColorScheme[8],
+            other_screen_border = ColorScheme[8],
 
             font = "Ubuntu Nerd Font",
             fontsize = 15,
@@ -163,7 +163,7 @@ mySecondWidget = [
             disable_drag = True
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -172,7 +172,7 @@ mySecondWidget = [
             foreground = ColorScheme[7],
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
@@ -181,7 +181,7 @@ mySecondWidget = [
             foreground = ColorScheme[7],
             ),
         widget.Sep(
-            foreground = ColorScheme[10],
+            foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
             padding = 0,
