@@ -42,10 +42,10 @@ configuration {
   padding: 0;
   spacing: 0;
 
-  bg: #1c1c1c;
+  bg: #1C1C1C;
   bg-alt: #585858;
-  fg: #d0d0d0;
-  fg-alt: #ffafd7;
+  fg: #D0D0D0;
+  fg-alt: #FFB9DC;
 
   background-color: @bg;
   text-color: @fg;
