@@ -20,54 +20,60 @@ nitrogen
 htop
 exa
 bat
-slop  # for screenshot
-xclip  # for screenshot
+xclip slop  # for rofi screenshot
 npm  # node.js for vim markdown plug
+
+arc-gtk-theme
+papirus-icon-theme
 
 #dmenu
 #i3-gaps
 #xmonad xmonad-contrib xmobar
 #tmux
 
-#===
+#===Nece commend line program===#
 ranger
 sxiv
 ncmpcpp
 
-#===Nvidia===#
+#===Graphical program===#
+pavucontrol
+gimp  # ps, draw
+
+
+#===Nvidea===#
 nvidia
 nvidia-utils 
 nvidia-settings
 nvtop
 
-#===Graphical===#
-pavucontrol
-gimp  # ps, draw
 
 #===Useless===#
 screenfetch
 cmatrix
 
-#===Plugin Install===#
-zplug
-# install zplug
+
+
+#===zplug===#
 # https://github.com/zplug/zplug
 $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 $ zplug install
 
-vim-plug
-# install vim-plug
+
+
+#===vim-plug===#
 # https://github.com/junegunn/vim-plug
 $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 :PlugInstall
 
 # setup markdown plug
 $ [sudo] npm -g install instant-markdown-d
 
 
+
+
 #===yay===#
-# intall yay
 $ git clone https://aur.archlinux.org/yay-git.git
 $ cd yay-git
 $ makepkg -si
@@ -81,14 +87,17 @@ colorscript
 ncpamixer
 ffcast  # for screenshot
 
+
+
+
 #===pip===#
-# install pip
 $ sudo pacman -S gcc python3-dev python-pip
 
 pip install psutil  # for qtile wigets
 pip install dbus-next
 
  
+
 
 
 #===changing your default shell===#
@@ -101,11 +110,13 @@ alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
 echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $HOME/.bashrc
 
+
 ##===nvidia ?===#
 #yay -S optimus-manager
 #sudo systemctl enable optimus-manager
 #vim /etc/optimus-manager/optimus-manager.conf
 #    startup-mode=nvidia
+
 
 #===pluseaudio===#
 already in .config
@@ -114,6 +125,7 @@ already in .config
 #    unload-module module-detect
 #    load-module module-alsa-sink device=dmix
 #    load-module module-alsa-source device=dsnoop
+
 
 #===steam===#
 https://www.chrisatmachine.com/Linux/08-steam-on-linux/
