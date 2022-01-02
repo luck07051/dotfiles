@@ -11,7 +11,7 @@ mod = "mod4"
 terminal = "alacritty"
 browser = "firefox"
 
-import widgets
+from widgets import myMainWidget, mySecondWidget
 from color import ColorScheme
 
 
@@ -152,20 +152,20 @@ extension_defaults = widget_defaults.copy()
 
 
 screens = [
-    Screen( top = bar.Bar( widgets.myMainWidget, opacity = 0.98, size = 24), 
+    Screen( top = bar.Bar( myMainWidget, opacity = 1, size = 24), 
         x = 0, y = 0, width = 1920, height = 1080),
 
-    Screen( top = bar.Bar( widgets.mySecondWidget, opacity = 0.98, size = 24), 
+    Screen( top = bar.Bar( mySecondWidget, opacity = 1, size = 24), 
         x = 1920, y = 0, width = 1920, height = 1080),
 ]       
 
 
 
 #====================HOOK====================#
-#@hook.subscribe.startup_once
-#def autostart():
-#    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-#    subprocess.run([home])
+# @hook.subscribe.startup_once
+# def autostart():
+#     home = os.path.expanduser('~/.config/qtile/autostart.sh')
+#     subprocess.run([home])
 
 
 #====================MOUSE BINDING====================#

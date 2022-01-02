@@ -12,12 +12,12 @@ set cursorline          " highlight cursor line
 set laststatus=2        " always show statusline
 set scrolloff=3         " keep 3 line when scrolling
 
+
 "===Theme==="
 set background=dark     " dark back ground
-colorscheme lucius      " theme
-"colorscheme ui_theme      " theme
+"colorscheme lucius      " theme
+colorscheme ui_theme
 syntax enable           " open syntax highlight
-
 
 
 "===Search==="
@@ -25,6 +25,7 @@ set hlsearch            " highlight search result
 set incsearch           " do incremental searching
 set ignorecase          " ignore case when searching, use \c turn off
 set smartcase           " no ignorecase if uppercase char present
+
 
 "===Indent==="
 set shiftwidth=4        " indent width
@@ -121,9 +122,11 @@ call plug#end()
 
 "===lightline==="
 " Set lightline theme
-let g:lightline = { 'colorscheme': 'darcula' } 
+let g:lightline = { 'colorscheme': 'seoul256' } 
 set noshowmode          " dont show mode below
 
 "===instant markdown==="
 " use surf broser
 let g:instant_markdown_browser = "surf"
+
+

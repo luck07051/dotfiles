@@ -87,3 +87,10 @@ colorscript random
 # install by 
 # $ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 eval "$(starship init zsh)"
+
+
+#===Auto Startx===#
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  startx
+fi
+

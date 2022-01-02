@@ -32,7 +32,7 @@ myMainWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.WindowName( 
             foreground = ColorScheme[7],
@@ -41,7 +41,7 @@ myMainWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.CurrentLayout(
             foreground = ColorScheme[7],
@@ -50,7 +50,7 @@ myMainWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.CPU(
             foreground = ColorScheme[7],
@@ -60,7 +60,7 @@ myMainWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.Memory(
             foreground = ColorScheme[7],
@@ -71,7 +71,7 @@ myMainWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         #widget.Net(
         #    foreground = ColorScheme[7],
@@ -82,7 +82,7 @@ myMainWidget = [
         #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
-        #    padding = 0,
+        #    padding = 2,
         #    ),
         #widget.ThermalSensor(
         #    foreground = ColorScheme[7],
@@ -91,7 +91,7 @@ myMainWidget = [
         #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
-        #    padding = 0,
+        #    padding = 2,
         #    ),
         #widget.NvidiaSensors(
         #    foreground = ColorScheme[7],
@@ -100,7 +100,7 @@ myMainWidget = [
         #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
-        #    padding = 0,
+        #    padding = 2,
         #    ),
         widget.TextBox(
             foreground = ColorScheme[7],
@@ -115,7 +115,7 @@ myMainWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         #widget.CheckUpdates(
         #    foreground = ColorScheme[7],
@@ -128,7 +128,7 @@ myMainWidget = [
         #    foreground = ColorScheme[8],
         #    size_percent = 90,
         #    linewidth = 2,
-        #    padding = 0,
+        #    padding = 2,
         #    ),
         widget.Clock(
             foreground = ColorScheme[7],
@@ -166,7 +166,7 @@ mySecondWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.WindowName( 
             foreground = ColorScheme[7],
@@ -175,7 +175,7 @@ mySecondWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.CurrentLayout(
             foreground = ColorScheme[7],
@@ -184,7 +184,7 @@ mySecondWidget = [
             foreground = ColorScheme[8],
             size_percent = 90,
             linewidth = 2,
-            padding = 0,
+            padding = 2,
             ),
         widget.Clock(
             foreground = ColorScheme[7],

@@ -23,6 +23,7 @@ font:
   # Point size
   size: 11.0
 
+
 # Colors (Tomorrow Night)
 colors:
   # Default colors
@@ -40,11 +41,11 @@ colors:
   normal:
     black:   '#1C1C1C'
     red:     '#CF6868'
-    green:   '#ADCF68'
-    yellow:  '#FFDF5F'
-    blue:    '#76A3D1'
+    green:   '#A3BE8C'
+    yellow:  '#EBCB8B'
+    blue:    '#81A1C1'
     magenta: '#FFB9DC'
-    cyan:    '#87ADA3'
+    cyan:    '#88C0D0'
     white:   '#D0D0D0'
 
 
@@ -53,11 +54,11 @@ colors:
     black:   '#585858'
     red:     '#E59999'
     green:   '#94C68B'
-    yellow:  '#FFD787'
+    yellow:  '#FCDD9F'
     blue:    '#68ADCF'
     magenta: '#D5B0FF'
-    cyan:    '#82C4AC'
-    white:   '#949494'
+    cyan:    '#87D1BC'
+    white:   '#808080'
 
 
 
