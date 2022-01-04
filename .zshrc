@@ -23,8 +23,6 @@ export PATH="${PATH}:$HOME/.config/rofi/scripts"
 
 #====================ALIAS====================#
 alias res="source ~/.zshrc"
-# for bare Git repository to manager my dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -45,6 +43,8 @@ alias grep="grep --color=auto"
 
 # git
 alias gs="git status"
+# for bare Git repository to manager my dotfiles
+alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 
 

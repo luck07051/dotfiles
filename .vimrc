@@ -4,7 +4,7 @@ set encoding=utf-8
 filetype plugin indent on
 
 "====================GENERAL===================="
-"===Basic===" 
+"===Basic==="
 set ruler               " show the cursor position below
 set number              " show line number on left side
 set showcmd             " show incomplete commad in last line
@@ -30,7 +30,7 @@ set smartcase           " no ignorecase if uppercase char present
 "===Indent==="
 set shiftwidth=4        " indent width
 set softtabstop=4       " tab width
-set expandtab           " tab always insert softtabstop of amonut spaces 
+set expandtab           " tab always insert softtabstop of amonut spaces
 set autoindent          " copy the indentation of the previous line
 set smartindent         " auto indent to next level, work on C-like file
 set shiftround          " round the indentation to the nearest multiple of shiftwidth
@@ -39,7 +39,7 @@ set shiftround          " round the indentation to the nearest multiple of shift
 "===Misc==="
 set nobackup            " not keep the backup file
 
-set showmatch           " when you insert bracket, 
+set showmatch           " when you insert bracket,
 set matchtime=1         "    the cursor will briefly jump to the matching one
 
 set backspace=indent,eol,start  " make that backspace key work the way it should
@@ -53,6 +53,10 @@ set t_Co=256            " set 256 colors if term supports
 set t_ut=""
 
 set wildmenu            " show the commom complete list, can use Tab and S-Tab
+
+set list
+set listchars=tab:»\ ,eol:↲,trail:_
+set showbreak=↪\ 
 
 
 "====================KEYMAP===================="
@@ -74,7 +78,6 @@ nnoremap <silent><C-k> :set paste<CR>m'O<Esc>'':set nopaste<CR>
 
 
 "===Leader Key==="
-noremap <Leader>m %
 " let d purely for deleting
 noremap <Leader>d "_d
 noremap <Leader>D "_D
@@ -107,6 +110,7 @@ endfunction
 
 
 
+
 "====================PLUGIN===================="
 call plug#begin('~/.vim/plugged')
 "===Basic==="
@@ -128,5 +132,9 @@ set noshowmode          " dont show mode below
 "===instant markdown==="
 " use surf broser
 let g:instant_markdown_browser = "surf"
+" Turns off auto preview
+let g:instant_markdown_autostart = 0
+nnore <Leader>md :InstantMarkdownPreview<CR>
+nnore <Leader>ms :InstantMarkdownStop<CR>
 
 

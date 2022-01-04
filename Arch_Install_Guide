@@ -1,6 +1,6 @@
 # Check Internet
 $ ping google.com
-
+   
 # Update the System Clock
 $ timedatectl set-ntp true
 

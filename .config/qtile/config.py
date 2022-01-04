@@ -23,7 +23,7 @@ keys = [
 
     Key([mod], "Return", lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
     Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
-    Key([mod], "g", lazy.spawn("rofi-qtile-menu"), desc="Open qtile menu"),
+    Key([mod], "m", lazy.spawn("rofi-qtile-menu"), desc="Open qtile menu"),
 
 
     Key([mod, "control"], "s", lazy.restart(), desc="Restart Qtile"),
@@ -48,7 +48,7 @@ keys = [
         lazy.layout.increase_nmaster(),
         desc="Expand window (MonadTall), increase number in master pane (Tile)"),
 
-    KeyChord([mod], "m", [
+    KeyChord([mod], "y", [
         Key([], "j", lazy.layout.shuffle_down(),  desc="Move windows down  in current stack"),
         Key([], "k", lazy.layout.shuffle_up(),    desc="Move windows up    in current stack"),
         Key([], "h", lazy.layout.shuffle_left(),  desc="Move windows left  in current stack"),

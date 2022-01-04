@@ -16,19 +16,20 @@
 > rofi  
 > conky  
 > firefox  
-> 
+>  
 > setxkbmap  
 > picom  
 > nitrogen  
 > htop  
 > exa  
+> icdiff  
 > bat  
 > xclip slop  # for rofi screenshot  
 > npm  # node.js for vim markdown plug  
->   
+>  
 > arc-gtk-theme  
 > papirus-icon-theme  
-> 
+>  
 > .dmenu  
 > .i3-gaps  
 > .xmonad xmonad-contrib xmobar  
@@ -101,11 +102,9 @@
 #### pip
 > Install pip  
 > ` $ sudo pacman -S gcc python3-dev python-pip `
-> 
+>   
 > pip install psutil  # for qtile wigets  
 > pip install dbus-next  
-
- 
 
 
 ### Setup
@@ -152,3 +151,14 @@
 
 #### wacom
 > ` xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275` 
+
+#### git difftool
+> add in .gitconfig
+> ```
+> [diff]
+>     tool = icdiff
+> [difftool]
+>     prompt = false
+> [difftool "icdiff"]
+>     cmd = icdiff --line-numbers $LOCAL $REMOTE
+> ```
