@@ -19,10 +19,18 @@ main() {
     case $choice in
         "  VimWiki")
             qtile cmd-obj -o screen -f toggle_group -a "7"
-            alacritty -e vim ~/vimwiki/index.md
+
+            # Check vimwiki is open
+            if [ -z "$(qtile cmd-obj -o group 7 -f info | grep "vimwiki")" ]
+            then
+                alacritty -e vim ~/vimwiki/index.md
+            fi
+            ;;
+
         "  Power")
             rofi -show power -modi power:power-menu -theme ui_theme
             ;;
+
         "  Screen Shot")
             rofi-screenshot
             ;;
