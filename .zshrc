@@ -6,7 +6,7 @@ SAVEHIST=10000
 # no beep sound
 unsetopt autocd beep
 # set vim mode
-bindkey -v      
+bindkey -v
 # prompt
 prompt="[%F{blue}%~%f]%F{blue}%# "
 

@@ -116,7 +116,12 @@ call plug#begin('~/.vim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
 
-Plug 'suan/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+Plug 'vimwiki/vimwiki'
+
+Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn install'  }
+
+Plug 'godlygeek/tabular', {'for': 'markdown'}
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
 Plug 'ap/vim-css-color'
 
@@ -129,12 +134,19 @@ call plug#end()
 let g:lightline = { 'colorscheme': 'seoul256' } 
 set noshowmode          " dont show mode below
 
-"===instant markdown==="
-" use surf broser
-let g:instant_markdown_browser = "surf"
-" Turns off auto preview
-let g:instant_markdown_autostart = 0
-nnore <Leader>md :InstantMarkdownPreview<CR>
-nnore <Leader>ms :InstantMarkdownStop<CR>
 
+"===vimwiki==="
+" use markdown syntax
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+
+"===markdown preview==="
+let g:mkdp_browser = 'surf'
+nmap <Leader>md <Plug>MarkdownPreview
+nmap <Leader>ms <Plug>MarkdownPreviewStop
+
+
+"===markdown==="
+let g:vim_markdown_math = 1
 

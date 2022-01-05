@@ -47,7 +47,7 @@
 
 #### Nvidea
 > nvidia  
-> nvidia-utils   
+> nvidia-utils  
 > nvidia-settings  
 > nvtop  
 
@@ -73,8 +73,8 @@
 > :PlugInstall
 > ```
 > 
-> setup markdown plug  
-> ` $ [sudo] npm -g install instant-markdown-d `
+> if markdown-preview dont work, try this 
+> `:call mkdp#util#install()`
 
 
 
