@@ -79,7 +79,7 @@ keys = [
 
 
 #====================GROUPS====================#
-groups_name = ["1", "2", "3", "4", "5", "6"]
+groups_name = ["1", "2", "3", "4", "5", "6", "7"]
 
 groups = [
     Group(
@@ -111,6 +111,10 @@ groups = [
         name = groups_name[5], 
         label = "",
         layout = "max",
+        ),
+    Group(
+        name = groups_name[6], 
+        label = "",
         ),
 ]
 
