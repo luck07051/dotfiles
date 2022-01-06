@@ -125,7 +125,7 @@ for i in groups_name:
             desc="Switch to group {}".format(i)),
 
         # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i, lazy.window.togroup(i, switch_group=True),
+        Key([mod, "shift"], i, lazy.window.togroup(i),
             desc="Switch to & move focused window to group {}".format(i)),
     ])
 

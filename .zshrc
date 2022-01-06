@@ -29,6 +29,9 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
+# vim
+alias vim="nvim"
+
 # ls
 alias ls="exa --icons --group-directories-first --color=always"
 alias la="exa -a --icons --group-directories-first --color=always"

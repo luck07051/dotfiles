@@ -1,7 +1,4 @@
-set nocompatible
-set t_RV=
-set encoding=utf-8
-filetype plugin indent on
+filetype plugin indent on 
 syntax enable
 
 "====================GENERAL===================="
@@ -13,11 +10,8 @@ set cursorline          " highlight cursor line
 set laststatus=2        " always show statusline
 set scrolloff=3         " keep 3 line when scrolling
 
-
 "===Theme==="
 set background=dark     " dark back ground
-"colorscheme lucius      " theme
-"colorscheme ui_theme
 "=Cursor="
 hi CursorLine                   ctermbg=236 cterm=none
 hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
@@ -55,12 +49,8 @@ set shiftround          " round the indentation to the nearest multiple of shift
 
 
 "===Misc==="
-set nobackup            " not keep the backup file
-
 set showmatch           " when you insert bracket,
 set matchtime=1         "    the cursor will briefly jump to the matching one
-
-set backspace=indent,eol,start  " make that backspace key work the way it should
 
 set linebreak           " if text warp, no break on word
 
@@ -165,4 +155,5 @@ nmap <Leader>ms <Plug>MarkdownPreviewStop
 
 "===markdown==="
 let g:vim_markdown_math = 1
+
 

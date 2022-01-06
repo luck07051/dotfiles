@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 get_options() {
-    echo "  VimWiki"
     echo "  Power"
+    echo "  VimWiki"
     echo "  Screen Shot"
 }
 
@@ -17,6 +17,10 @@ main() {
 
     # Run the selected command
     case $choice in
+        "  Power")
+            rofi -show power -modi power:power-menu -theme ui_theme
+            ;;
+
         "  VimWiki")
             qtile cmd-obj -o screen -f toggle_group -a "7"
 
@@ -25,10 +29,6 @@ main() {
             then
                 alacritty -e vim ~/vimwiki/index.md
             fi
-            ;;
-
-        "  Power")
-            rofi -show power -modi power:power-menu -theme ui_theme
             ;;
 
         "  Screen Shot")

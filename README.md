@@ -72,6 +72,11 @@
 >     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 > :PlugInstall
 > ```
+> Neovim
+> ```
+> sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
+>   --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+> ```
 > 
 > if markdown-preview dont work, try this 
 > `:call mkdp#util#install()`
@@ -162,3 +167,4 @@
 > [difftool "icdiff"]
 >     cmd = icdiff --line-numbers $LOCAL $REMOTE
 > ```
+
