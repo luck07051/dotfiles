@@ -1,6 +1,5 @@
 #===================COMMON=====================#
 # history
-HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 # no beep sound
@@ -13,16 +12,13 @@ prompt="[%F{blue}%~%f]%F{blue}%# "
 
 #====================EXPORT====================#
 export TERM="xterm-256color"
-export EDITOR="vim"
+export EDITOR="nvim"
 export LANG=en_US.UTF-8
 export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
-export XDG_CONFIG_HOME="$HOME/.config"
-export PATH="${PATH}:$HOME/.local/bin"
-export PATH="${PATH}:$HOME/.config/rofi/scripts"
 
 
 #====================ALIAS====================#
-alias res="source ~/.zshrc"
+alias res="source $XDG_CONFIG_HOME/zsh/.zshrc"
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -48,6 +44,7 @@ alias grep="grep --color=auto"
 alias gs="git status"
 # for bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+
 
 
 
@@ -91,9 +88,8 @@ colorscript random
 # $ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 eval "$(starship init zsh)"
 
+# zoxide
+eval "$(zoxide init zsh --cmd cd)"
 
-#===Auto Startx===#
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  startx
-fi
+
 

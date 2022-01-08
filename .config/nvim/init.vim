@@ -114,6 +114,8 @@ function DeleteExtraSpaces()
     :execute "to ".b:nline
 endfunction
 
+" Fix initial size incorrectly
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 
 
@@ -124,7 +126,7 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'vimwiki/vimwiki'
 
-Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn install' }
 
 Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
@@ -148,9 +150,23 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 
 "===markdown preview==="
-let g:mkdp_browser = 'surf'
 nmap <Leader>md <Plug>MarkdownPreview
 nmap <Leader>ms <Plug>MarkdownPreviewStop
+let g:mkdp_browser = 'surf'
+let g:mkdp_auto_close = 1
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'relative',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
 
 
 "===markdown==="

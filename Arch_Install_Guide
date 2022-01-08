@@ -39,8 +39,9 @@ $ ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 $ hwclock --systohc
 
 # Install Text Editor
-# not 'vim' is because vim not support clipboard
-$ pacman -S gvim
+# # not 'vim' is because vim not support clipboard
+# $ pacman -S gvim
+$ pacman -S neovim
 
 # Set Locales
 $ vim /etc/locale.gen

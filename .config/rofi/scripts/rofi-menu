@@ -22,12 +22,16 @@ main() {
             ;;
 
         "  VimWiki")
-            qtile cmd-obj -o screen -f toggle_group -a "7"
-
-            # Check vimwiki is open
-            if [ -z "$(qtile cmd-obj -o group 7 -f info | grep "vimwiki")" ]
+            # Check not in group '7'
+            if [ -z "$(qtile cmd-obj -o group -f info | grep "'name': '7'")" ]
             then
-                alacritty -e vim ~/vimwiki/index.md
+                qtile cmd-obj -o screen -f toggle_group -a "7"
+            fi
+
+            # Check vimwiki not open
+            if [ -z "$(ps -ef | grep /vimwiki | grep -v grep)" ]
+            then
+                alacritty -e nvim ~/vimwiki/index.md
             fi
             ;;
 

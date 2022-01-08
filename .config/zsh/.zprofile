@@ -18,6 +18,8 @@
 #    clear #for background artifacting
 #fi
 
-#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-#  startx
-#fi
+#===Auto Startx===#
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  startx "$XDG_CONFIG_HOME/X11/xinitrc"
+fi
+

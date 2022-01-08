@@ -76,6 +76,8 @@ set list
 set listchars=tab:»\ ,eol:↲,trail:_
 set showbreak=↪\ 
 
+set viminfo='10,<100,:100,%,n~/.vim/.viminfo
+
 
 "====================KEYMAP===================="
 " let space useless and be Leader Key
