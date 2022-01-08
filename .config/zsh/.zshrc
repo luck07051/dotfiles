@@ -12,7 +12,6 @@ prompt="[%F{blue}%~%f]%F{blue}%# "
 
 #====================EXPORT====================#
 export TERM="xterm-256color"
-export EDITOR="nvim"
 export LANG=en_US.UTF-8
 export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 
@@ -44,6 +43,9 @@ alias grep="grep --color=auto"
 alias gs="git status"
 # for bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+
+# wget
+alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
 
 

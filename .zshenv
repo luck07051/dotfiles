@@ -26,3 +26,11 @@ export LESSHISTFILE=-
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 # java
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# npm
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+
+
+# Default App
+export EDITOR="nvim"
+export BROWSER"firefox"
+export TERMINAL="alacritty"
