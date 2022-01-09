@@ -35,6 +35,7 @@ Commandline tool
 icdiff
 wget
 fzf
+task
 ```
 
 Commandline app
@@ -63,11 +64,17 @@ zoxide
 
 Dependencie
 ```
-xclip slop  # for rofi screenshot
-yay -S ffcast  # for rofi screenshot
+# for rofi screenshot
+xclip slop
+yay -S ffcast
 (npm  # node.js for vim-instant-markdown)
-pip install psutil  # for qtile wigets
-pip install dbus-next  # for qtile
+# for qtile 
+pip install psutil
+pip install dbus-next
+# for taskwiki
+sudo pip3 install tasklib
+sudo pip3 install pynvim
+
 ```
 
 Gtk theme

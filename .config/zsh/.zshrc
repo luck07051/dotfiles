@@ -10,12 +10,6 @@ bindkey -v
 prompt="[%F{blue}%~%f]%F{blue}%# "
 
 
-#====================EXPORT====================#
-export TERM="xterm-256color"
-export LANG=en_US.UTF-8
-export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
-
-
 #====================ALIAS====================#
 alias res="source $XDG_CONFIG_HOME/zsh/.zshrc"
 
@@ -25,12 +19,14 @@ alias mv="mv -i"
 alias rm="rm -i"
 
 # vim
-alias vim="nvim"
+alias v="nvim"
+alias vw="nvim ~/vimwiki/index.md"
 
 # ls
 alias ls="exa --icons --group-directories-first --color=always"
 alias la="exa -a --icons --group-directories-first --color=always"
 alias ll="exa -al --icons --group-directories-first --color=always"
+alias l="exa -al --icons --group-directories-first --color=always"
 
 # pacman and yay
 #alias pacman="sudo pacman"
@@ -46,6 +42,9 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # wget
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
+
+# task
+alias t="task"
 
 
 
@@ -91,7 +90,7 @@ colorscript random
 eval "$(starship init zsh)"
 
 # zoxide
-eval "$(zoxide init zsh --cmd cd)"
+eval "$(zoxide init zsh)"
 
 
 

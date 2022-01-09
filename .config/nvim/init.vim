@@ -62,7 +62,7 @@ set t_ut=""
 
 set wildmenu            " show the commom complete list, can use Tab and S-Tab
 
-set list
+"set list
 set listchars=tab:»\ ,eol:↲,trail:_
 set showbreak=↪\ 
 
@@ -124,13 +124,16 @@ call plug#begin('~/.vim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
 
+"===vimwiki and markdown==="
 Plug 'vimwiki/vimwiki'
+Plug 'tools-life/taskwiki'
 
 Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn install' }
 
 Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
+"=== ==="
 Plug 'ap/vim-css-color'
 
 call plug#end()
@@ -145,8 +148,16 @@ set noshowmode          " dont show mode below
 
 "===vimwiki==="
 " use markdown syntax
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" makes vimwiki markdown links ad [text](text.md) instead of [text](text)
+let g:vimwiki_markdown_link_ext = 1
+
+
+"===taskwiki==="
+let g:taskwiki_markup_syntax = 'markdown'
+let g:taskwiki_taskrc_location = '~/.config/task/taskrc'
+let g:taskwiki_data_location = '~/.local/share/task/'
+let g:taskwiki_disable_concealcursor = 'yes'
 
 
 "===markdown preview==="
@@ -169,7 +180,8 @@ let g:mkdp_preview_options = {
     \ }
 
 
-"===markdown==="
+"===vim markdown==="
 let g:vim_markdown_math = 1
+let g:vim_markdown_folding_disabled = 1
 
 

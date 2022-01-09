@@ -34,3 +34,8 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export EDITOR="nvim"
 export BROWSER"firefox"
 export TERMINAL="alacritty"
+
+# Misc
+export TERM="xterm-256color"
+export LANG=en_US.UTF-8
+export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
