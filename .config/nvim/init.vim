@@ -1,4 +1,4 @@
-filetype plugin indent on 
+filetype plugin indent on
 syntax enable
 
 "====================GENERAL===================="
@@ -64,7 +64,7 @@ set wildmenu            " show the commom complete list, can use Tab and S-Tab
 
 "set list
 set listchars=tab:»\ ,eol:↲,trail:_
-set showbreak=↪\ 
+set showbreak=↪\ "
 
 
 "====================KEYMAP===================="
@@ -94,7 +94,8 @@ noremap <Leader>p "+p
 noremap <Leader>P "+P
 " cancel search highlight
 nnoremap <silent><Leader>nh :nohlsearch<CR>
-   
+nnoremap <Leader>ns :call DeleteExtraSpaces()<CR>
+
 "===Copy or Change Search==="
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
@@ -103,10 +104,10 @@ omap s :normal vs<CR>
 
 
 "====================AUTOCMD===================="
-" not auto comment new line
+" Not auto comment new line
 autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
 
-" delete extra space
+" Delete extra space
 autocmd BufWrite *.cpp,*.h,makefile call DeleteExtraSpaces()
 function DeleteExtraSpaces()
     :let b:nline= line('.')
@@ -142,8 +143,9 @@ call plug#end()
 
 "===lightline==="
 " Set lightline theme
-let g:lightline = { 'colorscheme': 'seoul256' } 
+let g:lightline = { 'colorscheme': 'seoul256' }
 set noshowmode          " dont show mode below
+
 
 
 "===vimwiki==="

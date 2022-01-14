@@ -1,5 +1,6 @@
 from libqtile import qtile, bar, widget
 from color import ColorScheme
+from KeyChain import Keywidget
 
 
 myMainWidget = [
@@ -36,6 +37,9 @@ myMainWidget = [
             ),
         widget.WindowName( 
             foreground = ColorScheme[7],
+            ),
+        Keywidget(
+            foreground = ColorScheme[7]
             ),
         widget.Sep(
             foreground = ColorScheme[8],

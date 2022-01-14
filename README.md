@@ -42,6 +42,7 @@ Commandline app
 ```
 ranger
 sxiv
+llpp
 ncmpcpp
 yay -S ncpamixer
 ```

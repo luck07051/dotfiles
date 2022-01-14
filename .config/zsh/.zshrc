@@ -20,6 +20,7 @@ alias rm="rm -i"
 
 # vim
 alias v="nvim"
+alias vim="nvim"
 alias vw="nvim ~/vimwiki/index.md"
 
 # ls
@@ -90,7 +91,7 @@ colorscript random
 eval "$(starship init zsh)"
 
 # zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 
 

@@ -1,5 +1,6 @@
 import os
 import subprocess
+import xcffib
 
 from typing import List  # noqa: F401
 
@@ -7,116 +8,79 @@ from libqtile import qtile, bar, layout, widget, hook, extension
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 
-mod = "mod4"
+returnkey = "Escape"    # Esc
+rootkey = "Super_L"     # left Super
+mod = "mod4"            # left/right Super
+mousemod = "mod1"       # Alt
+
 terminal = "alacritty"
 browser = "firefox"
 
 from widgets import myMainWidget, mySecondWidget
 from color import ColorScheme
+from KeyChain import KeyNode
 
 
 #====================KEY BINDING====================#
-keys = [
-    #===Basic Stuff===#
-    Key([mod], "space", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill active windows"),
 
-    Key([mod], "Return", lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
-    Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
-    Key([mod], "m", lazy.spawn("rofi-qtile-menu"), desc="Open qtile menu"),
+root = KeyNode([], rootkey, [], name="Root")
+home = KeyNode([], returnkey, [], ishome=True, name="Home")
+home.addchildren(root)
+root.sethome(home)
+keys = home.children
 
+qtile_keys = KeyNode([], "q", [
+    KeyNode([], 'r', [], lazy.restart()),
+    KeyNode(["shift"], 'q', [], lazy.shutdown()),
+], name="Qtile")
 
-    Key([mod, "control"], "s", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Logout Qtile"),
+open_keys = KeyNode([], "o", [
+    KeyNode([], "t", [], lazy.spawn(terminal), desc="Open terminal"),
+    KeyNode([], 'b', [], lazy.spawn(browser), desc="Open browser"),
+    KeyNode([], 'l', [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
+], name="Open")
 
-
-    #===Monitor===#
-    Key([mod], "u", lazy.to_screen(0), desc="Focus to monitor 1"),
-    Key([mod], "i", lazy.to_screen(1), desc="Focus to monitor 2"),
-
-
-    #===Layout===#
-    Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
-    Key([mod], "k", lazy.layout.up(),    desc="Move focus to up in current stack"),
-
-    Key([mod], "h",
-        lazy.layout.shrink(),
-        lazy.layout.decrease_nmaster(),
-        desc="Shrink window (MonadTall), decrease number in master pane (Tile)"),
-    Key([mod], "l",
-        lazy.layout.grow(),
-        lazy.layout.increase_nmaster(),
-        desc="Expand window (MonadTall), increase number in master pane (Tile)"),
-
-    KeyChord([mod], "y", [
-        Key([], "j", lazy.layout.shuffle_down(),  desc="Move windows down  in current stack"),
-        Key([], "k", lazy.layout.shuffle_up(),    desc="Move windows up    in current stack"),
-        Key([], "h", lazy.layout.shuffle_left(),  desc="Move windows left  in current stack"),
-        Key([], "l", lazy.layout.shuffle_right(), desc="Move windows right in current stack"),
-        Key([], "m", lazy.layout.maximize(), desc="toggle window between minimum and maximum sizes"),
-        Key([], "n", lazy.layout.normalize(), desc="normalize window size rations"),
-    ]),
-
-    #===Group===#
-    Key([mod, "shift"], "f",
-        lazy.window.toggle_floating(),
-        desc="toggle floating"),
-
-    Key([mod], "f",
-        lazy.window.toggle_fullscreen(),
-        desc="toggle fullscreen"),
-
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+window_keys = KeyNode([], "w", [
+    KeyNode([], "w", [], lazy.spawn("rofi -show window -i -theme ui_theme")),
+], name="Window")
 
 
-    #===Special===#
-    # Key([mod], "n", functions.spawn_specific_app, desc="open specific app depend on group"),
+root.addchildren(
+    KeyNode([], "x", [], lazy.window.kill(), desc="Kill active windows"),
+    KeyNode([], "semicolon", [], lazy.spawn("rofi-menu"), desc="Open rofi menu"),
+    KeyNode([], "j", [], lazy.layout.down(), desc="Move focus to down in current stack"),
+    KeyNode([], "k", [], lazy.layout.up(),   desc="Move focus to up in current stack"),
+    qtile_keys,
+    open_keys,
+    window_keys,
+)
 
 
+
+#====================MOUSE BINDING====================#
+mouse = [
+    Drag( [mousemod], "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position()),
+
+    Drag( [mousemod, "shift"], "Button1",
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size()),
+
+    Click([mousemod, "control"], "Button1", 
+        lazy.window.bring_to_front())
 ]
+
 
 
 
 
 #====================GROUPS====================#
 groups_name = ["1", "2", "3", "4", "5", "6", "7"]
+groups_label = ["", "", "", "ﱘ", "ﭮ", "", ""]
 
-groups = [
-    Group(
-        name = groups_name[0],
-        label = "",
-        matches = [Match(wm_class = browser)],
-        spawn = (browser),
-        ),
-    Group(
-        name = groups_name[1], 
-        label = "",
-        matches = [Match(wm_class = terminal)],
-        spawn = (terminal),
-        ),
-    Group(
-        name = groups_name[2], 
-        label = "",
-        ),
-    Group(
-        name = groups_name[3], 
-        label = "ﱘ",
-        ),
-    Group(
-        name = groups_name[4], 
-        label = "ﭮ",
-        matches = [Match(wm_class = "discord")],
-        ),
-    Group(
-        name = groups_name[5], 
-        label = "",
-        layout = "max",
-        ),
-    Group(
-        name = groups_name[6], 
-        label = "",
-        ),
-]
+groups = [ Group( name = groups_name[i], label = groups_label[i] ) for i in range(len(groups_name)) ]
+
 
 for i in groups_name:
     keys.extend([
@@ -163,24 +127,6 @@ screens = [
         x = 1920, y = 0, width = 1920, height = 1080),
 ]       
 
-
-
-#====================HOOK====================#
-# @hook.subscribe.startup_once
-# def autostart():
-#     home = os.path.expanduser('~/.config/qtile/autostart.sh')
-#     subprocess.run([home])
-
-
-#====================MOUSE BINDING====================#
-# Drag floating layouts.
-mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start = lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start = lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front())
-]
 
 
 #====================MISC====================#
