@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+root() {
+    echo "q     : +Qtile"
+    echo "o     : +Open"
+    echo "w     : +Window"
+    echo "g     : +Group"
+
+    echo "x     : Kill windows"
+    echo "Return: Open terminal"
+    echo ";     : Rofi menu"
+    echo "Tab   : Switch layouts"
+    echo "j     : Focus down"
+    echo "k     : Focus up"
+    echo "h     : Shrink window"
+    echo "l     : Expand window"
+    echo ",     : Switch monitor"
+}
+
+main() {
+    # Get choice from rofi
+    choice=$( (root) | rofi -dmenu -theme ui_theme -p '')
+
+    # If user has not picked anything, exit
+    if [[ -z "${choice// }" ]]; then
+        exit 1
+    fi
+
+    # Run the selected command
+    case $choice in
+        "q     :  +Qtile")
+            ;;
+        "o     :  +Open")
+            ;;
+        "w     :  +Window")
+            ;;
+    esac
+
+    set -e
+}
+
+main $1 &
+
+exit 0
+
+!/bin/bash

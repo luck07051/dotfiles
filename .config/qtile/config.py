@@ -26,14 +26,12 @@ from KeyChain import KeyNode
 #====================GROUPS====================#
 groups_name = ["1", "2", "3", "4", "5", "6", "7"]
 groups_label = ["", "", "", "ﱘ", "ﭮ", "", ""]
-groups_shortcut = ["a", "s", "d", "f", "g", "h", "j", "k", "l"]
 
 groups = [ Group( name = groups_name[i], label = groups_label[i] ) for i in range(len(groups_name)) ]
 
 
 
 #====================KEY BINDING====================#
-
 root = KeyNode([], rootkey, [], name="Root")
 home = KeyNode([], returnkey, [], ishome=True, name="Home")
 home.addchildren(
@@ -42,17 +40,20 @@ home.addchildren(
 root.sethome(home)
 keys = home.children
 
+#===Qtile===#
 qtile_keys = KeyNode([], "q", [
     KeyNode([], "r", [], lazy.restart()),
     KeyNode(["shift"], "q", [], lazy.shutdown()),
 ], name="Qtile")
 
+#===Open===#
 open_keys = KeyNode([], "o", [
     KeyNode([], "o", [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
     KeyNode([], "t", [], lazy.spawn(terminal), desc="Open terminal"),
     KeyNode([], "b", [], lazy.spawn(browser), desc="Open browser"),
 ], name="Open")
 
+#===Window===#
 window_keys = KeyNode([], "w", [
     KeyNode([], "w", [], lazy.spawn("rofi -show window -i -theme ui_theme"),
         desc="Open window rofi"),
@@ -68,6 +69,7 @@ window_keys = KeyNode([], "w", [
     KeyNode([], "f", [], lazy.window.toggle_floating(), desc="toggle floating"),
 ], name="Window")
 
+#===Group===#
 group_keys = KeyNode([], "g", [], name="Group")
 for group in groups:
     group_keys.addchildren(
@@ -79,12 +81,15 @@ for group in groups:
     )
 
 
-
 root.addchildren(
+    KeyNode(["shift"], "slash", [], lazy.spawn("qtile_help"), desc="Open qtile help"),
     KeyNode([], "x", [], lazy.window.kill(), desc="Kill active windows"),
+    KeyNode([], "Return", [], lazy.spawn(terminal), desc="Open terminal"),
     KeyNode([], "semicolon", [], lazy.spawn("rofi-menu"), desc="Open rofi menu"),
 
-    KeyNode([], "space", [], lazy.next_screen(), desc="Switch monitor"),
+    KeyNode([], "Tab", [], lazy.next_layout(), desc="Toggle between layouts"),
+
+    KeyNode([], "comma", [], lazy.next_screen(), desc='Move focus to prev monitor'),
 
     KeyNode([], "j", [], lazy.layout.down(), desc="Move focus to down in current stack"),
     KeyNode([], "k", [], lazy.layout.up(),   desc="Move focus to up in current stack"),
@@ -98,7 +103,6 @@ root.addchildren(
         lazy.layout.increase_nmaster(),
         desc="Expand window (MonadTall), increase number in master pane (Tile)"),
 
-    KeyNode([], "Tab", [], lazy.next_layout(), desc="Toggle between layouts"),
 
     qtile_keys,     #q
     open_keys,      #o
@@ -135,7 +139,6 @@ layout_theme = {"border_width": 2,
 layouts = [
     layout.MonadTall(**layout_theme, border_on_single = "true"),
     layout.Max(**layout_theme),
-    layout.Floating(**layout_theme)
 ]
 
 
@@ -147,7 +150,6 @@ widget_defaults = dict(
 )
 
 extension_defaults = widget_defaults.copy()
-
 
 screens = [
     Screen( top = bar.Bar( myMainWidget, opacity = 1, size = 24), 
