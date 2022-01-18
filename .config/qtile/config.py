@@ -26,8 +26,12 @@ from KeyChain import KeyNode
 #====================GROUPS====================#
 groups_name = ["1", "2", "3", "4", "5", "6", "7"]
 groups_label = ["", "", "", "ﱘ", "ﭮ", "", ""]
+groups_spawn = [browser, terminal, '', '', '', '', '']
 
-groups = [ Group( name = groups_name[i], label = groups_label[i] ) for i in range(len(groups_name)) ]
+groups = [ Group( 
+    name = groups_name[i],
+    label = groups_label[i],
+    spawn = groups_spawn[i] ) for i in range(len(groups_name)) ]
 
 
 
@@ -84,16 +88,19 @@ for group in groups:
 root.addchildren(
     KeyNode(["shift"], "slash", [], lazy.spawn("qtile_help"), desc="Open qtile help"),
     KeyNode([], "x", [], lazy.window.kill(), desc="Kill active windows"),
+
     KeyNode([], "Return", [], lazy.spawn(terminal), desc="Open terminal"),
     KeyNode([], "semicolon", [], lazy.spawn("rofi-menu"), desc="Open rofi menu"),
-
+    KeyNode([], "f", [], lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
     KeyNode([], "Tab", [], lazy.next_layout(), desc="Toggle between layouts"),
 
-    KeyNode([], "comma", [], lazy.next_screen(), desc='Move focus to prev monitor'),
 
+    KeyNode(["shift"], "o", [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
+
+
+    KeyNode([], "comma", [], lazy.next_screen(), desc='Move focus to prev monitor'),
     KeyNode([], "j", [], lazy.layout.down(), desc="Move focus to down in current stack"),
     KeyNode([], "k", [], lazy.layout.up(),   desc="Move focus to up in current stack"),
-    
     KeyNode([], "h", [],
         lazy.layout.shrink(),
         lazy.layout.decrease_nmaster(),
@@ -172,6 +179,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class = 'ssh-askpass'),  # ssh-askpass
     Match(title = 'branchdialog'),  # gitk
     Match(title = 'pinentry'),  # GPG key password entry
+    Match(title = 'Library' ), # firefox
 
     Match(wm_class = 'pavucontrol'),  # Volume Controler
 ])

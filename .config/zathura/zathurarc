@@ -1,0 +1,10 @@
+set font "MesloLGS Nerd Font 11"
+
+set default-bg                  "#1c1c1c"
+set default-fg                  "#d0d0d0"
+
+set statusbar-bg                "#d0d0d0"
+set statusbar-fg                "#1c1c1c"
+
+set highlight-color             "#ebcb8b"
+set highlight-active-color      "#81a1c1"

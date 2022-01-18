@@ -43,6 +43,7 @@ Commandline app
 ranger
 sxiv
 llpp
+zathura zathura-pdf-mupdf
 ncmpcpp
 yay -S ncpamixer
 ```

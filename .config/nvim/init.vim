@@ -1,7 +1,7 @@
+"====================GENERAL===================="
 filetype plugin indent on
 syntax enable
 
-"====================GENERAL===================="
 "===Basic==="
 set ruler               " show the cursor position below
 set number              " show line number on left side
