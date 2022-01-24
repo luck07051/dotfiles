@@ -1,3 +1,7 @@
+# Creates KeyNodes that allow chaining of command groups
+# Originally lovingly borrowed from:  https://gitlab.com/Melkor333/dotfiles/-/blob/master/dotfiles/.config/qtile/qtile_config/KeyChain.py
+# this version from: https://gist.github.com/oboingo/67150b907d71dde00130cd2dcabf582c
+
 from libqtile.config import Key
 from libqtile.widget.textbox import TextBox
 from libqtile import bar, hook

@@ -38,6 +38,9 @@ myMainWidget = [
         widget.WindowName( 
             foreground = ColorScheme[7],
             ),
+
+
+
         Keywidget(
             foreground = ColorScheme[7]
             ),
@@ -60,6 +63,9 @@ myMainWidget = [
             foreground = ColorScheme[7],
             format = "CUP {load_percent:4.1f}%"
             ),
+        #widget.ThermalSensor(
+        #    foreground = ColorScheme[7],
+        #    ),
         widget.Sep(
             foreground = ColorScheme[8],
             size_percent = 90,
@@ -81,15 +87,6 @@ myMainWidget = [
         #    foreground = ColorScheme[7],
         #    interface = "enp0s20f0u1",
         #    format = "NET {down}↓↑{up}",
-        #    ),
-        #widget.Sep(
-        #    foreground = ColorScheme[8],
-        #    size_percent = 90,
-        #    linewidth = 2,
-        #    padding = 2,
-        #    ),
-        #widget.ThermalSensor(
-        #    foreground = ColorScheme[7],
         #    ),
         #widget.Sep(
         #    foreground = ColorScheme[8],

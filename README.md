@@ -32,18 +32,15 @@ yay -S colorscript
 
 Commandline tool
 ```
+ranger
+sxiv
 icdiff
 wget
 fzf
 task
-```
-
-Commandline app
-```
-ranger
-sxiv
-llpp
+ffmpeg ffmpegthumbnailer
 zathura zathura-pdf-mupdf
+ueberzug
 ncmpcpp
 yay -S ncpamixer
 ```
@@ -53,6 +50,7 @@ Graphical app
 thunar
 pavucontrol
 gimp
+vlc
 ```
 Rust
 
@@ -143,6 +141,10 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ```
 If markdown-preview dont work, try this `:call mkdp#util#install()`
 
+### ranger plugin
+```
+git clone git@github.com:jchook/ranger-zoxide.git ~/.config/ranger/plugins/zoxide
+```
 
 ### yay
 ```

@@ -11,7 +11,13 @@ prompt="[%F{blue}%~%f]%F{blue}%# "
 
 
 #====================ALIAS====================#
-alias res="source $XDG_CONFIG_HOME/zsh/.zshrc"
+# F5 to resource
+bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
+
+
+# Quick start
+alias v="nvim"
+alias f="ranger"
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -19,7 +25,6 @@ alias mv="mv -i"
 alias rm="rm -i"
 
 # vim
-alias v="nvim"
 alias vim="nvim"
 alias vw="nvim ~/vimwiki/index.md"
 
@@ -44,10 +49,11 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 # wget
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
-# task
+# taskwarrior
 alias t="task"
-
-
+alias tn="task project:"
+alias tl="task project:linux"
+alias ts="task project:school"
 
 
 #===================PLUG=====================#
@@ -83,7 +89,7 @@ setxkbmap -option ctrl:nocaps
 # $ yay -S shell-color-scripts
 # the shell-color-scripts is placed in /opt/shell-color-scripts/colorscripts
 # not use 'colorbars debian elfman hex illumina pukeskull rupees spectrum thebat tux'
-colorscript random
+#colorscript random
 
 # use starship prompt
 # install by 

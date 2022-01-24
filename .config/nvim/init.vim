@@ -74,16 +74,13 @@ let mapleader="\<Space>"
 " resource vimrc
 nnoremap <F5> :source $MYVIMRC<CR>
 
-"===Remap Defalut Key==="
 noremap Y y$
 noremap ~ g~
 
-"===Add a Empty Line==="
+" add a empty line
 nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
 nnoremap <silent><C-k> :set paste<CR>m'O<Esc>'':set nopaste<CR>
 
-
-"===Leader Key==="
 " let d purely for deleting
 noremap <Leader>d "_d
 noremap <Leader>D "_D
@@ -95,6 +92,11 @@ noremap <Leader>P "+P
 " cancel search highlight
 nnoremap <silent><Leader>nh :nohlsearch<CR>
 nnoremap <Leader>ns :call DeleteExtraSpaces()<CR>
+" split
+nnoremap <Leader>sh :split<CR>
+nnoremap <Leader>sv :vsplit<CR>
+" switch windows
+" switch buffers
 
 "===Copy or Change Search==="
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
@@ -134,11 +136,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn 
 Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
-"=== ==="
+"===Misc==="
 Plug 'ap/vim-css-color'
 
 call plug#end()
-" :PlugInstall
 
 
 "===lightline==="
