@@ -25,6 +25,7 @@ hi Constant         ctermfg=11
 hi Identifier       ctermfg=10
 hi Type             ctermfg=14
 "=Misc="
+hi VertSplit        ctermfg=236 ctermbg=236
 hi ErrorMsg         ctermfg=7
 " listchars eol
 hi NonText          ctermfg=238
@@ -68,18 +69,19 @@ set showbreak=↪\ "
 
 
 "====================KEYMAP===================="
+" resource vimrc
+nnoremap <F5> :source $MYVIMRC<CR>
+
 " let space useless and be Leader Key
 noremap <Space> <nop>
 let mapleader="\<Space>"
-" resource vimrc
-nnoremap <F5> :source $MYVIMRC<CR>
 
 noremap Y y$
 noremap ~ g~
 
-" add a empty line
-nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
-nnoremap <silent><C-k> :set paste<CR>m'O<Esc>'':set nopaste<CR>
+"" add a empty line
+"nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
+"nnoremap <silent><C-k> :set paste<CR>m'O<Esc>'':set nopaste<CR>
 
 " let d purely for deleting
 noremap <Leader>d "_d
@@ -89,14 +91,18 @@ noremap <Leader>y "+y
 noremap <Leader>Y "+Y
 noremap <Leader>p "+p
 noremap <Leader>P "+P
+
 " cancel search highlight
 nnoremap <silent><Leader>nh :nohlsearch<CR>
 nnoremap <Leader>ns :call DeleteExtraSpaces()<CR>
-" split
-nnoremap <Leader>sh :split<CR>
-nnoremap <Leader>sv :vsplit<CR>
+
 " switch windows
+nnoremap <Leader>j <C-W>
 " switch buffers
+nnoremap <C-J> :bnext<CR>
+nnoremap <C-K> :bprev<CR>
+nnoremap <C-H> gT
+nnoremap <C-L> gt
 
 "===Copy or Change Search==="
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
@@ -123,7 +129,7 @@ autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 
 "====================PLUGIN===================="
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
 

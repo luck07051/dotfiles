@@ -36,104 +36,68 @@ groups = [ Group(
 
 
 #====================KEY BINDING====================#
-root = KeyNode([], rootkey, [], name="Root")
-home = KeyNode([], returnkey, [], ishome=True, name="Home")
-home.addchildren(
-    root,
-    )
-root.sethome(home)
-keys = home.children
+keys = [
+    #===Qtile===#
+    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Logout Qtile"),
+    Key([mod], "slash", lazy.spawn("qtile_help"), desc="Open qtile help"),
 
-#===Qtile===#
-qtile_keys = KeyNode([], "q", [
-    KeyNode([], "r", [], lazy.restart()),
-    KeyNode(["shift"], "q", [], lazy.shutdown()),
-], name="Qtile")
+    Key([mod], "x", lazy.window.kill(), desc="Kill active windows"),
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 
-#===Open===#
-open_keys = KeyNode([], "o", [
-    KeyNode([], "o", [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
-    KeyNode([], "t", [], lazy.spawn(terminal), desc="Open terminal"),
-    KeyNode([], "b", [], lazy.spawn(browser), desc="Open browser"),
-], name="Open")
+    Key([mod], "comma", lazy.next_screen(), desc="Move focus to prev monitor"),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
 
-#===Window===#
-window_keys = KeyNode([], "w", [
-    KeyNode([], "w", [], lazy.spawn("rofi -show window -i -theme ui_theme"),
-        desc="Open window rofi"),
+    #===Open===#
+    Key([mod], "o", lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Open terminal"),
+    Key([mod], "b", lazy.spawn(browser), desc="Open browser"),
+    Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
 
-    KeyNode([], "j", [], lazy.layout.shuffle_down(),  desc="Move windows down  in current stack"),
-    KeyNode([], "k", [], lazy.layout.shuffle_up(),    desc="Move windows up    in current stack"),
-    KeyNode([], "h", [], lazy.layout.shuffle_left(),  desc="Move windows left  in current stack"),
-    KeyNode([], "l", [], lazy.layout.shuffle_right(), desc="Move windows right in current stack"),
-
-    KeyNode([], "m", [], lazy.layout.maximize(), desc="toggle window between minimum and maximum sizes"),
-    KeyNode([], "n", [], lazy.layout.normalize(), desc="normalize window size rations"),
-
-    KeyNode([], "f", [], lazy.window.toggle_floating(), desc="toggle floating"),
-], name="Window")
-
-#===Group===#
-group_keys = KeyNode([], "g", [], name="Group")
-for group in groups:
-    group_keys.addchildren(
-            KeyNode([], group.name, [], lazy.group[ group.name ].toscreen(),
-                desc="Switch to group {}".format(group.name)),
-
-            KeyNode(["shift"], group.name, [], lazy.window.togroup( group.name ),
-                desc="Move focused window to group {}".format(group.name)),
-    )
-
-
-root.addchildren(
-    KeyNode(["shift"], "slash", [], lazy.spawn("qtile_help"), desc="Open qtile help"),
-    KeyNode([], "x", [], lazy.window.kill(), desc="Kill active windows"),
-
-    KeyNode([], "Return", [], lazy.spawn(terminal), desc="Open terminal"),
-    KeyNode([], "semicolon", [], lazy.spawn("rofi-menu"), desc="Open rofi menu"),
-    KeyNode([], "f", [], lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
-    KeyNode([], "Tab", [], lazy.next_layout(), desc="Toggle between layouts"),
-
-
-    KeyNode(["shift"], "o", [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
-
-
-    KeyNode([], "comma", [], lazy.next_screen(), desc='Move focus to prev monitor'),
-    KeyNode([], "j", [], lazy.layout.down(), desc="Move focus to down in current stack"),
-    KeyNode([], "k", [], lazy.layout.up(),   desc="Move focus to up in current stack"),
-    KeyNode([], "h", [],
-        lazy.layout.shrink(),
-        lazy.layout.decrease_nmaster(),
+    #===Layout===#
+    Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
+    Key([mod], "k", lazy.layout.up(),    desc="Move focus to up in current stack"),
+    Key([mod], "h",
+        lazy.layout.shrink(), lazy.layout.decrease_nmaster(),
         desc="Shrink window (MonadTall), decrease number in master pane (Tile)"),
-    KeyNode([], "l", [],
-        lazy.layout.grow(),
-        lazy.layout.increase_nmaster(),
+    Key([mod], "l",
+        lazy.layout.grow(), lazy.layout.increase_nmaster(),
         desc="Expand window (MonadTall), increase number in master pane (Tile)"),
 
+    #===Window===#
+    KeyChord([mod], "w", [
+        Key([], "w", lazy.spawn("rofi -show window -i -theme ui_theme"),
+            desc="Open window rofi"),
 
-    qtile_keys,     #q
-    open_keys,      #o
-    window_keys,    #w
-    group_keys,     #g
-)
+        Key([], "j", lazy.layout.shuffle_down(),  desc="Move windows down  in current stack"),
+        Key([], "k", lazy.layout.shuffle_up(),    desc="Move windows up    in current stack"),
+        Key([], "h", lazy.layout.shuffle_left(),  desc="Move windows left  in current stack"),
+        Key([], "l", lazy.layout.shuffle_right(), desc="Move windows right in current stack"),
 
+        Key([], "m", lazy.layout.maximize(), desc="toggle window between minimum and maximum sizes"),
+        Key([], "n", lazy.layout.normalize(), desc="normalize window size rations"),
+
+        Key([], "f", lazy.window.toggle_floating(), desc="toggle floating"),
+    ]),
+]
+
+for group in groups:
+    keys.extend([
+        Key([mod], group.name, lazy.group[ group.name ].toscreen(),
+            desc="Switch to group {}".format(group.name)),
+        Key([mod, "shift"], group.name, lazy.window.togroup( group.name ),
+            desc="Move focused window to gorup {}".format(group.name)),
+        ])
 
 
 #====================MOUSE BINDING====================#
 mouse = [
-    Drag( [mousemod], "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position()),
-
-    Drag( [mousemod, "shift"], "Button1",
-        lazy.window.set_size_floating(),
-        start=lazy.window.get_size()),
-
-    Click([mousemod, "control"], "Button1", 
-        lazy.window.bring_to_front())
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start = lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start = lazy.window.get_size()),
+    Click([mod], "Button2", lazy.window.bring_to_front())
 ]
-
-
 
 
 
@@ -210,49 +174,99 @@ wmname = "LG3D"
 
 
 
-# Default bindings
-#mkeys = {}
-#mkeys[mod] = [
-#    # Switch between windows
-#    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-#    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-#    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-#    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-#    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-#    # Move windows
-#    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-#    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-#    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-#    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-#    # Grow windows
-#    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-#    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-#    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-#    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-#    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-#    # Toggle between split and unsplit sides of stack.
-#    # Split = all windows displayed
-#    # Unsplit = 1 window displayed, like Max layout, but still with
-#    # multiple stack panes
-#    Key( [mod, "shift"], "Return",
-#        lazy.layout.toggle_split(),
-#        desc="Toggle between split and unsplit sides of stack",),
-#    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-#    # Toggle between different layouts as defined below
-#    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-#    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-#    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-#    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-#    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+#root = KeyNode([], rootkey, [], name="Root")
+#home = KeyNode([], returnkey, [], ishome=True, name="Home")
+#home.addchildren(
+#    root,
+#    )
+#root.sethome(home)
+#keys = home.children
+#
+##===Qtile===#
+#qtile_keys = KeyNode([], "q", [
+#    KeyNode([], "r", [], lazy.restart()),
+#    KeyNode(["shift"], "q", [], lazy.shutdown()),
+#], name="Qtile")
+#
+##===Open===#
+#open_keys = KeyNode([], "o", [
+#    KeyNode([], "o", [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
+#    KeyNode([], "t", [], lazy.spawn(terminal), desc="Open terminal"),
+#    KeyNode([], "b", [], lazy.spawn(browser), desc="Open browser"),
+#], name="Open")
+#
+##===Window===#
+#window_keys = KeyNode([], "w", [
+#    KeyNode([], "w", [], lazy.spawn("rofi -show window -i -theme ui_theme"),
+#        desc="Open window rofi"),
+#
+#    KeyNode([], "j", [], lazy.layout.shuffle_down(),  desc="Move windows down  in current stack"),
+#    KeyNode([], "k", [], lazy.layout.shuffle_up(),    desc="Move windows up    in current stack"),
+#    KeyNode([], "h", [], lazy.layout.shuffle_left(),  desc="Move windows left  in current stack"),
+#    KeyNode([], "l", [], lazy.layout.shuffle_right(), desc="Move windows right in current stack"),
+#
+#    KeyNode([], "m", [], lazy.layout.maximize(), desc="toggle window between minimum and maximum sizes"),
+#    KeyNode([], "n", [], lazy.layout.normalize(), desc="normalize window size rations"),
+#
+#    KeyNode([], "f", [], lazy.window.toggle_floating(), desc="toggle floating"),
+#], name="Window")
+#
+##===Group===#
+#group_keys = KeyNode([], "g", [], name="Group")
+#for group in groups:
+#    group_keys.addchildren(
+#            KeyNode([], group.name, [], lazy.group[ group.name ].toscreen(),
+#                desc="Switch to group {}".format(group.name)),
+#
+#            KeyNode(["shift"], group.name, [], lazy.window.togroup( group.name ),
+#                desc="Move focused window to group {}".format(group.name)),
+#    )
+#
+#
+#root.addchildren(
+#    KeyNode(["shift"], "slash", [], lazy.spawn("qtile_help"), desc="Open qtile help"),
+#    KeyNode([], "x", [], lazy.window.kill(), desc="Kill active windows"),
+#
+#    KeyNode([], "Return", [], lazy.spawn(terminal), desc="Open terminal"),
+#    KeyNode([], "semicolon", [], lazy.spawn("rofi-menu"), desc="Open rofi menu"),
+#    KeyNode([], "f", [], lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
+#    KeyNode([], "Tab", [], lazy.next_layout(), desc="Toggle between layouts"),
+#
+#
+#    KeyNode(["shift"], "o", [], lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
+#
+#
+#    KeyNode([], "comma", [], lazy.next_screen(), desc='Move focus to prev monitor'),
+#    KeyNode([], "j", [], lazy.layout.down(), desc="Move focus to down in current stack"),
+#    KeyNode([], "k", [], lazy.layout.up(),   desc="Move focus to up in current stack"),
+#    KeyNode([], "h", [],
+#        lazy.layout.shrink(),
+#        lazy.layout.decrease_nmaster(),
+#        desc="Shrink window (MonadTall), decrease number in master pane (Tile)"),
+#    KeyNode([], "l", [],
+#        lazy.layout.grow(),
+#        lazy.layout.increase_nmaster(),
+#        desc="Expand window (MonadTall), increase number in master pane (Tile)"),
+#
+#
+#    qtile_keys,     #q
+#    open_keys,      #o
+#    window_keys,    #w
+#    group_keys,     #g
+#)
+#
+#
+#
+##====================MOUSE BINDING====================#
+#mouse = [
+#    Drag( [mousemod], "Button1",
+#        lazy.window.set_position_floating(),
+#        start=lazy.window.get_position()),
+#
+#    Drag( [mousemod, "shift"], "Button1",
+#        lazy.window.set_size_floating(),
+#        start=lazy.window.get_size()),
+#
+#    Click([mousemod, "control"], "Button1", 
+#        lazy.window.bring_to_front())
 #]
-#
-#for i in groups_name:
-#    keys.extend([
-#        # mod1 + letter of group = switch to group
-#        Key([mod], i, lazy.group[i].toscreen(),
-#            desc="Switch to group {}".format(i)),
-#
-#        # mod1 + shift + letter of group = switch to & move focused window to group
-#        Key([mod, "shift"], i, lazy.window.togroup(i),
-#            desc="Switch to & move focused window to group {}".format(i)),
-#    ])
