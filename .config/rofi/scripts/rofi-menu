@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
+declare -A options
+options[power]="  Power"
+options[vimwiki]="  VimWiki"
+options[screen_shot]="  Screen Shot"
+options[audio]="墳  Audio"
+
+
 get_options() {
-    echo "  Power"
-    echo "  VimWiki"
-    echo "  Screen Shot"
+    for entry in "${options[@]}"
+    do
+        echo "$entry"
+    done
 }
 
 main() {
@@ -17,11 +25,11 @@ main() {
 
     # Run the selected command
     case $choice in
-        "  Power")
+        "${options[power]}")
             rofi -show power -modi power:power-menu -theme ui_theme
             ;;
 
-        "  VimWiki")
+        "${options[vimwiki]}")
             # Check not in group '7'
             if [ -z "$(qtile cmd-obj -o group -f info | grep "'name': '7'")" ]
             then
@@ -35,8 +43,12 @@ main() {
             fi
             ;;
 
-        "  Screen Shot")
+        "${options[screen_shot]}")
             rofi-screenshot
+            ;;
+
+        "${options[audio]}")
+            audio-menu
             ;;
     esac
 

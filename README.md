@@ -52,14 +52,15 @@ pavucontrol
 gimp
 vlc
 ```
-Rust
 
+Rust
 ```
 exa
 htop
 bat
 procs
 zoxide
+starship # see .zshrc
 ```
 
 Dependencie

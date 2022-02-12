@@ -44,6 +44,8 @@ keys = [
 
     Key([mod], "x", lazy.window.kill(), desc="Kill active windows"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "n", lazy.screen.next_group(), desc="Switch to next group"),
+    Key([mod, "shift"], "n", lazy.screen.prev_group(), desc="Switch to prev group"),
 
     Key([mod], "comma", lazy.next_screen(), desc="Move focus to prev monitor"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
@@ -53,6 +55,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Open terminal"),
     Key([mod], "b", lazy.spawn(browser), desc="Open browser"),
     Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
+    Key([mod], "v", lazy.spawn("audio-menu"), desc="Open audio menu"),
 
     #===Layout===#
     Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
