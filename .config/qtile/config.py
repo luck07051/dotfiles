@@ -86,9 +86,11 @@ keys = [
     ]),
 
     #===Audio===#
-    Key([mod, "shift"], "j", lazy.spawn(scripts + "/decrease_volume"), 
+    Key([mod, "shift"], "j", 
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), 
         desc="Decrease volume"),
-    Key([mod, "shift"], "k", lazy.spawn(scripts + "/increase_volume"),
+    Key([mod, "shift"], "k", 
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
         desc="Increase volume"),
     Key([mod, "shift"], "i", lazy.spawn(scripts + "/switch_hdmi"), 
         desc="Switch output devices"),
