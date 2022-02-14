@@ -13,7 +13,8 @@ rootkey = "Super_L"     # left Super
 mod = "mod4"            # left/right Super
 mousemod = "mod1"       # Alt
 
-scripts = "./.config/qtile/scripts"
+qtile_scripts = "./.config/qtile/scripts"
+rofi_scripts = "./.config/rofi/scripts"
 
 
 terminal = "alacritty"
@@ -43,7 +44,7 @@ keys = [
     #===Qtile===#
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Logout Qtile"),
-    Key([mod], "slash", lazy.spawn("qtile_help"), desc="Open qtile help"),
+    Key([mod], "slash", lazy.spawn(rofi_scripts + "/qtile_help"), desc="Open qtile help"),
 
     Key([mod], "x", lazy.window.kill(), desc="Kill active windows"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -57,7 +58,7 @@ keys = [
     Key([mod], "o", lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Open terminal"),
     Key([mod], "b", lazy.spawn(browser), desc="Open browser"),
-    Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
+    Key([mod], "semicolon", lazy.spawn(rofi_scripts + "/rofi-menu"), desc="Open rofi menu"),
 
     #===Layout===#
     Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
@@ -89,12 +90,13 @@ keys = [
     Key([mod, "shift"], "j", 
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), 
         desc="Decrease volume"),
+
     Key([mod, "shift"], "k", 
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
         desc="Increase volume"),
-    Key([mod, "shift"], "i", lazy.spawn(scripts + "/switch_hdmi"), 
-        desc="Switch output devices"),
-    Key([mod, "shift"], "u", lazy.spawn(scripts + "/switch_headphones"), 
+
+    Key([mod, "shift"], "i", 
+        lazy.spawn(qtile_scripts + "/switch_default_sink"), 
         desc="Switch output devices"),
     
 ]

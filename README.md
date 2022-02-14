@@ -191,10 +191,6 @@ If text is corrupt
 ` pacman -S  lib32-fontconfig ttf-liberation wqy-zenhei `
 
 
-### wacom
-` xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275` 
-
-
 ### git difftool
 Add in .gitconfig
 ```
