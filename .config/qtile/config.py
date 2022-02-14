@@ -13,6 +13,9 @@ rootkey = "Super_L"     # left Super
 mod = "mod4"            # left/right Super
 mousemod = "mod1"       # Alt
 
+scripts = "./.config/qtile/scripts"
+
+
 terminal = "alacritty"
 browser = "firefox"
 
@@ -55,7 +58,6 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Open terminal"),
     Key([mod], "b", lazy.spawn(browser), desc="Open browser"),
     Key([mod], "semicolon", lazy.spawn("rofi-menu"), desc="Open rofi menu"),
-    Key([mod], "v", lazy.spawn("audio-menu"), desc="Open audio menu"),
 
     #===Layout===#
     Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
@@ -82,6 +84,17 @@ keys = [
 
         Key([], "f", lazy.window.toggle_floating(), desc="toggle floating"),
     ]),
+
+    #===Audio===#
+    Key([mod, "shift"], "j", lazy.spawn(scripts + "/decrease_volume"), 
+        desc="Decrease volume"),
+    Key([mod, "shift"], "k", lazy.spawn(scripts + "/increase_volume"),
+        desc="Increase volume"),
+    Key([mod, "shift"], "i", lazy.spawn(scripts + "/switch_hdmi"), 
+        desc="Switch output devices"),
+    Key([mod, "shift"], "u", lazy.spawn(scripts + "/switch_headphones"), 
+        desc="Switch output devices"),
+    
 ]
 
 for group in groups:

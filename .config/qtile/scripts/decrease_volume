@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+main() {
+
+    output="$(pactl list sinks short | grep "RUNNING" | awk '{print $2}')"
+
+    pactl set-sink-volume $output -5%
+
+
+
+    set -e
+}
+
+main $1 &
+
+exit 0
+
+!/bin/bash

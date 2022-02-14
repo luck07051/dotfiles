@@ -103,21 +103,23 @@ myMainWidget = [
         #    linewidth = 2,
         #    padding = 2,
         #    ),
-        widget.TextBox(
-            foreground = ColorScheme[7],
-            channel = "Master",
-            text = "Vol",
-            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
-            ),
-        widget.Volume(
-            foreground = ColorScheme[7],
-            ),
-        widget.Sep(
-            foreground = ColorScheme[8],
-            size_percent = 90,
-            linewidth = 2,
-            padding = 2,
-            ),
+
+        #widget.TextBox(
+        #    foreground = ColorScheme[7],
+        #    channel = "Master",
+        #    text = "Vol",
+        #    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")},
+        #    ),
+        #widget.Volume(
+        #    foreground = ColorScheme[7],
+        #    ),
+        #widget.Sep(
+        #    foreground = ColorScheme[8],
+        #    size_percent = 90,
+        #    linewidth = 2,
+        #    padding = 2,
+        #    ),
+
         #widget.CheckUpdates(
         #    foreground = ColorScheme[7],
         #    update_interval = 1800,

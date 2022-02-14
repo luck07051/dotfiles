@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+main() {
+
+    pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1
+
+    set -e
+}
+
+main $1 &
+
+exit 0
+
+!/bin/bash
