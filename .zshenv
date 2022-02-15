@@ -13,6 +13,7 @@ export PATH="${PATH}:$HOME/.config/rofi/scripts"
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export ZPLUG_HOME="$XDG_CONFIG_HOME"/zplug
 # X11
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
@@ -28,6 +29,12 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # npm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+# GunPG
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+# Java
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# Stack (Haskell)
+export STACK_ROOT="$XDG_CONFIG_HOME"/stack
 
 
 # Default App
