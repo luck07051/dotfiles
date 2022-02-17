@@ -36,7 +36,7 @@ alias l="exa -al --icons --group-directories-first --color=always"
 
 # pacman and yay
 #alias pacman="sudo pacman"
-alias pacup="sudo pacman -Syy"
+alias pacup="sudo pacman -Syu"
 
 # grep
 alias grep="grep --color=auto"

@@ -18,7 +18,7 @@ rofi_scripts = "./.config/rofi/scripts"
 
 
 terminal = "alacritty"
-browser = "firefox"
+browser = "qutebrowser"
 
 
 from widgets import myMainWidget, mySecondWidget
@@ -55,10 +55,15 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
 
     #===Open===#
-    Key([mod], "o", lazy.spawn("rofi -show combi -i -theme ui_theme"), desc="Run Launcher"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Open terminal"),
     Key([mod], "b", lazy.spawn(browser), desc="Open browser"),
-    Key([mod], "semicolon", lazy.spawn(rofi_scripts + "/rofi-menu"), desc="Open rofi menu"),
+    Key([mod], "o", 
+        lazy.spawn("rofi -show combi -i -theme ui_theme"), 
+        desc="Run Launcher"),
+    Key([mod], "semicolon", 
+        lazy.spawn("rofi -show power -modi power:power-menu -theme ui_theme"), 
+        desc="Open power menu"),
+    Key([mod, "shift"], "b", lazy.spawn("bwmenu"), desc="Open bitwarden-rofi menu"),
 
     #===Layout===#
     Key([mod], "j", lazy.layout.down(),  desc="Move focus to down in current stack"),
@@ -98,6 +103,7 @@ keys = [
     Key([mod, "shift"], "i", 
         lazy.spawn(qtile_scripts + "/switch_default_sink"), 
         desc="Switch output devices"),
+
     
 ]
 
@@ -136,7 +142,7 @@ layouts = [
 
 #====================WIDGET====================#
 widget_defaults = dict(
-    font = 'MesloLGL Nerd Font bold', 
+    font = 'MesloLGS Nerd Font bold', 
     fontsize = 12,
 )
 

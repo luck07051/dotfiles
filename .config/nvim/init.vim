@@ -21,7 +21,7 @@ hi Comment          ctermfg=15
 hi Statement        ctermfg=4
 hi Identifier       ctermfg=6
 hi PreProc          ctermfg=6
-hi Constant         ctermfg=11
+hi Constant         ctermfg=3
 hi Identifier       ctermfg=10
 hi Type             ctermfg=14
 "=Misc="
