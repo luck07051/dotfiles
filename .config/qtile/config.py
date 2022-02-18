@@ -8,29 +8,25 @@ from libqtile import qtile, bar, layout, widget, hook, extension
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 
-returnkey = "Escape"    # Esc
-rootkey = "Super_L"     # left Super
+
+from widgets import myMainWidget, mySecondWidget
+from read_xresources import xresources
+#from KeyChain import KeyNode
+
 mod = "mod4"            # left/right Super
 mousemod = "mod1"       # Alt
+#returnkey = "Escape"    # Esc
+#rootkey = "Super_L"     # left Super
 
 qtile_scripts = "./.config/qtile/scripts"
 rofi_scripts = "./.config/rofi/scripts"
-
-
-terminal = "alacritty"
-browser = "qutebrowser"
-
-
-from widgets import myMainWidget, mySecondWidget
-from color import ColorScheme
-from KeyChain import KeyNode
 
 
 
 #====================GROUPS====================#
 groups_name = ["1", "2", "3", "4", "5", "6", "7"]
 groups_label = ["", "", "", "ﱘ", "ﭮ", "", ""]
-groups_spawn = [browser, terminal, '', '', '', '', '']
+groups_spawn = [os.environ['BROWSER'], os.environ['TERMINAL'], '', '', '', '', '']
 
 groups = [ Group( 
     name = groups_name[i],
@@ -55,8 +51,8 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
 
     #===Open===#
-    Key([mod], "Return", lazy.spawn(terminal), desc="Open terminal"),
-    Key([mod], "b", lazy.spawn(browser), desc="Open browser"),
+    Key([mod], "Return", lazy.spawn(os.environ['TERMINAL']), desc="Open terminal"),
+    Key([mod], "b", lazy.spawn(os.environ['BROWSER']), desc="Open browser"),
     Key([mod], "o", 
         lazy.spawn("rofi -show combi -i -theme ui_theme"), 
         desc="Run Launcher"),
@@ -107,6 +103,8 @@ keys = [
     
 ]
 
+# mod + number to switch to group
+# mod + shift + number send window to group
 for group in groups:
     keys.extend([
         Key([mod], group.name, lazy.group[ group.name ].toscreen(),
@@ -117,6 +115,9 @@ for group in groups:
 
 
 #====================MOUSE BINDING====================#
+# mod + left button to move window position
+# mod + right button to change size
+# mod + middle button let window front
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start = lazy.window.get_position()),
@@ -130,8 +131,8 @@ mouse = [
 #====================LAYOUT====================#
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": ColorScheme[5],
-                "border_normal": ColorScheme[0]}
+                "border_focus": xresources['*.color5'],
+                "border_normal": xresources['*.background']}
 
 layouts = [
     layout.MonadTall(**layout_theme, border_on_single = "true"),
@@ -142,7 +143,7 @@ layouts = [
 
 #====================WIDGET====================#
 widget_defaults = dict(
-    font = 'MesloLGS Nerd Font bold', 
+    font = xresources['*.font'], 
     fontsize = 12,
 )
 

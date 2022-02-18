@@ -39,8 +39,8 @@ export STACK_ROOT="$XDG_CONFIG_HOME"/stack
 
 # Default App
 export EDITOR="nvim"
-export BROWSER"firefox"
 export TERMINAL="alacritty"
+export BROWSER="qutebrowser"
 
 # Misc
 export TERM="xterm-256color"

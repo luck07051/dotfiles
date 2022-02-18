@@ -3,30 +3,26 @@
 #   qute://help/configuring.html
 #   qute://help/settings.html
 
-ColorScheme = [
-    '#1c1c1c', '#cf6868', '#87af87', '#ebcb8b',
-    '#81a1c1', '#ffb9dc', '#87afaf', '#d0d0d0', 
-
-    '#585858', '#e59999', '#94c68b', '#f6b26b', 
-    '#68adcf', '#d5b0ff', '#87d1bc', '#808080']
-
-Terminal = 'alacritty'
+import os
+import subprocess
 
 
 # Change the argument to True to still load settings configured via autoconfig.yml
 config.load_autoconfig(False)
 # Always restore open sites when qutebrowser is reopened.
 c.auto_save.session = True
-
-c.scrolling.smooth = True
-
-c.editor.command = [Terminal, '-e', 'nvim', '-f', '{file}']
-
-c.messages.timeout = 5000
+# Editor to use for the `edit-*` commands.
+c.editor.command = [os.environ['TERMINAL'], '-e', os.environ['EDITOR'], '-f', '{file}']
+# Duration (in milliseconds) to show messages in the statusbar for.
+c.messages.timeout = 3500
 
 
 #====================URL====================#
-c.url.default_page = 'https://start.duckduckgo.com/'
+# Page to open if :open -t/-b/-w is used without URL.
+c.url.default_page = 'https://start.duckduckgo.com'
+# Page to open at the start.
+c.url.start_pages = 'https://start.duckduckgo.com'
+# Search engines which can be used via the address bar.
 c.url.searchengines = {
         'DEFAULT': 'https://duckduckgo.com/?q={}',
         'd': 'https://duckduckgo.com/?q={}',
@@ -49,18 +45,33 @@ c.bindings.key_mappings = {
         '<Shift+Return>': '<Return>'
         }
 
-config.bind('xb', 'config-cycle statusbar.show always never')
+# Use scroll command instead arrow key.
+config.bind('j', 'scroll-px 0 40')
+config.bind('k', 'scroll-px 0 -40')
+config.bind('h', 'scroll-px -40 0')
+config.bind('l', 'scroll-px 40 0')
+
+# Let J, K works straight.
+config.bind('J', 'tab-prev')
+config.bind('K', 'tab-next')
+
+# Hide statusbar or tabbar.
+config.bind('xb', 'config-cycle statusbar.show always in-mode')
 config.bind('xt', 'config-cycle tabs.show always never')
-config.bind('xx', 'config-cycle statusbar.show always never;; config-cycle tabs.show always never')
+config.bind('xx', 'config-cycle statusbar.show always in-mode;; config-cycle tabs.show always never')
 
 
 #====================DOWNLOADS====================#
+# Directory to save downloads to.
 c.downloads.location.directory = '~/downloads'
+# Where to show the downloaded files.
 c.downloads.position = 'bottom'
+# Duration (in milliseconds) to wait before removing finished downloads.
 c.downloads.remove_finished = 30000
 
 
 #====================CONTENT====================#
+# Automatically start playing `<video>` elements.
 c.content.autoplay = False
 
 # default
@@ -82,54 +93,96 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 
 
 #====================FILESELECT====================#
-c.fileselect.folder.command = [Terminal, "-e", "ranger", "--choosedir={}"]
-c.fileselect.multiple_files.command = [Terminal, "-e", "ranger", "--choosefiles={}"]
-c.fileselect.single_file.command = [Terminal, "-e", "ranger", "--choosefile={}"]
+# Command (and arguments) to use for selecting a folder/file in forms.
+c.fileselect.folder.command = [os.environ['TERMINAL'], "-e", "ranger", "--choosedir={}"]
+c.fileselect.multiple_files.command = [os.environ['TERMINAL'], "-e", "ranger", "--choosefiles={}"]
+c.fileselect.single_file.command = [os.environ['TERMINAL'], "-e", "ranger", "--choosefile={}"]
 
 
 #====================HINTS====================#
+# Characters used for hint strings.
 c.hints.chars = 'asdfghjkl'
+# Make characters in hint strings uppercase.
 c.hints.uppercase = True
+# Hide unmatched hints in rapid mode.
 c.hints.hide_unmatched_rapid_hints = False
+# CSS border value for hints.
 c.hints.border = '0px'
+# Rounding radius (in pixels) for the edges of hints.
 c.hints.radius = 1
 
 
 #====================TABS====================#
+# Format to use for the tab title.
 c.tabs.title.format = '{audio}{index}. {current_title}'
+# Width (in pixels) of the progress indicator (0 to disable).
 c.tabs.indicator.width = 0
+# Padding (in pixels) around text for tabs.
 c.tabs.padding = {"bottom": 1, "top": 1, "left": 5, "right": 5}
 
 
-#====================FONTS====================#
-c.fonts.default_family = 'MesloLGS Nerd Font'
-c.fonts.default_size = '10.5pt'
-
-
 #====================STATUSBAR====================#
+# Padding (in pixels) for the statusbar.
 c.statusbar.padding = {"bottom": 1, "top": 1, "left": 4, "right": 4}
+# List of widgets displayed in the statusbar.
 c.statusbar.widgets = ["keypress", "url", "scroll", "history", "tabs", "progress"]
 
 
+
+
+
+#====================xresources=====================#
+# taken from https://qutebrowser.org/doc/help/configuring.html
+def read_xresources(prefix):
+    """
+    read settings from xresources
+    """
+    props = {}
+    x = subprocess.run(["xrdb", "-query"], stdout=subprocess.PIPE)
+    lines = x.stdout.decode().split("\n")
+    for line in filter(lambda l: l.startswith(prefix), lines):
+        prop, _, value = line.partition(":\t")
+        props[prop] = value
+    return props
+
+xresources = read_xresources("*")
+
+def xresources_transparent(prefix, tran):
+    props = xresources[prefix]
+    r = int(props[1]+props[2], 16)
+    g = int(props[3]+props[4], 16)
+    b = int(props[5]+props[6], 16)
+    return 'rgba(' + str(r) + ', ' + str(g) + ', ' + str(b) + ', ' + tran + ')'
+    
+
+#====================FONTS====================#
+# Default font families to use.
+c.fonts.default_family = xresources['*.font']
+# Default font size to use.
+c.fonts.default_size = '10.5pt'
+
+
 #====================COLORS====================#
+color_none = 'rgba(0, 0, 0, 0%)'
+
 #===completion===#
-c.colors.completion.category.bg = ColorScheme[8]
-c.colors.completion.category.border.bottom = 'rgba(0, 0, 0, 0%)'
-c.colors.completion.category.border.top = 'rgba(0, 0, 0, 0%)'
-c.colors.completion.category.fg = ColorScheme[7]
-c.colors.completion.even.bg = ColorScheme[0]
-c.colors.completion.odd.bg = ColorScheme[0]
-c.colors.completion.fg = [ColorScheme[7], ColorScheme[15], ColorScheme[15]] 
-c.colors.completion.match.fg = ColorScheme[5]
+c.colors.completion.category.bg = xresources['*.color8']
+c.colors.completion.category.border.bottom = color_none
+c.colors.completion.category.border.top = color_none
+c.colors.completion.category.fg = xresources['*.foreground']
+c.colors.completion.even.bg = xresources['*.background']
+c.colors.completion.odd.bg = xresources['*.background']
+c.colors.completion.fg = [xresources['*.foreground'], xresources['*.color15'], xresources['*.color15']] 
+c.colors.completion.match.fg = xresources['*.color5']
 
-c.colors.completion.item.selected.bg = ColorScheme[3]
-c.colors.completion.item.selected.border.bottom = 'rgba(0, 0, 0, 0%)'
-c.colors.completion.item.selected.border.top = 'rgba(0, 0, 0, 0%)'
-c.colors.completion.item.selected.fg = ColorScheme[0]
-c.colors.completion.item.selected.match.fg = ColorScheme[0]
+c.colors.completion.item.selected.bg = xresources['*.color3']
+c.colors.completion.item.selected.border.bottom = color_none
+c.colors.completion.item.selected.border.top = color_none
+c.colors.completion.item.selected.fg = xresources['*.color0']
+c.colors.completion.item.selected.match.fg = xresources['*.color0']
 
-c.colors.completion.scrollbar.bg = ColorScheme[0]
-c.colors.completion.scrollbar.fg = ColorScheme[7]
+c.colors.completion.scrollbar.bg = xresources['*.background']
+c.colors.completion.scrollbar.fg = xresources['*.foreground']
 
 #===contextmenu===#
 #c.colors.contextmenu.disabled.bg (Current: )
@@ -140,98 +193,98 @@ c.colors.completion.scrollbar.fg = ColorScheme[7]
 #c.colors.contextmenu.selected.fg (Current: )
 
 #===downloads===#
-c.colors.downloads.bar.bg = ColorScheme[0]
-c.colors.downloads.start.bg = ColorScheme[4]
-c.colors.downloads.start.fg = ColorScheme[0]
-c.colors.downloads.stop.bg = ColorScheme[10]
-c.colors.downloads.stop.fg = ColorScheme[0]
-c.colors.downloads.error.bg = ColorScheme[1]
-c.colors.downloads.error.fg = ColorScheme[0]
+c.colors.downloads.bar.bg = xresources['*.background']
+c.colors.downloads.start.bg = xresources['*.color4']
+c.colors.downloads.start.fg = xresources['*.color0']
+c.colors.downloads.stop.bg = xresources['*.color10']
+c.colors.downloads.stop.fg = xresources['*.color0']
+c.colors.downloads.error.bg = xresources['*.color1']
+c.colors.downloads.error.fg = xresources['*.color0']
 
 #===hints===#
-c.colors.hints.bg = 'rgba(255, 185, 220, 90%)'
-c.colors.hints.fg = ColorScheme[0]
-c.colors.hints.match.fg = ColorScheme[6]
+c.colors.hints.bg = xresources['*.color5']
+c.colors.hints.fg = xresources['*.background']
+c.colors.hints.match.fg = xresources['*.color6']
 
 #===keyhint===#
-c.colors.keyhint.bg = 'rgba(28, 28, 28, 90%)'
-c.colors.keyhint.fg = ColorScheme[7]
-c.colors.keyhint.suffix.fg = ColorScheme[11]
+c.colors.keyhint.bg = xresources_transparent('*.background', '90%')
+c.colors.keyhint.fg = xresources['*.foreground']
+c.colors.keyhint.suffix.fg = xresources['*.color11']
 
 #===messages===#
-c.colors.messages.error.bg = ColorScheme[1]
-c.colors.messages.error.fg = ColorScheme[0]
-c.colors.messages.error.border = ColorScheme[1]
-c.colors.messages.info.bg = ColorScheme[0]
-c.colors.messages.info.fg = ColorScheme[7]
-c.colors.messages.info.border = ColorScheme[0]
-c.colors.messages.warning.bg = ColorScheme[11]
-c.colors.messages.warning.fg = ColorScheme[0]
-c.colors.messages.warning.border = ColorScheme[11]
+c.colors.messages.error.bg = xresources_transparent('*.color1', '90%')
+c.colors.messages.error.fg = xresources['*.color0']
+c.colors.messages.error.border = color_none
+c.colors.messages.info.bg = xresources_transparent('*.background', '90%')
+c.colors.messages.info.fg = xresources['*.foreground']
+c.colors.messages.info.border = color_none
+c.colors.messages.warning.bg = xresources_transparent('*.color11', '90%')
+c.colors.messages.warning.fg = xresources['*.color0']
+c.colors.messages.warning.border = color_none
 
 #===prompts===#
-c.colors.prompts.bg = ColorScheme[8]
-c.colors.prompts.fg = ColorScheme[7]
-c.colors.prompts.border = 'rgba(0, 0, 0, 0%)'
-c.colors.prompts.selected.bg = ColorScheme[15]
-c.colors.prompts.selected.fg = ColorScheme[7]
+c.colors.prompts.bg = xresources['*.background']
+c.colors.prompts.fg = xresources['*.foreground']
+c.colors.prompts.border = color_none
+c.colors.prompts.selected.bg = xresources['*.color15']
+c.colors.prompts.selected.fg = xresources['*.foreground']
 
 #===statusbar===#
-c.colors.statusbar.normal.bg = ColorScheme[0]
-c.colors.statusbar.normal.fg = ColorScheme[7]
+c.colors.statusbar.normal.bg = xresources['*.background']
+c.colors.statusbar.normal.fg = xresources['*.foreground']
 
-c.colors.statusbar.insert.bg = ColorScheme[2]
-c.colors.statusbar.insert.fg = ColorScheme[0]
+c.colors.statusbar.insert.bg = xresources['*.color2']
+c.colors.statusbar.insert.fg = xresources['*.color0']
 
-c.colors.statusbar.caret.bg = ColorScheme[13]
-c.colors.statusbar.caret.fg = ColorScheme[0]
-c.colors.statusbar.caret.selection.bg = ColorScheme[13]
-c.colors.statusbar.caret.selection.fg = ColorScheme[0]
+c.colors.statusbar.passthrough.bg = xresources['*.color4']
+c.colors.statusbar.passthrough.fg = xresources['*.color0']
 
-c.colors.statusbar.command.bg = ColorScheme[0]
-c.colors.statusbar.command.fg = ColorScheme[7]
+c.colors.statusbar.caret.bg = xresources['*.color13']
+c.colors.statusbar.caret.fg = xresources['*.color0']
+c.colors.statusbar.caret.selection.bg = xresources['*.color13']
+c.colors.statusbar.caret.selection.fg = xresources['*.color0']
 
-#c.colors.statusbar.passthrough.bg
-#c.colors.statusbar.passthrough.fg
+c.colors.statusbar.command.bg = xresources['*.background']
+c.colors.statusbar.command.fg = xresources['*.foreground']
 
 #c.colors.statusbar.progress.bg
 
 #c.colors.statusbar.private.bg
 #c.colors.statusbar.private.fg
-#c.colors.statusbar.command.private.bg = ColorScheme[0]
-#c.colors.statusbar.command.private.fg = ColorScheme[7]
+#c.colors.statusbar.command.private.bg = xresources['*.background']
+#c.colors.statusbar.command.private.fg = xresources['*.foreground']
 
-c.colors.statusbar.url.fg = ColorScheme[7]
-c.colors.statusbar.url.success.http.fg = ColorScheme[7]
-c.colors.statusbar.url.success.https.fg = ColorScheme[7]
-c.colors.statusbar.url.hover.fg = ColorScheme[6]
-c.colors.statusbar.url.warn.fg = ColorScheme[9]
-c.colors.statusbar.url.error.fg = ColorScheme[3]
+c.colors.statusbar.url.fg = xresources['*.foreground']
+c.colors.statusbar.url.success.http.fg = xresources['*.foreground']
+c.colors.statusbar.url.success.https.fg = xresources['*.foreground']
+c.colors.statusbar.url.hover.fg = xresources['*.color6']
+c.colors.statusbar.url.warn.fg = xresources['*.color9']
+c.colors.statusbar.url.error.fg = xresources['*.color3']
 
 #===tabs===#
-c.colors.tabs.bar.bg = ColorScheme[0]
+c.colors.tabs.bar.bg = xresources['*.background']
 
-c.colors.tabs.even.bg = ColorScheme[0]
-c.colors.tabs.even.fg = ColorScheme[7]
-c.colors.tabs.odd.bg = ColorScheme[0]
-c.colors.tabs.odd.fg = ColorScheme[7]
-c.colors.tabs.selected.even.bg = ColorScheme[7]
-c.colors.tabs.selected.even.fg = ColorScheme[0]
-c.colors.tabs.selected.odd.bg = ColorScheme[7]
-c.colors.tabs.selected.odd.fg = ColorScheme[0]
+c.colors.tabs.even.bg = xresources['*.background']
+c.colors.tabs.even.fg = xresources['*.foreground']
+c.colors.tabs.odd.bg = xresources['*.background']
+c.colors.tabs.odd.fg = xresources['*.foreground']
+c.colors.tabs.selected.even.bg = xresources['*.color7']
+c.colors.tabs.selected.even.fg = xresources['*.color0']
+c.colors.tabs.selected.odd.bg = xresources['*.color7']
+c.colors.tabs.selected.odd.fg = xresources['*.color0']
 
-c.colors.tabs.pinned.even.bg = ColorScheme[6]
-c.colors.tabs.pinned.even.fg = ColorScheme[0]
-c.colors.tabs.pinned.odd.bg = ColorScheme[6]
-c.colors.tabs.pinned.odd.fg = ColorScheme[0]
-c.colors.tabs.pinned.selected.even.bg = ColorScheme[4]
-c.colors.tabs.pinned.selected.even.fg = ColorScheme[0]
-c.colors.tabs.pinned.selected.odd.bg = ColorScheme[4]
-c.colors.tabs.pinned.selected.odd.fg = ColorScheme[0]
+c.colors.tabs.pinned.even.bg = xresources['*.color6']
+c.colors.tabs.pinned.even.fg = xresources['*.color0']
+c.colors.tabs.pinned.odd.bg = xresources['*.color6']
+c.colors.tabs.pinned.odd.fg = xresources['*.color0']
+c.colors.tabs.pinned.selected.even.bg = xresources['*.color4']
+c.colors.tabs.pinned.selected.even.fg = xresources['*.color0']
+c.colors.tabs.pinned.selected.odd.bg = xresources['*.color4']
+c.colors.tabs.pinned.selected.odd.fg = xresources['*.color0']
 
-#c.colors.tabs.indicator.error = ColorScheme[1]
-#c.colors.tabs.indicator.start = ColorScheme[3]
-#c.colors.tabs.indicator.stop = 'rgba(0, 0, 0, 0%)'
+#c.colors.tabs.indicator.error = xresources['*.color1']
+#c.colors.tabs.indicator.start = xresources['*.color3']
+#c.colors.tabs.indicator.stop = color_none
 #c.colors.tabs.indicator.system (Current: rgb)
 
 #===webpage===#

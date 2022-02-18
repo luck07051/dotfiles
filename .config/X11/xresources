@@ -1,4 +1,47 @@
-# Sxiv
-Sxiv.background: #1c1c1c
-Sxiv.foreground: #d0d0d0
-Sxiv.font: MesloLGS Nerd Font
+! color scheme
+#define base00  #1C1C1C
+#define base01  #CF6868
+#define base02  #87AF87
+#define base03  #EBCB8B
+#define base04  #81A1C1
+#define base05  #FFB9DC
+#define base06  #87AFAF
+#define base07  #D0D0D0
+#define base08  #585858
+#define base09  #E59999
+#define base0A  #94C68B
+#define base0B  #F6B26B
+#define base0C  #68ADCF
+#define base0D  #D5B0FF
+#define base0E  #87D1BC
+#define base0F  #808080
+
+*.color0:   base00  
+*.color1:   base01
+*.color2:   base02
+*.color3:   base03
+*.color4:   base04
+*.color5:   base05
+*.color6:   base06
+*.color7:   base07
+*.color8:   base08
+*.color9:   base09
+*.color10:  base0A
+*.color11:  base0B
+*.color12:  base0C
+*.color13:  base0D
+*.color14:  base0E
+*.color15:  base0F
+
+*.background: base00
+*.foreground: base07
+*.font: MesloLGS Nerd Font
+
+
+
+! Sxiv
+!Sxiv.background: #1c1c1c
+!Sxiv.foreground: #d0d0d0
+!Sxiv.font: MesloLGS Nerd Font
+
+
