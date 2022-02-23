@@ -7,7 +7,6 @@ export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
 export PATH="${PATH}:$HOME/.local/bin"
-export PATH="${PATH}:$HOME/.config/rofi/scripts"
 
 # Other program path
 # zsh

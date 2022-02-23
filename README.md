@@ -6,27 +6,31 @@ temp
 ```
 bitwarden-cli
 bitwarden-rofi
+
+mpv
+youtube-dl
 ```
 
 Basic
 ```
 base-devel
 xorg xorg-xinit xorg-fonts-misc
-alsl-utils
 xdg-user-dirs
+alsl-utils
 git openssh
 (bluez bluez-utils)
 ```
 
 Applications
 ```
-zsh
 alacritty
 qtile
+yay polybar
+zsh
 rofi
-firefox
 qutebrowswer
 (conky)
+(firefox)
 ```
 
 Background app
@@ -85,6 +89,8 @@ sudo pip3 install pynvim
 # for bitwarden-rofi
 jq
 xdotool
+# vim plug
+yarn
 
 ```
 
@@ -210,4 +216,10 @@ Add in .gitconfig
     prompt = false
 [difftool "icdiff"]
     cmd = icdiff --line-numbers $LOCAL $REMOTE
+```
+
+### if default browser incorrect
+try this 
+```
+xdg-mime default $(xdg-settings get default-web-browser) x-scheme-handler/https x-scheme-handler/http
 ```

@@ -1,6 +1,5 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -11,6 +10,9 @@ env:
 window:
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
+
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
 
 
 # Font configuration
@@ -24,7 +26,6 @@ font:
   size: 11.0
 
 
-# Colors (Tomorrow Night)
 colors:
   # Default colors
   primary:
@@ -40,7 +41,7 @@ colors:
   # Normal colors
   normal:
     black:   '#1C1C1C'
-    red:     '#CF6868'
+    red:     '#E67e80'
     green:   '#87AF87'
     yellow:  '#EBCB8B'
     blue:    '#81A1C1'
@@ -48,20 +49,16 @@ colors:
     cyan:    '#87AFAF'
     white:   '#D0D0D0'
 
-
   # Bright colors
   bright:
     black:   '#585858'
-    red:     '#E59999'
+    red:     '#D7afaf'
     green:   '#94C68B'
-    yellow:  '#F6B26B'
-    blue:    '#68ADCF'
-    magenta: '#D5B0FF'
-    cyan:    '#87D1BC'
+    yellow:  '#DFA000'
+    blue:    '#3a94c5'
+    magenta: '#DF69BA'
+    cyan:    '#7FBBB3'
     white:   '#808080'
 
-
-
-
 # Background opacity
-window.opacity: 0.97
+#window.opacity: 0.97

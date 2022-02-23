@@ -11,8 +11,6 @@ import subprocess
 config.load_autoconfig(False)
 # Always restore open sites when qutebrowser is reopened.
 c.auto_save.session = True
-# Editor to use for the `edit-*` commands.
-c.editor.command = [os.environ['TERMINAL'], '-e', os.environ['EDITOR'], '-f', '{file}']
 # Duration (in milliseconds) to show messages in the statusbar for.
 c.messages.timeout = 3500
 
@@ -25,9 +23,16 @@ c.url.start_pages = 'https://start.duckduckgo.com'
 # Search engines which can be used via the address bar.
 c.url.searchengines = {
         'DEFAULT': 'https://duckduckgo.com/?q={}',
-        'd': 'https://duckduckgo.com/?q={}',
-        'a': 'https://wiki.archlinux.org/?search={}',
-        'y': 'https://www.youtube.com/results?search_query={}'
+        'dd': 'https://duckduckgo.com/?q={}',
+
+        'aw': 'https://wiki.archlinux.org/?search={}',
+        'yt': 'https://www.youtube.com/results?search_query={}',
+        'gh': 'https://github.com/search?q={}',
+
+        # translator
+        'tg': 'https://translate.google.com/?sl=en&tl=zh-TW&text={}&op=translate',
+        'tc': 'https://dictionary.cambridge.org/us/dictionary/english-chinese-traditional/{}',
+        'tm': 'https://www.merriam-webster.com/dictionary/{}',
         }
 
 
@@ -42,7 +47,7 @@ c.bindings.key_mappings = {
         '<Ctrl+[>': '<Escape>',
         '<Enter>': '<Return>',
         '<Shift+Enter>': '<Return>',
-        '<Shift+Return>': '<Return>'
+        '<Shift+Return>': '<Return>',
         }
 
 # Use scroll command instead arrow key.
@@ -59,6 +64,46 @@ config.bind('K', 'tab-next')
 config.bind('xb', 'config-cycle statusbar.show always in-mode')
 config.bind('xt', 'config-cycle tabs.show always never')
 config.bind('xx', 'config-cycle statusbar.show always in-mode;; config-cycle tabs.show always never')
+
+# Insert mode
+config.bind("<Ctrl-a>", "fake-key <Home>", "insert")
+config.bind("<Ctrl-e>", "fake-key <End>", "insert")
+config.bind("<Ctrl-b>", "fake-key <Left>", "insert")
+config.bind("<Mod1-b>", "fake-key <Ctrl-Left>", "insert")
+config.bind("<Ctrl-f>", "fake-key <Right>", "insert")
+config.bind("<Mod1-f>", "fake-key <Ctrl-Right>", "insert")
+config.bind("<Ctrl-p>", "fake-key <Up>", "insert")
+config.bind("<Ctrl-n>", "fake-key <Down>", "insert")
+
+config.bind("<Ctrl-d>", "fake-key <Delete>", "insert")
+config.bind("<Mod1-d>", "fake-key <Ctrl-Delete>", "insert")
+config.bind("<Ctrl-h>", "fake-key <Backspace>", "insert")
+config.bind("<Ctrl-w>", "fake-key <Ctrl-Backspace>", "insert")
+config.bind("<Ctrl-u>", "fake-key <Shift-Home><Delete>", "insert")
+config.bind("<Ctrl-k>", "fake-key <Shift-End><Delete>", "insert")
+
+config.bind("<Ctrl-x><Ctrl-e>", "edit-text", "insert")
+
+# quick translate
+config.bind(',g', 'open -w tg {primary}')
+
+# swap ';' to ':' and ',' to ';'
+config.bind(';', 'set-cmd-text :')
+config.bind(',I', 'hint images tab')
+config.bind(',O', 'hint links fill :open -t -r {hint-url}')
+config.bind(',R', 'hint --rapid links window')
+config.bind(',Y', 'hint links yank-primary')
+config.bind(',b', 'hint all tab-bg')
+config.bind(',d', 'hint links download')
+config.bind(',f', 'hint all tab-fg')
+config.bind(',h', 'hint all hover')
+config.bind(',i', 'hint images')
+config.bind(',o', 'hint links fill :open {hint-url}')
+config.bind(',r', 'hint --rapid links tab-bg')
+config.bind(',t', 'hint inputs')
+config.bind(',y', 'hint links yank')
+
+config.bind(',m', 'hint links spawn mpv {hint-url}')
 
 
 #====================DOWNLOADS====================#
@@ -78,7 +123,7 @@ c.content.autoplay = False
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 config.set('content.cookies.accept', 'all', 'devtools://*')
 config.set('content.headers.accept_language', '', 'https://matchmaker.krunker.io/*')
-config.set('content.headers.user_agent', 
+config.set('content.headers.user_agent',
         'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
 config.set('content.headers.user_agent',
         'Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0', 'https://accounts.google.com/*')
@@ -93,10 +138,18 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 
 
 #====================FILESELECT====================#
+# Handler for selecting file(s) in forms.
+c.fileselect.handler = 'external'
 # Command (and arguments) to use for selecting a folder/file in forms.
-c.fileselect.folder.command = [os.environ['TERMINAL'], "-e", "ranger", "--choosedir={}"]
-c.fileselect.multiple_files.command = [os.environ['TERMINAL'], "-e", "ranger", "--choosefiles={}"]
-c.fileselect.single_file.command = [os.environ['TERMINAL'], "-e", "ranger", "--choosefile={}"]
+c.fileselect.folder.command = [os.environ['TERMINAL'],
+        '--class', 'floating', "-e", "ranger", "--choosedir={}"]
+c.fileselect.multiple_files.command = [os.environ['TERMINAL'],
+        '--class', 'floating', "-e", "ranger", "--choosefiles={}"]
+c.fileselect.single_file.command = [os.environ['TERMINAL'],
+        '--class', 'floating', "-e", "ranger", "--choosefile={}"]
+# Editor to use for the `edit-*` commands.
+c.editor.command = [os.environ['TERMINAL'],
+        '--class', 'floating', '-e', os.environ['EDITOR'], '-f', '{file}']
 
 
 #====================HINTS====================#
@@ -114,12 +167,18 @@ c.hints.radius = 1
 
 #====================TABS====================#
 # Format to use for the tab title.
-c.tabs.title.format = '{audio}{index}. {current_title}'
+c.tabs.title.format = '{audio}{current_title}'
+#c.tabs.title.format = '{audio}{index}. {current_title}'
 # Width (in pixels) of the progress indicator (0 to disable).
 c.tabs.indicator.width = 0
 # Padding (in pixels) around text for tabs.
 c.tabs.padding = {"bottom": 1, "top": 1, "left": 5, "right": 5}
-
+# How to behave when the last tab is closed. close: Close the window.
+c.tabs.last_close = 'close'
+## Position of the tab bar.
+#c.tabs.position = 'left'
+## When to show the tab bar.
+#c.tabs.show = 'switching'
 
 #====================STATUSBAR====================#
 # Padding (in pixels) for the statusbar.
@@ -128,7 +187,11 @@ c.statusbar.padding = {"bottom": 1, "top": 1, "left": 4, "right": 4}
 c.statusbar.widgets = ["keypress", "url", "scroll", "history", "tabs", "progress"]
 
 
-
+#====================KEYHINT====================#
+# Keychains that shouldn't be shown in the keyhint dialog.
+c.keyhint.blacklist = []
+# Time (in milliseconds) from pressing a key to seeing the keyhint dialog.
+c.keyhint.delay = 150
 
 
 #====================xresources=====================#
@@ -153,7 +216,7 @@ def xresources_transparent(prefix, tran):
     g = int(props[3]+props[4], 16)
     b = int(props[5]+props[6], 16)
     return 'rgba(' + str(r) + ', ' + str(g) + ', ' + str(b) + ', ' + tran + ')'
-    
+
 
 #====================FONTS====================#
 # Default font families to use.
@@ -172,7 +235,7 @@ c.colors.completion.category.border.top = color_none
 c.colors.completion.category.fg = xresources['*.foreground']
 c.colors.completion.even.bg = xresources['*.background']
 c.colors.completion.odd.bg = xresources['*.background']
-c.colors.completion.fg = [xresources['*.foreground'], xresources['*.color15'], xresources['*.color15']] 
+c.colors.completion.fg = [xresources['*.foreground'], xresources['*.color15'], xresources['*.color15']]
 c.colors.completion.match.fg = xresources['*.color5']
 
 c.colors.completion.item.selected.bg = xresources['*.color3']
@@ -268,10 +331,10 @@ c.colors.tabs.even.bg = xresources['*.background']
 c.colors.tabs.even.fg = xresources['*.foreground']
 c.colors.tabs.odd.bg = xresources['*.background']
 c.colors.tabs.odd.fg = xresources['*.foreground']
-c.colors.tabs.selected.even.bg = xresources['*.color7']
-c.colors.tabs.selected.even.fg = xresources['*.color0']
-c.colors.tabs.selected.odd.bg = xresources['*.color7']
-c.colors.tabs.selected.odd.fg = xresources['*.color0']
+c.colors.tabs.selected.even.bg = xresources['*.color8']
+c.colors.tabs.selected.even.fg = xresources['*.foreground']
+c.colors.tabs.selected.odd.bg = xresources['*.color8']
+c.colors.tabs.selected.odd.fg = xresources['*.foreground']
 
 c.colors.tabs.pinned.even.bg = xresources['*.color6']
 c.colors.tabs.pinned.even.fg = xresources['*.color0']
@@ -288,7 +351,7 @@ c.colors.tabs.pinned.selected.odd.fg = xresources['*.color0']
 #c.colors.tabs.indicator.system (Current: rgb)
 
 #===webpage===#
-#c.colors.webpage.bg (Current: white)
+#c.colors.webpage.bg = xresources['*.color0']
 #c.colors.webpage.darkmode.algorithm (Current: lightness-cielab)
 #c.colors.webpage.darkmode.contrast (Current: 0.0)
 #c.colors.webpage.darkmode.enabled (Current: false)

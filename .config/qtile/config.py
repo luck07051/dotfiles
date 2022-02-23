@@ -18,7 +18,7 @@ mousemod = "mod1"       # Alt
 #returnkey = "Escape"    # Esc
 #rootkey = "Super_L"     # left Super
 
-qtile_scripts = "./.config/qtile/scripts"
+scripts = "./.local/bin"
 rofi_scripts = "./.config/rofi/scripts"
 
 
@@ -28,7 +28,7 @@ groups_name = ["1", "2", "3", "4", "5", "6", "7"]
 groups_label = ["", "", "", "ﱘ", "ﭮ", "", ""]
 groups_spawn = [os.environ['BROWSER'], os.environ['TERMINAL'], '', '', '', '', '']
 
-groups = [ Group( 
+groups = [ Group(
     name = groups_name[i],
     label = groups_label[i],
     spawn = groups_spawn[i] ) for i in range(len(groups_name)) ]
@@ -43,21 +43,23 @@ keys = [
     Key([mod], "slash", lazy.spawn(rofi_scripts + "/qtile_help"), desc="Open qtile help"),
 
     Key([mod], "x", lazy.window.kill(), desc="Kill active windows"),
+    Key([mod], "q", lazy.window.kill(), desc="Kill active windows"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "n", lazy.screen.next_group(), desc="Switch to next group"),
     Key([mod, "shift"], "n", lazy.screen.prev_group(), desc="Switch to prev group"),
 
     Key([mod], "comma", lazy.next_screen(), desc="Move focus to prev monitor"),
-    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
+    Key([mod, "shift"], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
+    Key([mod], "f", lazy.window.toggle_floating(), desc="toggle floating"),
 
     #===Open===#
     Key([mod], "Return", lazy.spawn(os.environ['TERMINAL']), desc="Open terminal"),
     Key([mod], "b", lazy.spawn(os.environ['BROWSER']), desc="Open browser"),
-    Key([mod], "o", 
-        lazy.spawn("rofi -show combi -i -theme ui_theme"), 
+    Key([mod], "o",
+        lazy.spawn("rofi -show combi -i -theme ui_theme"),
         desc="Run Launcher"),
-    Key([mod], "semicolon", 
-        lazy.spawn("rofi -show power -modi power:power-menu -theme ui_theme"), 
+    Key([mod], "semicolon",
+        lazy.spawn("rofi -show power -modi power:power-menu -theme ui_theme"),
         desc="Open power menu"),
     Key([mod, "shift"], "b", lazy.spawn("bwmenu"), desc="Open bitwarden-rofi menu"),
 
@@ -84,23 +86,22 @@ keys = [
         Key([], "m", lazy.layout.maximize(), desc="toggle window between minimum and maximum sizes"),
         Key([], "n", lazy.layout.normalize(), desc="normalize window size rations"),
 
-        Key([], "f", lazy.window.toggle_floating(), desc="toggle floating"),
     ]),
 
     #===Audio===#
-    Key([mod, "shift"], "j", 
-        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), 
+    Key([mod, "shift"], "j",
+        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
         desc="Decrease volume"),
 
-    Key([mod, "shift"], "k", 
+    Key([mod, "shift"], "k",
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
         desc="Increase volume"),
 
-    Key([mod, "shift"], "i", 
-        lazy.spawn(qtile_scripts + "/switch_default_sink"), 
+    Key([mod, "shift"], "i",
+        lazy.spawn(qtile_scripts + "/switch_default_sink"),
         desc="Switch output devices"),
 
-    
+
 ]
 
 # mod + number to switch to group
@@ -112,7 +113,6 @@ for group in groups:
         Key([mod, "shift"], group.name, lazy.window.togroup( group.name ),
             desc="Move focused window to gorup {}".format(group.name)),
         ])
-
 
 #====================MOUSE BINDING====================#
 # mod + left button to move window position
@@ -143,19 +143,19 @@ layouts = [
 
 #====================WIDGET====================#
 widget_defaults = dict(
-    font = xresources['*.font'], 
+    font = xresources['*.font'] + ' bold',
     fontsize = 12,
 )
 
 extension_defaults = widget_defaults.copy()
 
 screens = [
-    Screen( top = bar.Bar( myMainWidget, opacity = 1, size = 24), 
+    Screen( top = bar.Bar( myMainWidget, opacity = 1, size = 24),
         x = 0, y = 0, width = 1920, height = 1080),
 
-    Screen( top = bar.Bar( mySecondWidget, opacity = 1, size = 24), 
+    Screen( top = bar.Bar( mySecondWidget, opacity = 1, size = 24),
         x = 1920, y = 0, width = 1920, height = 1080),
-]       
+]
 
 
 
@@ -170,8 +170,11 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class = 'ssh-askpass'),  # ssh-askpass
     Match(title = 'branchdialog'),  # gitk
     Match(title = 'pinentry'),  # GPG key password entry
-    Match(title = 'Library' ), # firefox
 
+    Match(wm_class = 'floating'),
+    Match(wm_class = 'qute_ranger'), # ranger for qutebrowser
+    Match(wm_class = 'qute_vim'), # ranger for qutebrowser
+    Match(wm_class = 'Places'), # firefox library
     Match(wm_class = 'pavucontrol'),  # Volume Controler
 ])
 
@@ -294,6 +297,6 @@ wmname = "LG3D"
 #        lazy.window.set_size_floating(),
 #        start=lazy.window.get_size()),
 #
-#    Click([mousemod, "control"], "Button1", 
+#    Click([mousemod, "control"], "Button1",
 #        lazy.window.bring_to_front())
 #]

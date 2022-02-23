@@ -32,6 +32,14 @@ hi NonText          ctermfg=238
 " listchars space, tab
 hi SpecialKey       ctermfg=238
 
+" highlight 81 column
+hi ColorColumn                  ctermbg=8
+call matchadd('ColorColumn', '\%81v', 100)
+
+" show extra space
+hi ExtraWhitespace              ctermbg=8
+match ExtraWhitespace /\s$/
+
 
 "===Search==="
 set hlsearch            " highlight search result
@@ -46,7 +54,7 @@ set softtabstop=4       " tab width
 set expandtab           " tab always insert softtabstop of amonut spaces
 set autoindent          " copy the indentation of the previous line
 set smartindent         " auto indent to next level, work on C-like file
-set shiftround          " round the indentation to the nearest multiple of shiftwidth
+set shiftround          " round indent to multiple of 'shiftwidth'
 
 
 "===Misc==="
@@ -64,7 +72,7 @@ set t_ut=""
 set wildmenu            " show the commom complete list, can use Tab and S-Tab
 
 "set list
-set listchars=tab:»\ ,eol:↲,trail:_
+"set listchars=tab:»\ ,eol:↲,trail:_
 set showbreak=↪\ "
 
 
@@ -78,6 +86,8 @@ let mapleader="\<Space>"
 
 noremap Y y$
 noremap ~ g~
+nnoremap ; :
+nnoremap : ;
 
 "" add a empty line
 "nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
@@ -116,7 +126,7 @@ omap s :normal vs<CR>
 autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Delete extra space
-autocmd BufWrite *.cpp,*.h,makefile call DeleteExtraSpaces()
+autocmd BufWrite *.cpp,*.h,*.py,*yml,makefile call DeleteExtraSpaces()
 function DeleteExtraSpaces()
     :let b:nline= line('.')
     :%s/\s\+$//e
@@ -132,12 +142,13 @@ autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
+Plug 'easymotion/vim-easymotion'
 
 "===vimwiki and markdown==="
 Plug 'vimwiki/vimwiki'
 Plug 'tools-life/taskwiki'
 
-Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn install' }
+Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app && yarn install'}
 
 Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
@@ -153,6 +164,24 @@ call plug#end()
 let g:lightline = { 'colorscheme': 'seoul256' }
 set noshowmode          " dont show mode below
 
+
+"===easymotion==="
+" wish: over press s/f/t jump to next search
+
+" f{char} to move to {char}
+map  f <Plug>(easymotion-bd-f)
+nmap f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 
 "===vimwiki==="
