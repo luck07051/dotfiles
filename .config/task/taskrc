@@ -41,4 +41,9 @@ hooks.location=~/.config/task/hooks
 
 news.version=2.6.0
 
-color.tagged=
+#color.tagged=
+#taskd.server=freecinc.com:53589
+#taskd.key=\/home\/ui\/.config\/task\/freecinc_f9d427e3.key.pem
+#taskd.certificate=\/home\/ui\/.config\/task\/freecinc_f9d427e3.cert.pem
+#taskd.ca=\/home\/ui\/.config\/task\/freecinc_f9d427e3.ca.pem
+#taskd.credentials=FreeCinc\/freecinc_f9d427e3\/4ac548c4-b18a-4e4e-8810-2feddbd40e0a

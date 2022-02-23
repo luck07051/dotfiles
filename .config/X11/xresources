@@ -5,41 +5,22 @@
 
 
 ! color scheme
-!#define base00  #1C1C1C
-!#define base01  #E67e80
-!#define base02  #87AF87
-!#define base03  #EBCB8B
-!#define base04  #81A1C1
-!#define base05  #FFB9DC
-!#define base06  #87AFAF
-!#define base07  #D0D0D0
-!#define base08  #585858
-!#define base09  #D7AFAF
-!#define base0A  #94C68B
-!#define base0B  #DFA000
-!#define base0C  #3a94c5
-!#define base0D  #DF69BA
-!#define base0E  #7FBBB3
-!#define base0F  #808080
-
-#define base00
-#define base01
-#define base02
-#define base03
-#define base04
-#define base05
-#define base06
-#define base07
-#define base08
-#define base09
-#define base0A
-#define base0B
-#define base0C
-#define base0D
-#define base0E
-#define base0F
-
-
+#define base00  #1C1C1C
+#define base01  #E67e80
+#define base02  #87AF87
+#define base03  #EBCB8B
+#define base04  #81A1C1
+#define base05  #FFB9DC
+#define base06  #87AFAF
+#define base07  #D0D0D0
+#define base08  #585858
+#define base09  #D7AFAF
+#define base0A  #94C68B
+#define base0B  #DFA000
+#define base0C  #3A94C5
+#define base0D  #DF69BA
+#define base0E  #7FBBB3
+#define base0F  #808080
 
 *.color0:   base00
 *.color1:   base01

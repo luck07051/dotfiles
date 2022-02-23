@@ -31,7 +31,7 @@ fi
 nitrogen --restore &
 picom &
 
-#===not screen saver===#
+#===Not screen saver===#
 xset s off
 xset -dpms
 
