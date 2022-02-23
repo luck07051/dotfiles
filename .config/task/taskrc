@@ -41,9 +41,8 @@ hooks.location=~/.config/task/hooks
 
 news.version=2.6.0
 
-#color.tagged=
-#taskd.server=freecinc.com:53589
-#taskd.key=\/home\/ui\/.config\/task\/freecinc_f9d427e3.key.pem
-#taskd.certificate=\/home\/ui\/.config\/task\/freecinc_f9d427e3.cert.pem
-#taskd.ca=\/home\/ui\/.config\/task\/freecinc_f9d427e3.ca.pem
-#taskd.credentials=FreeCinc\/freecinc_f9d427e3\/4ac548c4-b18a-4e4e-8810-2feddbd40e0a
+taskd.server=freecinc.com:53589
+taskd.key=~/.config/task/freecinc_84fc8662.key.pem
+taskd.certificate=~/.config/task/freecinc_84fc8662.cert.pem
+taskd.ca=~/.config/task/freecinc_84fc8662.ca.pem
+taskd.credentials=FreeCinc/freecinc_84fc8662/b58db834-d2ae-466d-9b15-460a40cd1d6c
