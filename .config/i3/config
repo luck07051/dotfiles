@@ -78,10 +78,13 @@ bindsym $mod+b exec $BROWSER
 # Open bitwarden-rofi menu
 bindsym $mod+Shift+b exec bwmenu
 # Open taskwarrior-tui
+# exec 'task sync' when opening and closing
 bindsym $mod+t exec \
+    task sync | \
     $TERMINAL --class 'floating' -t 'taskwarrior' \
     -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
-    -e taskwarrior-tui
+    -o window.opacity=0.90 \
+    -e taskwarrior-tui && task sync
 # Open class sheet
 bindsym $mod+Shift+c exec sxiv ~/pictures/class_sheet.jpg
 

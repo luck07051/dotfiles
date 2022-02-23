@@ -50,8 +50,7 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
 # taskwarrior
-alias t="taskwarrior-tui"
-alias ta="task"
+alias t="task"
 alias ts="task sync"
 
 

@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+# Gives a rofi prompt labeled with $1 to perform command $2
+# example:
+# $ pormpt "Do you want to Logout?" "i3-msg exit"
+
+[ $(echo -e "No\nYes" | rofi -dmenu -i -p "$1" -theme ui_theme) \
+    == "Yes" ] && $2
+

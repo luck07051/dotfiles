@@ -114,7 +114,6 @@ c.downloads.position = 'bottom'
 # Duration (in milliseconds) to wait before removing finished downloads.
 c.downloads.remove_finished = 30000
 
-
 #====================CONTENT====================#
 # Automatically start playing `<video>` elements.
 c.content.autoplay = False
@@ -141,15 +140,23 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 # Handler for selecting file(s) in forms.
 c.fileselect.handler = 'external'
 # Command (and arguments) to use for selecting a folder/file in forms.
-c.fileselect.folder.command = [os.environ['TERMINAL'],
-        '--class', 'floating', "-e", "ranger", "--choosedir={}"]
-c.fileselect.multiple_files.command = [os.environ['TERMINAL'],
-        '--class', 'floating', "-e", "ranger", "--choosefiles={}"]
-c.fileselect.single_file.command = [os.environ['TERMINAL'],
-        '--class', 'floating', "-e", "ranger", "--choosefile={}"]
+c.fileselect.folder.command = [
+        os.environ['TERMINAL'], '--class', 'floating',
+        "-o", "window.opacity=0.90",
+        "-e", "ranger", "--choosedir={}"]
+c.fileselect.multiple_files.command = [
+        os.environ['TERMINAL'], '--class', 'floating',
+        "-o", "window.opacity=0.90",
+        "-e", "ranger", "--choosefiles={}"]
+c.fileselect.single_file.command = [
+        os.environ['TERMINAL'], '--class', 'floating',
+        "-o", "window.opacity=0.90",
+        "-e", "ranger", "--choosefile={}"]
 # Editor to use for the `edit-*` commands.
-c.editor.command = [os.environ['TERMINAL'],
-        '--class', 'floating', '-e', os.environ['EDITOR'], '-f', '{file}']
+c.editor.command = [
+        os.environ['TERMINAL'], '--class', 'floating',
+        "-o", "window.opacity=0.90",
+        '-e', os.environ['EDITOR'], '-f', '{file}']
 
 
 #====================HINTS====================#

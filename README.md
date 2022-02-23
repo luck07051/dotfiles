@@ -49,6 +49,7 @@ icdiff
 wget
 fzf
 task
+taskwarrior-tui
 ffmpeg ffmpegthumbnailer
 zathura zathura-pdf-mupdf
 ueberzug

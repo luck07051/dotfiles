@@ -46,3 +46,6 @@ taskd.key=~/.config/task/freecinc_84fc8662.key.pem
 taskd.certificate=~/.config/task/freecinc_84fc8662.cert.pem
 taskd.ca=~/.config/task/freecinc_84fc8662.ca.pem
 taskd.credentials=FreeCinc/freecinc_84fc8662/b58db834-d2ae-466d-9b15-460a40cd1d6c
+
+uda.taskwarrior-tui.background_process=task sync
+uda.taskwarrior-tui.background_process_period=60
