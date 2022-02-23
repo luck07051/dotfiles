@@ -50,10 +50,9 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
 # taskwarrior
-alias t="task"
-alias tn="task project:"
-alias tl="task project:linux"
-alias ts="task project:school"
+alias t="taskwarrior-tui"
+alias ta="task"
+alias ts="task sync"
 
 
 #===================PLUG=====================#
