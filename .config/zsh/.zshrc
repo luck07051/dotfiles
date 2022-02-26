@@ -24,6 +24,7 @@ alias f="ranger"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
+alias mkdir="mkdir -p"
 
 # vim
 alias vim="nvim"

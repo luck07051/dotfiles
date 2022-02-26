@@ -24,7 +24,9 @@ git openssh
 Applications
 ```
 alacritty
-qtile
+(qtile)
+i3-gaps
+sxhkd
 yay polybar
 zsh
 rofi
@@ -103,7 +105,6 @@ papirus-icon-theme
 
 ```
 .dmenu
-.i3-gaps
 .xmonad xmonad-contrib xmobar
 .tmux
 ```

@@ -51,3 +51,7 @@ taskd.credentials=FreeCinc/freecinc_84fc8662/b58db834-d2ae-466d-9b15-460a40cd1d6
 uda.taskwarrior-tui.background_process=task sync
 uda.taskwarrior-tui.background_process_period=60
 
+uda.taskwarrior-tui.shortcuts.1=~/.config/task/scripts/priority_L
+uda.taskwarrior-tui.shortcuts.2=~/.config/task/scripts/priority_M
+uda.taskwarrior-tui.shortcuts.3=~/.config/task/scripts/priority_H
+uda.taskwarrior-tui.shortcuts.4=~/.config/task/scripts/priority_n

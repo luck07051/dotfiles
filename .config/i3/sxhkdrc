@@ -1,0 +1,110 @@
+
+#====================BASIC====================#
+# Restart WM and sxhkd
+super + ctrl + r
+    i3-msg restart && killall sxhkd && sxhkd -c $HOME/.config/i3/sxhkdrc
+
+# Quit WM
+super + ctrl +q
+    prompt 'Do you want to Logout?' 'i3-msg exit'
+
+# Kill focused window
+super + q
+    i3-msg kill
+
+
+#====================OPEN====================#
+# Open terminal
+super + Return
+    $TERMINAL
+
+# Open power menu
+super + semicolon
+    rofi -show power -modi power:power-menu -theme ui_theme
+
+# Open launcher
+super + o
+    rofi -show combi -i -theme ui_theme
+
+# Open browser
+super + b
+    $BROWSER
+
+# Open bitwarden-rodi menu
+    bwmenu
+
+# Open taskwarrior-tui
+# exec 'task sync' when opening and closing
+super + t
+    task sync | \
+    $TERMINAL --class 'floating' -t 'taskwarrior' \
+    -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
+    -o window.opacity=0.90 \
+    -e taskwarrior-tui && task sync
+
+# Open class sheet
+super + shift + c
+    sxiv ~/pictures/class_sheet.jpg
+
+
+#====================WINDOWS & LAYOUT====================#
+# Move focus
+super + {h, j, k, l}
+    i3-msg focus {left, down, up, right}
+
+# Move focused window
+super + shift + {h, j, k, l}
+    i3-msg move {left, down, up, right}
+
+# Toggle tiling / floating
+super + f
+    i3-msg floating toggle
+
+# Change focus between tiling / floating windows
+super + space
+    i3-msg focus mode_toggle
+
+# Enter fullscreen mode
+super + shift + f
+    i3-msg fullscreen toggle
+
+# Change layout
+super + {s, w, e}
+    i3-msg layout {stacking, tabbed, toggle split}
+
+# split in {horizontal, vertical} orientation
+super + {c, v}
+    i3-msg split {h, v}
+
+# Resize
+super + r + {h, l}
+    i3-msg resize {shrink, grow} width 10 px
+super + r + {j, k}
+    i3-msg resize {shrink, height} height 10 px
+
+
+
+#====================WORKSPACES====================#
+# Switch to workspace
+super + {1-9}
+    i3-msg workspace {1-9}
+
+# Move focused container to workspace
+super + shift + {1-9}
+    i3-msg move container to workspace {1-9}
+
+
+#====================AUDIO====================#
+# {Raise, Low} volume
+super + shift + {u, i}
+    pactl set-sink-volume @DEFAULT_SINK@ {+5%, -5%}
+
+{XF86AudioRaiseVolume, XF86AudioLowerVolume}
+    pactl set-sink-volume @DEFAULT_SINK@ {+5%, -5%}
+
+# Mute source
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+# Mute source
+XF86AudioMicMute
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle

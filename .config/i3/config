@@ -3,9 +3,9 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 
-
 #====================STARTUP====================#
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom
 
@@ -47,165 +47,6 @@ client.unfocused        $color0 $color0 $color15 $color0 $color0
 
 
 
-#====================KEY BINDING====================#
-# left/right super
-set $mod Mod4
-
-set $left h
-set $down j
-set $up k
-set $right l
-
-
-#===Basic===#
-# restart i3
-bindsym $mod+Ctrl+r restart
-# quit i3
-bindsym $mod+Ctrl+q exec prompt 'Do you want to Logout?' 'i3-msg exit'
-# Open power menu
-bindsym $mod+semicolon exec rofi -show power -modi power:power-menu -theme ui_theme
-# Kill focused window
-bindsym $mod+q kill
-
-
-#===Open===#
-# Open a terminal
-bindsym $mod+Return exec $TERMINAL
-# Open launcher
-bindsym $mod+o exec --no-startup-id rofi -show combi -i -theme ui_theme
-# Open browser
-bindsym $mod+b exec $BROWSER
-# Open bitwarden-rofi menu
-bindsym $mod+Shift+b exec bwmenu
-# Open taskwarrior-tui
-# exec 'task sync' when opening and closing
-bindsym $mod+t exec \
-    task sync | \
-    $TERMINAL --class 'floating' -t 'taskwarrior' \
-    -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
-    -o window.opacity=0.90 \
-    -e taskwarrior-tui && task sync
-# Open class sheet
-bindsym $mod+Shift+c exec sxiv ~/pictures/class_sheet.jpg
-
-
-
-#===Windows and layout===#
-# Move focus
-bindsym $mod+$left  focus left
-bindsym $mod+$down  focus down
-bindsym $mod+$up    focus up
-bindsym $mod+$right focus right
-
-# Move focused window
-bindsym $mod+Shift+$left  move left
-bindsym $mod+Shift+$down  move down
-bindsym $mod+Shift+$up    move up
-bindsym $mod+Shift+$right move right
-
-# toggle tiling / floating
-bindsym $mod+f floating toggle
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-# enter fullscreen mode for the focused container
-bindsym $mod+Shift+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-# split in horizontal orientation
-bindsym $mod+c split h
-# split in vertical orientation
-bindsym $mod+v split v
-
-# Resize window
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # Shrink or grow window
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
-
-        # Return to default mode
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-# use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# # focus the parent container
-# bindsym $mod+a focus parent
-#
-# # focus the child container
-# bindsym $mod+d focus child
-#
-# # move the currently focused window to the scratchpad
-# bindsym $mod+Shift+minus move scratchpad
-#
-# # Show the next scratchpad window or hide the focused scratchpad window.
-# # If there are multiple scratchpad windows, this command cycles through them.
-# bindsym $mod+minus scratchpad show
-
-
-#===Workspaces===#
-# Define names for workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-
-# switch to workspace
-bindsym $mod+$ws1 workspace $ws1
-bindsym $mod+$ws2 workspace $ws2
-bindsym $mod+$ws3 workspace $ws3
-bindsym $mod+$ws4 workspace $ws4
-bindsym $mod+$ws5 workspace $ws5
-bindsym $mod+$ws6 workspace $ws6
-bindsym $mod+$ws7 workspace $ws7
-bindsym $mod+$ws8 workspace $ws8
-bindsym $mod+$ws9 workspace $ws9
-
-# move focused container to workspace
-bindsym $mod+Shift+$ws1 move container to workspace $ws1
-bindsym $mod+Shift+$ws2 move container to workspace $ws2
-bindsym $mod+Shift+$ws3 move container to workspace $ws3
-bindsym $mod+Shift+$ws4 move container to workspace $ws4
-bindsym $mod+Shift+$ws5 move container to workspace $ws5
-bindsym $mod+Shift+$ws6 move container to workspace $ws6
-bindsym $mod+Shift+$ws7 move container to workspace $ws7
-bindsym $mod+Shift+$ws8 move container to workspace $ws8
-bindsym $mod+Shift+$ws9 move container to workspace $ws9
-
-
-#===Audio===#
-set $refresh_i3status killall -SIGUSR1 i3status
-
-bindsym $mod+Shift+u exec --no-startup-id \
-    pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id \
-    pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-
-bindsym $mod+Shift+i exec --no-startup-id \
-    pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id \
-    pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-
-bindsym XF86AudioMute exec --no-startup-id \
-    pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-
-bindsym XF86AudioMicMute exec --no-startup-id \
-    pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-
-#===
 #assign [class="^discord$"] 3
 
 
@@ -218,5 +59,6 @@ for_window [class="^Pavucontrol$"] floating enable
 
 
 #====================MISC====================#
+floating_modifier mod4
 mouse_warping none
 #workspace_auto_back_and_forth yes
