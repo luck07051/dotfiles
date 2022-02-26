@@ -137,7 +137,6 @@ endfunction
 autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 
-
 "====================PLUGIN===================="
 call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
@@ -146,6 +145,7 @@ Plug 'easymotion/vim-easymotion'
 
 "===vimwiki and markdown==="
 Plug 'vimwiki/vimwiki'
+"Plug 'michal-h21/vimwiki-sync'
 Plug 'tools-life/taskwiki'
 
 Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app && yarn install'}
@@ -189,6 +189,10 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
 let g:vimwiki_markdown_link_ext = 1
+
+
+
+"===vimwiki-sync==="
 
 
 "===taskwiki==="

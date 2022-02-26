@@ -1,0 +1,6 @@
+#!/bin/sh
+
+packages=$(pacman -Qu | wc -l)
+if [[ $packages != "0" ]]; then
+    echo $packages
+fi

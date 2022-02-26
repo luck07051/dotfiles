@@ -1,25 +1,26 @@
 #===================COMMON=====================#
-# history
+# History
 HISTSIZE=10000
 SAVEHIST=10000
-# no beep sound
+# No beep sound
 unsetopt autocd beep
-# set vim mode
+# Set vim mode
 bindkey -v
-# prompt
+# Prompt
 prompt="[%F{blue}%~%f]%F{blue}%# "
 
 
 #====================ALIAS====================#
 # F5 to resource
 bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
-
+# Quick run filemanager
+bindkey -s '^F' 'ranger\n'
 
 # Quick start
 alias v="nvim"
 alias f="ranger"
 
-# confirm before overwriting something
+# Confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
@@ -83,14 +84,8 @@ zplug load #--verbose
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
 
-# install by 
-# $ yay -S shell-color-scripts
-# the shell-color-scripts is placed in /opt/shell-color-scripts/colorscripts
-# not use 'colorbars debian elfman hex illumina pukeskull rupees spectrum thebat tux'
-#colorscript random
-
-# use starship prompt
-# install by 
+# Use starship prompt
+# install by
 # $ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 eval "$(starship init zsh)"
 

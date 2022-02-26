@@ -24,6 +24,7 @@ data.location=~/.local/share/task
 hooks.location=~/.config/task/hooks
 
 # Color theme (uncomment one to use)
+color.tagged=blue
 #include light-16.theme
 #include light-256.theme
 #include dark-16.theme
@@ -49,3 +50,4 @@ taskd.credentials=FreeCinc/freecinc_84fc8662/b58db834-d2ae-466d-9b15-460a40cd1d6
 
 uda.taskwarrior-tui.background_process=task sync
 uda.taskwarrior-tui.background_process_period=60
+

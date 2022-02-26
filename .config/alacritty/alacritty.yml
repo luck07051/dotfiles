@@ -20,6 +20,9 @@ font:
   # Normal (roman) font face
   normal:
     # Font family
+    #family: RobotoMono Nerd Font
+    #family: DejaVuSansMono Nerd Font
+    #family: UbuntuMono Nerd Font
     family: MesloLGS Nerd Font
 
   # Point size

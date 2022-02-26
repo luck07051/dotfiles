@@ -1,0 +1,3 @@
+#!/bin/sh
+
+$TERMINAL --class floating -e htop
