@@ -19,11 +19,11 @@ super + Return
     $TERMINAL
 
 # Open power menu
-super + semicolon
+super + p
     rofi -show power -modi power:power-menu -theme ui_theme
 
 # Open launcher
-super + o
+super + semicolon
     rofi -show combi -i -theme ui_theme
 
 # Open browser
@@ -31,23 +31,30 @@ super + b
     $BROWSER
 
 # Open bitwarden-rodi menu
+super + shift +b
     bwmenu
 
 # Open taskwarrior-tui
-# exec 'task sync' when opening and closing
+# exec 'task sync' when press super+t everytime
 super + t
-    task sync | \
-    $TERMINAL --class 'floating' -t 'taskwarrior' \
+    i3run --title 'taskwarrior' -- \
+    $TERMINAL --class 'scratchpad' -t 'taskwarrior' \
     -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
     -o window.opacity=0.90 \
-    -e taskwarrior-tui && task sync
+    -e taskwarrior-tui | task sync
+
+super + o ; {w, super + w}
+    i3run --title 'vimwiki' -- \
+    $TERMINAL --class 'scratchpad' -t 'vimwiki' \
+    -e nvim ~/vimwiki/index.md
+
 
 # Open class sheet
 super + shift + c
     sxiv ~/pictures/class_sheet.jpg
 
 
-#====================WINDOWS & LAYOUT====================#
+#====================WORKSPACES & LAYOUT & WINDOWS====================#
 # Move focus
 super + {h, j, k, l}
     i3-msg focus {left, down, up, right}
@@ -55,6 +62,10 @@ super + {h, j, k, l}
 # Move focused window
 super + shift + {h, j, k, l}
     i3-msg move {left, down, up, right}
+
+# Resize focused window
+super + ctrl + {h, j, k, l}
+    i3-msg resize {shrink width, grow height, shrink height, grow width} 30
 
 # Toggle tiling / floating
 super + f
@@ -68,23 +79,10 @@ super + space
 super + shift + f
     i3-msg fullscreen toggle
 
-# Change layout
-super + {s, w, e}
-    i3-msg layout {stacking, tabbed, toggle split}
-
 # split in {horizontal, vertical} orientation
 super + {c, v}
     i3-msg split {h, v}
 
-# Resize
-super + r + {h, l}
-    i3-msg resize {shrink, grow} width 10 px
-super + r + {j, k}
-    i3-msg resize {shrink, height} height 10 px
-
-
-
-#====================WORKSPACES====================#
 # Switch to workspace
 super + {1-9}
     i3-msg workspace {1-9}
@@ -102,9 +100,22 @@ super + shift + {u, i}
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
     pactl set-sink-volume @DEFAULT_SINK@ {+5%, -5%}
 
-# Mute source
+# switch output
+super + shift + o
+    switch_default_sink
+
+# Mute output
 XF86AudioMute
     pactl set-sink-mute @DEFAULT_SINK@ toggle
 # Mute source
 XF86AudioMicMute
     pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+
+
+super + alt + c
+    i3run --instance 'scratchpad' -- $TERMINAL --class 'scratchpad'
+super + alt + a
+    i3flip next
+super + alt + b
+    i3flip prev

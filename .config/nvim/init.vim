@@ -3,15 +3,15 @@ filetype plugin indent on
 syntax enable
 
 "===Basic==="
-set ruler               " show the cursor position below
-set number              " show line number on left side
-set showcmd             " show incomplete commad in last line
-set cursorline          " highlight cursor line
-set laststatus=2        " always show statusline
-set scrolloff=3         " keep 3 line when scrolling
+set ruler                   " show the cursor position below
+set number relativenumber   " show line number on left side
+set showcmd                 " show incomplete commad in last line
+set cursorline              " highlight cursor line
+set laststatus=2            " always show statusline
+set scrolloff=3             " keep 3 line when scrolling
 
 "===Theme==="
-set background=dark     " dark back ground
+set background=dark         " dark back ground
 "=Cursor="
 hi CursorLine                   ctermbg=236 cterm=none
 hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
@@ -66,6 +66,7 @@ set linebreak           " if text warp, no break on word
 set novisualbell        " turn off visual bell
 set visualbell t_vb=    " turn off error beep/flash
 
+"set termhuicolors
 set t_Co=256            " set 256 colors if term supports
 set t_ut=""
 

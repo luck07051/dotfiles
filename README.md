@@ -27,6 +27,7 @@ alacritty
 (qtile)
 i3-gaps
 sxhkd
+yay i3ass
 yay polybar
 zsh
 rofi

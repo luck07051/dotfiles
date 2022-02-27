@@ -34,12 +34,13 @@ set_from_resource $fg *.foreground $color7
 
 set_from_resource $font *.font MesloLGS Nerd Font
 
+
 # Font
 font pango:$font
 
 # Gaps and Border
 for_window [class=".*"] border pixel 2
-gaps inner 8
+gaps inner 10
 
 client.focused          $color5 $color5 $color15 $color5 $color5
 client.focused_inactive $color0 $color0 $color15 $color0 $color0
@@ -55,6 +56,8 @@ client.unfocused        $color0 $color0 $color15 $color0 $color0
 # instance: the first part of WM_CALSS
 for_window [instance="^floating$"] floating enable
 for_window [class="^floating$"] floating enable
+for_window [instance="^scratchpad$"] floating enable
+for_window [class="^scratchpad$"] floating enable
 for_window [class="^Pavucontrol$"] floating enable
 
 
