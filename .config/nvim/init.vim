@@ -127,7 +127,7 @@ omap s :normal vs<CR>
 autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Delete extra space
-autocmd BufWrite *.cpp,*.h,*.py,*yml,makefile call DeleteExtraSpaces()
+autocmd BufWrite * call DeleteExtraSpaces()
 function DeleteExtraSpaces()
     :let b:nline= line('.')
     :%s/\s\+$//e

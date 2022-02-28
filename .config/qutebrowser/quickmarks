@@ -2,6 +2,8 @@
 q qute://bookmarks
 b qute://bookmarks/#bookmarks
 
+bitwarden https://vault.bitwarden.com
+
 yt https://youtube.com
 odysee https://odysee.com
 spotift https://open.spotify.com
@@ -13,6 +15,7 @@ aw https://archlinux.org
 stack overflow https://stackoverflow.com
 
 qutebrowser https://qutebrowser.org
+qmk https://docs.qmk.fm/#
 i3 https://i3wm.org
 qtile http://www.qtile.org
 xmonad https://xmonad.org
@@ -21,7 +24,7 @@ taskwarrior https://taskwarrior.org
 nerd font https://github.com/ryanoasis/nerd-fonts
 nerd icon https://www.nerdfonts.com/cheat-sheet
 
-greasy fork https://greasyfork.org/en 
+greasy fork https://greasyfork.org/en
 
 google translate https://translate.google.com
 deepl translator https://www.deepl.com/translator
@@ -29,10 +32,10 @@ cambridge dictionsry https://dictionary.cambridge.org
 merriam dictionary https://www.merriam-webster.com
 
 google drive https://drive.google.com/drive
-gmail https://mail.google.com/mail 
+gmail https://mail.google.com/mail
 
-reddit https://www.reddit.com 
-twitter https://twitter.com/home 
+reddit https://www.reddit.com
+twitter https://twitter.com/home
 
 google classroom https://classroom.google.com
 google meet https://meet.google.com

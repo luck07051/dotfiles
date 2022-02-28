@@ -9,7 +9,6 @@ exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom
 
-
 #====================COLORS====================#
 # Colors from Xresources
 set_from_resource $color0  *.color0  #1C1C1C
@@ -58,10 +57,15 @@ for_window [instance="^floating$"] floating enable
 for_window [class="^floating$"] floating enable
 for_window [instance="^scratchpad$"] floating enable
 for_window [class="^scratchpad$"] floating enable
+
 for_window [class="^Pavucontrol$"] floating enable
+
+
+no_focus [instance="^surf$"]
 
 
 #====================MISC====================#
 floating_modifier mod4
 mouse_warping none
 #workspace_auto_back_and_forth yes
+
