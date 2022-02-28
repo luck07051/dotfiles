@@ -59,7 +59,7 @@ for_window [instance="^scratchpad$"] floating enable
 for_window [class="^scratchpad$"] floating enable
 
 for_window [class="^Pavucontrol$"] floating enable
-
+for_window [instance="^sp_terminal$"] floating enable
 
 no_focus [instance="^surf$"]
 

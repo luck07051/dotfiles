@@ -34,7 +34,7 @@ super + b
 super + shift +b
     bwmenu
 
-# Open taskwarrior-tui
+# Open taskwarrior-tui as scratchpad
 # exec 'task sync' when press super+t everytime
 super + t
     i3run --title 'taskwarrior' -- \
@@ -45,11 +45,22 @@ super + t
 
 # Open vimwiki
 super + w
-    i3run --title 'vimwiki' -- \
-    $TERMINAL --class 'scratchpad' -t 'vimwiki' \
-    -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
+    i3-switch-sp 10 "$TERMINAL --title vimwiki -e nvim $HOME/vimwiki/index.md"
+
+# Open terminal as scratchpad
+super + comma
+    i3run --instance 'sp_terminal' -- \
+    $TERMINAL --class 'sp_terminal' \
+    -o window.dimensions.columns=100 -o window.dimensions.lines=30 \
+    -o window.opacity=0.90
+
+# Open ranger as scratchpad
+super + r
+    i3run --title 'ranger' -- \
+    $TERMINAL --class 'scratchpad' -t 'ranger' \
+    -o window.dimensions.columns=120 -o window.dimensions.lines=35 \
     -o window.opacity=0.90 \
-    -e nvim ~/vimwiki/index.md
+    -e ranger
 
 # Open class sheet
 super + shift + c
@@ -69,6 +80,7 @@ super + shift + {h, j, k, l}
 super + ctrl + {h, j, k, l}
     i3-msg resize {shrink width, grow height, shrink height, grow width} 30
 
+
 # Toggle tiling / floating
 super + f
     i3-msg floating toggle
@@ -84,6 +96,10 @@ super + shift + f
 # split in {horizontal, vertical} orientation
 super + {c, v}
     i3-msg split {h, v}
+
+# Switch focus between monitor
+#super + comma
+#    i3-msg focus output $(xrandr | grep -w 'connected' | awk '{print $1}' | tr '\n' ' ')
 
 # Switch to workspace
 super + {1-9}
