@@ -98,8 +98,8 @@ super + {c, v}
     i3-msg split {h, v}
 
 # Switch focus between monitor
-#super + comma
-#    i3-msg focus output $(xrandr | grep -w 'connected' | awk '{print $1}' | tr '\n' ' ')
+super + m
+    i3-switch-monitor
 
 # Switch to workspace
 super + {1-9}

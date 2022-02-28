@@ -14,15 +14,15 @@
 declare -A target
 target[workspace]=$1
 target[output]=$(i3-msg -t get_workspaces | sed 's/{/\n{/g' |\
-    grep -e "\"num\":$1" -A 1 | sed 's/,/,\n/g' |\
+    grep -e "\"num\":$1" -A 1 | sed 's/,/\n/g' |\
     grep '"output"' | awk -F\" '{print $4}')
 
 declare -A current
 current[workspace]=$(i3-msg -t get_workspaces | sed 's/{/\n{/g' |\
-    grep '"focused":true' -A 1 | sed 's/,/,\n/g' |\
-    grep '"num"' | sed 's/"num"://g' | sed 's/,//g')
+    grep '"focused":true' -A 1 | sed 's/,/\n/g' |\
+    grep '"num"' | sed 's/"num"://g')
 current[output]=$(i3-msg -t get_workspaces | sed 's/{/\n{/g' |\
-    grep '"focused":true' -A 1 | sed 's/,/,\n/g' |\
+    grep '"focused":true' -A 1 | sed 's/,/\n/g' |\
     grep '"output"' | awk -F\" '{print $4}')
 
 

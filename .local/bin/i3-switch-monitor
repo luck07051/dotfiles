@@ -1,0 +1,18 @@
+#!/bin/bash
+
+declare -A monitor
+monitor=$(i3-msg -t get_outputs | sed 's/}/\n/g' |\
+    grep '"active":true' | awk -F\" '{print $4}')
+
+declare -A current_monitor
+current_monitor=$(i3-msg -t get_workspaces | sed 's/{/\n{/g' |\
+    grep '"focused":true' -A 1 | sed 's/,/\n/g' |\
+    grep '"output"' | awk -F\" '{print $4}')
+
+next_monitor=$(echo -e "$monitor" | grep $current_monitor -A 1)
+
+if [ $(echo -e "$next_monitor" | wc -l) == '1' ]; then
+    i3-msg focus output $(echo -e "$monitor" | head -n 1)
+else
+    i3-msg focus output $(echo -e "$next_monitor" | tail -n 1)
+fi
