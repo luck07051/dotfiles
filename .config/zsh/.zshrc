@@ -31,10 +31,10 @@ alias vim="nvim"
 alias vw="nvim ~/vimwiki/index.md"
 
 # ls
-alias ls="exa --icons --group-directories-first --color=always"
-alias la="exa -a --icons --group-directories-first --color=always"
+alias ls="exa -al --icons --group-directories-first --color=always"
 alias ll="exa -al --icons --group-directories-first --color=always"
-alias l="exa -al --icons --group-directories-first --color=always"
+alias la="exa -a --icons --group-directories-first --color=always"
+alias l="exa --icons --group-directories-first --color=always"
 
 # pacman and yay
 #alias pacman="sudo pacman"

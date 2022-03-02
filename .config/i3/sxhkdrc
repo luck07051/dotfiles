@@ -39,7 +39,7 @@ super + shift +b
 super + t
     i3run --title 'taskwarrior' -- \
     $TERMINAL --class 'scratchpad' -t 'taskwarrior' \
-    -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
+    -o window.dimensions.columns=130 -o window.dimensions.lines=35 \
     -o window.opacity=0.90 \
     -e taskwarrior-tui | task sync
 

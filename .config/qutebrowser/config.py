@@ -12,7 +12,7 @@ config.load_autoconfig(False)
 # Always restore open sites when qutebrowser is reopened.
 c.auto_save.session = True
 # Duration (in milliseconds) to show messages in the statusbar for.
-c.messages.timeout = 3500
+c.messages.timeout = 2000
 
 
 #====================URL====================#

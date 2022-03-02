@@ -60,6 +60,8 @@ htop                # better top
 bat                 # better cat
 procs               # better ps
 zoxide              # better cd
+fd                  # better find
+ripgerp             # better gerp
 ```
 
 Graphical app
