@@ -38,7 +38,6 @@ Commandline tool
 ```
 ranger              # file manager
 sxiv                # image viewer
-(ueberzug            # imageviewer)
 zathura zathura-pdf-mupdf   # pdf viewer
 ncmpcpp             # music player
 yay -S ncpamixer    # pulseaudio control
@@ -93,6 +92,10 @@ xdotool
 # vim plug markdown perviewer
 yarn
 
+# polybar
+# spotify
+playerctl
+pip install dbus-python
 ```
 
 Nvidea
@@ -171,6 +174,11 @@ git clone git@github.com:jchook/ranger-zoxide.git ~/.config/ranger/plugins/zoxid
 sudo pacman -S gcc python3-dev python-pip
 ```
 
+### qutebrowser
+Unable to view DRM content
+```
+yay -S chromium-widevine
+```
 
 ### changing default shell
 ```

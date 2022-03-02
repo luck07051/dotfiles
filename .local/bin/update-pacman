@@ -1,3 +1,0 @@
-#!/bin/sh
-
-$TERMINAL --class floating -e sudo pacman -Syu

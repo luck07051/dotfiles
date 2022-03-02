@@ -21,6 +21,8 @@ qtile http://www.qtile.org
 xmonad https://xmonad.org
 suckless https://suckless.org
 taskwarrior https://taskwarrior.org
+polybar https://github.com/polybar/polybar/wiki
+
 nerd font https://github.com/ryanoasis/nerd-fonts
 nerd icon https://www.nerdfonts.com/cheat-sheet
 

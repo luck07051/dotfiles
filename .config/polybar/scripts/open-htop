@@ -1,0 +1,5 @@
+#!/bin/sh
+# for polybar
+# because polybar not support environment variable
+
+$TERMINAL --class floating -e htop

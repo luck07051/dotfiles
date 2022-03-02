@@ -34,6 +34,10 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # Stack (Haskell)
 export STACK_ROOT="$XDG_CONFIG_HOME"/stack
+# gradle
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+# rust#cargo
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
 
 # Default App

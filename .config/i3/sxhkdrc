@@ -45,7 +45,7 @@ super + t
 
 # Open vimwiki
 super + w
-    i3-switch-sp 10 "$TERMINAL --title vimwiki -e nvim $HOME/vimwiki/index.md"
+    ~/.config/i3/scripts/i3-switch-sp -s -a 10 "$TERMINAL --title vimwiki -e nvim $HOME/vimwiki/index.md"
 
 # Open terminal as scratchpad
 super + comma
@@ -99,7 +99,7 @@ super + {c, v}
 
 # Switch focus between monitor
 super + m
-    i3-switch-monitor
+    ~/.config/i3/scripts/i3-switch-monitor
 
 # Switch to workspace
 super + {1-9}
