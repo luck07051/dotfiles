@@ -37,6 +37,7 @@ setxkbmap           # uses to remap capslock to ctrl
 Commandline tool
 ```
 ranger              # file manager
+yay lf              # file manager
 sxiv                # image viewer
 ueberzug            # image viewer (for ranger preview)
 zathura zathura-pdf-mupdf   # pdf viewer
@@ -181,6 +182,9 @@ sudo vim /etc/updatedb.conf
 # refresh database
 sudo updatedb
 ```
+
+### lf
+see [image preview](https://github.com/cirala/lfimg)
 
 
 ### pip

@@ -1,15 +1,68 @@
 #====================BASIC====================#
 set hidden true
-#set icons true
+set ignorecase true
+
 set previewer ~/.config/lf/preview
 set cleaner ~/.config/lf/cleaner
-set preview true
 
 
 #====================FUNCTIONS====================#
 cmd open ${{
     case $(file --mime-type "$f" -bL) in
         text/*|application/json) $EDITOR "$f";;
+        application/pdf) zathura "$f" &;;
+        image/*) sxiv "$f" &;;
         *) xdg-open "$f" ;;
     esac
 }}
+
+cmd mkdir %{{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd fzf_jump %{{
+    res="$(fd --hidden --ignore-file ~/.config/fzf/ignore-file --type file | fzf-tmux)"
+    if [ -d "$res" ]; then
+        cmd="cd"
+    else
+        cmd="select"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_jump_global %{{
+    res="$(locate home media | fzf-tmux -e -i)"
+    if [ -d "$res" ]; then
+        cmd="cd"
+    else
+        cmd="select"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_jump_local %{{
+    res="$(find . -maxdepth 1 | sed 's/\.\///g' | fzf-tmux -d 35% --info=hidden)"
+    cmd="select"
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+
+
+#====================KEYBINDING====================#
+# Reset
+map c
+
+map <esc> clear
+
+map D delete
+
+#map cd :
+map <c-f> :fzf_jump
+map <c-g> :fzf_jump_global
+map / :fzf_jump_local
+
+map ; read
+map : shell
+

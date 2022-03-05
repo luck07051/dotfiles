@@ -51,7 +51,7 @@ export LANG=en_US.UTF-8
 export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 
 # fzf setup
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=pointer:5,gutter:-1"
-export FZF_DEFAULT_COMMAND="fd --hidden --ignore-file ~/.config/fzf/ignore-file --type file"
+export FZF_DEFAULT_OPTS="--height 40% --color=pointer:5,gutter:-1"
+export FZF_DEFAULT_COMMAND="fd --hidden --ignore-file ~/.config/fzf/ignore-file --type file --info=hidden"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 

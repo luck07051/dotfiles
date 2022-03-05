@@ -45,22 +45,15 @@ super + t
 
 # Open vimwiki
 super + w
-    ~/.config/i3/scripts/i3-switch-sp -s -a 10 "$TERMINAL --title vimwiki -e nvim $HOME/vimwiki/index.md"
+    i3-open-vimwiki
 
 # Open terminal as scratchpad
 super + comma
-    i3run --instance 'sp_terminal' -- \
-    $TERMINAL --class 'sp_terminal' \
-    -o window.dimensions.columns=100 -o window.dimensions.lines=30 \
-    -o window.opacity=0.90
+    i3-scratchpad-with-tmux sp_terminal T
 
-# Open ranger as scratchpad
+# Open filemanager as scratchpad
 super + r
-    i3run --title 'ranger' -- \
-    $TERMINAL --class 'scratchpad' -t 'ranger' \
-    -o window.dimensions.columns=120 -o window.dimensions.lines=35 \
-    -o window.opacity=0.90 \
-    -e ranger
+    i3-scratchpad-with-tmux filemanager F
 
 # Open class sheet
 super + shift + c
@@ -99,7 +92,7 @@ super + {c, v}
 
 # Switch focus between monitor
 super + m
-    ~/.config/i3/scripts/i3-switch-monitor
+    i3-switch-monitor
 
 # Switch to workspace
 super + {1-9}

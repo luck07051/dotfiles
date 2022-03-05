@@ -15,7 +15,7 @@ bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 bindkey -s '^F' 'lf\n'
 
 
-alias ranger='ranger --choosedir=/tmp/last-dir;\
+alias ranger='ranger --choosedir=/tmp/last-dir; \
     LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
 alias lf='lfrun -last-dir-path /tmp/last-dir; \
     LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
@@ -94,11 +94,3 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh --cmd cd)"
 
-case ${TERM} in
-  xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-        ;;
-  screen*)
-    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-    ;;
-esac

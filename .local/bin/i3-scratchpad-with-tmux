@@ -1,0 +1,7 @@
+#!/bin/sh
+
+i3run --title $1 -- \
+$TERMINAL --class 'scratchpad' -t $1 \
+-o window.dimensions.columns=130 -o window.dimensions.lines=35 \
+-o window.opacity=0.90 \
+-e tmux new-session -A -s $2
