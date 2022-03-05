@@ -6,19 +6,19 @@ SAVEHIST=10000
 unsetopt autocd beep
 # Set vim mode
 bindkey -v
-# Prompt
-prompt="[%F{blue}%~%f]%F{blue}%# "
 
 
 #====================ALIAS====================#
 # F5 to resource
 bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 # Quick run filemanager
-bindkey -s '^F' 'ranger\n'
+bindkey -s '^F' 'lf\n'
 
-# Quick start
-alias v="nvim"
-alias f="ranger"
+
+alias ranger='ranger --choosedir=/tmp/last-dir;\
+    LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
+alias lf='lfrun -last-dir-path /tmp/last-dir; \
+    LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
 
 # Confirm before overwriting something
 alias cp="cp -i"
@@ -27,6 +27,7 @@ alias rm="rm -i"
 alias mkdir="mkdir -p"
 
 # vim
+alias v="nvim"
 alias vim="nvim"
 alias vw="nvim ~/vimwiki/index.md"
 
@@ -93,5 +94,11 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh --cmd cd)"
 
-
-
+case ${TERM} in
+  xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+        ;;
+  screen*)
+    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+    ;;
+esac

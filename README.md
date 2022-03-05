@@ -38,6 +38,7 @@ Commandline tool
 ```
 ranger              # file manager
 sxiv                # image viewer
+ueberzug            # image viewer (for ranger preview)
 zathura zathura-pdf-mupdf   # pdf viewer
 ncmpcpp             # music player
 yay -S ncpamixer    # pulseaudio control
@@ -75,10 +76,6 @@ mpv                 # video viewer
 
 Dependencie
 ```
-# rofi screenshot
-xclip slop
-yay -S ffcast
-
 # qtile bar
 pip install psutil
 pip install dbus-next
@@ -98,6 +95,10 @@ yarn
 # spotify
 playerctl
 pip install dbus-python
+
+# ranger
+findutils
+mlocate
 ```
 
 Nvidea
@@ -165,9 +166,20 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ```
 If markdown-preview dont work, try this `:call mkdp#util#install()`
 
-### ranger plugin
+
+### ranger
 ```
 git clone git@github.com:jchook/ranger-zoxide.git ~/.config/ranger/plugins/zoxide
+```
+```
+sudo vim /etc/updatedb.conf
+
+>>> remove /media from PRUNEPATHS
+>>> save and exit
+
+
+# refresh database
+sudo updatedb
 ```
 
 

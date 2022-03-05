@@ -87,8 +87,8 @@ let mapleader="\<Space>"
 
 noremap Y y$
 noremap ~ g~
-nnoremap ; :
-nnoremap : ;
+noremap ; :
+noremap : ;
 
 "" add a empty line
 "nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
@@ -143,6 +143,8 @@ call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 
 "===vimwiki and markdown==="
 Plug 'vimwiki/vimwiki'
@@ -169,20 +171,32 @@ set noshowmode          " dont show mode below
 "===easymotion==="
 " wish: over press s/f/t jump to next search
 
-" f{char} to move to {char}
-map  f <Plug>(easymotion-bd-f)
-nmap f <Plug>(easymotion-overwin-f)
+"" f{char} to move to {char}
+"map  f <Plug>(easymotion-bd-f)
+"nmap f <Plug>(easymotion-overwin-f)
+"
+"" s{char}{char} to move to {char}{char}
+"nmap s <Plug>(easymotion-overwin-f2)
+"
+"" Move to line
+"map <Leader>L <Plug>(easymotion-bd-jk)
+"nmap <Leader>L <Plug>(easymotion-overwin-line)
+"
+"" Move to word
+"map  <Leader>w <Plug>(easymotion-bd-w)
+"nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
 
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+"===fzf==="
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
 
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+noremap <Leader>f :Files<CR>
+noremap <Leader>b :Buffers<CR>
+
 
 
 "===vimwiki==="
