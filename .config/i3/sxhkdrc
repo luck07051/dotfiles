@@ -16,7 +16,7 @@ super + q
 #====================OPEN====================#
 # Open terminal
 super + Return
-    $TERMINAL
+    $TERMINAL -e tmux
 
 # Open power menu
 super + p
@@ -53,7 +53,7 @@ super + comma
 
 # Open filemanager as scratchpad
 super + r
-    i3-scratchpad-with-tmux filemanager F
+    i3-scratchpad-with-tmux filemanager F lf
 
 # Open class sheet
 super + shift + c

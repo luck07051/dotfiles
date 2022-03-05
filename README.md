@@ -36,6 +36,8 @@ setxkbmap           # uses to remap capslock to ctrl
 
 Commandline tool
 ```
+tmux
+yay tmuxinator
 ranger              # file manager
 yay lf              # file manager
 sxiv                # image viewer
@@ -166,6 +168,13 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
   --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 If markdown-preview dont work, try this `:call mkdp#util#install()`
+
+
+### Tmux
+[tmux plug manager](https://github.com/tmux-plugins/tpm)
+```
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+```
 
 
 ### ranger
