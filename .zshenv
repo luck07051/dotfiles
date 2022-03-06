@@ -38,6 +38,8 @@ export STACK_ROOT="$XDG_CONFIG_HOME"/stack
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 # rust#cargo
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+# go
+export GOPATH="$XDG_DATA_HOME"/go
 
 
 # Default App

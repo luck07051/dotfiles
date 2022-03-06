@@ -45,7 +45,8 @@ super + t
 
 # Open vimwiki
 super + w
-    i3-open-vimwiki
+    i3-switch-sp -s -a 10 "$TERMINAL \
+        --title vimwiki -e tmuxinator start vimwiki"
 
 # Open terminal as scratchpad
 super + comma

@@ -1,6 +1,6 @@
 # Check Internet
 $ ping google.com
-   
+
 # Update the System Clock
 $ timedatectl set-ntp true
 
@@ -53,7 +53,7 @@ $ vim /etc/hostname
 # Set the Host Conf
 $ vim /etc/hosts
 
-# Set Password for Root 
+# Set Password for Root
 $ passwd
 # Add Normal User and Password
 $ useradd -m [user]
@@ -87,5 +87,5 @@ $ vim /etc/pacman.conf
 # Reboot
 $ exit
 $ umount -R /mnt
-$ reboot 
+$ reboot
 Remember to remove the installation medium

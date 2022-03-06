@@ -5,6 +5,8 @@ set ignorecase true
 set previewer ~/.config/lf/preview
 set cleaner ~/.config/lf/cleaner
 
+set shell zsh
+
 
 #====================FUNCTIONS====================#
 cmd open ${{
@@ -20,6 +22,12 @@ cmd mkdir %{{
   printf "Directory Name: "
   read ans
   mkdir $ans
+}}
+
+cmd mkfile %{{
+  printf "File Name: "
+  read ans
+  touch $ans
 }}
 
 cmd fzf_jump %{{
@@ -48,6 +56,10 @@ cmd fzf_jump_local %{{
     lf -remote "send $id $cmd \"$res\""
 }}
 
+cmd zoxide %{{
+    eval "$(zoxide init zsh --cmd z)"
+    lf -remote "send $id cd '$(z $1; pwd)'"
+}}
 
 
 #====================KEYBINDING====================#
@@ -55,14 +67,13 @@ cmd fzf_jump_local %{{
 map c
 
 map <esc> clear
-
 map D delete
 
-#map cd :
+map cd push :zoxide<space>
+
 map <c-f> :fzf_jump
 map <c-g> :fzf_jump_global
 map / :fzf_jump_local
 
 map ; read
-map : shell
 

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-i3-switch-sp -s -a 10 "$TERMINAL \
-    --title vimwiki -e tmuxinator start vimwiki"

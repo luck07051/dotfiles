@@ -15,6 +15,7 @@ bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 bindkey -s '^F' 'lf\n'
 
 
+
 alias ranger='ranger --choosedir=/tmp/last-dir; \
     LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
 alias lf='lfrun -last-dir-path /tmp/last-dir; \
@@ -38,7 +39,6 @@ alias la="exa -a --icons --group-directories-first --color=always"
 alias l="exa --icons --group-directories-first --color=always"
 
 # pacman and yay
-#alias pacman="sudo pacman"
 alias pacup="sudo pacman -Syu"
 
 # grep
