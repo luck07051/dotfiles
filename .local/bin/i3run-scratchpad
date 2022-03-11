@@ -1,0 +1,15 @@
+#!/bin/sh
+
+title="$1"
+col="$2"
+row="$3"
+shift 3
+
+echo "$title"
+
+i3run --title "$title" -- \
+    $TERMINAL --class "scratchpad" --title "$title" \
+    -o window.dimensions.columns="$col" -owindow.dimensions.lines="$row" \
+    -o window.opacity=0.90 \
+    -e $@
+

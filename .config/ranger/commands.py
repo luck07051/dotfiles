@@ -81,11 +81,11 @@ class fzf_select(Command):
         if self.quantifier:
             # match only directories
             command="find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
-            -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+            -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf-tmux +m"
         else:
             # match files and directories
             command="find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
-            -o -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+            -o -print 2> /dev/null | sed 1d | cut -b3- | fzf-tmux +m"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
@@ -108,9 +108,9 @@ class fzf_locate(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="locate home media | fzf -e -i"
+            command="locate home media | fzf-tmux -e -i"
         else:
-            command="locate home media | fzf -e -i"
+            command="locate home media | fzf-tmux -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:

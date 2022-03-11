@@ -14,6 +14,7 @@ super + q
 
 
 #====================OPEN====================#
+#===Essential===#
 # Open terminal
 super + Return
     $TERMINAL -e tmux
@@ -30,31 +31,35 @@ super + semicolon
 super + b
     $BROWSER
 
-# Open bitwarden-rodi menu
-super + shift +b
-    bwmenu
-
+#===Scratchpad===#
 # Open taskwarrior-tui as scratchpad
 # exec 'task sync' when press super+t everytime
 super + t
-    i3run --title 'taskwarrior' -- \
-    $TERMINAL --class 'scratchpad' -t 'taskwarrior' \
-    -o window.dimensions.columns=130 -o window.dimensions.lines=35 \
-    -o window.opacity=0.90 \
-    -e taskwarrior-tui | task sync
+    i3run-scratchpad Taskwarrior 130 35 "taskwarrior-tui | task sync"
 
 # Open vimwiki
 super + w
     i3-switch-sp -s -a 10 "$TERMINAL \
-        --title vimwiki -e tmuxinator start vimwiki"
+        --title Vimwiki -e tmuxinator start vimwiki"
 
 # Open terminal as scratchpad
 super + comma
-    i3-scratchpad-with-tmux sp_terminal T
+    i3run-scratchpad Terminal 120 30 "tmuxinator start terminal"
 
 # Open filemanager as scratchpad
 super + r
-    i3-scratchpad-with-tmux filemanager F lf
+    i3run-scratchpad Filemanager 130 35 "tmuxinator start filemanager"
+
+#===Extra===#
+# Open bitwarden-rodi menu
+super + shift +b
+    bwmenu
+
+# Bookmark
+super + o
+    $TERMINAL --class 'floating' --title 'bookmark' \
+    -o window.opacity=0.90 \
+    -e bookmark open
 
 # Open class sheet
 super + shift + c

@@ -94,3 +94,5 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh --cmd cd)"
 
+
+source /home/ui/.config/broot/launcher/bash/br

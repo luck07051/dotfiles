@@ -9,6 +9,7 @@ set shell zsh
 
 
 #====================FUNCTIONS====================#
+#===Basic===#
 cmd open ${{
     case $(file --mime-type "$f" -bL) in
         text/*|application/json) $EDITOR "$f";;
@@ -21,15 +22,58 @@ cmd open ${{
 cmd mkdir %{{
   printf "Directory Name: "
   read ans
-  mkdir $ans
+  mkdir -p $ans
+  lf -remote "send $id select \"$ans\""
 }}
 
 cmd mkfile %{{
   printf "File Name: "
   read ans
-  touch $ans
+  lf -remote "send $id edit $ans"
+  lf -remote "send $id select \"$ans\""
+}}
+cmd edit ${{ $EDITOR "$@" }}
+
+cmd mv %{{
+    printf "Move to: "
+    read ans
+
+    for file in "$fx"
+    do
+        mv $file $ans
+    done
 }}
 
+cmd open-with %"$@" $fx
+
+#===cd===#
+cmd zoxide %{{
+    eval "$(zoxide init zsh --cmd z)"
+    lf -remote "send $id cd '$(z $1; pwd)'"
+}}
+
+cmd chmod %{{
+    printf "Mode Bits: "
+    read ans
+
+    for file in "$fx"
+    do
+        chmod $ans $file
+    done
+
+    lf -remote 'send reload'
+}}
+
+cmd excutable %{{
+    for file in "$fx"
+    do
+        chmod +x $file
+    done
+
+    lf -remote 'send reload'
+}}
+
+#===jump===#
 cmd fzf_jump %{{
     res="$(fd --hidden --ignore-file ~/.config/fzf/ignore-file --type file | fzf-tmux)"
     if [ -d "$res" ]; then
@@ -56,24 +100,42 @@ cmd fzf_jump_local %{{
     lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd zoxide %{{
-    eval "$(zoxide init zsh --cmd z)"
-    lf -remote "send $id cd '$(z $1; pwd)'"
+
+
+#===Archive bindings===#
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
 }}
 
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
 
 #====================KEYBINDING====================#
 # Reset
 map c
+map m
+map "'"
+map '"'
 
 map <esc> clear
 map D delete
-
 map cd push :zoxide<space>
+map mkd mkdir
+map mkf mkfile
+map mv mv
+map ` push :open-with<space>
 
-map <c-f> :fzf_jump
-map <c-g> :fzf_jump_global
-map / :fzf_jump_local
+map f fzf_jump
+map <c-f> fzf_jump_global
+map / fzf_jump_local
 
 map ; read
 

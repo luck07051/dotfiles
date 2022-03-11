@@ -89,6 +89,7 @@ noremap Y y$
 noremap ~ g~
 noremap ; :
 noremap : ;
+noremap Q qq
 
 "" add a empty line
 "nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
@@ -105,15 +106,24 @@ noremap <Leader>P "+P
 
 " cancel search highlight
 nnoremap <silent><Leader>nh :nohlsearch<CR>
-nnoremap <Leader>ns :call DeleteExtraSpaces()<CR>
+" delete extra spaces
+nnoremap <silent><Leader>ns :call DeleteExtraSpaces()<CR>
 
+" open new file
+nnoremap <silent><Leader>t :tabnew<CR>
+nnoremap <silent><Leader>v :split<CR>
+nnoremap <silent><Leader>x :vsplit<CR>
 " switch windows
-nnoremap <Leader>j <C-W>
+nnoremap <silent><C-j> <C-w>j
+nnoremap <silent><C-k> <C-w>k
+nnoremap <silent><C-h> <C-w>h
+nnoremap <silent><C-l> <C-w>l
 " switch buffers
-nnoremap <C-J> :bnext<CR>
-nnoremap <C-K> :bprev<CR>
-nnoremap <C-H> gT
-nnoremap <C-L> gt
+nnoremap <silent><A-j> :bnext<CR>
+nnoremap <silent><A-k> :bprev<CR>
+" switch tabs
+nnoremap <silent><A-h> gT
+nnoremap <silent><A-l> gt
 
 "===Copy or Change Search==="
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
@@ -143,6 +153,8 @@ call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
+
+"===fzf==="
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 
@@ -164,7 +176,7 @@ call plug#end()
 
 "===lightline==="
 " Set lightline theme
-let g:lightline = { 'colorscheme': 'seoul256' }
+let g:lightline = { 'colorscheme': 'ui_theme' }
 set noshowmode          " dont show mode below
 
 
@@ -194,8 +206,8 @@ let g:fzf_action = {
     \ 'ctrl-x': 'split',
     \ 'ctrl-v': 'vsplit' }
 
-noremap <Leader>f :Files<CR>
-noremap <Leader>b :Buffers<CR>
+noremap <C-f> :Files<CR>
+noremap <C-b> :Buffers<CR>
 
 
 
