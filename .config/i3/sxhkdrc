@@ -79,7 +79,6 @@ super + shift + {h, j, k, l}
 super + ctrl + {h, j, k, l}
     i3-msg resize {shrink width, grow height, shrink height, grow width} 30
 
-
 # Toggle tiling / floating
 super + f
     i3-msg floating toggle
@@ -93,7 +92,7 @@ super + shift + f
     i3-msg fullscreen toggle
 
 # split in {horizontal, vertical} orientation
-super + {c, v}
+super + {x, v}
     i3-msg split {h, v}
 
 # Switch focus between monitor

@@ -10,36 +10,6 @@ set cursorline              " highlight cursor line
 set laststatus=2            " always show statusline
 set scrolloff=3             " keep 3 line when scrolling
 
-"===Theme==="
-set background=dark         " dark back ground
-"=Cursor="
-hi CursorLine                   ctermbg=236 cterm=none
-hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
-hi LineNr           ctermfg=8
-"=Syntax="
-hi Comment          ctermfg=15
-hi Statement        ctermfg=4
-hi Identifier       ctermfg=6
-hi PreProc          ctermfg=6
-hi Constant         ctermfg=3
-hi Identifier       ctermfg=10
-hi Type             ctermfg=14
-"=Misc="
-hi VertSplit        ctermfg=236 ctermbg=236
-hi ErrorMsg         ctermfg=7
-" listchars eol
-hi NonText          ctermfg=238
-" listchars space, tab
-hi SpecialKey       ctermfg=238
-
-" highlight 81 column
-hi ColorColumn                  ctermbg=8
-call matchadd('ColorColumn', '\%81v', 100)
-
-" show extra space
-hi ExtraWhitespace              ctermbg=8
-match ExtraWhitespace /\s$/
-
 
 "===Search==="
 set hlsearch            " highlight search result
@@ -75,6 +45,59 @@ set wildmenu            " show the commom complete list, can use Tab and S-Tab
 "set list
 "set listchars=tab:»\ ,eol:↲,trail:_
 set showbreak=↪\ "
+
+
+
+
+"====================AUTOCMD===================="
+" Not auto comment new line
+autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Delete extra space
+autocmd BufWrite * call DeleteExtraSpaces()
+function DeleteExtraSpaces()
+    :let b:nline= line('.')
+    :%s/\s\+$//e
+    :execute "to ".b:nline
+endfunction
+
+" Fix initial size incorrectly
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+
+
+
+
+"====================THEME===================="
+set background=dark         " dark back ground
+"===Cursor==="
+hi CursorLine                   ctermbg=236 cterm=none
+hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
+hi LineNr           ctermfg=8
+"===Syntax==="
+hi Comment          ctermfg=15
+hi Statement        ctermfg=4
+hi Identifier       ctermfg=6
+hi PreProc          ctermfg=6
+hi Constant         ctermfg=3
+hi Identifier       ctermfg=10
+hi Type             ctermfg=14
+"===Misc==="
+hi VertSplit        ctermfg=236 ctermbg=236
+hi ErrorMsg         ctermfg=7
+" listchars eol
+hi NonText          ctermfg=238
+" listchars space, tab
+hi SpecialKey       ctermfg=238
+
+" highlight 81 column
+hi ColorColumn                  ctermbg=8
+call matchadd('ColorColumn', '\%81v', 100)
+
+" show extra space
+hi ExtraWhitespace              ctermbg=8
+match ExtraWhitespace /\s$/
+
+
 
 
 "====================KEYMAP===================="
@@ -131,21 +154,6 @@ vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
 omap s :normal vs<CR>
 
 
-
-"====================AUTOCMD===================="
-" Not auto comment new line
-autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Delete extra space
-autocmd BufWrite * call DeleteExtraSpaces()
-function DeleteExtraSpaces()
-    :let b:nline= line('.')
-    :%s/\s\+$//e
-    :execute "to ".b:nline
-endfunction
-
-" Fix initial size incorrectly
-autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
 
 "====================PLUGIN===================="
