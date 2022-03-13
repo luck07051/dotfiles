@@ -14,9 +14,14 @@ cmd q %{{ lf -remote "send $id quit" }}
 
 cmd open ${{
     case $(file --mime-type "$f" -bL) in
+        # Text
         text/*|application/json) $EDITOR "$f";;
+        # PDF
         application/pdf) zathura "$f" &;;
+        # Image
         image/*) sxiv "$f" &;;
+
+
         *) xdg-open "$f" ;;
     esac
 }}
