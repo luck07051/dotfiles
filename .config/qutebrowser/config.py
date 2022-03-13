@@ -1,7 +1,9 @@
-
 # Documentation:
 #   qute://help/configuring.html
 #   qute://help/settings.html
+
+# Link quickmarks
+# ln ~/bookmarks $XDG_CONFIG_HOME/qutebrowser/quickmarks -s
 
 import os
 import subprocess

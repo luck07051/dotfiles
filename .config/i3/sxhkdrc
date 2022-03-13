@@ -79,26 +79,6 @@ super + shift + {h, j, k, l}
 super + ctrl + {h, j, k, l}
     i3-msg resize {shrink width, grow height, shrink height, grow width} 30
 
-# Toggle tiling / floating
-super + f
-    i3-msg floating toggle
-
-# Change focus between tiling / floating windows
-super + space
-    i3-msg focus mode_toggle
-
-# Enter fullscreen mode
-super + shift + f
-    i3-msg fullscreen toggle
-
-# split in {horizontal, vertical} orientation
-super + {x, v}
-    i3-msg split {h, v}
-
-# Switch focus between monitor
-super + m
-    i3-switch-monitor
-
 # Switch to workspace
 super + {1-9}
     i3-msg workspace {1-9}
@@ -107,6 +87,31 @@ super + {1-9}
 # Move focused container to workspace
 super + shift + {1-9}
     i3-msg move container to workspace {1-9}
+
+# Switch focus between monitor
+super + m
+    i3-switch-monitor
+
+# Move workspace to other monitor
+super + shift + m
+    i3-msg move workspace to output next
+
+
+# Toggle tiling / floating
+super + f
+    i3-msg floating toggle
+
+# Change focus between tiling / floating windows
+super + space
+    i3-msg focus mode_toggle
+
+# split in {horizontal, vertical} orientation
+super + {x, v}
+    i3-msg split {h, v}
+
+# Enter fullscreen mode
+super + shift + f
+    i3-msg fullscreen toggle
 
 
 #====================AUDIO====================#

@@ -45,4 +45,4 @@ root: ~/
 # attach: false
 
 windows:
-  - main: lf
+  - main: tmux set-option status off ;lf
