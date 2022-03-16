@@ -21,7 +21,6 @@ cmd open ${{
         # Image
         image/*) sxiv "$f" &;;
 
-
         *) xdg-open "$f" ;;
     esac
 }}
@@ -108,8 +107,7 @@ cmd fzf_jump_local %{{
 }}
 
 
-
-#===Archive bindings===#
+#===Archive===#
 cmd unarchive ${{
   case "$f" in
       *.zip) unzip "$f" ;;

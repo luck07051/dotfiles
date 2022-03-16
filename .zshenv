@@ -6,7 +6,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
-export PATH="${PATH}:$HOME/.local/bin"
+export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
 
 # Other program path
 # zsh

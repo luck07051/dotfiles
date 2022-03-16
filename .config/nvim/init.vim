@@ -73,6 +73,9 @@ set background=dark         " dark back ground
 hi CursorLine                   ctermbg=236 cterm=none
 hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
 hi LineNr           ctermfg=8
+
+hi VertSplit        ctermfg=236 ctermbg=236
+hi SignColumn                   ctermbg=0
 "===Syntax==="
 hi Comment          ctermfg=15
 hi Statement        ctermfg=4
@@ -81,8 +84,8 @@ hi PreProc          ctermfg=6
 hi Constant         ctermfg=3
 hi Identifier       ctermfg=10
 hi Type             ctermfg=14
+hi Error            ctermfg=0   ctermbg=1
 "===Misc==="
-hi VertSplit        ctermfg=236 ctermbg=236
 hi ErrorMsg         ctermfg=7
 " listchars eol
 hi NonText          ctermfg=238
@@ -141,12 +144,12 @@ nnoremap <silent><C-j> <C-w>j
 nnoremap <silent><C-k> <C-w>k
 nnoremap <silent><C-h> <C-w>h
 nnoremap <silent><C-l> <C-w>l
-" switch buffers
-nnoremap <silent><A-j> :bnext<CR>
-nnoremap <silent><A-k> :bprev<CR>
-" switch tabs
-nnoremap <silent><A-h> gT
-nnoremap <silent><A-l> gt
+"" switch buffers
+"nnoremap <silent><A-j> :bnext<CR>
+"nnoremap <silent><A-k> :bprev<CR>
+"" switch tabs
+"nnoremap <silent><A-h> gT
+"nnoremap <silent><A-l> gt
 
 "===Copy or Change Search==="
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
@@ -161,6 +164,9 @@ call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'kshenoy/vim-signature'
 
 "===fzf==="
 Plug 'junegunn/fzf.vim'
@@ -168,12 +174,7 @@ Plug 'airblade/vim-rooter'
 
 "===vimwiki and markdown==="
 Plug 'vimwiki/vimwiki'
-"Plug 'michal-h21/vimwiki-sync'
-Plug 'tools-life/taskwiki'
-
 Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app && yarn install'}
-
-Plug 'godlygeek/tabular', {'for': 'markdown'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
 "===Misc==="
@@ -191,21 +192,6 @@ set noshowmode          " dont show mode below
 "===easymotion==="
 " wish: over press s/f/t jump to next search
 
-"" f{char} to move to {char}
-"map  f <Plug>(easymotion-bd-f)
-"nmap f <Plug>(easymotion-overwin-f)
-"
-"" s{char}{char} to move to {char}{char}
-"nmap s <Plug>(easymotion-overwin-f2)
-"
-"" Move to line
-"map <Leader>L <Plug>(easymotion-bd-jk)
-"nmap <Leader>L <Plug>(easymotion-overwin-line)
-"
-"" Move to word
-"map  <Leader>w <Plug>(easymotion-bd-w)
-"nmap <Leader>w <Plug>(easymotion-overwin-w)
-
 
 "===fzf==="
 let g:fzf_layout = { 'down': '40%' }
@@ -214,9 +200,14 @@ let g:fzf_action = {
     \ 'ctrl-x': 'split',
     \ 'ctrl-v': 'vsplit' }
 
-noremap <C-f> :Files<CR>
-noremap <C-b> :Buffers<CR>
-
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fw :Windows<CR>
+nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>fm :Marks<CR>
+nnoremap <Leader>fg :Rg<CR>
+nnoremap <Leader>fl :Lines<CR>
+nnoremap <Leader>f/ :Helptags<CR>
 
 
 "===vimwiki==="
@@ -224,17 +215,6 @@ noremap <C-b> :Buffers<CR>
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
 let g:vimwiki_markdown_link_ext = 1
-
-
-
-"===vimwiki-sync==="
-
-
-"===taskwiki==="
-let g:taskwiki_markup_syntax = 'markdown'
-let g:taskwiki_taskrc_location = '~/.config/task/taskrc'
-let g:taskwiki_data_location = '~/.local/share/task/'
-let g:taskwiki_disable_concealcursor = 'yes'
 
 
 "===markdown preview==="

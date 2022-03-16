@@ -32,7 +32,7 @@ c.url.searchengines = {
         'gh': 'https://github.com/search?q={}',
 
         # translator
-        'tg': 'https://translate.google.com/?sl=en&tl=zh-TW&text={}&op=translate',
+        'gt': 'https://translate.google.com/?sl=en&tl=zh-TW&text={}&op=translate',
         'tc': 'https://dictionary.cambridge.org/us/dictionary/english-chinese-traditional/{}',
         'tm': 'https://www.merriam-webster.com/dictionary/{}',
         }
@@ -87,7 +87,7 @@ config.bind("<Ctrl-k>", "fake-key <Shift-End><Delete>", "insert")
 config.bind("<Ctrl-x><Ctrl-e>", "edit-text", "insert")
 
 # quick translate
-config.bind(',g', 'open -w tg {primary}')
+config.bind(',g', 'open -w gt {primary}')
 
 # swap ';' to ':' and ',' to ';'
 config.bind(';', 'set-cmd-text :')

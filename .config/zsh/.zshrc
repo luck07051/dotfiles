@@ -15,7 +15,7 @@ bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 bindkey -s '^F' 'lf\n'
 
 
-
+# Change working directories when exit filemanager
 alias ranger='ranger --choosedir=/tmp/last-dir; \
     LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
 alias lf='lfrun -last-dir-path /tmp/last-dir; \
@@ -25,6 +25,7 @@ alias lf='lfrun -last-dir-path /tmp/last-dir; \
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
+#  Auot make parent directories
 alias mkdir="mkdir -p"
 
 # vim
@@ -38,7 +39,7 @@ alias ll="exa -al --icons --group-directories-first --color=always"
 alias la="exa -a --icons --group-directories-first --color=always"
 alias l="exa --icons --group-directories-first --color=always"
 
-# pacman and yay
+# pacman
 alias pacup="sudo pacman -Syu"
 
 # grep
@@ -48,6 +49,8 @@ alias grep="grep --color=auto"
 alias gs="git status"
 # for bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias cons="config status"
+alias confs="config status"
 
 # wget
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
@@ -86,13 +89,12 @@ zplug load #--verbose
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
 
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # Use starship prompt
-# install by
-# $ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 eval "$(starship init zsh)"
 
 # zoxide
 eval "$(zoxide init zsh --cmd cd)"
-
-
-source /home/ui/.config/broot/launcher/bash/br

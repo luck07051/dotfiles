@@ -1,6 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-pacman -Qu | wc -l
+packages=$(pacman -Qu | wc -l)
+
+if [[ $packages != "0" ]]; then
+    echo $packages
+fi
+
 #packages=$(pacman -Qu | wc -l)
 #if [[ $packages != "0" ]]; then
 #    echo $packages
