@@ -6,6 +6,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
+# Add .local/bin and its subdir to path
 export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
 
 # Other program path
