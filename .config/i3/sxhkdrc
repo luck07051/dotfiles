@@ -19,17 +19,17 @@ super + q
 super + Return
     $TERMINAL -e tmux
 
-# Open power menu
-super + p
-    rofi -show power -modi power:power-menu -theme ui_theme
+# Open browser
+super + b
+    $BROWSER
 
 # Open launcher
 super + semicolon
     rofi -show combi -i -theme ui_theme
 
-# Open browser
-super + b
-    $BROWSER
+# Open power menu
+super + p
+    rofi -show power -modi power:power-menu -theme ui_theme
 
 #===Scratchpad===#
 # Open taskwarrior-tui as scratchpad
@@ -37,21 +37,18 @@ super + b
 super + t
     i3run-scratchpad Taskwarrior 130 35 "taskwarrior-tui | task sync"
 
-# Open vimwiki
+# Open audio control
+super + a
+    i3run-scratchpad ncpamixer 130 35 "ncpamixer"
+
+#===Special Workspace===#
+# vimwiki
 super + w
     i3-switch-sp -s -a 10 "$TERMINAL \
         --title Vimwiki -e tmuxinator start vimwiki"
 
-# Open terminal as scratchpad
-super + comma
-    i3run-scratchpad Terminal 120 30 "tmuxinator start terminal"
-
-# Open filemanager as scratchpad
-super + r
-    i3run-scratchpad Filemanager 130 35 "tmuxinator start filemanager"
-
 #===Extra===#
-# Open bitwarden-rodi menu
+# Open bitwarden-rofi menu
 super + shift +b
     bwmenu
 
@@ -81,8 +78,8 @@ super + ctrl + {h, j, k, l}
 
 # Switch to workspace
 super + {1-9}
-    i3-msg workspace {1-9}
-    #i3-wk-switch {1-9}
+    i3-wk-switch {1-9}
+    #i3-msg workspace {1-9}
 
 # Move focused container to workspace
 super + shift + {1-9}
@@ -92,9 +89,9 @@ super + shift + {1-9}
 super + m
     i3-switch-monitor
 
-# Move workspace to other monitor
-super + shift + m
-    i3-msg move workspace to output next
+## Move workspace to other monitor
+#super + shift + m
+#    i3-msg move workspace to output next
 
 
 # Toggle tiling / floating

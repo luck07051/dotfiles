@@ -116,6 +116,8 @@ noremap ~ g~
 noremap ; :
 noremap : ;
 noremap Q qq
+noremap <C-e> 3<C-e>
+noremap <C-y> 3<C-y>
 
 "" add a empty line
 "nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
@@ -139,11 +141,12 @@ nnoremap <silent><Leader>ns :call DeleteExtraSpaces()<CR>
 nnoremap <silent><Leader>t :tabnew<CR>
 nnoremap <silent><Leader>v :split<CR>
 nnoremap <silent><Leader>x :vsplit<CR>
+
 " switch windows
-nnoremap <silent><C-j> <C-w>j
-nnoremap <silent><C-k> <C-w>k
-nnoremap <silent><C-h> <C-w>h
-nnoremap <silent><C-l> <C-w>l
+"nnoremap <silent><C-j> <C-w>j
+"nnoremap <silent><C-k> <C-w>k
+"nnoremap <silent><C-h> <C-w>h
+"nnoremap <silent><C-l> <C-w>l
 "" switch buffers
 "nnoremap <silent><A-j> :bnext<CR>
 "nnoremap <silent><A-k> :bprev<CR>
@@ -163,6 +166,8 @@ omap s :normal vs<CR>
 call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 Plug 'itchyny/lightline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'

@@ -2,54 +2,64 @@
 #====================BASIC====================#
 # Restart WM and sxhkd
 super + ctrl + r
-    i3-msg restart && killall sxhkd && sxhkd -c $HOME/.config/i3/sxhkdrc
+    bspc wm -r && killall sxhkd && sxhkd -c $HOME/.config/bspwm/sxhkdrc
 
 # Quit WM
 super + ctrl +q
-    prompt 'Do you want to Logout?' 'i3-msg exit'
+    prompt 'Do you want to Logout?' 'bspc quit'
 
 # Kill focused window
 super + q
-    i3-msg kill
+    bspc node -c
 
 
 #====================OPEN====================#
+#===Essential===#
 # Open terminal
 super + Return
-    $TERMINAL
-
-# Open power menu
-super + p
-    rofi -show power -modi power:power-menu -theme ui_theme
-
-# Open launcher
-super + semicolon
-    rofi -show combi -i -theme ui_theme
+    $TERMINAL -e tmux
 
 # Open browser
 super + b
     $BROWSER
 
-# Open bitwarden-rodi menu
-super + shift +b
-    bwmenu
+# Open launcher
+super + semicolon
+    rofi -show combi -i -theme ui_theme
 
-# Open taskwarrior-tui
-# exec 'task sync' when press super+t everytime
-super + t
-    i3run --title 'taskwarrior' -- \
-    $TERMINAL --class 'scratchpad' -t 'taskwarrior' \
-    -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
-    -o window.opacity=0.90 \
-    -e taskwarrior-tui | task sync
+# Open power menu
+super + p
+    rofi -show power -modi power:power-menu -theme ui_theme
 
-# Open vimwiki
-super + w
-    i3run --title 'vimwiki' -- \
-    $TERMINAL --class 'scratchpad' -t 'vimwiki' \
-    -o window.dimensions.columns=140 -o window.dimensions.lines=40 \
+##===Scratchpad===#
+## Open taskwarrior-tui as scratchpad
+## exec 'task sync' when press super+t everytime
+#super + t
+#    i3run-scratchpad Taskwarrior 130 35 "taskwarrior-tui | task sync"
+#
+## Open vimwiki
+#super + w
+#    i3-switch-sp -s -a 10 "$TERMINAL \
+#        --title Vimwiki -e tmuxinator start vimwiki"
+#
+## Open terminal as scratchpad
+#super + comma
+#    i3run-scratchpad Terminal 120 30 "tmuxinator start terminal"
+#
+## Open filemanager as scratchpad
+#super + r
+#    i3run-scratchpad Filemanager 130 35 "tmuxinator start filemanager"
+#
+##===Extra===#
+## Open bitwarden-rodi menu
+#super + shift +b
+#    bwmenu
+#
+# Bookmark
+super + o
+    $TERMINAL --class 'floating' --title 'bookmark' \
     -o window.opacity=0.90 \
-    -e nvim ~/vimwiki/index.md
+    -e bookmark open
 
 # Open class sheet
 super + shift + c
@@ -59,40 +69,48 @@ super + shift + c
 #====================WORKSPACES & LAYOUT & WINDOWS====================#
 # Move focus
 super + {h, j, k, l}
-    i3-msg focus {left, down, up, right}
+    bspc node -f {west, south, north, east}
 
-# Move focused window
-super + shift + {h, j, k, l}
-    i3-msg move {left, down, up, right}
-
-# Resize focused window
-super + ctrl + {h, j, k, l}
-    i3-msg resize {shrink width, grow height, shrink height, grow width} 30
-
-# Toggle tiling / floating
-super + f
-    i3-msg floating toggle
-
-# Change focus between tiling / floating windows
-super + space
-    i3-msg focus mode_toggle
-
-# Enter fullscreen mode
-super + shift + f
-    i3-msg fullscreen toggle
-
-# split in {horizontal, vertical} orientation
-super + {c, v}
-    i3-msg split {h, v}
+## Move focused window
+#super + shift + {h, j, k, l}
+#    i3-msg move {left, down, up, right}
+#
+## Resize focused window
+#super + ctrl + {h, j, k, l}
+#    i3-msg resize {shrink width, grow height, shrink height, grow width} 30
 
 # Switch to workspace
 super + {1-9}
-    i3-msg workspace {1-9}
-    #i3-wk-switch {1-9}
+    bsp_focus_dt {1-9}
 
-# Move focused container to workspace
-super + shift + {1-9}
-    i3-msg move container to workspace {1-9}
+## Move focused container to workspace
+#super + shift + {1-9}
+#    i3-msg move container to workspace {1-9}
+#
+## Switch focus between monitor
+#super + m
+#    i3-switch-monitor
+#
+## Move workspace to other monitor
+#super + shift + m
+#    i3-msg move workspace to output next
+#
+#
+## Toggle tiling / floating
+#super + f
+#    i3-msg floating toggle
+#
+## Change focus between tiling / floating windows
+#super + space
+#    i3-msg focus mode_toggle
+#
+## split in {horizontal, vertical} orientation
+#super + {x, v}
+#    i3-msg split {h, v}
+#
+## Enter fullscreen mode
+#super + shift + f
+#    i3-msg fullscreen toggle
 
 
 #====================AUDIO====================#

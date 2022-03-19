@@ -1,0 +1,10 @@
+# /home/ui/.config/tmuxinator/main.yml
+
+name: main
+root: ~/
+
+
+windows:
+  - main:
+      panes:
+        - clear

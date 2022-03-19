@@ -54,10 +54,12 @@ export LANG=en_US.UTF-8
 export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 
 # lf
-[ -f "$XDG_CONFIG_HOME/lf/colors" ] $$ source "$XDG_CONFIG_HOME/lf/colors"
+if [ -f "$XDG_CONFIG_HOME/lf/colors" ];then
+    $$ source "$XDG_CONFIG_HOME/lf/colors"
+fi
 
 # fzf setup
-export FZF_DEFAULT_OPTS="--height 40% --color=pointer:5,gutter:-1 --info=hidden"
+export FZF_DEFAULT_OPTS="--height 40% --color=pointer:5,gutter:-1"
 export FZF_DEFAULT_COMMAND="fd --hidden \
     --ignore-file ~/.config/fzf/ignore-file --type file"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

@@ -1,8 +1,0 @@
-# /home/ui/.config/tmuxinator/terminal.yml
-
-name: terminal
-root: ~/
-
-
-windows:
-  - main: clear
