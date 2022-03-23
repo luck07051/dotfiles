@@ -155,7 +155,7 @@ nnoremap <silent><Leader>x :vsplit<CR>
 "nnoremap <silent><A-l> gt
 
 "===Copy or Change Search==="
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+vnoremap <silent>s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 omap s :normal vs<CR>
 
@@ -213,6 +213,8 @@ nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>fg :Rg<CR>
 nnoremap <Leader>fl :Lines<CR>
 nnoremap <Leader>f/ :Helptags<CR>
+nnoremap <C-f> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
 
 
 "===vimwiki==="

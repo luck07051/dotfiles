@@ -79,14 +79,6 @@ mpv                 # video viewer
 
 Dependencie
 ```
-# qtile bar
-pip install psutil
-pip install dbus-next
-
-# taskwiki
-sudo pip3 install tasklib
-sudo pip3 install pynvim
-
 # bitwarden-rofi
 jq
 xdotool
@@ -99,9 +91,10 @@ yarn
 playerctl
 pip install dbus-python
 
-# ranger
-findutils
-mlocate
+# taskwiki
+sudo pip3 install tasklib
+sudo pip3 install pynvim
+
 ```
 
 Nvidea
@@ -177,20 +170,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
 
 
-### ranger
-```
-git clone git@github.com:jchook/ranger-zoxide.git ~/.config/ranger/plugins/zoxide
-```
-```
-sudo vim /etc/updatedb.conf
-
->>> remove /media from PRUNEPATHS
->>> save and exit
-
-
-# refresh database
-sudo updatedb
-```
 
 ### lf
 see [image preview](https://github.com/cirala/lfimg)
@@ -260,4 +239,9 @@ Add in .gitconfig
 try this
 ```
 xdg-mime default $(xdg-settings get default-web-browser) x-scheme-handler/https x-scheme-handler/http
+```
+
+### xinput
+```
+ln ~/.config/X11/xorg.conf.d/[] /etc/X11/xinit/xinitrc.d/
 ```

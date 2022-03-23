@@ -44,7 +44,7 @@ configuration {
 
   bg: #1C1C1C;
   bg-alt: #585858;
-  fg: #D0D0D0;
+  fg: #BCBCBC;
   fg-alt: #FFB9DC;
 
   background-color: @bg;
