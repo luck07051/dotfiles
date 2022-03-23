@@ -55,7 +55,7 @@ export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 
 # lf
 if [ -f "$XDG_CONFIG_HOME/lf/colors" ];then
-    $$ source "$XDG_CONFIG_HOME/lf/colors"
+    source "$XDG_CONFIG_HOME/lf/colors"
 fi
 
 # fzf setup

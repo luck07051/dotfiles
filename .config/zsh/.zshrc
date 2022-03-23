@@ -48,7 +48,7 @@ alias grep="grep --color=auto"
 # git
 alias gs="git status"
 # for bare Git repository to manager my dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias cons="config status"
 alias confs="config status"
 
