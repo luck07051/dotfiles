@@ -244,6 +244,10 @@ If text is corrupt
 ### git difftool
 Add in .gitconfig
 ```
+[user]
+    email =
+    name =
+
 [diff]
     tool = icdiff
 [difftool]
