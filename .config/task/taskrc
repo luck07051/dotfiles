@@ -45,11 +45,6 @@ urgency.user.tag.collage.coefficient       = 15.0 # +collage tag
 
 
 
-
-
-
-
-
 # Color theme (uncomment one to use)
 color.tagged=blue
 #include light-16.theme

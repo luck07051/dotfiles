@@ -179,7 +179,7 @@ Plug 'airblade/vim-rooter'
 
 "===vimwiki and markdown==="
 Plug 'vimwiki/vimwiki'
-Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app && yarn install'}
+Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
 "===Misc==="
@@ -227,7 +227,7 @@ let g:vimwiki_markdown_link_ext = 1
 "===markdown preview==="
 nmap <Leader>md <Plug>MarkdownPreview
 nmap <Leader>ms <Plug>MarkdownPreviewStop
-let g:mkdp_browser = 'surf'
+let g:mkdp_browser = 'qutebrowser'
 let g:mkdp_auto_close = 1
 let g:mkdp_preview_options = {
     \ 'mkit': {},

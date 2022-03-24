@@ -79,10 +79,6 @@ mpv                 # video viewer
 
 Dependencie
 ```
-# bitwarden-rofi
-jq
-xdotool
-
 # vim plug markdown perviewer
 yarn
 
@@ -91,9 +87,9 @@ yarn
 playerctl
 pip install dbus-python
 
-# taskwiki
-sudo pip3 install tasklib
-sudo pip3 install pynvim
+# bitwarden-rofi
+jq
+xdotool
 
 ```
 

@@ -58,6 +58,7 @@ alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 # taskwarrior
 alias t="task"
 alias ts="task sync"
+alias tt="taskwarrior-tui | task sync"
 
 
 #===================PLUG=====================#
