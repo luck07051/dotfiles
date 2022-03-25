@@ -52,13 +52,15 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias cons="config status"
 alias confs="config status"
 
-# wget
-alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
-
 # taskwarrior
 alias t="task"
 alias ts="task sync"
 alias tt="taskwarrior-tui | task sync"
+
+# wget
+alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
+# yarn
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
 
 #===================PLUG=====================#

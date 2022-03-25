@@ -156,6 +156,8 @@ Neovim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
   --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
+Make sure nodejs and yarn installed
+
 If markdown-preview dont work, try this `:call mkdp#util#install()`
 
 
