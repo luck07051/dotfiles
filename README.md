@@ -140,9 +140,6 @@ rm yay-git
 $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 $ zplug install
 ```
-```
-yay -S zsh-syntax-highlighting-git
-```
 
 
 ### **[vim-plug](https://github.com/junegunn/vim-plug)**

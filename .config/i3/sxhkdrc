@@ -27,6 +27,9 @@ super + b
 super + semicolon
     rofi -show combi -i -theme ui_theme
 
+super + i
+    i3-terminal launcher 60 20 sway-launcher-desktop
+
 # Open power menu
 super + p
     rofi -show power -modi power:power-menu -theme ui_theme
@@ -35,11 +38,11 @@ super + p
 # Open taskwarrior-tui as scratchpad
 # exec 'task sync' when press super+t everytime
 super + t
-    i3run-scratchpad Taskwarrior 130 35 "taskwarrior-tui | task sync"
+    i3run-terminal Taskwarrior 130 35 "taskwarrior-tui | task sync"
 
 # Open audio control
 super + a
-    i3run-scratchpad ncpamixer 130 35 "ncpamixer"
+    i3run-terminal ncpamixer 130 35 "ncpamixer"
 
 #===Special Workspace===#
 # vimwiki
@@ -78,8 +81,7 @@ super + ctrl + {h, j, k, l}
 
 # Switch to workspace
 super + {1-9}
-    i3-msg workspace {1-9}
-    #i3-wk-switch {1-9}
+    i3-switch-sp {1-9}
 
 # Move focused container to workspace
 super + shift + {1-9}
@@ -94,6 +96,7 @@ super + m
 #    i3-msg move workspace to output next
 
 
+#=== ===#
 # Toggle tiling / floating
 super + f
     i3-msg floating toggle

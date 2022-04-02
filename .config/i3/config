@@ -38,7 +38,6 @@ set_from_resource $fg *.foreground $color7
 
 set_from_resource $font *.font MesloLGS Nerd Font
 
-
 # Font
 font pango:$font
 
@@ -49,13 +48,15 @@ gaps inner 10
 client.focused          $color5 $color5 $color15 $color5 $color5
 client.focused_inactive $color0 $color0 $color15 $color0 $color0
 client.unfocused        $color0 $color0 $color15 $color0 $color0
+client.urgent           $color0 $color0 $color15 $color0 $color0
 
 
-
+#====================ASSIGN====================#
 assign [instance="^qutebrowser$"] 1
 assign [instance="^terminal_startup$"] 2
 assign [instance="^filemanager_startup$"] 3
 
+assign [instance="^discord$"] 5
 
 #====================FLOATING====================#
 # class: the second part of WM_CLASS
@@ -66,8 +67,11 @@ for_window [instance="^scratchpad$"] floating enable
 for_window [class="^scratchpad$"] floating enable
 
 for_window [class="^Pavucontrol$"] floating enable
-for_window [instance="^sp_terminal$"] floating enable
 
+# matalb figure
+for_window [title="^Figure" class="MATLAB"] floating enable
+
+# surf browser
 no_focus [instance="^surf$"]
 
 

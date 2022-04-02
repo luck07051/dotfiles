@@ -14,12 +14,8 @@
 
 # Use the command 'task show' to see all defaults and overrides
 
-# Files
-#data.location=~/.config/task/task
 
-# To use the default location of the XDG directories,
-# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
-
+# config and data path
 data.location=~/.local/share/task
 hooks.location=~/.config/task/hooks
 
@@ -46,30 +42,20 @@ urgency.user.tag.collage.coefficient       = 15.0 # +collage tag
 
 
 # Color theme (uncomment one to use)
-color.tagged=blue
-#include light-16.theme
-#include light-256.theme
-#include dark-16.theme
-#include dark-256.theme
-#include dark-red-256.theme
-#include dark-green-256.theme
-#include dark-blue-256.theme
-#include dark-violets-256.theme
-#include dark-yellow-green.theme
-#include dark-gray-256.theme
-#include dark-gray-blue-256.theme
-#include solarized-dark-256.theme
-#include solarized-light-256.theme
-#include no-color.theme
+color.tagged=none
+color.tag.collage=blue
+
 
 news.version=2.6.0
 
+# task server
 taskd.server=freecinc.com:53589
 taskd.key=~/.config/task/freecinc_84fc8662.key.pem
 taskd.certificate=~/.config/task/freecinc_84fc8662.cert.pem
 taskd.ca=~/.config/task/freecinc_84fc8662.ca.pem
 taskd.credentials=FreeCinc/freecinc_84fc8662/b58db834-d2ae-466d-9b15-460a40cd1d6c
 
+# taskwarrior-tui
 uda.taskwarrior-tui.background_process=task sync
 uda.taskwarrior-tui.background_process_period=60
 

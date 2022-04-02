@@ -21,8 +21,6 @@ export XAUTHORITY=$XDG_CONFIG_HOME/X11/xauthority
 # cabal
 export CABAL_CONFIG="$XDG_CONFIG_HOME"/cabal/config
 export CABAL_DIR="$XDG_CACHE_HOME"/cabal
-# less hittory
-export LESSHISTFILE=-
 # wget
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 # java
@@ -41,6 +39,8 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # go
 export GOPATH="$XDG_DATA_HOME"/go
+# matlab
+export MATLAB_LOG_DIR=/tmp
 
 
 # Default App
@@ -51,16 +51,8 @@ export BROWSER="qutebrowser"
 # Misc
 export TERM="xterm-256color"
 export LANG=en_US.UTF-8
-export HISTORY_IGNORE='(ls|la|ll|cd|cd -|cd ..|pwd|exit|reboot|history|q)'
 
 # lf
 if [ -f "$XDG_CONFIG_HOME/lf/colors" ];then
     source "$XDG_CONFIG_HOME/lf/colors"
 fi
-
-# fzf setup
-export FZF_DEFAULT_OPTS="--height 40% --color=pointer:5,gutter:-1"
-export FZF_DEFAULT_COMMAND="fd --hidden \
-    --ignore-file ~/.config/fzf/ignore-file --type file"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
