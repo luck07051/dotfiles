@@ -27,11 +27,14 @@ fi
 #    xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275
 #fi
 
+
 #===Start some programs===#
 nitrogen --restore &
 picom &
 
-#===Not screen saver===#
+# Set 144 rate
+xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
+# No screen saver
 xset s off
 xset -dpms
 

@@ -135,6 +135,7 @@ map D delete
 map cd push :zoxide<space>
 map mkd mkdir
 map mkf mkfile
+map i mkfile
 map mv mv
 map ` push :open-with<space>
 

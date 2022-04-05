@@ -157,6 +157,11 @@ Make sure nodejs and yarn installed
 
 If markdown-preview dont work, try this `:call mkdp#util#install()`
 
+vimtex
+```
+pacman -S texlive-core (or texlive-most)
+```
+
 
 ### Tmux
 [tmux plug manager](https://github.com/tmux-plugins/tpm)

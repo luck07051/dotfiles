@@ -110,6 +110,7 @@ nnoremap <F5> :source $MYVIMRC<CR>
 " let space useless and be Leader Key
 noremap <Space> <nop>
 let mapleader="\<Space>"
+let maplocalleader="\<Space>"
 
 noremap Y y$
 noremap ~ g~
@@ -165,22 +166,31 @@ omap s :normal vs<CR>
 "====================PLUGIN===================="
 call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
+" Status bar
 Plug 'itchyny/lightline.vim'
+" Vimwiki
+Plug 'vimwiki/vimwiki'
+" Use C-hjkl to switch vim and tmux panel
 Plug 'christoomey/vim-tmux-navigator'
+" Linting
+Plug 'dense-analysis/ale'
+" Show marks on sign column
+Plug 'kshenoy/vim-signature'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'kshenoy/vim-signature'
 
 "===fzf==="
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 
-"===vimwiki and markdown==="
-Plug 'vimwiki/vimwiki'
+"===markdown==="
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+
+"===laTex==="
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 "===Misc==="
 Plug 'ap/vim-css-color'
@@ -189,9 +199,40 @@ call plug#end()
 
 
 "===lightline==="
-" Set lightline theme
-let g:lightline = { 'colorscheme': 'ui_theme' }
 set noshowmode          " dont show mode below
+let g:lightline = { 'active': {} }
+let g:lightline.colorscheme = 'ui_theme'
+
+let g:lightline.active.left =
+    \   [ [ 'mode', 'paste' ],[ 'readonly', 'filename', 'modified' ] ]
+let g:lightline.active.right =
+    \   [ [ 'lineinfo' ], [ 'percent' ],
+    \   [ 'fileencoding', 'filetype' ] ]
+
+let g:lightline.component= {}
+let g:lightline.component_function= {
+    \   'filetype': 'LightlineFiletype',
+    \   }
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+
+"===ale==="
+nmap <silent> <Leader>a <Plug>(ale_next_wrap)
+" run linter when text changed in normal mode or
+" leave insert mode
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>'
+let g:ale_sign_warning = '-'
+hi ALEErrorSign     ctermfg=1   ctermbg=none
+hi ALEWarningSign   ctermfg=3   ctermbg=none
+hi SpellBad         ctermfg=1   ctermbg=none    cterm=bold,underline
+hi SpellCap         ctermfg=3   ctermbg=none    cterm=bold,underline
 
 
 "===easymotion==="
@@ -249,3 +290,18 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
 
 
+"===vimtex==="
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+let g:vimtex_view_method = 'zathura'
+
+" Or with a generic interface:
+"let g:vimtex_view_general_viewer = 'okular'
+"let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+"let g:vimtex_compiler_method = 'latexrun'
