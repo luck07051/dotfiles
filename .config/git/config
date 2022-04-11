@@ -1,3 +1,11 @@
 [user]
 	email = luck0751@gmail.com
 	name = luck07051
+
+
+#[diff]
+#    tool = icdiff
+#[difftool]
+#    prompt = false
+#[difftool "icdiff"]
+#    cmd = icdiff --line-numbers $LOCAL $REMOTE

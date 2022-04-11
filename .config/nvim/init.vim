@@ -180,7 +180,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-tmux-navigator'
 " Linting
 Plug 'dense-analysis/ale'
-" Show marks on sign colum
+" Show marks on sign column
 Plug 'kshenoy/vim-signature'
 
 Plug 'easymotion/vim-easymotion'

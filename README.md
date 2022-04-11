@@ -81,6 +81,9 @@ Dependencie
 ```
 # vim plug markdown perviewer
 yarn
+# vimtex
+texlive-core (or texlive-most)
+
 
 # polybar
 # spotify
@@ -135,6 +138,7 @@ $ makepkg -si
 rm yay-git
 ```
 
+
 ### **[zplug](https://github.com/zplug/zplug)**
 ```
 $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -143,24 +147,13 @@ $ zplug install
 
 
 ### **[vim-plug](https://github.com/junegunn/vim-plug)**
-Vim
-```
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs\
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-Neovim
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
   --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 Make sure nodejs and yarn installed
 
-If markdown-preview dont work, try this `:call mkdp#util#install()`
-
-vimtex
-```
-pacman -S texlive-core (or texlive-most)
-```
+If markdown-preview dont work, `:call mkdp#util#install()`
 
 
 ### Tmux
@@ -168,7 +161,6 @@ pacman -S texlive-core (or texlive-most)
 ```
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
-
 
 
 ### lf
@@ -180,11 +172,13 @@ see [image preview](https://github.com/cirala/lfimg)
 sudo pacman -S gcc python3-dev python-pip
 ```
 
+
 ### qutebrowser
 Unable to view DRM content
 ```
 yay -S chromium-widevine
 ```
+
 
 ### changing default shell
 ```
@@ -192,10 +186,10 @@ chsh -l
 chsh -s full-path-to-shell
 ```
 
+
 ### [dotfile](https://www.atlassian.com/git/tutorials/dotfiles)
 Install onto a new system
 ```
-echo "dotfiles' >> .gitignore
 git clone --bare alias config='/usr/bin/git --git-dir=$HOME/.cfg/ \
     --work-tree=$HOME' $HOME/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
@@ -205,41 +199,17 @@ config checkout
 config config --local status.showUntrackedFiles no
 ```
 
-### ? nvidia ?
-Not try yet
-```
-yay -S optimus-manager
-sudo systemctl enable optimus-manager
-vim /etc/optimus-manager/optimus-manager.conf
-    startup-mode=nvidia
-```
-
 
 ### [steam](https://www.chrisatmachine.com/Linux/08-steam-on-linux/)
 If text is corrupt
 ` pacman -S  lib32-fontconfig ttf-liberation wqy-zenhei `
 
 
-### git difftool
-Add in .gitconfig
-```
-[user]
-    email =
-    name =
-
-[diff]
-    tool = icdiff
-[difftool]
-    prompt = false
-[difftool "icdiff"]
-    cmd = icdiff --line-numbers $LOCAL $REMOTE
-```
-
 ### if default browser incorrect
-try this
 ```
 xdg-mime default $(xdg-settings get default-web-browser) x-scheme-handler/https x-scheme-handler/http
 ```
+
 
 ### xinput
 ```
