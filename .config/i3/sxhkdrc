@@ -47,7 +47,7 @@ super + a
 #===Special Workspace===#
 # vimwiki
 super + w
-    i3-switch-sp -s -a 10 "$TERMINAL \
+    i3-switch-sp -s -a 9 "$TERMINAL \
         --title Vimwiki -e tmuxinator start vimwiki"
 
 #===Extra===#

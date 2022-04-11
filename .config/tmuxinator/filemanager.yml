@@ -1,9 +1,0 @@
-# /home/ui/.config/tmuxinator/filemanager.yml
-
-name: filemanager
-root: ~/
-
-
-windows:
-  #- main: tmux set-option status off; lf
-  - main: lf

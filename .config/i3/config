@@ -12,7 +12,6 @@ exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
 
 exec $BROWSER
 exec $TERMINAL --class 'terminal_startup' -e tmuxinator start main
-exec $TERMINAL --class 'filemanager_startup' -e tmuxinator start filemanager
 
 #====================COLORS====================#
 # Colors from Xresources
@@ -54,7 +53,6 @@ client.urgent           $color0 $color0 $color15 $color0 $color0
 #====================ASSIGN====================#
 assign [instance="^qutebrowser$"] 1
 assign [instance="^terminal_startup$"] 2
-assign [instance="^filemanager_startup$"] 3
 
 assign [instance="^discord$"] 5
 

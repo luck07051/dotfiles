@@ -1,3 +1,9 @@
+" todo:
+" * one key for open md or tex previewer.
+" * keybind for switch tab etc.
+
+
+
 "====================GENERAL===================="
 filetype plugin indent on
 syntax enable
@@ -174,7 +180,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-tmux-navigator'
 " Linting
 Plug 'dense-analysis/ale'
-" Show marks on sign column
+" Show marks on sign colum
 Plug 'kshenoy/vim-signature'
 
 Plug 'easymotion/vim-easymotion'
