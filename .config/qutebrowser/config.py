@@ -108,6 +108,10 @@ config.bind(',y', 'hint links yank')
 config.bind(',m', 'hint links spawn mpv {hint-url}')
 
 
+#====================ALIASES====================#
+c.aliases["bit"] = "spawn --userscript qute-bitwarden"
+
+
 #====================DOWNLOADS====================#
 # Directory to save downloads to.
 c.downloads.location.directory = '~/downloads'

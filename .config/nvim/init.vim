@@ -2,8 +2,6 @@
 " * one key for open md or tex previewer.
 " * keybind for switch tab etc.
 
-
-
 "====================GENERAL===================="
 filetype plugin indent on
 syntax enable
@@ -97,6 +95,8 @@ hi ErrorMsg         ctermfg=7
 hi NonText          ctermfg=238
 " listchars space, tab
 hi SpecialKey       ctermfg=238
+" complete menu
+hi Pmenu            ctermfg=7   ctermbg=236
 
 " highlight 81 column
 hi ColorColumn                  ctermbg=8
@@ -174,14 +174,16 @@ call plug#begin('~/.config/nvim/plugged')
 "===Basic==="
 " Status bar
 Plug 'itchyny/lightline.vim'
+" Linting
+Plug 'dense-analysis/ale'
+" Code comletion
+Plug 'ycm-core/YouCompleteMe'
+" Show marks on sign column
+Plug 'kshenoy/vim-signature'
 " Vimwiki
 Plug 'vimwiki/vimwiki'
 " Use C-hjkl to switch vim and tmux panel
 Plug 'christoomey/vim-tmux-navigator'
-" Linting
-Plug 'dense-analysis/ale'
-" Show marks on sign column
-Plug 'kshenoy/vim-signature'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
@@ -190,6 +192,9 @@ Plug 'tpope/vim-repeat'
 "===fzf==="
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
+
+"===rust==="
+Plug 'rust-lang/rust.vim'
 
 "===markdown==="
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -204,6 +209,7 @@ Plug 'ap/vim-css-color'
 call plug#end()
 
 
+"====================PLUGIN CONFIG===================="
 "===lightline==="
 set noshowmode          " dont show mode below
 let g:lightline = { 'active': {} }
@@ -241,6 +247,7 @@ hi ALEWarningSign   ctermfg=3   ctermbg=none
 hi SpellBad         ctermfg=1   ctermbg=none    cterm=bold,underline
 hi SpellCap         ctermfg=3   ctermbg=none    cterm=bold,underline
 
+let g:ale_linters = {'rust': ['rustc', 'rls']}
 
 "===easymotion==="
 " wish: over press s/f/t jump to next search

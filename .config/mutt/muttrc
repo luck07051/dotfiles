@@ -1,13 +1,18 @@
 #====================Account====================#
 folder-hook 'account1' 'source $XDG_CONFIG_HOME/mutt/account1'
 folder-hook 'account2' 'source $XDG_CONFIG_HOME/mutt/account2'
+folder-hook 'account3' 'source $XDG_CONFIG_HOME/mutt/account3'
 
 # Default account
 source "$XDG_CONFIG_HOME/mutt/account1"
 
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/account1<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/mutt/account2<enter><change-folder>!<enter>'
+macro index <f1> '<sync-mailbox><enter-command>source \
+    $XDG_CONFIG_HOME/mutt/account1<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source \
+    $XDG_CONFIG_HOME/mutt/account2<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source \
+    $XDG_CONFIG_HOME/mutt/account3<enter><change-folder>!<enter>'
 
 # Fetch mail shortcut
 #bind index G imap-fetch-mail

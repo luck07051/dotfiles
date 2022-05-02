@@ -70,6 +70,7 @@ ripgerp             # better gerp
 
 Graphical app
 ```
+flameshot           # screenshot
 thunar              # file manager
 pavucontrol         # pulseaudio control
 gimp                # draw app
@@ -154,6 +155,15 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 Make sure nodejs and yarn installed
 
 If markdown-preview dont work, `:call mkdp#util#install()`
+
+ycm
+```
+yay -S vim-youcompleteme-git
+sudo pacman -S python-pynvim
+
+cd .../plugged/YouCompleteMe
+/usr/bin/python install.py
+```
 
 
 ### Tmux

@@ -15,7 +15,7 @@ cmd q %{{ lf -remote "send $id quit" }}
 cmd open ${{
     case $(file --mime-type "$f" -bL) in
         # Text
-        text/*|application/json) $EDITOR "$f";;
+        text/* | application/json | inode/x-empty) $EDITOR "$f";;
         # PDF
         application/pdf) zathura "$f" &;;
         # Image
@@ -25,18 +25,21 @@ cmd open ${{
     esac
 }}
 
-cmd mkdir %{{
-  printf "Directory Name: "
-  read ans
-  mkdir -p $ans
-  lf -remote "send $id select \"$ans\""
+cmd mkdir ${{
+    mkdir -p $@
+    lf -remote "send $id select \"$1\""
 }}
-
-cmd mkfile %{{
-  printf "File Name: "
-  read ans
-  lf -remote "send $id edit $ans"
-  lf -remote "send $id select \"$ans\""
+cmd mkfile ${{
+    touch $@
+    lf -remote "send $id select \"$1\""
+}}
+cmd newdir ${{
+    mkdir -p $@
+    lf -remote "send $id cd \"$1\""
+}}
+cmd newfile ${{
+    $EDITOR "$@"
+    lf -remote "send $id select \"$1\""
 }}
 cmd edit ${{ $EDITOR "$@" }}
 
@@ -102,7 +105,11 @@ cmd fzf_jump_global %{{
 
 cmd fzf_jump_local %{{
     res="$(find . -maxdepth 1 | sed 's/\.\///g' | fzf-tmux -d 35% --info=hidden)"
-    cmd="select"
+    if [ -d "$res" ]; then
+        cmd="cd"
+    else
+        cmd="select"
+    fi
     lf -remote "send $id $cmd \"$res\""
 }}
 
@@ -133,10 +140,10 @@ map '"'
 map <esc> clear
 map D delete
 map cd push :zoxide<space>
-map mkd mkdir
-map mkf mkfile
-map o mkdir
-map i mkfile
+map o push :mkdir<space>
+map i push :mkfile<space>
+map O push :newdir<space>
+map I push :newfile<space>
 map mv mv
 map ` push :open-with<space>
 

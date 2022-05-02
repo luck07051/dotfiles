@@ -23,24 +23,26 @@ export CABAL_CONFIG="$XDG_CONFIG_HOME"/cabal/config
 export CABAL_DIR="$XDG_CACHE_HOME"/cabal
 # wget
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
-# java
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # npm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # GunPG
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 # Java
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export JDK_JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export JAVA_TOOL_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # Stack (Haskell)
 export STACK_ROOT="$XDG_CONFIG_HOME"/stack
 # gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-# rust#cargo
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # go
 export GOPATH="$XDG_DATA_HOME"/go
 # matlab
 export MATLAB_LOG_DIR=/tmp
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+# rust
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
 
 # Default App
@@ -53,6 +55,6 @@ export TERM="xterm-256color"
 export LANG=en_US.UTF-8
 
 # lf
-if [ -f "$XDG_CONFIG_HOME/lf/colors" ];then
-    source "$XDG_CONFIG_HOME/lf/colors"
-fi
+source "$XDG_CONFIG_HOME/lf/colors"
+
+. "/home/ui/.local/share/cargo/env"

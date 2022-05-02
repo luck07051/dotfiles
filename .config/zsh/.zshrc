@@ -58,6 +58,8 @@ alias tt="taskwarrior-tui | task sync"
 # matlab
 alias ml="matlab -nodisplay"
 
+alias transt="trans :zh-TW"
+
 # Fix config file path
 # wget
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
