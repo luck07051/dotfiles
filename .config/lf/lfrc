@@ -147,9 +147,9 @@ map I push :newfile<space>
 map mv mv
 map ` push :open-with<space>
 
-map f fzf_jump
+map / fzf_jump
+map f fzf_jump_local
 map <c-f> fzf_jump_global
-map / fzf_jump_local
 
 map ; read
 

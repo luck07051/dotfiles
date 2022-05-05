@@ -37,8 +37,8 @@ super + p
 #===Scratchpad===#
 # Open taskwarrior-tui as scratchpad
 # exec 'task sync' when press super+t everytime
-super + t
-    i3run-terminal Taskwarrior 130 35 "taskwarrior-tui | task sync"
+#super + t
+#    i3run-terminal Taskwarrior 130 35 "taskwarrior-tui | task sync"
 
 # Open audio control
 super + a
@@ -112,6 +112,9 @@ super + {x, v}
 # Enter fullscreen mode
 super + shift + f
     i3-msg fullscreen toggle
+
+super + t
+    i3-msg layout default
 
 
 #====================AUDIO====================#

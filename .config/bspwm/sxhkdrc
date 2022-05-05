@@ -81,21 +81,17 @@ super + {h, j, k, l}
 
 # Switch to workspace
 super + {1-9}
-    bsp_focus_dt {1-9}
+    dsp_desktop_switcher {1-9}
 
 ## Move focused container to workspace
 #super + shift + {1-9}
 #    i3-msg move container to workspace {1-9}
 #
-## Switch focus between monitor
-#super + m
-#    i3-switch-monitor
-#
-## Move workspace to other monitor
-#super + shift + m
-#    i3-msg move workspace to output next
-#
-#
+# Switch focus between monitor
+super + m
+    bspc monitor --focus next
+
+
 ## Toggle tiling / floating
 #super + f
 #    i3-msg floating toggle

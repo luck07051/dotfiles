@@ -1,0 +1,18 @@
+#!/bin/bash
+
+target="$1"
+focused=$(bspc query -D --desktop --names)
+target_monitor=$(bspc query -M --desktop $target --names)
+focused_monitor=$(bspc query -M --desktop --names)
+
+if [ $focused_monitor != $target_monitor ]; then
+    bspc desktop $focused --swap $target
+fi
+
+bspc desktop --focus $target
+
+
+# Reorder desktop for main monitor
+main_monitor="HDMI-0"
+bspc monitor $main_monitor --reorder-desktops \
+    $(echo $(bspc query -D --monitor $main_monitor --names | sort))

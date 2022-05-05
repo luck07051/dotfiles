@@ -247,7 +247,7 @@ hi ALEWarningSign   ctermfg=3   ctermbg=none
 hi SpellBad         ctermfg=1   ctermbg=none    cterm=bold,underline
 hi SpellCap         ctermfg=3   ctermbg=none    cterm=bold,underline
 
-let g:ale_linters = {'rust': ['rustc', 'rls']}
+"let g:ale_linters = {'rust': ['cargo', 'rls']}
 
 "===easymotion==="
 " wish: over press s/f/t jump to next search

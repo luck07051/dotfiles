@@ -41,5 +41,5 @@ xset -dpms
 #===Start Window Manager===#
 #exec xmonad
 #exec qtile start
-exec i3
-#exec bspwm
+#exec i3
+exec bspwm
