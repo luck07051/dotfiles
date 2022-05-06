@@ -123,10 +123,10 @@ Print
 #    bwmenu
 #
 # Bookmark
-super + o
-    $TERMINAL --class 'floating' --title 'bookmark' \
-    -o window.opacity=0.90 \
-    -e bookmark open
+#super + o
+#    $TERMINAL --class 'floating' --title 'bookmark' \
+#    -o window.opacity=0.90 \
+#    -e bookmark open
 #
 ## Open class sheet
 #super + shift + c
