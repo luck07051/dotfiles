@@ -2,20 +2,41 @@
 
 bspc rule -r "*"
 
-# Startup
-sxhkd -c ~/.config/bspwm/sxhkdrc &
-~/.config/polybar/launch.sh
 
-# Monitor
+#====================MONITOR====================#
 bspc monitor HDMI-0 -d 1 3 4 5 6 7 8 9
 bspc monitor HDMI-1 -d 2
 
+
+#====================CONFIG====================#
+bspc config focus_follows_pointer   true
+
+
+# Border and gap
 bspc config border_width            2
 bspc config window_gap              8
-
-bspc click_to_focus                 true
-
 
 bspc config focused_border_color    $(xrdb -get color5)
 bspc config active_border_color     $(xrdb -get color0)
 bspc config normal_border_color     $(xrdb -get color0)
+
+
+#====================RULE====================#
+bspc rule -a *:floating:*       state=floating
+bspc rule -a *:scratchpad:*     state=floating
+
+bspc rule -a Surf               state=tiled focus=off
+bspc rule -a Zathura            state=tiled
+
+
+#====================STARTUP====================#
+# Basic programs
+~/.config/polybar/launch.sh
+sxhkd -c ~/.config/bspwm/sxhkdrc &
+
+# Change cursor
+xsetroot -cursor_name left_ptr &
+
+# Auto start programs
+pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
+pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL -e tmuxinator start main &)
