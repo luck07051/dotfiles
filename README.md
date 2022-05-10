@@ -15,22 +15,27 @@ openssh
 Setup
 ```
 alacritty           # terminal emulator
-i3-gaps             # windows manager
-yay i3ass           # i3 function, for i3run
+bspwm               # windows manager
 sxhkd               # keybinding
 yay polybar         # status bar
 zsh                 # shell
 rofi                # launcher and more
 qutebrowswer        # browser
 
+pipewire-jack       # audio
+pipewire-pulse
+pipewire-alsa
+
 picom               # compositor
 nitrogen            # wallpaper
-setxkbmap           # uses to remap capslock to ctrl
+setxkbmap           # uses it to remap capslock to ctrl
 ```
 ```
 (bluez bluez-utils)
 (qtile)
 (xmonad xmonad-contrib xmobar)
+(i3-gaps)
+(yay i3ass)
 ```
 
 
@@ -38,10 +43,10 @@ Commandline tool
 ```
 tmux
 yay tmuxinator
-ranger              # file manager
 yay lf              # file manager
+ranger              # file manager
 sxiv                # image viewer
-ueberzug            # image viewer (for ranger preview)
+ueberzug            # image viewer (to view image in terminal)
 zathura zathura-pdf-mupdf   # pdf viewer
 ncmpcpp             # music player
 yay -S ncpamixer    # pulseaudio control

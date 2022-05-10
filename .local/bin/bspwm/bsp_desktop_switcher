@@ -11,8 +11,3 @@ fi
 
 bspc desktop --focus $target
 
-
-# Reorder desktop for main monitor
-main_monitor="HDMI-0"
-bspc monitor $main_monitor --reorder-desktops \
-    $(echo $(bspc query -D --monitor $main_monitor --names | sort))

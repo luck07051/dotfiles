@@ -34,8 +34,8 @@ super + p
 
 #====================WORKSPACES & LAYOUT & WINDOWS====================#
 # Move focus
-super + {h, j, k, l space}
-    bspc node --focus {west, south, north, east, next}
+super + {h, j, k, l}
+    bspc node --focus {west, south, north, east}
 
 # Move focused window
 super + shift + {h, j, k, l}
@@ -46,12 +46,13 @@ super + ctrl + {h, j, k, l}
     bspc node --resize {left, bottom, top, right} 5 5
 
 # Switch to workspace
-super + {1-9}
-    bsp_desktop_switcher {1-9}
+super + {1-9, 0}
+    bspc desktop --focus {1-9, 0}
+#    bsp_desktop_switcher {1-9}
 
-## Move focused container to workspace
-#super + shift + {1-9}
-#    i3-msg move container to workspace {1-9}
+# Move focused container to workspace
+super + shift + {1-9, 0}
+    bspc node --to-desktop {1-9, 0}
 
 # Switch focus between monitor
 super + m
@@ -65,6 +66,14 @@ super + {t, shift + t, f, shift + f}
 #super + {x, v}
 #    i3-msg split {h, v}
 
+
+# Switch layout between tiled and monocle
+super + y
+    bspc desktop --layout next
+
+# Move focus next or prev
+super + {_, shift} + space
+    bspc node --focus {next.local.window, prev.local.window}
 
 #====================AUDIO====================#
 # {Raise, Low} volume

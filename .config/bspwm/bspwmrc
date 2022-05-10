@@ -4,8 +4,8 @@ bspc rule -r "*"
 
 
 #====================MONITOR====================#
-bspc monitor HDMI-0 -d 1 3 4 5 6 7 8 9
-bspc monitor HDMI-1 -d 2
+bspc monitor HDMI-0 -d 1 2 3 4 5
+bspc monitor HDMI-1 -d 6 7 8 9 0
 
 
 #====================CONFIG====================#
@@ -25,6 +25,8 @@ bspc config normal_border_color     $(xrdb -get color0)
 bspc rule -a *:floating:*       state=floating
 bspc rule -a *:scratchpad:*     state=floating
 
+bspc rule -a QjackCtl           state=floating desktop='9'
+bspc rule -a Pavucontrol        state=floating
 bspc rule -a Surf               state=tiled focus=off
 bspc rule -a Zathura            state=tiled
 
@@ -37,6 +39,7 @@ sxhkd -c ~/.config/bspwm/sxhkdrc &
 # Change cursor
 xsetroot -cursor_name left_ptr &
 
-# Auto start programs
+# Auto start programs if the programs not running
 pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
 pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL -e tmuxinator start main &)
+pgrep "qjackctl" || qjackctl &
