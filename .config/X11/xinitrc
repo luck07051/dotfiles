@@ -29,9 +29,6 @@ fi
 
 
 #===Start some programs===#
-nitrogen --restore &
-picom &
-
 # Set 144 rate
 xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
 # No screen saver

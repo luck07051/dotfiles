@@ -10,6 +10,7 @@ xdg-user-dirs
 alsl-utils
 git
 openssh
+ntp
 ```
 
 Setup
@@ -17,7 +18,7 @@ Setup
 alacritty           # terminal emulator
 bspwm               # windows manager
 sxhkd               # keybinding
-yay polybar         # status bar
+yay -S polybar      # status bar
 zsh                 # shell
 rofi                # launcher and more
 qutebrowswer        # browser
@@ -26,7 +27,7 @@ pipewire-jack       # audio
 pipewire-pulse
 pipewire-alsa
 
-picom               # compositor
+yay -S picom-jonaburg-git   # compositor
 nitrogen            # wallpaper
 setxkbmap           # uses it to remap capslock to ctrl
 ```
@@ -42,8 +43,8 @@ setxkbmap           # uses it to remap capslock to ctrl
 Commandline tool
 ```
 tmux
-yay tmuxinator
-yay lf              # file manager
+yay -S tmuxinator
+yay -S lf           # file manager
 ranger              # file manager
 sxiv                # image viewer
 ueberzug            # image viewer (to view image in terminal)
@@ -229,4 +230,12 @@ xdg-mime default $(xdg-settings get default-web-browser) x-scheme-handler/https 
 ### xinput
 ```
 ln ~/.config/X11/xorg.conf.d/[] /etc/X11/xinit/xinitrc.d/
+```
+
+
+### clock drift
+```
+sudo pacman -S ntp
+sudo ntpd -qg
+sudo hwclock --systoch
 ```

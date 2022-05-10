@@ -205,6 +205,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 
 "===Misc==="
 Plug 'ap/vim-css-color'
+Plug 'elkowar/yuck.vim', { 'for':'yuck' }
 
 call plug#end()
 

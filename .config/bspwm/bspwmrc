@@ -33,13 +33,18 @@ bspc rule -a Zathura            state=tiled
 
 #====================STARTUP====================#
 # Basic programs
-~/.config/polybar/launch.sh
 sxhkd -c ~/.config/bspwm/sxhkdrc &
+pgrep "nitrogen" || nitrogen --restore &
+pgrep "picom" || picom --experimental-backend &
+
+# Bar
+~/.config/polybar/launch.sh
+#eww kill; eww daemon; eww open bar
 
 # Change cursor
 xsetroot -cursor_name left_ptr &
 
 # Auto start programs if the programs not running
 pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
-pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL -e tmuxinator start main &)
+pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='6'; $TERMINAL -e tmuxinator start main &)
 pgrep "qjackctl" || qjackctl &
