@@ -1,0 +1,36 @@
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+}
+
+$color00: #1C1C1C;
+$color01: #E67e80;
+$color02: #87AF87;
+$color03: #EBCB8B;
+$color04: #81A1C1;
+$color05: #FFB9DC;
+$color06: #87AFAF;
+$color07: #BCBCBC;
+$color08: #585858;
+$color09: #D7AFAF;
+$color10: #94C68B;
+$color11: #DFA000;
+$color12: #3A94C5;
+$color13: #DF69BA;
+$color14: #7FBBB3;
+$color15: #808080;
+
+$bg: $color00;
+$fg: $color07;
+
+.workspaces {
+  background-color: $bg;
+}
+.workspaces button:hover {
+  color: $color01;
+}
+
+.foc { color: $color01; }
+.occ { color: $fg; }
+.urg { color: $color02; }
+.emt { color: $color15; }
+

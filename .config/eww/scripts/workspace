@@ -1,0 +1,37 @@
+#!/bin/bash
+
+workspace () {
+    if [ $(bspc query -D -d .focused --names | grep $i) ]; then
+        echo -n "(button :onclick \"bspc desktop -f $1\" :class \"foc\" \"$1\") "
+        return
+    fi
+    if [ $(bspc query -D -d .occupied --names | grep $i) ]; then
+        echo -n "(button :onclick \"bspc desktop -f $1\" :class \"occ\" \"$1\") "
+        return
+    fi
+    if [ $(bspc query -D -d .urgent --names | grep $i) ]; then
+        echo -n "(button :onclick \"bspc desktop -f $1\" :class \"urg\" \"$1\") "
+        return
+    fi
+    echo -n "(button :onclick \"bspc desktop -f $1\" :class \"emt\" \"$1\") "
+}
+
+workspaces () {
+    ws=$(bspc query -D --names | sort)
+
+    echo -n "(box :class \"workspaces\" :orientation \"horizontal\" "
+    echo -n ":space-evenly true :spacing 10 "
+    echo -n ":halign \"center\" :space-evenly true :spaceing 10 "
+
+    for i in $ws; do
+        workspace $i
+    done
+
+    echo ")"
+}
+
+
+workspaces
+bspc subscribe desktop node_transfer | while read -r _ ; do
+workspaces
+done
