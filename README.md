@@ -10,7 +10,6 @@ xdg-user-dirs
 alsl-utils
 git
 openssh
-ntp
 ```
 
 Setup
@@ -30,6 +29,9 @@ pipewire-alsa
 yay -S picom-jonaburg-git   # compositor
 nitrogen            # wallpaper
 setxkbmap           # uses it to remap capslock to ctrl
+
+ntp                 # clock fixer
+xclip               # let nvim can use system clipboard
 ```
 ```
 (bluez bluez-utils)
