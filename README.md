@@ -91,7 +91,7 @@ Dependencie
 # vim plug markdown perviewer
 yarn
 # vimtex
-texlive-core (or texlive-most)
+texlive-most
 
 
 # polybar

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+workspaces () {
+    ws=$(bspc query -D --names | sort)
+
+    echo -n "(box :class \"workspaces\" :orientation \"horizontal\" "
+    echo -n ":space-evenly true :spacing 10 "
+    echo -n ":halign \"center\" :space-evenly true :spaceing 10 "
+
+    for i in $ws; do
+        state=$(bspc wm --get-status | sed 's/:/\n/g' | grep -G "^.$i")
+        case $state in
+            "O$i" | "F$i")
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" :class \"foc\" \"$i\") ";;
+            "o$i")
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" :class \"occ\" \"$i\") ";;
+            "f$i")
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" :class \"emt\" \"$i\") ";;
+            "u$i")
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" :class \"urg\" \"$i\") ";;
+        esac
+    done
+
+    echo ")"
+}
+
+workspaces
+bspc subscribe desktop node_transfer | while read -r _ ; do
+workspaces
+done
+

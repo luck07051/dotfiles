@@ -22,15 +22,26 @@ $color15: #808080;
 $bg: $color00;
 $fg: $color07;
 
-.workspaces {
+.workspaces0 {
   background-color: $bg;
+  //font-family: "MesloLGS Nerd Font";
+  font-size: 1.2em;
+  padding: 0.4rem 0 0rem 0;
 }
-.workspaces button:hover {
-  color: $color01;
+.workspaces1 {
+  background-color: $bg;
+  font-size: 1.2em;
+  padding: 0.4rem 0 0rem 0;
 }
-
+.workspaces0 button:hover { color: $color03; }
+.workspaces1 button:hover { color: $color03; }
 .foc { color: $color01; }
+.act {color: $color05; }
 .occ { color: $fg; }
-.urg { color: $color02; }
 .emt { color: $color15; }
+.urg { color: $fg; background-color: $color01; }
 
+.time {
+    background-color: $bg;
+    color: $fg;
+}

@@ -4,8 +4,8 @@ bspc rule -r "*"
 
 
 #====================MONITOR====================#
-bspc monitor HDMI-0 -d 1 2 3 4 5
-bspc monitor HDMI-1 -d 6 7 8 9 0
+bspc monitor HDMI-0 -d 1 3 4 5 6 7 8 9
+bspc monitor HDMI-1 -d 2
 
 
 #====================CONFIG====================#
@@ -39,12 +39,12 @@ pgrep "picom" || picom --experimental-backend &
 
 # Bar
 #~/.config/polybar/launch.sh
-eww kill; eww daemon; eww open workspaces
+~/.config/eww/launch
 
 # Change cursor
 xsetroot -cursor_name left_ptr &
 
 # Auto start programs if the programs not running
 pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
-pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='6'; $TERMINAL -e tmuxinator start main &)
+pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL -e tmuxinator start main &)
 pgrep "qjackctl" || qjackctl &

@@ -47,8 +47,8 @@ super + ctrl + {h, j, k, l}
 
 # Switch to workspace
 super + {1-9, 0}
-    bspc desktop --focus {1-9, 0}
-#    bsp_desktop_switcher {1-9}
+    bsp_desktop_switcher {1-9, 0}
+    #bspc desktop --focus {1-9, 0}
 
 # Move focused container to workspace
 super + shift + {1-9, 0}

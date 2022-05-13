@@ -1,0 +1,8 @@
+#!/bin/sh
+
+eww -c ~/.config/eww/bar kill
+eww -c ~/.config/eww/bar daemon
+
+eww -c ~/.config/eww/bar open workspaces0
+eww -c ~/.config/eww/bar open workspaces1
+eww -c ~/.config/eww/bar open time

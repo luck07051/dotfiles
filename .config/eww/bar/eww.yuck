@@ -1,0 +1,49 @@
+
+(include "workspaces.yuck")
+(include "control.yuck")
+
+(defwindow workspaces0
+  :monitor 0
+  :geometry
+  (geometry
+    :x "10px"
+    :y "10px"
+    :width "15%"
+    :height "30px"
+    :anchor "top left")
+  :stacking "fg"
+  :wm-ignore false
+  :reserve (struts :distance "38px" :side "top")
+  :windowtype "dock"
+  (workspaces_HDMI-0))
+
+(defwindow workspaces1
+  :monitor 1
+  :geometry
+  (geometry
+    :x "10px"
+    :y "10px"
+    :width "15%"
+    :height "30px"
+    :anchor "top left")
+  :stacking "fg"
+  :wm-ignore false
+  :reserve (struts :distance "38px" :side "top")
+  :windowtype "dock"
+  (workspaces_HDMI-1))
+
+
+(defwindow time
+  :monitor 0
+  :geometry
+  (geometry
+    :x "-10px"
+    :y "10px"
+    :width "3%"
+    :height "30px"
+    :anchor "top right")
+  :stacking "fg"
+  :wm-ignore false
+  :reserve (struts :distance "38px" :side "top")
+  :windowtype "dock"
+  (time))
