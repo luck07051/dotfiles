@@ -1,0 +1,32 @@
+#!/bin/sh
+
+get_volume () {
+    echo $(pamixer --get-volume --sink "$1")
+}
+set_volume () {
+    pactl set-sink-volume "$1" "$2"
+}
+get_icon () {
+    case $1 in
+        "speaker") echo "S";;
+        "headphone") echo "H";;
+    esac
+}
+
+speaker="alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1"
+headphone="alsa_output.pci-0000_00_1f.3.analog-stereo"
+
+case $2 in
+    "speaker") sink="$speaker";;
+    "headphone") sink="$headphone";;
+    "default") sink=$(pactl info | grep "Default Sink:" | awk '{print $3}');;
+esac
+
+case $1 in
+    "get-volume")
+        get_volume "$sink";;
+    "set-volume")
+        set_volume "$sink" "$3%";;
+    "get-icon")
+        get_icon $2;;
+esac

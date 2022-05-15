@@ -2,7 +2,7 @@
 #====================BASIC====================#
 # Restart WM and sxhkd
 super + ctrl + r
-    bspc wm -r && killall sxhkd
+    bsp_desktop_reorder; (bspc wm -r && killall sxhkd)
 
 # Quit WM
 super + ctrl +q

@@ -241,3 +241,10 @@ sudo pacman -S ntp
 sudo ntpd -qg
 sudo hwclock --systoch
 ```
+
+
+# MATLAB
+if matlab can't install
+```
+downgrade cairo
+```

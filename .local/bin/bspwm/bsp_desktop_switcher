@@ -9,8 +9,7 @@ if [ $focused_monitor != $target_monitor ]; then
     bspc desktop $focused --swap $target
 fi
 
-
-bsp_desktop_reorder
+#bsp_desktop_reorder
 bspc desktop --activate $(bspc query -D -d .focused -m ^1 --names)
 bspc desktop --focus $target
 

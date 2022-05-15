@@ -15,7 +15,8 @@ cmd q %{{ lf -remote "send $id quit" }}
 cmd open ${{
     case $(file --mime-type "$f" -bL) in
         # Text
-        text/* | application/json | inode/x-empty) $EDITOR "$f";;
+        text/* | application/json | inode/x-empty | application/x-elc)
+            $EDITOR "$f";;
         # PDF
         application/pdf) zathura "$f" &;;
         # Image

@@ -1,8 +1,0 @@
-
-(defwidget workspaces_HDMI-0 []
-  (literal :content workspace_HDMI-0))
-(deflisten workspace_HDMI-0 "scripts/workspace_with_monitor HDMI-0")
-
-(defwidget workspaces_HDMI-1 []
-  (literal :content workspace_HDMI-1))
-(deflisten workspace_HDMI-1 "scripts/workspace_with_monitor HDMI-1")
