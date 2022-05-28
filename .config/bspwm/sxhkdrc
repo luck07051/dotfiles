@@ -2,7 +2,7 @@
 #====================BASIC====================#
 # Restart WM and sxhkd
 super + ctrl + r
-    bsp_desktop_reorder; (bspc wm -r && killall sxhkd)
+    bsp_restart
 
 # Quit WM
 super + ctrl +q
@@ -78,24 +78,24 @@ super + {_, shift} + space
 #====================AUDIO====================#
 # {Raise, Low} volume
 super + shift + {u, i}
-    pactl set-sink-volume @DEFAULT_SINK@ {+5%, -5%}
+    volume set-volume {+5, -5}
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
-    pactl set-sink-volume @DEFAULT_SINK@ {+5%, -5%}
+    volume set-volume {+5, -5}
 
 {button10, button11}
-    pactl set-sink-volume @DEFAULT_SINK@ {+5%, -5%}
+    volume set-volume {+5, -5}
 
 # switch output
 super + shift + o
-    switch_default_sink
+    volume next-sink
 
 # Mute output
 XF86AudioMute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    volume sink-mute
 # Mute source
 XF86AudioMicMute
-    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    volume source-mute
 
 
 #====================MISC====================#

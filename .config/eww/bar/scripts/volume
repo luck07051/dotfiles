@@ -1,32 +1,22 @@
 #!/bin/sh
 
-get_volume () {
-    echo $(pamixer --get-volume --sink "$1")
-}
-set_volume () {
-    pactl set-sink-volume "$1" "$2"
-}
-get_icon () {
-    case $1 in
-        "speaker") echo "S";;
-        "headphone") echo "H";;
-    esac
-}
-
-speaker="alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1"
-headphone="alsa_output.pci-0000_00_1f.3.analog-stereo"
-
-case $2 in
-    "speaker") sink="$speaker";;
-    "headphone") sink="$headphone";;
-    "default") sink=$(pactl info | grep "Default Sink:" | awk '{print $3}');;
-esac
+DIR="$XDG_CONFIG_HOME/eww/bar"
 
 case $1 in
-    "get-volume")
-        get_volume "$sink";;
-    "set-volume")
-        set_volume "$sink" "$3%";;
     "get-icon")
-        get_icon $2;;
+        case "$(pactl info | grep "Default Sink:" | cut -d' ' -f3)" in
+            "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1")
+                echo "奔";;
+            "alsa_output.pci-0000_00_1f.3.analog-stereo")
+                echo "";;
+        esac;;
+
+    "get-volume")
+        pamixer --get-volume
+        ;;
+
+    "update-volume-vol")
+        eww -c $DIR update volume_vol="$("$DIR"/scripts/volume get-volume)";;
+    "update-volume-icon")
+        eww -c $DIR update volume_icon="$("$DIR"/scripts/volume get-icon)";;
 esac

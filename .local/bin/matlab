@@ -1,0 +1,3 @@
+#!/bin/sh
+/home/ui/.local/share/MATLAB/R2022a/bin/matlab $@
+

@@ -1,15 +1,15 @@
 #!/bin/sh
 
-desktops=($(bspc query -D --monitor ^1 ))
-target=($(bspc query -D --monitor ^1 | sort))
+desktops=($(bspc query -D --monitor ^1 --names))
+target=($(bspc query -D --monitor ^1 --names | sort))
 main_monitor_focus=$(bspc wm --get-status | sed 's/L/\n/g' | grep "HDMI-0" | sed 's/:/\n/g' | grep -G '^[OF]' | cut -c 2)
 focus=$(bspc query -D --desktop .focused)
 
-for i in echo "${!desktops[@]}"
+for i in "${!desktops[@]}"
 do
     if [ "${target[$i]}" != "${desktops[$i]}" ]; then
         bspc desktop ${target[$i]} --swap ${desktops[$i]}
-        desktops=($(bspc query -D --monitor ^1 ))
+        desktops=($(bspc query -D --monitor ^1 --names))
     fi
 done
 

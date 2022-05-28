@@ -1,44 +1,61 @@
 
-(defvar eww "$HOME/.local/bin/eww -c $HOME/.config/eww/bar")
+; base on https://github.com/saimoomedits/eww-widgets
+; and https://github.com/druskus20/eugh
+
+(defvar eww "eww -c $HOME/.config/eww/bar")
 
 ;==================== WIDGETS ====================;
 
 ;===== WORKSPACES =====;
 
-(defwidget workspaces_HDMI-0 []
-  (literal :content workspace_HDMI-0))
 (deflisten workspace_HDMI-0 "scripts/workspace_with_monitor HDMI-0")
-
-(defwidget workspaces_HDMI-1 []
-  (literal :content workspace_HDMI-1))
 (deflisten workspace_HDMI-1 "scripts/workspace_with_monitor HDMI-1")
+(defwidget workspaces [content]
+  (literal :class "workspaces" :content content))
 
 
 ;===== CLOCK =====;
 
-(defpoll clock_time :interval "5s" "date +\%I")
+(defpoll clock_hour :interval "5s" "date +\%I")
 (defpoll clock_minute :interval "5s" "date +\%M")
 (defpoll clock_date :interval "10m" "date '+%d/%m'")
-(defvar time_rev false)
+(defvar clock_rev false)
+
+(defwidget clock []
+  (eventbox :onhover "${eww} update clock_rev=true"
+            :onhoverlost "${eww} update clock_rev=false"
+    (box :space-evenly false
+      (revealer :reveal {!clock_rev}
+                :duration "200ms"
+                :transition "slideleft"
+        (clock_time))
+      (revealer :reveal {clock_rev}
+                :duration "200ms"
+                :transition "slideleft"
+        (clock_date)))))
+
+(defwidget clock_time []
+  (box  :class "time clock"
+        :orientation "h"
+        :halign "start"
+        :hexpand false
+        :space-evenly false
+    (label :text clock_hour)
+    (label :text ":")
+    (label :text clock_minute)))
+
+(defwidget clock_date []
+  (box  :class "date clock"
+        :orientation "h"
+        :halign "start"
+        :hexpand false
+        :space-evenly false
+    (button :class "clock_date"
+            :onclick "$HOME/.config/eww/bar/scripts/pop calendar" clock_date)))
+
 
 (defpoll calendar_day :interval "20m" "date '+%d'")
 (defpoll calendar_year :interval "20h" "date '+%Y'")
-
-
-(defwidget clock_module []
-  (eventbox :onhover "${eww} update time_rev=true"
-            :onhoverlost "${eww} update time_rev=false"
-    (box :class "clock" :space-evenly "false" :orientation "h" :spacing "3"
-      (label :text clock_time :class "clock_time" )
-      (label :text ":" :class "clock_sep" )
-      (label :text clock_minute :class "clock_minute")
-      (revealer :transition "slideleft"
-                :reveal time_rev
-                :duration "350ms"
-        (button :class "clock_date"
-                :onclick "$HOME/.config/eww/bar/scripts/pop calendar" clock_date
-          )))))
-
 
 (defwidget cal []
   (box :class "cal" :orientation "v"
@@ -50,87 +67,41 @@
 
 ;===== VOLUME =====;
 ;=== volume ===;
-(defpoll vol_volume :interval "3s" "pamixer --get-volume")
-(defvar vol_rev false)
+(defvar volume_rev false)
+(defpoll volume_vol :interval "1s" "scripts/volume get-volume")
+(defpoll volume_icon :interval "1s" "scripts/volume get-icon")
 
 (defwidget volume []
-  (eventbox :onhover "${eww} update vol_rev=true"
-            :onhoverlost "${eww} update vol_rev=false"
+  (eventbox :onhover "${eww} update volume_rev=true"
+            :onhoverlost "${eww} update volume_rev=false"
     (box :class "volume" :space-evenly "false" :orientation "h" :spacing "3"
-      (button   :onclick "scripts/pop audio" :class "vol_icon" "墳")
-      (revealer :transition "slideleft"
-                :reveal vol_rev
+      (revealer :transition "slideright"
+                :reveal volume_rev
                 :duration "350ms"
-        (scale    :class "volbar"
-                  :value vol_volume
+        (scale    :class "bar volume"
+                  :value volume_vol
                   :orientation "h"
-                  :tooltip "${vol_volume}%"
-                  :max 150
+                  :tooltip "${volume_vol}%"
+                  :max 101
                   :min 0
-                  :onchange "pamixer --set-volume $(echo {} | awk -F. '{print $1}')" )))))
+                  :onchange "volume set-volume $(echo {} | cut -d'.' -f1)" ))
+      (button   :class "icon volume"
+                :onrightclick "volume next-sink" volume_icon))))
 
-;=== audio ===;
-(defvar speaker "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1")
-(defpoll vol_speaker :interval "1s"
-  "pamixer --sink alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1 --get-volume")
-
-(defvar headphone "alsa_output.pci-0000_00_1f.3.analog-stereo")
-(defpoll vol_headphone :interval "1s"
-  "pamixer --sink alsa_output.pci-0000_00_1f.3.analog-stereo --get-volume")
-
-(defvar mic "alsa_input.usb-Jieli_Technology_USB_PHY_2.0-02.mono-fallback")
-(defpoll vol_mic :interval "1s"
-  "pamixer --source alsa_input.usb-Jieli_Technology_USB_PHY_2.0-02.mono-fallback --get-volume")
-
-(defwidget audio_speaker []
-    (box :halign "v" :space-evenly "false" :hexpand "false" :vexpand "false"
-      (box :class "audio_speaker_icon" :orientation "v")
-      (box :orientation "v" :halign "center" :vexpand "false" :hexpand "false"
-        (label :class "audio_speaker_text" :text "speaker" :valign "center" :halign "left" )
-        (box :class "audio_speaker_bar" :halign "center" :vexpand "false" :hexpand "false"
-          (scale  :value vol_speaker
-                  :space-evenly "false"
-                  :orientation "h"
-                  :onchange "pamixer --sink ${speaker} --set-volume $(echo {} | awk -F. '{print $1}')"
-                  :tooltip "${vol_speaker}%"
-                  :max 150
-                  :min 0)))))
-
-(defwidget audio_headphone []
-    (box :halign "v" :space-evenly "false" :hexpand "false" :vexpand "false"
-      (box :class "audio_headphone_icon" :orientation "v")
-      (box :orientation "v" :halign "center" :vexpand "false" :hexpand "false"
-        (label :class "audio_headphone_text" :text "headphone" :valign "center" :halign "left" )
-        (box :class "audio_headphone_bar" :halign "center" :vexpand "false" :hexpand "false"
-          (scale  :value vol_headphone
-                  :space-evenly "false"
-                  :orientation "h"
-                  :onchange "pamixer --sink ${headphone} --set-volume $(echo {} | awk -F. '{print $1}')"
-                  :tooltip "${vol_headphone}%"
-                  :max 150
-                  :min 0)))))
-
-(defwidget audio_mic []
-    (box :halign "v" :space-evenly "false" :hexpand "false" :vexpand "false"
-      (box :class "audio_mic_icon" :orientation "v")
-      (box :orientation "v" :halign "center" :vexpand "false" :hexpand "false"
-        (label :class "audio_mic_text" :text "mic" :valign "center" :halign "left" )
-        (box :class "audio_mic_bar" :halign "center" :vexpand "false" :hexpand "false"
-          (scale  :value vol_mic
-                  :space-evenly "false"
-                  :orientation "h"
-                  :tooltip "mic on ${vol_mic}%"
-                  :onchange "pamixer --source ${mic} --set-volume $(echo {} | awk -F. '{print $1}')"
-                  :max 100
-                  :min 0)))))
-
-(defwidget audio []
-  (box :class "audio-box" :orientation "v" :space-evenly "false" :vexpand "false" :hexpand "false"
-    (audio_speaker)
-    (label :text "" :class "audio_sep" :halign "center")
-    (audio_headphone)
-    (label :text "" :class "audio_sep" :halign "center")
-    (audio_mic)))
+;=====  =====;
+(defwidget mem []
+  (box :class "mem" :vexpand "false" :hexpand "false"
+    (circular-progress :value {EWW_RAM.used_mem_perc}
+                       :class "mem_bar"
+                       :thickness 4
+      (button
+        :class "mem_icon"
+        :limit-width 2
+        :tooltip "using ${EWW_RAM.used_mem_perc}% ram"
+        ;:onclick "$HOME/.config/eww/bar/scripts/pop system"
+        :show_truncated false
+        :wrap false
+        ""))))
 
 
 ;===== power =====;
@@ -145,51 +116,52 @@
     (label :class "separ" :text "|")))
 
 
+
+
 ;=====  =====;
 
 (defwidget right []
   (box :orientation "h"
        :space-evenly false
        :halign "end"
-       :class "right_class"
+       :class "right"
+;    (mem)
     (volume)
-    (clock_module)
+    (clock)
     (power)
     ))
+
 (defwidget center []
   (box :orientation "h"
        :space-evenly false
        :halign "center"
-       :class "centr_class"
+       :class "centr"
     (power)
     ))
+
 (defwidget left0 []
   (box :orientation "h"
        :space-evenly false
        :halign "start"
-       :class "left0_class"
-    (workspaces_HDMI-0)
-    ))
+       :class "left"
+    (workspaces :content workspace_HDMI-0)))
 (defwidget left1 []
   (box :orientation "h"
        :space-evenly false
        :halign "start"
-       :class "left1_class"
-    (workspaces_HDMI-1)
-    ))
+       :class "left"
+    (workspaces :content workspace_HDMI-1)))
 
-
-;=====  =====;
 
 (defwidget all0 []
   (box :orientation "h"
-       :class "all0_class"
+       :class "all"
     (left0)
     (center)
     (right)))
 (defwidget all1 []
   (box :orientation "h"
-       :class "all1_class"
+       :class "all"
     (left1)
     (center)
     (right)))

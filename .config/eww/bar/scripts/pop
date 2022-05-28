@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EWW="$HOME/.local/bin/eww -c $HOME/.config/eww/bar"
+EWW="eww -c $HOME/.config/eww/bar"
 
 
 
@@ -11,15 +11,15 @@ calendar() {
         ${EWW} open calendar
     }
 
-# Open widgets
-if [[ ! -f "$LOCK_FILE" ]]; then
-    ${EWW} close system music_win audio
-    touch "$LOCK_FILE"
-    run && echo "ok good!"
-else
-    ${EWW} close calendar
-    rm "$LOCK_FILE" && echo "closed"
-fi
+    # Open widgets
+    if [[ ! -f "$LOCK_FILE" ]]; then
+        ${EWW} close system music_win audio
+        touch "$LOCK_FILE"
+        run && echo "ok good!"
+    else
+        ${EWW} close calendar
+        rm "$LOCK_FILE" && echo "closed"
+    fi
 }
 
 

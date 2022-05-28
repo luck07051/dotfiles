@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# reorder desktop
+bsp_desktop_reorder
+
+# let node correct after restart
+s_desktop=$(bspc query -D --monitor ^2)
+bspc desktop $s_desktop --swap 2
+
+bspc wm -r
+killall sxhkd

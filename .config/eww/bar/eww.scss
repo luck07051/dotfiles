@@ -24,13 +24,15 @@ $bg: $color00;
 $fg: $color07;
 $scale_bg: #303030;
 
-.bar0, .bar1 {
+
+.bar0, .bar1, .all {
     background-color: $bg;
     color: $fg;
-    font-size: 1.1em;
-    font-weight : bold;
-    padding: 0rem 8 0rem 8;
+    font-size: 1.1rem;
 }
+
+
+///////////////////SEPAR//////////////////
 .separ {
     color: $color08;
     font-size: 14;
@@ -39,17 +41,19 @@ $scale_bg: #303030;
 }
 
 
-
-
 ///////////////WORKSPACE///////////////////
 
-.left0_class, .left1_class {
+.workspaces {
     background-color: $bg;
-    font-size: 1.2em;
-    padding: 0.3rem 8 0rem 8;
+    font-size: 1.3rem;
+    font-weight : bold;
+    padding-top: 0.2rem;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-right: 4px;
+    margin-left: 4px;
 }
-.left0_class button:hover,
-.left1_class button:hover { color: $color05; }
+.workspaces button:hover { color: $color05; }
 .foc { color: $color01; }
 .act { color: $color05; }
 .occ { color: $fg; }
@@ -64,18 +68,10 @@ $scale_bg: #303030;
 .clock {
     font-weight : bold;
     background-color: $color08;
-    padding-right: 8px;
-    padding-left: 8px;
-    margin-right: 4px;
-    margin-left: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
-.clock_date {
-    font-weight : bold;
-    padding-right: 0px;
-    padding-left: 4px;
-    margin-right: 4px;
-    margin-left: 4px;
-}
+
 
 ////////////////////CALENDAR//////////////////////
 .calendar {
@@ -86,99 +82,54 @@ $scale_bg: #303030;
 
 ///////////////VOLUME/////////////////
 
+.volume {
+    margin-right: 6px;
+    //margin-left: 4px;
+    //padding-right: 4px;
+    //padding-left: 4px;
+}
 .volume scale trough {
     all: unset;
     background-color: $scale_bg;
     border-radius: 50px;
-    min-height: 8px;
+    min-height: 7px;
     min-width: 50px;
-    margin-right: 8px;
 }
 .volume scale trough highlight {
     all: unset;
     background-color: $color06;
     border-radius: 10px;
 }
-.vol_icon {
-    color: $color06;
-    font-size: 18;
-    padding-top: 0.2rem;
-    margin-right: 8px;
-}
-.volbar {
+.volume.bar {
     padding-top: 2;
     padding-left: 2;
 }
-
-
-/////////////AUDIO/////////////
-
-.audio-box {
-        background-color: $bg;
-	border-radius: 16px;
-}
-.audio_sep {
-    color: $color08;
+.volume.icon {
+    color: $color06;
     font-size: 18;
-    margin : 0px 0px 0px 0px;
+    padding-top: 0.1rem;
 }
 
-.audio_speaker_icon {
-	background-size: cover;
-    background-image: url('images/speaker.png');
-	background-position: center;
-	min-height: 70px;
-	min-width: 75px;
-	margin: 10px 20px 5px 20px;
-	border-radius: 12px;
-}
-.audio_headphone_icon {
-	background-size: cover;
-    background-image: url('images/headphone.png');
-	background-position: center;
-	min-height: 70px;
-	min-width: 75px;
-	margin: 5px 20px 20px 20px;
-	border-radius: 12px;
-}
-.audio_mic_icon {
-	background-size: cover;
-    background-image: url('images/mic.png');
-	background-position: center;
-	min-height: 70px;
-	min-width: 75px;
-	margin: 5px 20px 20px 20px;
-	border-radius: 12px;
-}
 
-.audio_speaker_text,
-.audio_headphone_text,
-.audio_mic_text
-{
-        color: $color06;
-	font-size : 22px;
-	font-weight : bold;
-	margin: 20px 0px 0px 0px;
+//////////////////////////////////////////////
+.mem_bar {
+  color: #e0b089;
+    background-color: #38384d;
+  border-radius: 10px;
 }
-.audio_speaker_bar scale trough,
-.audio_headphone_bar scale trough,
-.audio_mic_bar scale trough
-{
-	all: unset;
-    background-color: $scale_bg;
-        box-shadow: 0 6px 5px 2px #06060b;
-	border-radius: 24px;
-	min-height: 13px;
-	min-width: 120px;
-	margin : 0px 0px 5px 0px;
+.mem_icon {
+    color: #e0b089;
 }
-.audio_speaker_bar scale trough highlight,
-.audio_headphone_bar scale trough highlight,
-.audio_mic_bar scale trough highlight
-{
-	all: unset;
-        background-color: $color06;
-	border-radius: 24px;
+.mem_icon {
+    font-size: 15;
+    margin: 10px;
 }
+.mem {
+    background-color: #0f0f17;
+	border-radius: 16px;
+  margin: 0px 10px 0px 3px;
+  }
+
+
 
 

@@ -1,0 +1,66 @@
+#!/bin/sh
+
+#sink[speaker]="alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1"
+#sink[headphone]="alsa_output.pci-0000_00_1f.3.analog-stereo"
+#sink[default]="$(pactl info | grep "Default Sink:" | cut -d' ' -f3)"
+#sink=${sink[default]}
+#
+#parsed=$(getopt --options h --longoptions help,sink: --name "$0" -- "$@")
+#if [ $? -ne 0 ]; then
+#    echo 'Terminating...' >&2
+#    exit 1
+#fi
+#eval set -- "$parsed"
+#unset parsed
+#while true; do
+#    case "$1" in
+#        "-h|--help")
+#            echo "Not ready yet..."
+#            exit 0
+#            ;;
+#        "--sink")
+#            sink="$2"
+#            shift 2
+#            ;;
+#        "--")
+#            shift
+#            break
+#            ;;
+#        *)
+#            echo "Internal error" >&2
+#            exit 1
+#            ;;
+#    esac
+#done
+
+
+sink="$(pactl info | grep "Default Sink:" | cut -d' ' -f3)"
+option="$1"
+shift 1
+
+case $option in
+    "set-volume")
+        #pactl set-sink-volume "$sink" $1%
+        pactl set-sink-volume @DEFAULT_SINK@ $1%
+        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume-vol
+        ;;
+
+    "sink-mute")
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume-vol
+        ;;
+
+    "source-mute")
+        pactl set-source-mute @DEFAULT_SOURCE@ toggle
+        ;;
+
+    "next-sink")
+        switch_default_sink
+        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume-icon
+        ;;
+
+esac
+
+
+#$(echo $2 | cut -d'.' -f 1)
+

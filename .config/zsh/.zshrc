@@ -50,15 +50,16 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias cons="config status"
 alias confs="config status"
 
-# taskwarrior
-alias t="task"
-alias ts="task sync"
-alias tt="taskwarrior-tui | task sync"
+## taskwarrior
+#alias t="task"
+#alias ts="task sync"
+#alias tt="taskwarrior-tui | task sync"
 
 # matlab
 alias ml="matlab -nodisplay"
 
-alias transt="trans :zh-TW"
+# trans
+alias tt="trans :zh-TW"
 
 # Fix config file path
 # wget

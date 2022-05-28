@@ -1,15 +1,17 @@
 
-# XDG paths
+#==================== XDG Paths ====================#
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
+#==================== Bin Paths ====================#
 # Add .local/bin and its subdir to path
 export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
 
-# Other program path
+
+#==================== Let Paths Right ====================#
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
@@ -45,16 +47,19 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
 
-# Default App
+#==================== Default App ====================#
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="qutebrowser"
 
-# Misc
+#==================== Misc ====================#
 export TERM="xterm-256color"
 export LANG=en_US.UTF-8
 
 # lf
 source "$XDG_CONFIG_HOME/lf/colors"
+
+# fix matlab
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 . "/home/ui/.local/share/cargo/env"

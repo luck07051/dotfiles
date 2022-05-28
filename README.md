@@ -239,7 +239,7 @@ ln ~/.config/X11/xorg.conf.d/[] /etc/X11/xinit/xinitrc.d/
 ```
 sudo pacman -S ntp
 sudo ntpd -qg
-sudo hwclock --systoch
+sudo hwclock --systohc
 ```
 
 
