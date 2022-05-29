@@ -36,8 +36,8 @@ $scale_bg: #303030;
 .separ {
     color: $color08;
     font-size: 14;
-    padding: 0rem 0 0rem 0;
-    margin: 0px 4px 0px 4px;
+    margin-right: 4px;
+    margin-left: 4px;
 }
 
 
@@ -66,6 +66,7 @@ $scale_bg: #303030;
 ////////////////CLOCK///////////////////
 
 .clock {
+    //font-family: Comic Sans MS;
     font-weight : bold;
     background-color: $color08;
     padding-right: 10px;
@@ -105,10 +106,30 @@ $scale_bg: #303030;
     padding-left: 2;
 }
 .volume.icon {
-    color: $color06;
     font-size: 18;
     padding-top: 0.1rem;
 }
+.volume.icon.muted { color: $color15; }
+.volume.icon.unmute { color: $color06; }
+
+
+////////////////////POWER//////////////////////
+.power {
+    //font-family: Font Awesome;
+    font-weight : bold;
+    padding-right: 4px;
+    padding-left: 4px;
+    margin-right: 4px;
+}
+.power.shutdown { color: $color01; }
+.power.reboot { color: $color02; }
+.power.lock { color: $color04; }
+.power.logout { color: $color05; }
+.power.restartwm { color: $color06; }
+
+.power.prompt.yes { color: $color15; }
+.power.prompt.no { color: $color07; }
+
 
 
 //////////////////////////////////////////////

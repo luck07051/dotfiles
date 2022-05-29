@@ -13,7 +13,7 @@ calendar() {
 
     # Open widgets
     if [[ ! -f "$LOCK_FILE" ]]; then
-        ${EWW} close system music_win audio
+        ${EWW} close audio
         touch "$LOCK_FILE"
         run && echo "ok good!"
     else
@@ -23,70 +23,8 @@ calendar() {
 }
 
 
-system() {
-    LOCK_FILE_MEM="$HOME/.cache/eww-system.lock"
-
-    run() {
-        ${EWW} open system
-    }
-
-    # Open widgets
-    if [[ ! -f "$LOCK_FILE_MEM" ]]; then
-        ${EWW} close calendar music_win audio
-        touch "$LOCK_FILE_MEM"
-        run && echo "ok good!"
-    else
-        ${EWW} close system
-        rm "$LOCK_FILE_MEM" && echo "closed"
-    fi
-}
 
 
-music() {
-    LOCK_FILE_SONG="$HOME/.cache/eww-song.lock"
-
-    run() {
-        ${EWW} open music_win
-    }
-
-    # Open widgets
-    if [[ ! -f "$LOCK_FILE_SONG" ]]; then
-        ${EWW} close system calendar
-        touch "$LOCK_FILE_SONG"
-        run && echo "ok good!"
-    else
-        ${EWW} close music_win
-        rm "$LOCK_FILE_SONG" && echo "closed"
-    fi
-}
-
-
-
-audio() {
-    LOCK_FILE_AUDIO="$HOME/.cache/eww-audio.lock"
-
-    run() {
-        ${EWW} open audio
-    }
-
-    # Open widgets
-    if [[ ! -f "$LOCK_FILE_AUDIO" ]]; then
-        ${EWW} close system calendar music
-        touch "$LOCK_FILE_AUDIO"
-        run && echo "ok good!"
-    else
-        ${EWW} close audio
-        rm "$LOCK_FILE_AUDIO" && echo "closed"
-    fi
-}
-
-
-if [ "$1" = "calendar" ]; then
-    calendar
-elif [ "$1" = "system" ]; then
-    system
-elif [ "$1" = "music" ]; then
-    music
-elif [ "$1" = "audio" ]; then
-    audio
-fi
+case $1 in
+    "calendar") calendar;;
+esac

@@ -61,6 +61,9 @@ config.bind('l', 'scroll-px 40 0')
 # Let J, K works straight.
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
+# use w and b to switch tab
+config.bind('w', 'tab-prev')
+config.bind('b', 'tab-next')
 
 # Hide statusbar or tabbar.
 config.bind('xb', 'config-cycle statusbar.show always in-mode')
@@ -140,6 +143,8 @@ config.set('content.javascript.enabled', True, 'chrome-devtools://*')
 config.set('content.javascript.enabled', True, 'devtools://*')
 config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
+# maybe need $sudo pacman -S python-adblock, idk
+config.set('content.blocking.method', 'both')
 
 
 #====================FILESELECT====================#

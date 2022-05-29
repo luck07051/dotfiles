@@ -1,7 +1,8 @@
 #!/bin/sh
 
-EWW="$HOME/.local/bin/eww -c $HOME/.config/eww/bar"
+EWW="eww -c $HOME/.config/eww/bar"
 
+rm -f $HOME/.cache/eww*.lock
 ${EWW} kill
 ${EWW} daemon
 

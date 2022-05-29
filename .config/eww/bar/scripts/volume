@@ -1,7 +1,5 @@
 #!/bin/sh
 
-DIR="$XDG_CONFIG_HOME/eww/bar"
-
 case $1 in
     "get-icon")
         case "$(pactl info | grep "Default Sink:" | cut -d' ' -f3)" in
@@ -15,8 +13,19 @@ case $1 in
         pamixer --get-volume
         ;;
 
-    "update-volume-vol")
-        eww -c $DIR update volume_vol="$("$DIR"/scripts/volume get-volume)";;
-    "update-volume-icon")
-        eww -c $DIR update volume_icon="$("$DIR"/scripts/volume get-icon)";;
+    "is-mute")
+        vol="$(pamixer --get-volume-human)"
+        if [ "$vol" == "0%" ] || [ "$vol" == "muted" ]; then
+            echo "muted"
+        else
+            echo "unmute"
+        fi
+        ;;
+
+    "update-volume")
+        DIR="$XDG_CONFIG_HOME/eww/bar"
+        eww -c $DIR update volume_vol="$("$DIR"/scripts/volume get-volume)"
+        eww -c $DIR update volume_icon="$("$DIR"/scripts/volume get-icon)"
+        eww -c $DIR update volume_is_mute="$("$DIR"/scripts/volume is-mute)"
+        ;;
 esac

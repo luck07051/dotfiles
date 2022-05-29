@@ -51,7 +51,7 @@
         :hexpand false
         :space-evenly false
     (button :class "clock_date"
-            :onclick "$HOME/.config/eww/bar/scripts/pop calendar" clock_date)))
+            :onclick "./scripts/pop calendar" clock_date)))
 
 
 (defpoll calendar_day :interval "20m" "date '+%d'")
@@ -70,6 +70,7 @@
 (defvar volume_rev false)
 (defpoll volume_vol :interval "1s" "scripts/volume get-volume")
 (defpoll volume_icon :interval "1s" "scripts/volume get-icon")
+(defpoll volume_is_mute :interval "1s" "scripts/volume is-mute")
 
 (defwidget volume []
   (eventbox :onhover "${eww} update volume_rev=true"
@@ -82,10 +83,10 @@
                   :value volume_vol
                   :orientation "h"
                   :tooltip "${volume_vol}%"
-                  :max 101
+                  :max 150
                   :min 0
                   :onchange "volume set-volume $(echo {} | cut -d'.' -f1)" ))
-      (button   :class "icon volume"
+      (button   :class "${volume_is_mute} icon volume"
                 :onrightclick "volume next-sink" volume_icon))))
 
 ;=====  =====;
@@ -105,8 +106,57 @@
 
 
 ;===== power =====;
+(defvar power_rev false)
+(defvar power_prompt_rev false)
+(defvar power_command "")
+
 (defwidget power []
-  (label :class "power" :text "P"))
+  (eventbox :onhover "${eww} update power_rev=true"
+            :onhoverlost "${eww} update power_rev=false"
+    (box  :space-evenly "false"
+          :class "power"
+      (revealer	:transition "slideleft"
+                :reveal power_rev
+                :duration "350ms"
+        (box  :orientation "h"
+              :space-evenly "false"
+
+          (button :class "restartwm power"
+                  :tooltip "Restart Windows Manager"
+                  :onclick "${eww} update power_prompt_rev=true;
+                           ${eww} update power_command=\"bsp_restart\"" "" )
+
+          (button :class "logout power"
+                  :tooltip "Logout"
+                  :onclick "${eww} update power_prompt_rev=true;
+                           ${eww} update power_command=\"killall bspwm\"" "")
+
+          (button :class "lock power"
+                  :tooltip "Lock Screen"
+                  :onclick "${eww} update power_prompt_rev=true;
+                           ${eww} update power_command=\"betterlockscreen -l\"" "")
+
+          (button :class "reboot power"
+                  :tooltip "Reboot"
+                  :onclick "${eww} update power_prompt_rev=true;
+                           ${eww} update power_command=\"reboot\"" "")))
+
+      (button :class "shutdown power"
+              :tooltip "Shutdown"
+              :onclick "${eww} update power_prompt_rev=true;
+                       ${eww} update power_command=\"systemctl poweroff\"" "")
+
+      (eventbox :onhover "${eww} update power_prompt_rev=true"
+                :onhoverlost "${eww} update power_prompt_rev=false"
+        (revealer :transition "slideleft"
+                  :reveal power_prompt_rev
+                  :duration "200ms"
+          (box  :orientation "h"
+                :space-evenly "false"
+            (button :class "yes prompt power"
+                    :onclick power_command "Yes")
+            (button :class "no prompt power"
+                    :onclick "${eww} update power_prompt_rev=false" "No")))))))
 
 
 ;===== SEP =====;
@@ -136,7 +186,7 @@
        :space-evenly false
        :halign "center"
        :class "centr"
-    (power)
+    (clock)
     ))
 
 (defwidget left0 []
@@ -208,11 +258,3 @@
     :width "270px"
     :height "60px")
   (cal))
-(defwindow audio
-  :geometry (geometry :x "-20px"
-    :y "7%"
-    :anchor "top right"
-    :width "280px"
-    :height "60px")
-  (audio))
-

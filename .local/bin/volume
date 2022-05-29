@@ -34,20 +34,19 @@
 #done
 
 
-sink="$(pactl info | grep "Default Sink:" | cut -d' ' -f3)"
+#sink="$(pactl info | grep "Default Sink:" | cut -d' ' -f3)"
 option="$1"
 shift 1
 
 case $option in
     "set-volume")
         #pactl set-sink-volume "$sink" $1%
-        pactl set-sink-volume @DEFAULT_SINK@ $1%
-        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume-vol
+        pactl set-sink-volume @DEFAULT_SINK@ "$1"%
         ;;
 
     "sink-mute")
         pactl set-sink-mute @DEFAULT_SINK@ toggle
-        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume-vol
+        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume
         ;;
 
     "source-mute")
@@ -55,12 +54,15 @@ case $option in
         ;;
 
     "next-sink")
-        switch_default_sink
-        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume-icon
+        def_sink=$(pactl get-default-sink)
+        next_sink=$(pactl list sinks short | grep -A 1 "$def_sink" | cut -f2 | tail -n1)
+        if [ "$def_sink" == "$next_sink" ]; then
+            next_sink=$(pactl list sinks short | cut -f2 | head -n1)
+        fi
+        pactl set-default-sink $next_sink
+
+        $XDG_CONFIG_HOME/eww/bar/scripts/volume update-volume
         ;;
 
 esac
-
-
-#$(echo $2 | cut -d'.' -f 1)
 

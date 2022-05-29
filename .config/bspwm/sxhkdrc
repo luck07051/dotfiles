@@ -78,13 +78,13 @@ super + {_, shift} + space
 #====================AUDIO====================#
 # {Raise, Low} volume
 super + shift + {u, i}
-    volume set-volume {+5, -5}
+    volume set-volume {+5,-5}
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
-    volume set-volume {+5, -5}
+    volume set-volume {+5,-5}
 
 {button10, button11}
-    volume set-volume {+5, -5}
+    volume set-volume {+5,-5}
 
 # switch output
 super + shift + o
