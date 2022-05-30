@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 target="$1"
 focused=$(bspc query -D --desktop --names)
 target_monitor=$(bspc query -M --desktop $target --names)

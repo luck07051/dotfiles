@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Reorder the desktop without messing the node
+
 desktops=($(bspc query -D --monitor ^1 --names))
 target=($(bspc query -D --monitor ^1 --names | sort))
 main_monitor_focus=$(bspc wm --get-status | sed 's/L/\n/g' | grep "HDMI-0" | sed 's/:/\n/g' | grep -G '^[OF]' | cut -c 2)

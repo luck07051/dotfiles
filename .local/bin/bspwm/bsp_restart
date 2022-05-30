@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Use this to restart bspwm without messing node.
+
 # reorder desktop
 bsp_desktop_reorder
 

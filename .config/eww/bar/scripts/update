@@ -1,0 +1,28 @@
+#!/bin/sh
+
+EWW="eww -c $HOME/.config/eww/bar"
+
+function pac () {
+    bspc rule -a '*' -o monitor='^2'; \
+    $TERMINAL --class "floating" --title "Updating" \
+        -o window.dimensions.columns="80" -o window.dimensions.lines="20" \
+        -e sudo pacman -Syu
+}
+
+case $1 in
+    "do-update")
+        pac && ${EWW}/scripts/update
+        ;;
+    *)
+        update=$(checkupdates | wc -l)
+
+        echo $update
+
+        if [ "$update" == "0" ]; then
+            ${EWW} update update_show=false
+        else
+            ${EWW} update update_show=true
+        fi
+        ;;
+esac
+

@@ -89,6 +89,8 @@
       (button   :class "${volume_is_mute} icon volume"
                 :onrightclick "volume next-sink" volume_icon))))
 
+
+
 ;=====  =====;
 (defwidget mem []
   (box :class "mem" :vexpand "false" :hexpand "false"
@@ -105,7 +107,7 @@
         ""))))
 
 
-;===== power =====;
+;===== POWER =====;
 (defvar power_rev false)
 (defvar power_prompt_rev false)
 (defvar power_command "")
@@ -146,8 +148,7 @@
               :onclick "${eww} update power_prompt_rev=true;
                        ${eww} update power_command=\"systemctl poweroff\"" "")
 
-      (eventbox :onhover "${eww} update power_prompt_rev=true"
-                :onhoverlost "${eww} update power_prompt_rev=false"
+      (eventbox :onhoverlost "${eww} update power_prompt_rev=false"
         (revealer :transition "slideleft"
                   :reveal power_prompt_rev
                   :duration "200ms"
@@ -158,6 +159,30 @@
             (button :class "no prompt power"
                     :onclick "${eww} update power_prompt_rev=false" "No")))))))
 
+
+;===== UPDATE =====;
+(defvar update_show false)
+(defvar update_rev false)
+(defpoll update_num :interval "3h" "./scripts/update")
+
+(defwidget update []
+  (revealer :reveal update_show
+            :duration "350ms"
+            :transition "slideleft"
+    (eventbox :onhover "${eww} update update_rev=true"
+              :onhoverlost "${eww} update update_rev=false"
+      (box  :class "update"
+            :space-evenly false
+        (revealer :reveal {!update_rev}
+                  :duration "200ms"
+                  :transition "slideleft"
+          (label  :class "icon update"
+                  :text ""))
+        (revealer :reveal {update_rev}
+                  :duration "200ms"
+                  :transition "slideleft"
+          (button :class "data update"
+                  :onclick "./scripts/update do-update" update_num))))))
 
 ;===== SEP =====;
 
@@ -176,6 +201,8 @@
        :halign "end"
        :class "right"
 ;    (mem)
+    (update)
+    (sep)
     (volume)
     (clock)
     (power)
@@ -224,14 +251,14 @@
   :geometry
   (geometry
     :x "0px"
-    :y "8px"
-    :width "98%"
+    :y "6px"
+    :width "99%"
     :height "30px"
     :anchor "top center")
   :stacking "bg"
   :wm-ignore false
   :windowtype "dock"
-  :reserve (struts :distance "36px" :side "top")
+  :reserve (struts :distance "30px" :side "top")
   (all0))
 
 (defwindow bar1
@@ -239,21 +266,21 @@
   :geometry
   (geometry
     :x "0px"
-    :y "8px"
-    :width "98%"
+    :y "6px"
+    :width "99%"
     :height "30px"
     :anchor "top center")
   :stacking "bg"
   :wm-ignore false
   :windowtype "dock"
-  :reserve (struts :distance "36px" :side "top")
+  :reserve (struts :distance "30px" :side "top")
   (all1))
 
 
 
 (defwindow calendar
   :geometry (geometry :x "-20px"
-    :y "7%"
+    :y "40px"
     :anchor "top right"
     :width "270px"
     :height "60px")

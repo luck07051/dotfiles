@@ -248,3 +248,17 @@ if matlab can't install
 ```
 downgrade cairo
 ```
+
+
+# Firefox
+Open `about:config` page.
+Search for these:
+```
+    toolkit.legacyUserProfileCustomizations.stylesheets
+    layers.acceleration.force-enabled
+    gfx.webrender.all
+    gfx.webrender.enabled
+    layout.css.backdrop-filter.enabled
+    svg.context-properties.content.enabled
+```
+Then make sure to enable them all.

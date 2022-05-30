@@ -29,6 +29,7 @@ bspc rule -a QjackCtl           state=floating desktop='9'
 bspc rule -a Pavucontrol        state=floating
 bspc rule -a Surf               state=tiled focus=off
 bspc rule -a Zathura            state=tiled
+bspc rule -a matplotlib         state=floating
 
 
 #====================STARTUP====================#
@@ -47,4 +48,4 @@ xsetroot -cursor_name left_ptr &
 # Auto start programs if the programs not running
 pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
 pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL -e tmuxinator start main &)
-pgrep "qjackctl" || qjackctl &
+#pgrep "qjackctl" || qjackctl &
