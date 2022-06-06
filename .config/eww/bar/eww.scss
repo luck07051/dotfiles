@@ -1,6 +1,5 @@
 * {
     all: unset; //Unsets everything so you can style everything from scratch
-    //font-family: "MesloLGS Nerd Font";
 }
 
 $color00: #1C1C1C;
@@ -41,7 +40,7 @@ $scale_bg: #303030;
 }
 
 
-///////////////WORKSPACE///////////////////
+/////////////////////WORKSPACE////////////////////////
 
 .workspaces {
     background-color: $bg;
@@ -66,9 +65,11 @@ $scale_bg: #303030;
 ////////////////CLOCK///////////////////
 
 .clock {
-    //font-family: Comic Sans MS;
+    font-family: Iosevka Nerd Font;
+    font-size: 15;
     font-weight : bold;
     background-color: $color08;
+    padding-top: 2px;
     padding-right: 10px;
     padding-left: 10px;
 }
@@ -121,15 +122,62 @@ $scale_bg: #303030;
     padding-right: 4px;
     padding-left: 4px;
     margin-right: 4px;
+    margin-left: 2px;
 }
-.power.shutdown { color: $color07; }
+.power.shutdown { color: $color01; }
 .power.reboot { color: $color02; }
-.power.lock { color: $color04; }
-.power.logout { color: $color05; }
+.power.lock { color: $color03; }
+.power.logout { color: $color04; }
 .power.restartwm { color: $color06; }
 
 .power.prompt.yes { color: $color15; }
 .power.prompt.no { color: $color07; }
+
+
+/////////////////////SYSTEM/////////////////////////
+.system {
+    margin-left: 8px;
+}
+
+.system scale trough {
+    all: unset;
+    background-color: $scale_bg;
+    border-radius: 10px;
+    min-height: 5px;
+    min-width: 35px;
+}
+.system scale trough highlight {
+    all: unset;
+    border-radius: 10px;
+}
+.system.icon {
+    padding-left: 0px;
+}
+.system.bar {
+    padding-top: 2px;
+    padding-right: 0px;
+}
+
+.system.cpu { color: $color01; }
+.system.cpu { margin-right: 4px; }
+.system.cpu scale trough highlight { background-color: $color01; }
+.system.icon.cpu {
+    padding-top: 2px;
+    font-size: 13;
+}
+
+.system.mem { color: $color02; }
+.system.mem scale trough highlight { background-color: $color02; }
+
+.system.uptime { color: $color03; }
+.system.icon.uptime {
+    padding-top: 1px;
+}
+.system.data.uptime {
+    padding-top: 2px;
+    font-size: 13;
+    font-weight: bold;
+}
 
 
 
@@ -142,30 +190,7 @@ $scale_bg: #303030;
     font-size: 16;
     padding-top: 2px;
     padding-right: 3px;
-    color: $color01;
+    color: $color04;
 }
 .update.data {
 }
-
-//////////////////////////////////////////////
-.mem_bar {
-  color: #e0b089;
-    background-color: #38384d;
-  border-radius: 10px;
-}
-.mem_icon {
-    color: #e0b089;
-}
-.mem_icon {
-    font-size: 15;
-    margin: 10px;
-}
-.mem {
-    background-color: #0f0f17;
-	border-radius: 16px;
-  margin: 0px 10px 0px 3px;
-  }
-
-
-
-

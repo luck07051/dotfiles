@@ -30,6 +30,7 @@ yay -S picom-jonaburg-git   # compositor
 nitrogen            # wallpaper
 setxkbmap           # uses it to remap capslock to ctrl
 
+cronie              # auto exec tasks at pre-determined times
 ntp                 # clock fixer
 xclip               # let nvim can use system clipboard
 ```
@@ -57,7 +58,7 @@ yay -S ncpamixer    # pulseaudio control
 icdiff              # diff tool
 wget                # download file from web
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
-youtube-dl          # youtube download
+youtube-dl          # youtube downloader
 
 task                # taskwarrior, task management tool
 taskwarrior-tui     # a tui for taskwarrior
@@ -69,6 +70,7 @@ fzf                 # fuzzy finder
 starship            # prompt
 exa                 # better ls
 htop                # better top
+btop                # better better top
 bat                 # better cat
 procs               # better ps
 zoxide              # better cd
@@ -93,16 +95,14 @@ yarn
 # vimtex
 texlive-most
 
-
 # polybar
-# spotify
+## spotify
 playerctl
 pip install dbus-python
 
 # bitwarden-rofi
 jq
 xdotool
-
 ```
 
 Nvidea
@@ -126,18 +126,11 @@ yay -S adobe-source-han-sans-otc-fonts
 yay -S noto-fonts-cjk
 ```
 
-Useless
-```
-screenfetch
-cmatrix
-```
 
 
 
 
-
-
-#
+# NOTE
 
 ### yay
 ```
@@ -243,16 +236,16 @@ sudo hwclock --systohc
 ```
 
 
-# MATLAB
+### MATLAB
 if matlab can't install
 ```
 downgrade cairo
 ```
 
 
-# Firefox
+### Firefox
+#### CSS
 Open `about:config` page.
-Search for these:
 ```
     toolkit.legacyUserProfileCustomizations.stylesheets
     layers.acceleration.force-enabled
@@ -262,3 +255,17 @@ Search for these:
     svg.context-properties.content.enabled
 ```
 Then make sure to enable them all.
+
+
+### Cron
+enable cron
+```
+systemctl enable cronie
+systemctl start cronie
+```
+
+put this in `srontab -u root -e`
+```
+# sync time everyday at 8pm
+0 20 * * * /usr/bin/ntpd -qg; /usr/bin/hwclock --systohc
+```

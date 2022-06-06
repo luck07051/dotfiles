@@ -1,5 +1,5 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/ui_theme.vim
+" Filename: autoload/lightline/colorscheme/ui_lightline_colors.vim
 " Author: luck07051
 " License: MIT License
 " Last Change: 2022/03/15 23:58:59.
@@ -44,4 +44,4 @@ let s:p.tabline.right = copy(s:p.normal.right)
 let s:p.normal.error =   [ [ s:red, s:none ] ]
 let s:p.normal.warning = [ [ s:yellow, s:base0 ] ]
 
-let g:lightline#colorscheme#ui_theme#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#ui_lightline_colors#palette = lightline#colorscheme#flatten(s:p)

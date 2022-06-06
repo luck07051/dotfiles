@@ -7,14 +7,13 @@ export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
 #==================== Bin Paths ====================#
-# Add .local/bin and its subdir to path
+# Add ~/.local/bin and its subdir to path
 export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
 
 
 #==================== Let Paths Right ====================#
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export ZPLUG_HOME="$XDG_CONFIG_HOME"/zplug
 # X11
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc

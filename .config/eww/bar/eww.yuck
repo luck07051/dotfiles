@@ -1,3 +1,14 @@
+; cpu
+; mem
+; uptime
+; dirve
+
+; network
+; wifi
+
+; light
+; battery
+
 
 ; base on https://github.com/saimoomedits/eww-widgets
 ; and https://github.com/druskus20/eugh
@@ -38,7 +49,6 @@
   (box  :class "time clock"
         :orientation "h"
         :halign "start"
-        :hexpand false
         :space-evenly false
     (label :text clock_hour)
     (label :text ":")
@@ -48,7 +58,6 @@
   (box  :class "date clock"
         :orientation "h"
         :halign "start"
-        :hexpand false
         :space-evenly false
     (button :class "clock_date"
             :onclick "./scripts/pop calendar" clock_date)))
@@ -66,7 +75,6 @@
 
 
 ;===== VOLUME =====;
-;=== volume ===;
 (defvar volume_rev false)
 (defpoll volume_vol :interval "1s" "scripts/volume get-volume")
 (defpoll volume_icon :interval "1s" "scripts/volume get-icon")
@@ -91,20 +99,39 @@
 
 
 
-;=====  =====;
+;===== SYSTEM =====;
+(defwidget system-bar [name value icon]
+  (box  :class "${name} system"
+        :space-evenly "false"
+        :orientation "h"
+    (label  :class "${name} icon system"
+            :text icon)
+    (scale  :class "${name} bar system"
+            :value value
+            :min 0
+            :max 100
+            :tooltip "${value}%"
+            :active "false")))
+
+(defpoll cpu_value :interval "2s" "./scripts/sys_info --cpu")
+(defpoll mem_value :interval "2s" "./scripts/sys_info --mem")
+
+(defwidget cpu []
+  (system-bar :name "cpu"
+              :value cpu_value
+              :icon ""))
+
 (defwidget mem []
-  (box :class "mem" :vexpand "false" :hexpand "false"
-    (circular-progress :value {EWW_RAM.used_mem_perc}
-                       :class "mem_bar"
-                       :thickness 4
-      (button
-        :class "mem_icon"
-        :limit-width 2
-        :tooltip "using ${EWW_RAM.used_mem_perc}% ram"
-        ;:onclick "$HOME/.config/eww/bar/scripts/pop system"
-        :show_truncated false
-        :wrap false
-        ""))))
+  (system-bar :name "mem"
+              :value mem_value
+              :icon ""))
+
+
+(defpoll uptime :interval "1m" "./scripts/uptime")
+(defwidget uptime []
+  (box :class "uptime system" :space-evenly "false"
+    (label :class "uptime icon system" :text "祥")
+    (label :class "uptime data system" :text uptime)))
 
 
 ;===== POWER =====;
@@ -123,10 +150,10 @@
         (box  :orientation "h"
               :space-evenly "false"
 
-          (button :class "restartwm power"
-                  :tooltip "Restart Windows Manager"
-                  :onclick "${eww} update power_prompt_rev=true;
-                           ${eww} update power_command=\"bsp_restart\"" "" )
+;          (button :class "restartwm power"
+;                  :tooltip "Restart Windows Manager"
+;                  :onclick "${eww} update power_prompt_rev=true;
+;                           ${eww} update power_command=\"bsp_restart\"" "" )
 
           (button :class "logout power"
                   :tooltip "Logout"
@@ -187,7 +214,7 @@
 ;===== SEP =====;
 
 (defwidget sep []
-  (box :class "separ" :vexpand "false" :hexpand "false"
+  (box :class "separ"
     (label :class "separ" :text "|")))
 
 
@@ -200,8 +227,10 @@
        :space-evenly false
        :halign "end"
        :class "right"
-;    (mem)
     (update)
+    (uptime)
+    (mem)
+    (cpu)
     (sep)
     (volume)
     (clock)
