@@ -1,6 +1,0 @@
-#viewerContainer > #viewer > .page > .canvasWrapper > canvas{
-    /*filter: grayscale(100%); */
-    filter: invert(100%);
-}
-/* javascript:(function(){viewer.style = 'filter: grayscale(1) invert(1)';})() */
-

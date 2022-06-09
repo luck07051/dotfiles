@@ -1,6 +1,0 @@
-#!/bin/sh
-#/usr/bin/firefox --profile "$XDG_CONFIG_HOME/mozilla/firefox" "$@" &
-/usr/bin/firefox --profile "$XDG_CONFIG_HOME/mozilla/firefox/zot5znfl.default-release" "$@" &
-
-sleep 1
-rm -rf $HOME/.mozilla
