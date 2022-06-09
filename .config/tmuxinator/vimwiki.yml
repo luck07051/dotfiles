@@ -1,8 +1,0 @@
-# /home/ui/.config/tmuxinator/vimwiki.yml
-
-name: vimwiki
-root: ~/vimwiki/
-
-
-windows:
-  - editor: vim ~/vimwiki/index.md

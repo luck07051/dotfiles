@@ -1,3 +1,8 @@
+
+set window-title-basename "true"
+set selection-clipboard "clipboard"
+
+
 set font "MesloLGS Nerd Font 11"
 
 set default-bg                  "#1c1c1c"
@@ -6,5 +11,21 @@ set default-fg                  "#bcbcbc"
 set statusbar-bg                "#bcbcbc"
 set statusbar-fg                "#1c1c1c"
 
+# sceach color
 set highlight-color             "#ebcb8b"
 set highlight-active-color      "#81a1c1"
+
+#set completion-bg               "#1C1C1C"
+#set completion-fg               "#BCBCBC"
+
+# context color
+set recolor-lightcolor          "#1C1C1C"
+set recolor-darkcolor           "#BCBCBC"
+
+
+# Startup options
+
+set adjust-open width
+set recolor true
+
+map <F2> recolor toggle

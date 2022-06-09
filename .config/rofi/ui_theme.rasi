@@ -12,85 +12,79 @@
  */
 
 configuration {
-  font: "MesloLGS Nerd Font Bold 10";
+    font: "MesloLGS Nerd Font Bold 12";
 
-  drun {
-    display-name: " ";
-  }
+    drun { display-name: " "; }
+    run { display-name: ""; }
+    window { display-name: ""; }
+    combi { display-name: ""; }
 
-  run {
-    display-name: "";
-  }
-
-  window {
-    display-name: "";
-  }
-
-  combi {
-    display-name: "";
-  }
-
-  timeout {
-    delay: 10;
-    action: "kb-cancel";
-  }
+    timeout {
+        delay: 10;
+        action: "kb-cancel";
+    }
 }
 
+
 * {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  spacing: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
 
-  bg: #1C1C1C;
-  bg-alt: #585858;
-  fg: #BCBCBC;
-  fg-alt: #FFB9DC;
+    bg: #1C1C1CC0;
+    bg-alt: #585858;
+    fg: #BCBCBC;
+    fg-alt: #FFB9DC;
 
-  background-color: @bg;
-  text-color: @fg;
+    background-color: transparent;
+    text-color: @fg;
 }
 
 window {
-  transparency: "real";
+    location: center;
+    background-color: @bg;
+    y-offset: -220;
 }
 
 mainbox {
-  children: [inputbar, listview];
+    children: [inputbar, listview];
+    margin: 10;
 }
 
 inputbar {
-  background-color: @bg-alt;
-  children: [prompt, entry];
+    children: [prompt, entry];
 }
 
 entry {
-  background-color: inherit;
-  padding: 12px 3px;
+    padding: 12px 12px;
 }
 
 prompt {
-  background-color: inherit;
-  padding: 12px;
+    padding: 12px;
 }
 
 listview {
-  lines: 10;
+    lines: 10;
+    columns: 1;
+
+    fixed-height: false;
 }
 
 element {
-  children: [element-icon, element-text];
+    children: [element-icon, element-text];
+    margin: 0 16;
 }
 
 element-icon {
-  padding: 10px 10px;
+    padding: 10px 10px;
 }
 
 
 element-text {
-  padding: 10px 0;
+    padding: 10px 0;
 }
 
 element-text selected {
-  text-color: @fg-alt;
+    text-color: @fg-alt;
 }

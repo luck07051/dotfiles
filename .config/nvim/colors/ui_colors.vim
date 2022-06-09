@@ -28,6 +28,8 @@ hi SpecialKey       ctermfg=238
 " complete menu
 hi Pmenu            ctermfg=7   ctermbg=236
 
+
+"==================== SPECIAL FUNCTION ===================="
 " highlight 81 column
 hi ColorColumn                  ctermbg=8
 call matchadd('ColorColumn', '\%81v', 100)
@@ -37,7 +39,7 @@ hi ExtraWhitespace              ctermbg=8
 match ExtraWhitespace /\s$/
 
 
-"==================== FILE SP ===================="
-" set color for tex
+"==================== FILE SPECIFIC ===================="
+" latex
 autocmd filetype tex hi Error ctermfg=1   ctermbg=none
 

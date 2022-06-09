@@ -14,13 +14,14 @@ Plug 'kshenoy/vim-signature'
 Plug 'vimwiki/vimwiki'
 " Use C-hjkl to switch vim and tmux panel
 Plug 'christoomey/vim-tmux-navigator'
+" Add some movement to Sorrondings
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 ""
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 
 Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
 
 "===fzf==="
 Plug 'junegunn/fzf.vim'

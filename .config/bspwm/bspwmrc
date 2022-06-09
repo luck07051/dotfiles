@@ -3,12 +3,12 @@
 bspc rule -r "*"
 
 
-#====================MONITOR====================#
+#==================== MONITOR ====================#
 bspc monitor HDMI-0 -d 1 3 4 5 6 7 8 9
 bspc monitor HDMI-1 -d 2
 
 
-#====================CONFIG====================#
+#==================== CONFIG ====================#
 bspc config focus_follows_pointer   true
 
 
@@ -21,7 +21,7 @@ bspc config active_border_color     $(xrdb -get color0)
 bspc config normal_border_color     $(xrdb -get color0)
 
 
-#====================RULE====================#
+#==================== RULE ====================#
 bspc rule -a *:floating:*       state=floating
 bspc rule -a *:scratchpad:*     state=floating
 
@@ -32,7 +32,7 @@ bspc rule -a Zathura            state=tiled
 bspc rule -a matplotlib         state=floating
 
 
-#====================STARTUP====================#
+#==================== STARTUP ====================#
 # Basic programs
 sxhkd -c ~/.config/bspwm/sxhkdrc &
 pgrep "nitrogen" || nitrogen --restore &

@@ -39,6 +39,7 @@
 *.color13:  base0D
 *.color14:  base0E
 *.color15:  base0F
+
 *color0:    base00
 *color1:    base01
 *color2:    base02
@@ -55,6 +56,25 @@
 *color13:   base0D
 *color14:   base0E
 *color15:   base0F
+
+*black        : base00
+*blue         : base01
+*cyan         : base02
+*green        : base03
+*purple       : base04
+*red          : base05
+*white        : base06
+*yellow       : base07
+*brightBlack  : base08
+*brightBlue   : base09
+*brightCyan   : base0A
+*brightGreen  : base0B
+*brightPurple : base0C
+*brightRed    : base0D
+*brightWhite  : base0E
+*brightYellow : base0F
+
+
 
 *.background: base00
 *.foreground: base07

@@ -1,5 +1,5 @@
 
-#====================BASIC====================#
+#==================== BASIC ====================#
 # Restart WM and sxhkd
 super + ctrl + r
     bsp_restart
@@ -13,7 +13,7 @@ super + q
     bspc node -c
 
 
-#====================OPEN====================#
+#==================== OPEN ====================#
 #===Essential===#
 # Open terminal
 super + Return
@@ -32,7 +32,7 @@ super + p
     rofi -show power -modi power:power-menu -theme ui_theme
 
 
-#====================WORKSPACES & LAYOUT & WINDOWS====================#
+#==================== WORKSPACES & LAYOUT & WINDOWS ====================#
 # Move focus
 super + {h, j, k, l}
     bspc node --focus {west, south, north, east}
@@ -75,7 +75,7 @@ super + y
 super + {_, shift} + space
     bspc node --focus {next.local.window, prev.local.window}
 
-#====================AUDIO====================#
+#==================== AUDIO ====================#
 # {Raise, Low} volume
 super + shift + {u, i}
     volume set-volume {+5,-5}
@@ -98,46 +98,9 @@ XF86AudioMicMute
     volume source-mute
 
 
-#====================MISC====================#
+#==================== MISC ====================#
 # Screenshot
 Print
     flameshot gui
 
-
-
-
-
-##===Scratchpad===#
-## Open taskwarrior-tui as scratchpad
-## exec 'task sync' when press super+t everytime
-#super + t
-#    i3run-scratchpad Taskwarrior 130 35 "taskwarrior-tui | task sync"
-#
-## Open vimwiki
-#super + w
-#    i3-switch-sp -s -a 10 "$TERMINAL \
-#        --title Vimwiki -e tmuxinator start vimwiki"
-#
-## Open terminal as scratchpad
-#super + comma
-#    i3run-scratchpad Terminal 120 30 "tmuxinator start terminal"
-#
-## Open filemanager as scratchpad
-#super + r
-#    i3run-scratchpad Filemanager 130 35 "tmuxinator start filemanager"
-#
-##===Extra===#
-## Open bitwarden-rodi menu
-#super + shift +b
-#    bwmenu
-#
-# Bookmark
-#super + o
-#    $TERMINAL --class 'floating' --title 'bookmark' \
-#    -o window.opacity=0.90 \
-#    -e bookmark open
-#
-## Open class sheet
-#super + shift + c
-#    sxiv ~/pictures/class_sheet.jpg
 

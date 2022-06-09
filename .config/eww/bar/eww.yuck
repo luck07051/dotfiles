@@ -110,20 +110,18 @@
             :value value
             :min 0
             :max 100
-            :tooltip "${value}%"
+            :tooltip "${round(value,0)}%"
             :active "false")))
 
-(defpoll cpu_value :interval "2s" "./scripts/sys_info --cpu")
-(defpoll mem_value :interval "2s" "./scripts/sys_info --mem")
 
 (defwidget cpu []
   (system-bar :name "cpu"
-              :value cpu_value
+              :value {EWW_CPU.avg}
               :icon ""))
 
 (defwidget mem []
   (system-bar :name "mem"
-              :value mem_value
+              :value {EWW_RAM.used_mem_perc}
               :icon ""))
 
 
@@ -144,47 +142,49 @@
             :onhoverlost "${eww} update power_rev=false"
     (box  :space-evenly "false"
           :class "power"
-      (revealer	:transition "slideleft"
-                :reveal power_rev
-                :duration "350ms"
-        (box  :orientation "h"
-              :space-evenly "false"
-
-;          (button :class "restartwm power"
-;                  :tooltip "Restart Windows Manager"
-;                  :onclick "${eww} update power_prompt_rev=true;
-;                           ${eww} update power_command=\"bsp_restart\"" "" )
-
-          (button :class "logout power"
-                  :tooltip "Logout"
-                  :onclick "${eww} update power_prompt_rev=true;
-                           ${eww} update power_command=\"killall bspwm\"" "")
-
-          (button :class "lock power"
-                  :tooltip "Lock Screen"
-                  :onclick "${eww} update power_prompt_rev=true;
-                           ${eww} update power_command=\"betterlockscreen -l\"" "")
-
-          (button :class "reboot power"
-                  :tooltip "Reboot"
-                  :onclick "${eww} update power_prompt_rev=true;
-                           ${eww} update power_command=\"reboot\"" "")))
-
-      (button :class "shutdown power"
-              :tooltip "Shutdown"
-              :onclick "${eww} update power_prompt_rev=true;
-                       ${eww} update power_command=\"systemctl poweroff\"" "")
-
       (eventbox :onhoverlost "${eww} update power_prompt_rev=false"
-        (revealer :transition "slideleft"
-                  :reveal power_prompt_rev
-                  :duration "200ms"
-          (box  :orientation "h"
-                :space-evenly "false"
-            (button :class "yes prompt power"
-                    :onclick power_command "Yes")
-            (button :class "no prompt power"
-                    :onclick "${eww} update power_prompt_rev=false" "No")))))))
+        (box  :space-evenly "false"
+              :class "power"
+          (revealer	:transition "slideleft"
+                        :reveal power_rev
+                        :duration "350ms"
+            (box  :orientation "h"
+                  :space-evenly "false"
+
+              ;          (button :class "restartwm power"
+              ;                  :tooltip "Restart Windows Manager"
+              ;                  :onclick "${eww} update power_prompt_rev=true;
+              ;                           ${eww} update power_command=\"bsp_restart\"" "" )
+
+              (button :class "logout power"
+                      :tooltip "Logout"
+                      :onclick "${eww} update power_prompt_rev=true;
+                               ${eww} update power_command=\"killall bspwm\"" "")
+
+              (button :class "lock power"
+                      :tooltip "Lock Screen"
+                      :onclick "${eww} update power_prompt_rev=true;
+                               ${eww} update power_command=\"betterlockscreen -l\"" "")
+
+              (button :class "reboot power"
+                      :tooltip "Reboot"
+                      :onclick "${eww} update power_prompt_rev=true;
+                               ${eww} update power_command=\"reboot\"" "")))
+
+          (button :class "shutdown power"
+                  :tooltip "Shutdown"
+                  :onclick "${eww} update power_prompt_rev=true;
+                           ${eww} update power_command=\"systemctl poweroff\"" "")
+
+          (revealer :transition "slideleft"
+                    :reveal power_prompt_rev
+                    :duration "200ms"
+            (box  :orientation "h"
+                  :space-evenly "false"
+              (button :class "yes prompt power"
+                      :onclick power_command "Yes")
+              (button :class "no prompt power"
+                      :onclick "${eww} update power_prompt_rev=false" "No"))))))))
 
 
 ;===== UPDATE =====;
@@ -280,14 +280,14 @@
   :geometry
   (geometry
     :x "0px"
-    :y "6px"
-    :width "99%"
-    :height "30px"
+    :y "0px"
+    :width "100%"
+    :height "26px"
     :anchor "top center")
   :stacking "bg"
   :wm-ignore false
   :windowtype "dock"
-  :reserve (struts :distance "30px" :side "top")
+  :reserve (struts :distance "26px" :side "top")
   (all0))
 
 (defwindow bar1
@@ -295,14 +295,14 @@
   :geometry
   (geometry
     :x "0px"
-    :y "6px"
-    :width "99%"
-    :height "30px"
+    :y "0px"
+    :width "100%"
+    :height "26px"
     :anchor "top center")
   :stacking "bg"
   :wm-ignore false
   :windowtype "dock"
-  :reserve (struts :distance "30px" :side "top")
+  :reserve (struts :distance "26px" :side "top")
   (all1))
 
 

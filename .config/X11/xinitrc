@@ -35,6 +35,7 @@ xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
 xset s off
 xset -dpms
 
+
 #===Start Window Manager===#
 #exec xmonad
 #exec qtile start

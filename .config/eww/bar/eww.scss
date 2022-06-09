@@ -27,6 +27,7 @@ $scale_bg: #303030;
 .bar0, .bar1, .all {
     background-color: $bg;
     color: $fg;
+    font-family: MesloLGS Nerd Font;
     font-size: 1.1rem;
 }
 
@@ -65,8 +66,8 @@ $scale_bg: #303030;
 ////////////////CLOCK///////////////////
 
 .clock {
-    font-family: Iosevka Nerd Font;
-    font-size: 15;
+
+    font-size: 14;
     font-weight : bold;
     background-color: $color08;
     padding-top: 2px;
@@ -118,11 +119,10 @@ $scale_bg: #303030;
 ////////////////////POWER//////////////////////
 .power {
     //font-family: Font Awesome;
-    font-weight : bold;
-    padding-right: 4px;
-    padding-left: 4px;
-    margin-right: 4px;
-    margin-left: 2px;
+    padding-right: 6px;
+    padding-left: 6px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 .power.shutdown { color: $color01; }
 .power.reboot { color: $color02; }

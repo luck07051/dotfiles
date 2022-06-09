@@ -5,7 +5,8 @@ colorscheme ui_colors
 
 source $VIMHOME/general.vim
 
+source $VIMHOME/key.vim
+
 source $VIMHOME/plugin.vim
 
-source $VIMHOME/key.vim
 

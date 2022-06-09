@@ -52,7 +52,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 #==================== Default App ====================#
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="$HOME/.local/bin/applications/firefox"
+export BROWSER="firefox"
 
 #==================== Misc ====================#
 export TERM="xterm-256color"
@@ -65,3 +65,4 @@ source "$XDG_CONFIG_HOME/lf/colors"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 . "/home/ui/.local/share/cargo/env"
+

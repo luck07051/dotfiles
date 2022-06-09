@@ -16,5 +16,5 @@ killall -q polybar
 
 # All monitor ues bar
 for m in $(polybar --list-monitors | cut -d":" -f1); do
-    MONITOR=$m polybar -c $HOME/.config/polybar/config.ini --reload bar &
+    MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/config.ini --reload bar &
 done

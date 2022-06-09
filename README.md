@@ -269,3 +269,14 @@ put this in `srontab -u root -e`
 # sync time everyday at 8pm
 0 20 * * * /usr/bin/ntpd -qg; /usr/bin/hwclock --systohc
 ```
+
+
+### GRUB
+[Hidden menu](https://wiki.archlinux.org/title/GRUB/Tips_and_tricks#Hidden_menu)
+
+Fix resolution, add these in /etc/default/grub
+```
+GRUB_CMDLINE_LINUX_DEFAULT="nomodeset"
+GRUB_GFXPAYLOAD_LINUX=1920x1080
+```
+remember comment default setting

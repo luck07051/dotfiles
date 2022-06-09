@@ -1,5 +1,5 @@
 
-"====================GENERAL===================="
+"==================== GENERAL ===================="
 filetype plugin indent on
 syntax enable
 
@@ -46,4 +46,25 @@ set wildmenu            " show the commom complete list, can use Tab and S-Tab
 "set list
 "set listchars=tab:»\ ,eol:↲,trail:_
 set showbreak=↪\ "
+
+
+
+" Not auto comment new line
+autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
+
+
+" Delete extra space when write the file
+autocmd BufWrite * call DeleteExtraSpaces()
+function DeleteExtraSpaces()
+    :let b:nline= line('.')
+    :%s/\s\+$//e
+    :execute "to ".b:nline
+endfunction
+
+
+" Fix initial size incorrectly
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+
+
+
 
