@@ -119,20 +119,11 @@ let g:vimwiki_markdown_link_ext = 1
 nmap <Leader>md <Plug>MarkdownPreview
 nmap <Leader>ms <Plug>MarkdownPreviewStop
 let g:mkdp_browser = 'surf'
-let g:mkdp_auto_close = 1
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'relative',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 0
-    \ }
+let g:mkdp_auto_start = 1
+let g:mkdp_preview_options = {}
+let g:mkdp_preview_options.sync_scroll_type = 'relative'
+let g:mkdp_preview_options.disable_filename = v:true
+let g:mkdp_markdown_css = expand('$XDG_CONFIG_HOME/nvim/colors/markdown.css')
 
 
 "===vim markdown==="

@@ -1,31 +1,35 @@
 
-set window-title-basename "true"
-set selection-clipboard "clipboard"
+#==================== THEME ====================#
+set font                    "MesloLGS Nerd Font 11"
+set default-bg              "#1c1c1c"
+set default-fg              "#bcbcbc"
 
-
-set font "MesloLGS Nerd Font 11"
-
-set default-bg                  "#1c1c1c"
-set default-fg                  "#bcbcbc"
-
-set statusbar-bg                "#bcbcbc"
-set statusbar-fg                "#1c1c1c"
+set statusbar-bg            "#1c1c1c"
+set statusbar-fg            "#bcbcbc"
 
 # sceach color
-set highlight-color             "#ebcb8b"
-set highlight-active-color      "#81a1c1"
+set highlight-color         "#ebcb8b"
+set highlight-active-color  "#81a1c1"
 
-#set completion-bg               "#1C1C1C"
-#set completion-fg               "#BCBCBC"
+#set completion-bg          "#1c1c1c"
+#set completion-fg          "#bcbcbc"
 
 # context color
-set recolor-lightcolor          "#1C1C1C"
-set recolor-darkcolor           "#BCBCBC"
+set recolor                 true
+set recolor-lightcolor      "#1c1c1c"
+set recolor-darkcolor       "#e4e4e4"
+set recolor-keephue         true      # keep original color
 
 
-# Startup options
+# ==================== OPTIONS ====================#
 
-set adjust-open width
-set recolor true
+set window-title-basename   "true"
+set selection-clipboard     "clipboard"
 
-map <F2> recolor toggle
+set adjust-open             "best-fit"
+
+set scroll-step             50
+
+map i recolor
+unmap r
+map R rotate

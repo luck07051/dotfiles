@@ -25,11 +25,13 @@ bspc config normal_border_color     $(xrdb -get color0)
 bspc rule -a *:floating:*       state=floating
 bspc rule -a *:scratchpad:*     state=floating
 
-bspc rule -a QjackCtl           state=floating desktop='9'
+bspc rule -a QjackCtl           state=floating
 bspc rule -a Pavucontrol        state=floating
 bspc rule -a Surf               state=tiled focus=off
 bspc rule -a Zathura            state=tiled
 bspc rule -a matplotlib         state=floating
+
+bspc rule -a discord            desktop='9'
 
 
 #==================== STARTUP ====================#

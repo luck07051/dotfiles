@@ -32,7 +32,7 @@ configuration {
     padding: 0;
     spacing: 0;
 
-    bg: #1C1C1CC0;
+    bg: #1C1C1CE0;
     bg-alt: #585858;
     fg: #BCBCBC;
     fg-alt: #FFB9DC;
