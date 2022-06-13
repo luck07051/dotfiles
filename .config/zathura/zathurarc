@@ -1,7 +1,7 @@
 
 #==================== THEME ====================#
 set font                    "MesloLGS Nerd Font 11"
-set default-bg              "#1c1c1c"
+set default-bg              rgba(28,28,28,0.85)
 set default-fg              "#d0d0d0"
 
 set statusbar-bg            "#1c1c1c"
@@ -11,12 +11,15 @@ set statusbar-fg            "#d0d0d0"
 set highlight-color         "#ebcb8b"
 set highlight-active-color  "#81a1c1"
 
-#set completion-bg          "#1c1c1c"
-#set completion-fg          "#d0d0d0"
+set completion-bg           "#1c1c1c"
+set completion-fg           "#d0d0d0"
+
+set notification-bg         "#1c1c1c"
+set notification-fg         "#d0d0d0"
 
 # context color
 set recolor                 true
-set recolor-lightcolor      "#1c1c1c"
+set recolor-lightcolor      rgba(28,28,28,0.5)
 set recolor-darkcolor       "#e4e4e4"
 set recolor-keephue         true      # keep original color
 
@@ -26,7 +29,8 @@ set recolor-keephue         true      # keep original color
 set window-title-basename   "true"
 set selection-clipboard     "clipboard"
 
-set adjust-open             "best-fit"
+set adjust-open             "width"
+#set adjust-open             "best-fit"
 
 set scroll-step             50
 

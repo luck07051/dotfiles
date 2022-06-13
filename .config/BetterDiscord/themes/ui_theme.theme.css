@@ -22,13 +22,13 @@
   --background-size: cover;
   --background-repeat: no-repeat;
   --background-attachment: fixed;
-  --background-brightness: 250%;
+  --background-brightness: 100%;
   --background-contrast: 100%;
   --background-saturation: 100%;
   --background-grayscale: 0%;
   --background-invert: 0%;
   --background-blur: 0px;
-  --background-overlay: rgba(0,0,0,0.6);
+  --background-overlay: rgba(0,0,0,0.0);
   --user-popout-image: url('https://i.imgur.com/irkG7cq.png');
   --user-popout-position: Bottom left;
   --user-popout-size: cover;
@@ -85,6 +85,7 @@
 
   --text-normal: rgb(238, 238, 238); /* color of default discord text */
 
+  /*--background-color: transparent !important;*/
 }
 
 /* Any custom CSS below here */
