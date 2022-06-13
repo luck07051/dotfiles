@@ -35,7 +35,11 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 "=== language ==="
+" language packs
+Plug 'sheerun/vim-polyglot'
+" just for rust
 Plug 'rust-lang/rust.vim'
+" just for yuck
 Plug 'elkowar/yuck.vim'
 
 "=== Misc ==="
@@ -51,12 +55,11 @@ let g:lightline = { 'active': {} }
 source $XDG_CONFIG_HOME/nvim/colors/ui_lightline_colors.vim
 let g:lightline.colorscheme = 'ui_lightline_colors'
 
-let g:lightline.active.left =
-    \   [ [ 'mode', 'paste' ],[ 'readonly', 'filename', 'modified' ] ]
-let g:lightline.active.right =
-    \   [ [ 'lineinfo' ], [ 'percent' ],
-    \   [ 'fileencoding', 'filetype', 'totalline' ] ]
-
+let g:lightline.active = {
+    \ 'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+    \ 'right': [ [ 'lineinfo' ], [ 'percent' ],
+    \           [ 'fileencoding', 'filetype', 'totalline' ] ]
+    \}
 let g:lightline.component= {
     \   'totalline': '%L'}
 let g:lightline.component_function= {
@@ -119,6 +122,4 @@ let g:vim_markdown_folding_disabled = 1
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
 let g:vimtex_view_method = 'zathura'
-
-
 

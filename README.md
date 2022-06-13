@@ -49,7 +49,7 @@ tmux
 yay -S tmuxinator
 yay -S lf           # file manager
 ranger              # file manager
-sxiv                # image viewer
+-nsxiv              # image viewer (install from git@github.com:luck07051/nsxiv.git)
 ueberzug            # image viewer (to view image in terminal)
 zathura zathura-pdf-mupdf   # pdf viewer
 ncmpcpp             # music player

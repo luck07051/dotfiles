@@ -2,14 +2,20 @@ let g:colors_name = "ui_colors"
 
 "==================== COLORS ===================="
 set background=dark         " dark back ground
-"===Cursor==="
+
+
+"=== Cursor ==="
+
 hi CursorLine                   ctermbg=236 cterm=none
 hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
 hi LineNr           ctermfg=8
 
 hi VertSplit        ctermfg=236 ctermbg=236
 hi SignColumn                   ctermbg=none
-"===Syntax==="
+
+
+"=== Syntax ==="
+
 hi Comment          ctermfg=15
 hi Statement        ctermfg=4
 hi Identifier       ctermfg=6
@@ -18,8 +24,11 @@ hi Constant         ctermfg=3
 hi Identifier       ctermfg=10
 hi Type             ctermfg=14
 hi Error            ctermfg=0   ctermbg=1
-hi MatchParen       ctermfg=0   ctermbg=4
-"===Misc==="
+hi MatchParen       ctermfg=0   ctermbg=15
+
+
+"=== Misc ==="
+
 hi ErrorMsg         ctermfg=7
 " listchars eol
 hi NonText          ctermfg=238

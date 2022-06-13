@@ -15,7 +15,7 @@
   --hover-color: #D5ABC0;
   --success-color: #43b581;
   --danger-color: #982929;
-  --url-color: var(--main-color);
+  --url-color: #2780E6;
   --background-image: url('https://i.imgur.com/irkG7cq.png');
   --background-shading: 0%;
   --background-position: center;
@@ -55,8 +55,8 @@
   --home-position: center;
   --home-size: 40px;
   --channel-unread: var(--main-color);
-  --channel-color: rgba(255,255,255,0.6);
-  --muted-color: rgba(255,255,255,0.35);
+  --channel-color: rgba(255,255,255,0.8);
+  --muted-color: rgba(255,255,255,0.5);
   --online-color: #43b581;
   --idle-color: #faa61a;
   --dnd-color: #982929;

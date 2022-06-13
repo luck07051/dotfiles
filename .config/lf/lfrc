@@ -20,7 +20,7 @@ cmd open ${{
         # PDF
         application/pdf) zathura "$f" &;;
         # Image
-        image/*) sxiv "$f" &;;
+        image/*) nsxiv "$f" &;;
 
         *) xdg-open "$f" ;;
     esac
