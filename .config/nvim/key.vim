@@ -43,8 +43,24 @@ nnoremap <silent><Leader>x :vsplit<CR>
 "nnoremap <silent><A-l> gt
 
 
-"===Copy or Change Search==="
-vnoremap <silent>s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
+"==================== PLUGIN ===================="
+"=== ale ==="
+nmap <silent> <Leader>a <Plug>(ale_next_wrap)
 
+
+"=== fzf ==="
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fw :Windows<CR>
+nnoremap <Leader>ft :Tags<CR>
+nnoremap <Leader>fm :Marks<CR>
+nnoremap <Leader>fg :Rg<CR>
+nnoremap <Leader>fl :Lines<CR>
+nnoremap <Leader>f/ :Helptags<CR>
+nnoremap <C-f> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+
+
+"=== markdown preview ==="
+nmap <Leader>md <Plug>MarkdownPreview
+nmap <Leader>ms <Plug>MarkdownPreviewStop

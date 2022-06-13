@@ -1,45 +1,27 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
-# Any items in the `env` entry below will be added as
-# environment variables. Some entries may override variables
-# set by alacritty itself.
 env:
   # TERM variable
   TERM: alacritty
-
-window:
-  # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
-
-  # Allow terminal applications to change Alacritty's window title.
-  dynamic_title: true
-
 
 # Font configuration
 font:
   # Normal (roman) font face
   normal:
-    # Font family
-    #family: RobotoMono Nerd Font
-    #family: DejaVuSansMono Nerd Font
-    #family: UbuntuMono Nerd Font
     family: MesloLGS Nerd Font
-
   # Point size
-  size: 11.0
-
+  size: 11
 
 colors:
   # Default colors
   primary:
     background: '#1c1c1c'
-    foreground: '#bcbcbc'
+    foreground: '#D0D0D0'
 
   # Cursor colors
   cursor:
    text: CellBackground
-   cursor: '#bcbcbc'
-
+   cursor: '#D0D0D0'
 
   # Normal colors
   normal:
@@ -50,13 +32,13 @@ colors:
     blue:    '#81A1C1'
     magenta: '#FFB9DC'
     cyan:    '#87AFAF'
-    white:   '#bcbcbc'
+    white:   '#D0D0D0'
 
   # Bright colors
   bright:
     black:   '#585858'
     red:     '#D7afaf'
-    green:   '#94C68B'
+    green:   '#A3B262'
     yellow:  '#DFA000'
     blue:    '#3a94c5'
     magenta: '#DF69BA'
@@ -66,9 +48,9 @@ colors:
 # Background opacity
 window:
   opacity: 0.85
-
   padding:
-    x: 10
-    y: 10
-
+    x: 12
+    y: 12
   dynamic_padding: true
+
+

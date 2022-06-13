@@ -2,17 +2,17 @@
 #==================== THEME ====================#
 set font                    "MesloLGS Nerd Font 11"
 set default-bg              "#1c1c1c"
-set default-fg              "#bcbcbc"
+set default-fg              "#d0d0d0"
 
 set statusbar-bg            "#1c1c1c"
-set statusbar-fg            "#bcbcbc"
+set statusbar-fg            "#d0d0d0"
 
 # sceach color
 set highlight-color         "#ebcb8b"
 set highlight-active-color  "#81a1c1"
 
 #set completion-bg          "#1c1c1c"
-#set completion-fg          "#bcbcbc"
+#set completion-fg          "#d0d0d0"
 
 # context color
 set recolor                 true
