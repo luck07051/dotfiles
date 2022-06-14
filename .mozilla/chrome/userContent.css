@@ -1,5 +1,14 @@
 
+@import "content/newtab_background.css";
+@import "content/dark_settings_pages.css";
+
+@import "content/youtube_background.css";
+@import "content/github_background.css";
+/*@import "content/arch_background.css";*/
+
+/* invert pdf reader color */
 #viewerContainer > #viewer > .page > .canvasWrapper > canvas{
     filter: grayscale(100%);
     filter: invert(87%);
 }
+

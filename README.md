@@ -253,6 +253,8 @@ Open `about:config` page.
     gfx.webrender.enabled
     layout.css.backdrop-filter.enabled
     svg.context-properties.content.enabled
+
+    layout.css.color-mix.enabled
 ```
 Then make sure to enable them all.
 

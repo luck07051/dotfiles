@@ -1,0 +1,43 @@
+
+@-moz-document url-prefix("https://github.com/") {
+    :root {
+        --custom-color: rgba(28, 28, 28, 1);
+    }
+
+    .Header,
+    .team-left-column,
+    .flex-auto.col-md-8.col-lg-8.px-3.px-lg-5{
+        background-color: var(--custom-color) !important;
+    }
+
+    /***** Repositor *****/
+    body {
+        background-color: var(--custom-color) !important;
+    }
+    /* header */
+    #repository-container-header {
+        background-color: var(--custom-color) !important;
+    }
+
+    /***** fix some thing *****/
+    /* explore top menu */
+    /* .site-subnav.site-subnav-sticky.js-sticky, */
+    /* wiki title */
+    .d-flex.flex-column.flex-md-row.gh-header,
+    /* discussion title */
+    .d-flex.width-full.flex-order-1.flex-md-order-none,
+    /* discussion write */
+    .discussion-timeline-actions {
+        background-color: var(--custom-color) !important;
+    }
+
+    /* let btn back */
+    .subnav-item {
+        background-color: var(--color-canvas-subtle) !important;
+    }
+    /* let some item back */
+    .content.text-center,
+    .pinned-issue-item {
+        background-color: var(--color-canvas-default);
+    }
+}

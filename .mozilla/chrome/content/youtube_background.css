@@ -1,0 +1,34 @@
+
+@-moz-document url-prefix("https://www.youtube.com/"){
+    :root {
+        --custom-color: rgba(28, 28, 28, 1);
+    }
+    /* Main Area */
+    #page-manager.ytd-app.style-scope,
+    .style-scope.ytd-page-manager {
+        background-color: var(--custom-color);
+    }
+    /* Player */
+    #player-container {
+        background-color: var(--custom-color);
+    }
+    /* Search Bar */
+    #container.ytd-masthead.style-scope  {
+        background-color: var(--custom-color) !important;
+    }
+    /* Left Pane */
+    #sections {
+        background-color: var(--custom-color) !important;
+    }
+    /* channel banner */
+    #channel-header.style-scope,
+    #tabs-inner-container.style-scope {
+        background-color: var(--custom-color);
+    }
+    /* Topic Botton */
+    #chips-wrapper,
+    #header.ytd-rich-grid-renderer.style-scope {
+        visibility: collapse;
+    }
+}
+
