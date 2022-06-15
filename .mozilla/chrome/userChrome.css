@@ -1,22 +1,36 @@
-
 @import "chrome/navbar_tabs_oneliner.css";
 
 
-/***** Personally Custom *****/
-
-/* Tab */
-#titlebar {
-  background-color: #1c1c1c !important;
-}
-/* Tool Bar */
-#nav-bar {
-  background-color: #1c1c1c !important;
-}
-/* Bookmarks Bar */
-#PersonalToolbar {
-  background-color: #1c1c1c !important;
-}
-/* hiddle url box */
 #identity-icon-box {
   visibility: collapse;
+}
+:root {
+  /* background */
+  --lwt-accent-color: rgb(28, 28, 28) !important;
+  --toolbar-field-background-color: rgb(28, 28, 28) !important;
+  --toolbar-bgcolor: rgb(28, 28, 28) !important;
+
+  /* menu background */
+  --arrowpanel-background: rgba(28, 28, 28, 0.95) !important;
+  --toolbar-field-focus-background-color: rgba(28, 28, 28, 0.95) !important;
+
+  /* button */
+  --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
+  --button-hover-bgcolor: rgba(255, 255, 255, 0.15) !important;
+  --lwt-selected-tab-background-color: rgba(255, 255, 255, 0.15) !important;
+
+  /* menu separator and border */
+  --autocomplete-popup-separator-color: rgba(255, 255, 255, 0.15) !important;
+  --panel-separator-zap-gradient: rgba(255, 255, 255, 0.15) !important;
+  --arrowpanel-border-color: rgba(255, 255, 255, 0.15) !important;
+
+  --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
+}
+
+:root:-moz-lwtheme {
+  --focus-outline-color: #FFB9DC !important;
+}
+:root {
+  --toolbar-field-focus-border-color: color-mix(in srgb, var(--focus-outline-color) 95%, transparent) !important;
+  --focus-outline-width: 1px !important;
 }

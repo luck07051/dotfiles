@@ -38,6 +38,6 @@
     /* let some item back */
     .content.text-center,
     .pinned-issue-item {
-        background-color: var(--color-canvas-default);
+        background-color: var(--color-canvas-default) !important;
     }
 }

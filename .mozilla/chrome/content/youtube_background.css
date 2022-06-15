@@ -5,26 +5,19 @@
     }
     /* Main Area */
     #page-manager.ytd-app.style-scope,
-    .style-scope.ytd-page-manager {
-        background-color: var(--custom-color);
-    }
+    .style-scope.ytd-page-manager,
     /* Player */
-    #player-container {
-        background-color: var(--custom-color);
-    }
+    #player-container,
     /* Search Bar */
-    #container.ytd-masthead.style-scope  {
-        background-color: var(--custom-color) !important;
-    }
+    #container.ytd-masthead.style-scope,
     /* Left Pane */
-    #sections {
-        background-color: var(--custom-color) !important;
-    }
+    #sections,
     /* channel banner */
     #channel-header.style-scope,
     #tabs-inner-container.style-scope {
-        background-color: var(--custom-color);
+        background-color: var(--custom-color) !important;
     }
+
     /* Topic Botton */
     #chips-wrapper,
     #header.ytd-rich-grid-renderer.style-scope {

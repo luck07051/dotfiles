@@ -5,9 +5,16 @@ See the above repository for updates as well as full license text. */
 
 @namespace url("http://www.w3.org/1999/xhtml");
 
+@-moz-document url("about:newtab") {
+  body {
+    --newtab-background-color: rgb(28,28,28) !important;
+    --newtab-background-color-secondary: rgba(255,255,255,0.15) !important;
+    --newtab-primary-action-background: #FFB9DC !important;
+  }
+}
+
 @-moz-document url("about:home"),
   url("about:blank"),
-  url("about:newtab"),
   url("about:privatebrowsing"){
   body{background-color: rgb(28,28,28) !important;}
 }
