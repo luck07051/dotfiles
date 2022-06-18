@@ -58,6 +58,12 @@ export BROWSER="firefox"
 export TERM="xterm-256color"
 export LANG=en_US.UTF-8
 
+# input method
+export GTK_IM_MODULE='fcitx'
+export QT_IM_MODULE='fcitx'
+export SDL_IM_MODULE='fcitx'
+export XMODIFIERS='@im=fcitx'
+
 # lf
 source "$XDG_CONFIG_HOME/lf/colors"
 

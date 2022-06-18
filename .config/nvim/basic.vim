@@ -5,7 +5,7 @@ syntax enable
 
 set ruler                   " show the cursor position below
 set number                  " show line number on left side
-set relativenumber          " show relative number instead absolute number
+"set relativenumber          " show relative number instead absolute number
 set showcmd                 " show incomplete commad in last line
 set cursorline              " highlight cursor line
 set laststatus=2            " always show statusline
@@ -31,6 +31,7 @@ set matchtime=1         "    the cursor will briefly jump to the matching one
 set linebreak           " if text warp, no break on word
 set showbreak=↪\ "      " if text warp, show a char to tell
 set wildmenu            " show the commom complete list, can use Tab and S-Tab
+set conceallevel=2      " conceal text
 
 "set list                " show special char
 "set listchars=tab:»\ ,eol:↲,trail:_

@@ -10,30 +10,30 @@ Plug 'dense-analysis/ale'
 Plug 'ycm-core/YouCompleteMe'
 " Show marks on sign column
 Plug 'kshenoy/vim-signature'
-" Vimwiki
-Plug 'vimwiki/vimwiki'
 " Use C-hjkl to switch vim and tmux panel
 Plug 'christoomey/vim-tmux-navigator'
+" snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " Add some movement to Sorrondings
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-""
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
-
-"Plug 'easymotion/vim-easymotion'
-
-"=== fzf ==="
+" fzf
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
+" idk
+"Plug 'easymotion/vim-easymotion'
+
+" vimwiki
+Plug 'vimwiki/vimwiki'
 
 "=== markdown ==="
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
 "=== laTex ==="
 Plug 'lervag/vimtex', { 'for': 'tex' }
-
+Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
+"Plug 'gillescastel/latex-snippets', { 'for': 'tex' }
 "=== language ==="
 " language packs
 Plug 'sheerun/vim-polyglot'
@@ -85,6 +85,19 @@ hi SpellBad         ctermfg=1   ctermbg=none    cterm=bold,underline
 hi SpellCap         ctermfg=3   ctermbg=none    cterm=bold,underline
 
 
+"=== YCM ==="
+"let g:ycm_auto_trigger = 0
+    " to fix ultisnips auto expansion
+let g:ycm_min_num_of_chars_for_completion  = 3
+
+
+"=== Snippet ==="
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<Leader><Leader>"
+let g:UltiSnipsJumpForwardTrigger="<Leader><Leader>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
 "=== easymotion ==="
 " wish: over press s/f/t jump to next search
 
@@ -119,7 +132,8 @@ let g:vim_markdown_folding_disabled = 1
 
 
 "=== vimtex ==="
-" Viewer options: One may configure the viewer either by specifying a built-in
-" viewer method:
+"=== tex-conceal ==="
 let g:vimtex_view_method = 'zathura'
+let g:tex_flavor = 'latex'
+let g:tex_conceal = "abdgm"
 

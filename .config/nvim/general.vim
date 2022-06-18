@@ -6,6 +6,13 @@ noremap <Space> <nop>
 let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
+function ToggleConceal()
+    if &conceallevel == 0
+        setlocal conceallevel=2
+    else
+        setlocal conceallevel=0
+    endif
+endfunction
 
 " Not auto comment new line
 autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o

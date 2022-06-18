@@ -3,6 +3,9 @@
     :root {
         --custom-color: rgba(28, 28, 28, 1);
     }
+    html {
+        background: var(--custom-color) !important;
+    }
 
     .Header,
     .team-left-column,

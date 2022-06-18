@@ -42,6 +42,8 @@ sxhkd -c ~/.config/bspwm/sxhkdrc &
 pgrep "nitrogen" || nitrogen --restore &
 pgrep "picom" || picom --experimental-backend &
 
+fcitx5 -d &
+
 # Bar
 ~/.config/eww/launch
 

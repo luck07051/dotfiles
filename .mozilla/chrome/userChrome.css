@@ -6,29 +6,29 @@
 }
 :root {
   /* background */
-  --lwt-accent-color: rgb(28, 28, 28) !important;
-  --toolbar-field-background-color: rgb(28, 28, 28) !important;
-  --toolbar-bgcolor: rgb(28, 28, 28) !important;
+  --lwt-accent-color: rgb(28,28,28) !important;
+  --toolbar-field-background-color: rgb(28,28,28) !important;
+  --toolbar-bgcolor: rgb(28,28,28) !important;
 
   /* menu background */
-  --arrowpanel-background: rgba(28, 28, 28, 0.95) !important;
-  --toolbar-field-focus-background-color: rgba(28, 28, 28, 0.95) !important;
+  --arrowpanel-background: rgba(28,28,28,0.85) !important;
+  --toolbar-field-focus-background-color: rgba(28,28,28,0.95) !important;
 
   /* button */
-  --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
-  --button-hover-bgcolor: rgba(255, 255, 255, 0.15) !important;
-  --lwt-selected-tab-background-color: rgba(255, 255, 255, 0.15) !important;
+  --button-active-bgcolor: rgba(255,255,255,0.2) !important;
+  --button-hover-bgcolor: rgba(255,255,255,0.15) !important;
+  --lwt-selected-tab-background-color: rgba(255,255,255,0.15) !important;
 
   /* menu separator and border */
-  --autocomplete-popup-separator-color: rgba(255, 255, 255, 0.15) !important;
-  --panel-separator-zap-gradient: rgba(255, 255, 255, 0.15) !important;
-  --arrowpanel-border-color: rgba(255, 255, 255, 0.15) !important;
+  --autocomplete-popup-separator-color: rgba(255,255,255,0.15) !important;
+  --panel-separator-zap-gradient: rgba(255,255,255,0.15) !important;
+  --arrowpanel-border-color: rgba(255,185,220,0.8) !important;
 
   --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
 }
 
 :root:-moz-lwtheme {
-  --focus-outline-color: #FFB9DC !important;
+  --focus-outline-color: rgb(255,185,220) !important;
 }
 :root {
   --toolbar-field-focus-border-color: color-mix(in srgb, var(--focus-outline-color) 95%, transparent) !important;

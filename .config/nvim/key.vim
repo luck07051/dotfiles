@@ -29,6 +29,9 @@ nnoremap <silent><Leader>t :tabnew<CR>
 nnoremap <silent><Leader>v :split<CR>
 nnoremap <silent><Leader>x :vsplit<CR>
 
+" toggle conceal
+nnoremap <silent><Leader>cc :call ToggleConceal()<CR>
+
 " switch windows (currently uses plug)
 "nnoremap <silent><C-j> <C-w>j
 "nnoremap <silent><C-k> <C-w>k
@@ -47,7 +50,6 @@ nnoremap <silent><Leader>x :vsplit<CR>
 "=== ale ==="
 nmap <silent> <Leader>a <Plug>(ale_next_wrap)
 
-
 "=== fzf ==="
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fb :Buffers<CR>
@@ -60,7 +62,3 @@ nnoremap <Leader>f/ :Helptags<CR>
 nnoremap <C-f> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 
-
-"=== markdown preview ==="
-nmap <Leader>md <Plug>MarkdownPreview
-nmap <Leader>ms <Plug>MarkdownPreviewStop

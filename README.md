@@ -33,6 +33,9 @@ setxkbmap           # uses it to remap capslock to ctrl
 cronie              # auto exec tasks at pre-determined times
 ntp                 # clock fixer
 xclip               # let nvim can use system clipboard
+
+fcitx5-im           # imput framework
+fcitx5-rime         # chinese engine
 ```
 ```
 (bluez bluez-utils)
@@ -282,3 +285,12 @@ GRUB_CMDLINE_LINUX_DEFAULT="nomodeset"
 GRUB_GFXPAYLOAD_LINUX=1920x1080
 ```
 remember comment default setting
+
+
+
+### rime
+If not want fcitx5 overrides xkeyboard.
+Use fcitx5-configtool to uncheck Addons → XCB → Allow Overriding System XKB Settings.
+
+
+

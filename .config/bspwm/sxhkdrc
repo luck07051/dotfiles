@@ -104,3 +104,5 @@ Print
     flameshot gui
 
 
+super + shift + control + z
+    rime_build

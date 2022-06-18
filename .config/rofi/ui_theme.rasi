@@ -44,6 +44,9 @@ window {
     location: center;
     background-color: @bg;
     y-offset: -220;
+    border: 2;
+    border-color: @fg-alt;
+    border-radius: 10;
 }
 
 mainbox {

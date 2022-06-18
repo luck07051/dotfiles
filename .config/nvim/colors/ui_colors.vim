@@ -36,6 +36,9 @@ hi NonText          ctermfg=238
 hi SpecialKey       ctermfg=238
 " complete menu
 hi Pmenu            ctermfg=7   ctermbg=236
+" concealed text
+hi Conceal                      ctermbg=none
+
 
 
 "==================== SPECIAL FUNCTION ===================="
@@ -47,8 +50,5 @@ call matchadd('ColorColumn', '\%81v', 100)
 hi ExtraWhitespace              ctermbg=8
 match ExtraWhitespace /\s$/
 
-
 "==================== FILE SPECIFIC ===================="
-" latex
-autocmd filetype tex hi Error ctermfg=1   ctermbg=none
 

@@ -1,8 +1,12 @@
 
 @-moz-document url-prefix("https://www.youtube.com/"){
-    :root {
+    :root{
         --custom-color: rgba(28, 28, 28, 1);
     }
+    html {
+        background: var(--custom-color) !important;
+    }
+
     /* Main Area */
     #page-manager.ytd-app.style-scope,
     .style-scope.ytd-page-manager,
