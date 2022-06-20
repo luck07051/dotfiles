@@ -4,7 +4,7 @@ let g:colors_name = "ui_colors"
 set background=dark         " dark back ground
 
 
-"=== Cursor ==="
+"===== Cursor ====="
 
 hi CursorLine                   ctermbg=236 cterm=none
 hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
@@ -14,7 +14,7 @@ hi VertSplit        ctermfg=236 ctermbg=236
 hi SignColumn                   ctermbg=none
 
 
-"=== Syntax ==="
+"===== Syntax ====="
 
 hi Comment          ctermfg=15
 hi Statement        ctermfg=4
@@ -27,7 +27,7 @@ hi Error            ctermfg=0   ctermbg=1
 hi MatchParen       ctermfg=0   ctermbg=15
 
 
-"=== Misc ==="
+"===== Misc ====="
 
 hi ErrorMsg         ctermfg=7
 " listchars eol
@@ -36,10 +36,11 @@ hi NonText          ctermfg=238
 hi SpecialKey       ctermfg=238
 " complete menu
 hi Pmenu            ctermfg=7   ctermbg=236
+
 " concealed text
 hi Conceal                      ctermbg=none
-
-
+" fold text
+hi Folded           ctermfg=246  ctermbg=none cterm=bold
 
 "==================== SPECIAL FUNCTION ===================="
 " highlight 81 column
@@ -50,5 +51,10 @@ call matchadd('ColorColumn', '\%81v', 100)
 hi ExtraWhitespace              ctermbg=8
 match ExtraWhitespace /\s$/
 
-"==================== FILE SPECIFIC ===================="
+"==================== PLUGIN ===================="
+"===== ale ====="
+hi ALEErrorSign     ctermfg=1   ctermbg=none
+hi ALEWarningSign   ctermfg=3   ctermbg=none
+hi SpellBad         ctermfg=1   ctermbg=none    cterm=bold,underline
+hi SpellCap         ctermfg=3   ctermbg=none    cterm=bold,underline
 

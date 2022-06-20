@@ -29,12 +29,12 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # GunPG
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 # Java
-export _JAVA_OPTIONS="-Duser.home=\"$XDG_DATA_HOME\"/java\
-    -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME\"/java"
-export JDK_JAVA_OPTIONS="-Duser.home=\"$XDG_DATA_HOME\"/java\
-    -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME\"/java"
-export JAVA_TOOL_OPTIONS="-Duser.home=\"$XDG_DATA_HOME\"/java\
-    -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME\"/java"
+export _JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
+    -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export JDK_JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
+    -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export JAVA_TOOL_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
+    -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 # Stack (Haskell)
 export STACK_ROOT="$XDG_CONFIG_HOME"/stack
 # gradle

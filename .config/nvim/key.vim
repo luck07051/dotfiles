@@ -1,7 +1,7 @@
 
 "==================== KEYMAP ===================="
 " resource vimrc
-nnoremap <F5> :source $MYVIMRC<CR>
+nnoremap <F5> :source $MYVIMRC<CR>:nohlsearch<CR>
 
 " let these key make sense
 noremap Y y$
@@ -16,10 +16,10 @@ noremap <C-y> 3<C-y>
 noremap <Leader>d "_d
 noremap <Leader>D "_D
 " let y and p can use clipboard
-noremap <Leader>y "+y
-noremap <Leader>Y "+Y
-noremap <Leader>p "+p
-noremap <Leader>P "+P
+noremap cy "+y
+noremap cY "+Y
+noremap cp "+p
+noremap cP "+P
 
 " cancel search highlight
 nnoremap <silent><Leader>nh :nohlsearch<CR>
@@ -32,7 +32,7 @@ nnoremap <silent><Leader>x :vsplit<CR>
 " toggle conceal
 nnoremap <silent><Leader>cc :call ToggleConceal()<CR>
 
-" switch windows (currently uses plug)
+" switch windows
 "nnoremap <silent><C-j> <C-w>j
 "nnoremap <silent><C-k> <C-w>k
 "nnoremap <silent><C-h> <C-w>h
@@ -46,11 +46,21 @@ nnoremap <silent><Leader>cc :call ToggleConceal()<CR>
 "nnoremap <silent><A-l> gt
 
 
-"==================== PLUGIN ===================="
-"=== ale ==="
-nmap <silent> <Leader>a <Plug>(ale_next_wrap)
 
-"=== fzf ==="
+"==================== PLUGIN ===================="
+
+"===== ale ====="
+nnoremap <Leader>aa <Plug>(ale_next_wrap)
+nnoremap <Leader>ad <Plug>(ale_go_to_definition_in_split)
+nnoremap <Leader>ar <Plug>(ale_find_references)
+nnoremap <Leader>am <Plug>(ale_hover)
+nnoremap <Leader>ai <Plug>(ale_import)
+nnoremap <Leader>ao <Plug>(ale_organize_imports)
+nnoremap <Leader>an <Plug>(ale_rename)
+nnoremap <Leader>as :ALESymbolSearch "
+
+
+"===== FZF ====="
 nnoremap <Leader>ff :Files<CR>
 nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fw :Windows<CR>
@@ -62,3 +72,31 @@ nnoremap <Leader>f/ :Helptags<CR>
 nnoremap <C-f> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
 
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
+
+
+"===== YCM ====="
+"" use C-J and C-K to select completion
+"let g:ycm_key_list_select_completion = ['<C-J>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-K>', '<Up>']
+"let g:ycm_key_invoke_completion = '<C-J>'
+
+
+"===== UltiSnips ====="
+"let g:UltiSnipsExpandTrigger="<C-J>"
+"let g:UltiSnipsJumpForwardTrigger="<C-J>"
+let g:UltiSnipsExpandTrigger="<Space><Space>"
+let g:UltiSnipsJumpForwardTrigger="<Space><Space>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+
+"===== Goyo ====="
+nnoremap <silent><Leader>gg :Goyo<CR>
+
+
+"===== Markdown preview ====="
+nmap <Leader>md <Plug>MarkdownPreview
+nmap <Leader>ms <Plug>MarkdownPreviewStop

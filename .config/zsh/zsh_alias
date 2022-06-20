@@ -20,7 +20,8 @@ alias mkdir="mkdir -p"
 
 # vim
 alias vim="nvim"
-alias vw="nvim ~/vimwiki/index.md"
+alias ww="nvim ~/vimwiki/index.md"
+alias v="nvim -u $XDG_CONFIG_HOME/nvim/basic.vim"
 
 # ls
 alias ls="exa -al --icons --group-directories-first --color=always"

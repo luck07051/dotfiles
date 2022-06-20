@@ -166,7 +166,7 @@ yay -S vim-youcompleteme-git
 sudo pacman -S python-pynvim
 
 cd .../plugged/YouCompleteMe
-/usr/bin/python install.py
+/usr/bin/python install.py --all
 ```
 
 
