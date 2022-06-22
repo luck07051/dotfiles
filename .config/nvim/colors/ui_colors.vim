@@ -58,3 +58,9 @@ hi ALEWarningSign   ctermfg=3   ctermbg=none
 hi SpellBad         ctermfg=1   ctermbg=none    cterm=bold,underline
 hi SpellCap         ctermfg=3   ctermbg=none    cterm=bold,underline
 
+"===== LightSpeed ====="
+hi LightspeedCursor         ctermfg=0   ctermbg=7
+hi LightspeedUnlabeledMatch ctermfg=255 ctermbg=none    cterm=bold
+hi LightspeedShortcut       ctermfg=5   ctermbg=none    cterm=bold
+hi LightspeedLabel          ctermfg=0   ctermbg=5       cterm=bold
+hi LightspeedlabelDistant   ctermfg=0   ctermbg=4       cterm=bold

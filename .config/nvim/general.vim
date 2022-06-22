@@ -1,19 +1,21 @@
 
 "==================== GENERAL ===================="
 
-" let vim can search sub and subdir
+" Let vim can search sub and subdir
 set path+=**
 " Tags setting
-"set tags=./.tags;,.tags
+set tags=./.tags;,.tags
+" The file what complete to ignore
+set wildignore=*.git/*,*.tags,tags,*.o,*.class
 
-" show sign in number col
+" Show sign in number col
 set signcolumn=number
 "set signcolumn=yes
 
-" conceal text
+" Conceal text
 set conceallevel=2
 
-" open new split window on bottom or right
+" Open new split window on bottom or right
 set splitbelow
 set splitright
 
@@ -47,27 +49,27 @@ let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
 
-function ToggleConceal()
+function ToggleConceal() "{{{
     if &conceallevel == 0
         setlocal conceallevel=2
     else
         setlocal conceallevel=0
     endif
-endfunction
+endfunction "}}}
 
 " Not auto comment new line
 autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Delete extra space when write the file
 autocmd BufWrite * call DeleteExtraSpaces()
-function DeleteExtraSpaces()
+function DeleteExtraSpaces() "{{{
     :let b:nline= line('.')
     :%s/\s\+$//e
     :%s/\n\+\%$//e
     :execute "to ".b:nline
-endfunction
+endfunction "}}}
 
 
 
-" Fix initial size incorrectly
-autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+"==================== LaTex ===================="
+autocmd VimLeave *.tex !latexmk -c %

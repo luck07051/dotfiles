@@ -17,8 +17,6 @@ let g:ale_sign_warning = '-'
 " YouCompleteMe {{{
 Plug 'ycm-core/YouCompleteMe'
 
-" set popup menu size
-set pumheight=15
 " dont use syntax cheacking and preview windows
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_add_preview_to_completeopt = 0
@@ -42,6 +40,15 @@ let g:ycm_filetype_whitelist = {
             \}
 
 "}}}
+" function hint {{{
+Plug 'Shougo/echodoc.vim'
+
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
+let g:echodoc#enevts = ['CompleteDone', 'TextChangedP', 'InsertEnter']
+hi link EchoDocFloat Pmenu
+
+"}}}
 " gutentags {{{
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -60,15 +67,6 @@ let g:gutentags_cache_dir = s:vim_tags
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
-
-"}}}
-" function hint {{{
-Plug 'Shougo/echodoc.vim'
-
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'floating'
-let g:echodoc#enevts = ['CompleteDone', 'TextChangedP', 'InsertEnter']
-hi link EchoDocFloat Pmenu
 
 "}}}
 
@@ -102,10 +100,15 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
 "}}}
+" lightspeed {{{
+Plug 'ggandor/lightspeed.nvim'
+
+"}}}
 " fzf {{{
 Plug 'junegunn/fzf.vim'
 
-let g:fzf_layout = { 'down': '40%' }
+"let g:fzf_layout = { 'down': '40%' }
+let g:fzf_layout = {'window': { 'width':0.9, 'height':0.6}}
 
 "}}}
 " vim-rooter {{{
@@ -214,12 +217,9 @@ call plug#end()
 "===== ligntline ====="
 source $XDG_CONFIG_HOME/nvim/colors/ui_lightline_colors.vim
 
-
-"Plug 'easymotion/vim-easymotion'  wish: over press s/f/t jump to next search
 "Plug 'jdhao/better-escape.vim'
-" latex
 "Plug 'gillescastel/latex-snippets', { 'for': 'tex' }
 
 
-
 "Plug 'mhinz/vim-signify'
+"Plug 'ryanoasis/vim-devicons'

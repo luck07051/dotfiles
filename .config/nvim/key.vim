@@ -9,6 +9,8 @@ noremap ~ g~
 noremap ; :
 noremap : ;
 noremap Q qq
+noremap c "_c
+noremap C "_C
 noremap <C-e> 3<C-e>
 noremap <C-y> 3<C-y>
 
@@ -33,17 +35,20 @@ nnoremap <silent><Leader>x :vsplit<CR>
 nnoremap <silent><Leader>cc :call ToggleConceal()<CR>
 
 " switch windows
-"nnoremap <silent><C-j> <C-w>j
-"nnoremap <silent><C-k> <C-w>k
-"nnoremap <silent><C-h> <C-w>h
-"nnoremap <silent><C-l> <C-w>l
+nnoremap <silent><C-j> <C-w>j
+nnoremap <silent><C-k> <C-w>k
+nnoremap <silent><C-h> <C-w>h
+nnoremap <silent><C-l> <C-w>l
 
-"" switch buffers
-"nnoremap <silent><A-j> :bnext<CR>
-"nnoremap <silent><A-k> :bprev<CR>
-"" switch tabs
-"nnoremap <silent><A-h> gT
-"nnoremap <silent><A-l> gt
+" adjusing split sizes
+nnoremap <silent><C-Left> :vertical resize +3<CR>
+nnoremap <silent><C-Right> :vertical resize -3<CR>
+nnoremap <silent><C-Up> :resize +3<CR>
+nnoremap <silent><C-Down> :resize -3<CR>
+
+" open file
+cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'e<Space><C-D>' : 'e'
+cnoreabbrev <expr> b getcmdtype() == ":" && getcmdline() == 'b' ? 'ls<CR>:b' : 'b'
 
 
 
@@ -62,15 +67,13 @@ nnoremap <Leader>as :ALESymbolSearch "
 
 "===== FZF ====="
 nnoremap <Leader>ff :Files<CR>
-nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>fw :Windows<CR>
 nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fm :Marks<CR>
 nnoremap <Leader>fg :Rg<CR>
-nnoremap <Leader>fl :Lines<CR>
 nnoremap <Leader>f/ :Helptags<CR>
 nnoremap <C-f> :Files<CR>
-nnoremap <C-b> :Buffers<CR>
+nnoremap <Leader>fl <plug>(fzf-maps-n)
 
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',

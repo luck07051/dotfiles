@@ -30,4 +30,6 @@ set shiftround          " round indent to multiple of 'shiftwidth'
 "===== Misc ====="
 set linebreak           " if text warp, no break on word
 set showbreak=↪\ "      " if text warp, show a char to tell
-set wildmenu            " show the commom complete list, can use Tab and S-Tab
+set wildmenu            " show the commom complete list, use Tab and S-Tab
+set wildignorecase      " case insensitive
+set pumheight=15        " set popup menu size

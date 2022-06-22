@@ -34,3 +34,9 @@
   --toolbar-field-focus-border-color: color-mix(in srgb, var(--focus-outline-color) 95%, transparent) !important;
   --focus-outline-width: 1px !important;
 }
+/* book menu */
+#PlacesToolbar menupopup{
+  background: rgba(28,28,28,0.85) !important;
+  border: 1px solid var(--arrowpanel-border-color) !important;
+  border-radius: 10px !important;
+}
