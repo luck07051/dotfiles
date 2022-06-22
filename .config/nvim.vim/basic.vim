@@ -33,3 +33,4 @@ set showbreak=↪\ "      " if text warp, show a char to tell
 set wildmenu            " show the commom complete list, use Tab and S-Tab
 set wildignorecase      " case insensitive
 set pumheight=15        " set popup menu size
+set noswapfile          " not create swap file

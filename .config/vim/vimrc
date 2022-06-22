@@ -74,7 +74,7 @@ set wildmenu            " show the commom complete list, can use Tab and S-Tab
 
 set list
 set listchars=tab:»\ ,eol:↲,trail:_
-set showbreak=↪\ 
+set showbreak=↪\
 
 set viminfo='10,<100,:100,%,n~/.vim/.viminfo
 
@@ -106,7 +106,7 @@ noremap <Leader>p "+p
 noremap <Leader>P "+P
 " cancel search highlight
 nnoremap <silent><Leader>nh :nohlsearch<CR>
-   
+
 "===Copy or Change Search==="
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
@@ -149,7 +149,7 @@ call plug#end()
 
 "===lightline==="
 " Set lightline theme
-let g:lightline = { 'colorscheme': 'seoul256' } 
+let g:lightline = { 'colorscheme': 'seoul256' }
 set noshowmode          " dont show mode below
 
 
@@ -167,4 +167,3 @@ nmap <Leader>ms <Plug>MarkdownPreviewStop
 
 "===markdown==="
 let g:vim_markdown_math = 1
-
