@@ -11,45 +11,46 @@ local silent = { noremap = true, silent = true }
 
 
 -- Make space as leader key --
-keymap("", "<Space>", "<Nop>")
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+keymap('', '<Space>', '<Nop>')
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Resource config --
-keymap("n", "<F5>", ":source %<CR>:nohlsearch<CR>", silent)
-
+keymap('n', '<F5>', ':w<CR>:source %<CR>:nohlsearch<CR>', silent)
 
 
 -- Change default key behavior --
-keymap("", "Y", "y$")
-keymap("", "~", "g~")
-keymap("", ";", ":")
-keymap("", ":", ";")
-keymap("", "Q", "qq")
-keymap("", "c", '"_c')
-keymap("", "C", '"_C')
+keymap('', 'Y', 'y$')
+keymap('', '~', 'g~')
+keymap('', ';', ':')
+keymap('', ':', ';')
+keymap('', 'Q', 'qq')
+-- Change with black hole --
+keymap('', 'c', '"_c')
+keymap('', 'C', '"_C')
 -- Delete with black hole --
-keymap("", "<Leader>d", '"_d')
-keymap("", "<Leader>D", '"_D')
+keymap('', '<Leader>d', '"_d')
+keymap('', '<Leader>D', '"_D')
 -- Copy paste from system clipboard --
-keymap("", "cy", '"+y')
-keymap("", "cY", '"+y$')
-keymap("", "cp", '"+p')
-keymap("", "cP", '"+P')
+keymap('', '<Leader>y', '"+y')
+keymap('', '<Leader>Y', '"+y$')
+keymap('', '<Leader>p', '"+p')
+keymap('', '<Leader>P', '"+P')
 -- Paste in visual mode but not change register
-keymap("v", "p", '"_dP')
+keymap('v', 'p', '"_dP')
+keymap('v', 'gp', '"_d"+P')
 
 -- Cancel search highlight --
-keymap("n", "<Leader>nh", ":nohlsearch<CR>", silent)
+keymap('n', '<Leader>nh', ':nohlsearch<CR>', silent)
 
 -- Navigation windows --
-keymap("n", "<C-h>", "<C-w>h")
-keymap("n", "<C-j>", "<C-w>j")
-keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-l>", "<C-w>l")
+keymap('n', '<C-h>', '<C-w>h')
+keymap('n', '<C-j>', '<C-w>j')
+keymap('n', '<C-k>', '<C-w>k')
+keymap('n', '<C-l>', '<C-w>l')
 
 
-vim.cmd [[
-cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'e<Space><C-D>' : 'e'
-cnoreabbrev <expr> b getcmdtype() == ":" && getcmdline() == 'b' ? 'ls<CR>:b' : 'b'
-]]
+--vim.cmd [[
+--cnoreabbrev <expr> e getcmdtype() == ':' && getcmdline() == 'e' ? 'e<Space><C-D>' : 'e'
+--cnoreabbrev <expr> b getcmdtype() == ':' && getcmdline() == 'b' ? 'ls<CR>:b' : 'b'
+--]]

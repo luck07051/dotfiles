@@ -43,4 +43,9 @@
     .pinned-issue-item {
         background-color: var(--color-canvas-default) !important;
     }
+
+    #partial-discussion-header,
+    .color-bg-default.js-profile-timeline-year-list {
+        background-color: var(--custom-color) !important;
+    }
 }

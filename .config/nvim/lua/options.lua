@@ -11,7 +11,7 @@ opt.showcmd = true
 opt.cursorline = true
 opt.laststatus = 2
 opt.scrolloff = 5
-opt.signcolumn = "yes"
+opt.signcolumn = 'yes'
 opt.conceallevel = 2
 
 -- ===== Search ==== --
@@ -31,21 +31,21 @@ opt.shiftround = true
 -- ===== Wild Menu =====--
 opt.wildmenu = true
 opt.wildignorecase = true
-opt.wildignore = { "*.git/*", "*.tags", "tags", "*.o", "*.class" }
-opt.pumheight = 15
+opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
+opt.pumheight = 10
 
 -- ===== Misc ==== --
 opt.linebreak = true
-opt.showbreak = "↪ "
+opt.showbreak = '↪ '
 -- opt.list = true
--- opt.listchars = { tab = "» ", eol = "↲", trail = "_" }
+-- opt.listchars = { tab = '» ', eol = '↲', trail = '_' }
 
 opt.splitbelow = true
 opt.splitright = true
 
 opt.swapfile = false
-opt.path:append("**")
+opt.path:append('**')
 
-opt.foldmethod = "marker"
+opt.foldmethod = 'marker'
 
 --opt.termguicolors = true
