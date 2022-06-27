@@ -17,7 +17,8 @@ super + q
 #===Essential===#
 # Open terminal
 super + Return
-    $TERMINAL -e tmux
+    $TERMINAL
+    #$TERMINAL -e tmux
 
 # Open browser
 super + b

@@ -2,7 +2,7 @@
 # F5 to resource
 bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 # Quick run filemanager
-bindkey -M viins -s '^f' '^ulf\n'
+#bindkey -M viins -s '^f' '^ulf\n'
 
 
 # Change working directories when exit filemanager
@@ -10,6 +10,8 @@ alias ranger='ranger --choosedir=/tmp/last-dir; \
     LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
 alias lf='lfrun -last-dir-path /tmp/last-dir; \
     LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
+
+alias ..="cd .."
 
 # Confirm before overwriting something
 alias cp="cp -i"
