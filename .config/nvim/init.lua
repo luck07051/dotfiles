@@ -1,16 +1,18 @@
+require 'options'
+require 'keymaps'
+require 'plugins'
+require 'functions'
+require 'colorscheme'
 
-require('options')
-require('keymaps')
-require('plugins')
-require('functions')
-require('colorscheme')
+require 'config.cmp'
+require 'config.lsp'
+require 'config.treesitter'
+require 'config.luasnip'
+require 'config.telescope'
 
-require('config.cmp')
-require('config.lsp')
-require('config.treesitter')
-require('config.luasnip')
-require('config.telescope')
-
-require('config.vimwiki')
---require('config.colorizer')
-require('config.comment')
+require 'config.vimwiki'
+require 'config.colorizer'
+require 'config.comment'
+--require('config.gitsigns'
+require 'config.lualine'
+require 'config.toggleterm'

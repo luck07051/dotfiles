@@ -9,8 +9,8 @@ map l       scrollRight
 map d       scrollPageDown
 map u       scrollPageUp
 
-map w       previousTab
-map b       nextTab
+map w       nextTab
+map b       previousTab
 
 map H       goBack
 map J       previousTab

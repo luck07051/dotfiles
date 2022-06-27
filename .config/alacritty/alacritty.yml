@@ -2,7 +2,8 @@
 
 env:
   # TERM variable
-  TERM: alacritty
+  #TERM: alacritty
+  TERM: xterm-256color
 
 # Font configuration
 font:
@@ -36,12 +37,12 @@ colors:
 
   # Bright colors
   bright:
-    black:   '#585858'
+    black:   '#444444'
     red:     '#D7afaf'
     green:   '#A3B262'
-    yellow:  '#DFA000'
+    yellow:  '#D8AF5F'
     blue:    '#3a94c5'
-    magenta: '#DF69BA'
+    magenta: '#DF5F87'
     cyan:    '#7FBBB3'
     white:   '#808080'
 
@@ -52,5 +53,3 @@ window:
     x: 12
     y: 12
   dynamic_padding: true
-
-

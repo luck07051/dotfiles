@@ -14,7 +14,6 @@ export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:
 #==================== Let Paths Right ====================#
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-export ZPLUG_HOME="$XDG_CONFIG_HOME"/zplug
 # X11
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
@@ -71,4 +70,3 @@ source "$XDG_CONFIG_HOME/lf/colors"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 . "/home/ui/.local/share/cargo/env"
-

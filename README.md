@@ -63,6 +63,8 @@ wget                # download file from web
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
 youtube-dl          # youtube downloader
 
+pactl               # pulse control
+
 task                # taskwarrior, task management tool
 taskwarrior-tui     # a tui for taskwarrior
 

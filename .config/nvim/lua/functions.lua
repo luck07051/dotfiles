@@ -5,7 +5,7 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Dont auto comment next line --
 autocmd( 'BufEnter', { command = [[set formatoptions-=cro]] } )
 
--- When save file, delete trailing spaces and extra line at and -- {{{
+-- When save file, delete trailing spaces and extra line -- {{{
 local DeleteExtraSpaces = function()
     vim.cmd [[ let b:nline= line('.') ]]
     vim.cmd [[ %s/\s\+$//e ]]
@@ -39,3 +39,8 @@ function! MyFoldText() "{{{
 endfunction "}}}
 set foldtext=MyFoldText()
 ]]
+
+-- Highlight 81 column
+cmd [[ call matchadd('ColorColumn', '\%81v', 100) ]]
+-- Show extra space
+cmd [[ call matchadd('ColorColumn', '\s$', 100) ]]

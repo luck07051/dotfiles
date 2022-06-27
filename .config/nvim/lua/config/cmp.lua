@@ -91,7 +91,7 @@ cmp.setup {
 
     --experimental = { ghost_text = true },
 
-    completion = { keyword_length = 2 },
+    --completion = { keyword_length = 2 },
 
     snippet = { --{{{
         expand = function(args)

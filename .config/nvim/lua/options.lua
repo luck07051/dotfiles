@@ -1,6 +1,4 @@
 
--- ==================== BASIC ===================== --
-
 local opt = vim.opt
 local cmd = vim.cmd
 
@@ -48,4 +46,4 @@ opt.path:append('**')
 
 opt.foldmethod = 'marker'
 
---opt.termguicolors = true
+opt.termguicolors = true

@@ -14,7 +14,7 @@
 #define base05  #FFB9DC
 #define base06  #87AFAF
 #define base07  #D0D0D0
-#define base08  #585858
+#define base08  #303030
 #define base09  #D7AFAF
 #define base0A  #A3B262
 #define base0B  #DFA000
@@ -88,4 +88,3 @@ Xft.hinting: 1
 Xft.rgba: rgb
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
-

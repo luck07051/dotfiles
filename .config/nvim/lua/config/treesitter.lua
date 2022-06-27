@@ -19,3 +19,7 @@ treesitter.setup {
         enable = true,
     },
 }
+
+-- fix
+vim.cmd [[ hi! link TSVariable Identifier ]]
+vim.cmd [[ hi! link TSNamespace Identifier ]]

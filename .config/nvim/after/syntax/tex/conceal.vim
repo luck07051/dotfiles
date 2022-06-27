@@ -1,3 +1,4 @@
+echo "abd"
 if !has('conceal')
   finish
 endif
