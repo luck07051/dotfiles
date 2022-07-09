@@ -34,7 +34,9 @@ keymap('', '<Leader>y', '"+y')
 keymap('', '<Leader>Y', '"+y$')
 keymap('', '<Leader>p', '"+p')
 keymap('', '<Leader>P', '"+P')
--- Paste in visual mode but not change register
+-- Copy all file --
+keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
+-- Paste in visual mode but not change register --
 keymap('v', 'p', '"_dP')
 keymap('v', 'gp', '"_d"+P')
 

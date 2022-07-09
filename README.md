@@ -18,8 +18,10 @@ alacritty           # terminal emulator
 bspwm               # windows manager
 sxhkd               # keybinding
 yay -S polybar      # status bar
+yay -S eww          # status bar
 zsh                 # shell
 rofi                # launcher and more
+firefox             # browser
 qutebrowswer        # browser
 
 pipewire-jack       # audio
@@ -33,43 +35,25 @@ setxkbmap           # uses it to remap capslock to ctrl
 cronie              # auto exec tasks at pre-determined times
 ntp                 # clock fixer
 xclip               # let nvim can use system clipboard
-
-fcitx5-im           # imput framework
-fcitx5-rime         # chinese engine
-```
-```
-(bluez bluez-utils)
-(qtile)
-(xmonad xmonad-contrib xmobar)
-(i3-gaps)
-(yay i3ass)
 ```
 
 
 Commandline tool
 ```
 tmux
-yay -S tmuxinator
 yay -S lf           # file manager
 ranger              # file manager
--nsxiv              # image viewer (install from git@github.com:luck07051/nsxiv.git)
+- nsxiv             # image viewer (install from git@github.com:luck07051/nsxiv.git)
 ueberzug            # image viewer (to view image in terminal)
 zathura zathura-pdf-mupdf   # pdf viewer
 ncmpcpp             # music player
-yay -S ncpamixer    # pulseaudio control
+#yay -S ncpamixer    # pulseaudio control
 
 icdiff              # diff tool
 wget                # download file from web
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
 youtube-dl          # youtube downloader
-
 pactl               # pulse control
-
-task                # taskwarrior, task management tool
-taskwarrior-tui     # a tui for taskwarrior
-
-bitwarden-cli       # bitwarden in commandline
-bitwarden-rofi      # bitwarden rofi menu
 
 fzf                 # fuzzy finder
 starship            # prompt
@@ -99,15 +83,6 @@ Dependencie
 yarn
 # vimtex
 texlive-most
-
-# polybar
-## spotify
-playerctl
-pip install dbus-python
-
-# bitwarden-rofi
-jq
-xdotool
 ```
 
 Nvidea
@@ -144,14 +119,6 @@ $ cd yay-git
 $ makepkg -si
 rm yay-git
 ```
-
-
-### **[zplug](https://github.com/zplug/zplug)**
-```
-$ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-$ zplug install
-```
-
 
 ### **[vim-plug](https://github.com/junegunn/vim-plug)**
 ```

@@ -6,5 +6,6 @@ rm -f $HOME/.cache/eww*.lock
 ${EWW} kill
 ${EWW} daemon
 
-${EWW} open bar0
-${EWW} open bar1
+#${EWW} open bar0
+#${EWW} open bar1
+${EWW} open bar

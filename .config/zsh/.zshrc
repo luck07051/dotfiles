@@ -32,8 +32,8 @@ bindkey -v
 export KEYTIMEOUT=1
 bindkey "^?" backward-delete-char
 
-# Source Alias file
-zsh_add_file "zsh_alias"
+# Alias
+zsh_add_file "alias.zsh"
 # fzf
 zsh_add_file "fzf.zsh"
 
@@ -45,7 +45,6 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
-
 
 
 # use fzf to select complete option

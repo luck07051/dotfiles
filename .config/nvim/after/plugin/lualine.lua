@@ -37,3 +37,4 @@ lualine.setup {
     tabline = {},
     extensions = {}
 }
+vim.opt.showmode = false

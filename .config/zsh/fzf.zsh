@@ -6,7 +6,7 @@ export FZF_DEFAULT_COMMAND="fd --hidden \
 
 
 fd_path() {
-  fd --hidden --follow --exclude ".git" .
+  fd --hidden --follow --max-depth 4 --exclude ".git" .
 }
 fd_dir() {
   fd --type d --hidden --follow --max-depth 7 --exclude ".git" .
@@ -21,7 +21,8 @@ fzf_run() {
         [[ -n $target ]] && cd "$target"
         ;;
     vim)
-        vim `'ls' -a | fzf "$@" --preview 'cat {}'`
+        target=`fd_path | fzf "$@" --preview 'cat {}'`
+        [[ -n $target ]] && vim $target
         ;;
 
     export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
@@ -32,3 +33,4 @@ fzf_run() {
 
 bindkey -s '^F' 'fzf_run cd\n'
 bindkey -s '^V' 'fzf_run vim\n'
+alias v='fzf_run vim'

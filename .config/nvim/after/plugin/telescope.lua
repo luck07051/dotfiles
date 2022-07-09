@@ -77,7 +77,7 @@ keymap('n', '<Leader>fb',   builtin..'buffers()<cr>', silent)
 keymap('n', '<Leader>fl',   builtin..'grep_string()<cr>', silent)
 
 keymap('n', '<Leader>fe',   builtin..'diagnostics()<cr>', silent)
-keymap('n', '<Leader>fd',   builtin..'lsp_definitions()<cr>', silent)
+keymap('n', 'gd',           builtin..'lsp_definitions()<cr>', silent)
 keymap('n', '<Leader>fr',   builtin..'lsp_references()<cr>', silent)
 keymap('n', '<Leader>fi',   builtin..'lsp_implementations()<cr>', silent)
 keymap('n', '<Leader>ft',   builtin..'lsp_type_definitions()<cr>', silent)

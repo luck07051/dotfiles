@@ -19,11 +19,11 @@
 
 ;===== WORKSPACES =====;
 
-(deflisten workspace_HDMI-0 "scripts/workspace_with_monitor HDMI-0")
-(deflisten workspace_HDMI-1 "scripts/workspace_with_monitor HDMI-1")
+;(deflisten workspace_HDMI-0 "scripts/workspace_with_monitor HDMI-0")
+;(deflisten workspace_HDMI-1 "scripts/workspace_with_monitor HDMI-1")
+(deflisten workspace_main "scripts/workspace_main_monitor_only")
 (defwidget workspaces [content]
   (literal :class "workspaces" :content content))
-
 
 ;===== CLOCK =====;
 
@@ -244,42 +244,83 @@
        :class "centr"
     ))
 
-(defwidget left0 []
+;(defwidget left0 []
+;  (box :orientation "h"
+;       :space-evenly false
+;       :halign "start"
+;       :class "left"
+;    (workspaces :content workspace_HDMI-0)))
+;(defwidget left1 []
+;  (box :orientation "h"
+;       :space-evenly false
+;       :halign "start"
+;       :class "left"
+;    (workspaces :content workspace_HDMI-1)))
+(defwidget left []
   (box :orientation "h"
        :space-evenly false
        :halign "start"
        :class "left"
-    (workspaces :content workspace_HDMI-0)))
-(defwidget left1 []
-  (box :orientation "h"
-       :space-evenly false
-       :halign "start"
-       :class "left"
-    (workspaces :content workspace_HDMI-1)))
+    (workspaces :content workspace_main)))
 
 
-(defwidget all0 []
+;(defwidget all0 []
+;  (box :orientation "h"
+;       :class "all"
+;    (left0)
+;    (center)
+;    (right)))
+;(defwidget all1 []
+;  (box :orientation "h"
+;       :class "all"
+;    (left1)
+;    (center)
+;    (right)))
+(defwidget all []
   (box :orientation "h"
        :class "all"
-    (left0)
+    (left)
     (center)
     (right)))
-(defwidget all1 []
-  (box :orientation "h"
-       :class "all"
-    (left1)
-    (center)
-    (right)))
+
 
 
 ;==================== WINDOWS ====================;
 
-(defwindow bar0
-  :monitor 0
+;(defwindow bar0
+;  :monitor 0
+;  :geometry
+;  (geometry
+;    :x "0px"
+;    :y "0px"
+;    :width "100%"
+;    :height "26px"
+;    :anchor "top center")
+;  :stacking "bg"
+;  :wm-ignore false
+;  :windowtype "dock"
+;  :reserve (struts :distance "26px" :side "top")
+;  (all0))
+;
+;(defwindow bar1
+;  :monitor 1
+;  :geometry
+;  (geometry
+;    :x "0px"
+;    :y "0px"
+;    :width "100%"
+;    :height "26px"
+;    :anchor "top center")
+;  :stacking "bg"
+;  :wm-ignore false
+;  :windowtype "dock"
+;  :reserve (struts :distance "26px" :side "top")
+;  (all1))
+(defwindow bar
   :geometry
   (geometry
     :x "0px"
-    :y "0px"
+    :y "-1px"
     :width "100%"
     :height "26px"
     :anchor "top center")
@@ -287,22 +328,7 @@
   :wm-ignore false
   :windowtype "dock"
   :reserve (struts :distance "26px" :side "top")
-  (all0))
-
-(defwindow bar1
-  :monitor 1
-  :geometry
-  (geometry
-    :x "0px"
-    :y "0px"
-    :width "100%"
-    :height "26px"
-    :anchor "top center")
-  :stacking "bg"
-  :wm-ignore false
-  :windowtype "dock"
-  :reserve (struts :distance "26px" :side "top")
-  (all1))
+  (all))
 
 
 

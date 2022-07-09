@@ -36,12 +36,11 @@ M.setup = function() --{{{
 end
 --}}}
 
-
 local function lsp_keymaps(bufnr) --{{{
     local opts = { buffer = bufnr, noremap = true, silent = true }
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     -- jump to ...
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    --vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
@@ -66,6 +65,8 @@ local function lsp_keymaps(bufnr) --{{{
 end
 
 --}}}
+
+
 
 local function lsp_illuminate(client) --{{{
     local status_ok, illuminate = pcall(require, "illuminate")

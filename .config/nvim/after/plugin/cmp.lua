@@ -11,17 +11,17 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Kind icons --{{{
 local kind_icons = {
-  Text = " Text",
-  Variable = " Variable",
-  File = " File",
-  Folder = " Folder",
-  Reference = " Reference",
+  Text = "",
+  Variable = "",
+  File = "",
+  Folder = "",
+  Reference = "",
 
-  Snippet = " Snip",
-  Function = " Function",
-  Method = "m Method",
-  Value = " Value",
-  Keyword = " Keyword",
+  Snippet = "",
+  Function = "",
+  Method = "m",
+  Value = "",
+  Keyword = "",
   Constructor = "",
   Field = "",
   Class = "",
@@ -49,7 +49,7 @@ cmp.setup {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ["<c-y>"] = cmp.mapping(
+        ["<C-y>"] = cmp.mapping(
             cmp.mapping.confirm {
                 behavior = cmp.ConfirmBehavior.Insert,
                 select = true,

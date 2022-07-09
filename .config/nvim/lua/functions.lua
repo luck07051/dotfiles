@@ -20,6 +20,9 @@ autocmd( 'VimLeave', { pattern = '*.tex', command = [[!latexmk -c %]] } )
 -- Fix filetype --
 autocmd( {'BufRead', 'BufNewFile'},
     { pattern = '*.tex', command = [[ set filetype=tex ]] } )
+-- Disable treesitter for conceal
+autocmd( {'BufRead', 'BufNewFile'},
+    { pattern = '*.tex', command = [[ TSBufDisable highlight ]] } )
 
 cmd [[
 function! MyFoldText() "{{{
