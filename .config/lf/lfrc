@@ -1,4 +1,4 @@
-#====================BASIC====================#
+#==================== BASIC ====================#
 set hidden true
 set ignorecase true
 
@@ -8,8 +8,8 @@ set cleaner ~/.config/lf/cleaner
 set shell zsh
 
 
-#====================FUNCTIONS====================#
-#===Basic===#
+#==================== FUNCTIONS ====================#
+# Basic #{{{
 cmd q %{{ lf -remote "send $id quit" }}
 
 cmd open ${{
@@ -56,7 +56,7 @@ cmd mv %{{
 
 cmd open-with %"$@" $fx
 
-#===cd===#
+# cd
 cmd zoxide %{{
     eval "$(zoxide init zsh --cmd z)"
     lf -remote "send $id cd '$(z $1; pwd)'"
@@ -82,10 +82,11 @@ cmd excutable %{{
 
     lf -remote 'send reload'
 }}
+#}}}
 
-#===jump===#
-cmd fzf_jump %{{
-    res="$(fd --hidden --ignore-file ~/.config/fzf/ignore-file --type file | fzf-tmux)"
+# FZF #{{{
+cmd fzf_jump_file ${{
+    res="$(fd --type f -HL --exclude '.git' | fzf)"
     if [ -d "$res" ]; then
         cmd="cd"
     else
@@ -94,8 +95,8 @@ cmd fzf_jump %{{
     lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd fzf_jump_global %{{
-    res="$(locate home media | fzf-tmux -e -i)"
+cmd fzf_jump_dir ${{
+    res="$(fd --type d --max-depth 10 -HL --exclude '.git' | fzf)"
     if [ -d "$res" ]; then
         cmd="cd"
     else
@@ -104,8 +105,8 @@ cmd fzf_jump_global %{{
     lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd fzf_jump_local %{{
-    res="$(find . -maxdepth 1 | sed 's/\.\///g' | fzf-tmux -d 35% --info=hidden)"
+cmd fzf_jump_local_dir ${{
+    res="$(fd --type d --max-depth 1 -HL --exclude '.git' | fzf)"
     if [ -d "$res" ]; then
         cmd="cd"
     else
@@ -113,9 +114,9 @@ cmd fzf_jump_local %{{
     fi
     lf -remote "send $id $cmd \"$res\""
 }}
+#}}}
 
-
-#===Archive===#
+# Archive #{{{
 cmd unarchive ${{
   case "$f" in
       *.zip) unzip "$f" ;;
@@ -130,8 +131,9 @@ cmd zip %zip -r "$f" "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
 cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+#}}}
 
-#====================KEYBINDING====================#
+#==================== KEYBINDING ====================#
 # Reset
 map c
 map m
@@ -148,9 +150,8 @@ map I push :newfile<space>
 map mv mv
 map ` push :open-with<space>
 
-map / fzf_jump
-map f fzf_jump_local
-map <c-f> fzf_jump_global
+map / fzf_jump_file
+map f fzf_jump_local_dir
+map <c-f> fzf_jump_dir
 
 map ; read
-

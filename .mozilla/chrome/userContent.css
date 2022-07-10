@@ -3,6 +3,7 @@
 @import "content/dark_settings_pages.css";
 
 @import "content/youtube_background.css";
+@import "content/duckduckgo_background.css";
 @import "content/github_background.css";
 @import "content/arch_background.css";
 
@@ -11,4 +12,3 @@
     filter: grayscale(100%);
     filter: invert(87%);
 }
-

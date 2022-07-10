@@ -1,3 +1,4 @@
+
 @import "chrome/navbar_tabs_oneliner.css";
 
 
@@ -25,6 +26,7 @@
   --arrowpanel-border-color: rgba(255,185,220,0.8) !important;
 
   --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
+
 }
 
 :root:-moz-lwtheme {
@@ -37,6 +39,17 @@
 /* book menu */
 #PlacesToolbar menupopup{
   background: rgba(28,28,28,0.85) !important;
-  border: 1px solid var(--arrowpanel-border-color) !important;
+  border: 2px solid var(--arrowpanel-border-color) !important;
+  border-radius: 10px !important;
+}
+.menupopup-arrowscrollbox {
+  background: rgba(0,0,0,0) !important;
+  border: none !important;
+}
+/* right click menu */
+#contentAreaContextMenu,
+#contentAreaContextMenu menupopup {
+  background: rgba(28,28,28,0.90) !important;
+  border: 2px solid var(--arrowpanel-border-color) !important;
   border-radius: 10px !important;
 }

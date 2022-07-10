@@ -1,8 +1,9 @@
-
 # F5 to resource
 bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 # Quick run filemanager
-#bindkey -M viins -s '^f' '^ulf\n'
+bindkey -M viins -s '^f' '^ulf\n'
+# Back to upper dir
+bindkey -s '^H' 'cd ..\n'
 
 
 # Change working directories when exit filemanager
@@ -35,18 +36,9 @@ alias grep="grep --color=auto"
 
 # git
 alias gs="git status"
-# for bare Git repository to manager my dotfiles
+# use bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias cons="config status"
-alias confs="config status"
-
-## taskwarrior
-#alias t="task"
-#alias ts="task sync"
-#alias tt="taskwarrior-tui | task sync"
-
-# matlab
-alias ml="matlab -nodisplay"
 
 # trans
 alias tt="trans :zh-TW"
