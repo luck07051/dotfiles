@@ -1,4 +1,3 @@
-
 local function keymap(mode, lhs, rhs, opts)
     local options = { noremap = true }
     if opts then options = vim.tbl_extend('force', options, opts) end
@@ -34,7 +33,7 @@ keymap('', '<Leader>y', '"+y')
 keymap('', '<Leader>Y', '"+y$')
 keymap('', '<Leader>p', '"+p')
 keymap('', '<Leader>P', '"+P')
--- Copy all file --
+-- Copy all file to clipboard --
 keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 -- Paste in visual mode but not change register --
 keymap('v', 'p', '"_dP')
@@ -54,10 +53,3 @@ keymap('n', '<C-l>', '<C-w>l')
 --cnoreabbrev <expr> e getcmdtype() == ':' && getcmdline() == 'e' ? 'e<Space><C-D>' : 'e'
 --cnoreabbrev <expr> b getcmdtype() == ':' && getcmdline() == 'b' ? 'ls<CR>:b' : 'b'
 --]]
-
-
-vim.cmd [[
-nnoremap <leader>so :so $VIMRUNTIME/syntax/hitest.vim<CR>
-nnoremap <leader>sp :TSCaptureUnderCursor<cr>
-nnoremap <leader>ss :h syntax.txt<cr>
-]]

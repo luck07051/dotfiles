@@ -97,6 +97,8 @@ cmp.setup {
         expand = function(args)
             -- For luasnip --
             luasnip.lsp_expand(args.body)
+            -- For UltiSnips --
+            --vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         end,
   },
   --}}}

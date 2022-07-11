@@ -1,9 +1,8 @@
-
 local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 
 -- Dont auto comment next line --
-autocmd( 'BufEnter', { command = [[set formatoptions-=cro]] } )
+autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
 -- When save file, delete trailing spaces and extra line -- {{{
 local DeleteExtraSpaces = function()
@@ -12,17 +11,17 @@ local DeleteExtraSpaces = function()
     vim.cmd [[ %s/\n\+\%$//e ]]
     vim.cmd [[ execute "to ".b:nline ]]
 end
-autocmd( 'BufWrite', { pattern = '*', callback = DeleteExtraSpaces } ) --}}}
+autocmd('BufWrite', { pattern = '*', callback = DeleteExtraSpaces }) --}}}
 
 
 -- Auto clear nonessential files when leave tex file --
-autocmd( 'VimLeave', { pattern = '*.tex', command = [[!latexmk -c %]] } )
+autocmd('VimLeave', { pattern = '*.tex', command = [[!latexmk -c %]] })
 -- Fix filetype --
-autocmd( {'BufRead', 'BufNewFile'},
-    { pattern = '*.tex', command = [[ set filetype=tex ]] } )
+autocmd({ 'BufRead', 'BufNewFile' },
+    { pattern = '*.tex', command = [[ set filetype=tex ]] })
 -- Disable treesitter for conceal
-autocmd( {'BufRead', 'BufNewFile'},
-    { pattern = '*.tex', command = [[ TSBufDisable highlight ]] } )
+autocmd({ 'BufRead', 'BufNewFile' },
+    { pattern = '*.tex', command = [[ TSBufDisable highlight ]] })
 
 cmd [[
 function! MyFoldText() "{{{

@@ -1,4 +1,3 @@
-
 vim.cmd [[
     try
         colorscheme ui_colors

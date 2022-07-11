@@ -1,6 +1,7 @@
 local M = {}
 
-M.setup = function() --{{{
+-- Setup {{{
+M.setup = function()
     -- Icon define --
     local function sign(name, text)
         vim.fn.sign_define(name, { texthl = name, text = text, numhl = "" })
@@ -36,7 +37,8 @@ M.setup = function() --{{{
 end
 --}}}
 
-local function lsp_keymaps(bufnr) --{{{
+-- Keymap {{{
+local function lsp_keymaps(bufnr)
     local opts = { buffer = bufnr, noremap = true, silent = true }
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     -- jump to ...
@@ -61,23 +63,24 @@ local function lsp_keymaps(bufnr) --{{{
     --vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, opts)
 
     vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<Leader>=', vim.lsp.buf.formatting, opts)
+    vim.keymap.set('n', '<Leader>=', vim.lsp.buf.formatting_sync, opts)
 end
 
 --}}}
 
-
-
-local function lsp_illuminate(client) --{{{
+-- illuminate {{{
+local function lsp_illuminate(client)
     local status_ok, illuminate = pcall(require, "illuminate")
     if not status_ok then
         return
     end
     illuminate.on_attach(client)
 end
+
 --}}}
 
-local function lsp_signature(bufnr) --{{{
+-- signature {{{
+local function lsp_signature(bufnr)
     local status_ok, signature = pcall(require, "lsp_signature")
     if not status_ok then
         return
@@ -95,14 +98,17 @@ local function lsp_signature(bufnr) --{{{
         hi_parameter = "LspSignatureActiveParameter",
     }, bufnr)
 end
+
 --}}}
 
-M.on_attach = function(client, bufnr) --{{{
+-- on attach {{{
+M.on_attach = function(client, bufnr)
     lsp_keymaps(bufnr)
     lsp_illuminate(client)
     lsp_signature(bufnr)
 end
 --}}}
+
 
 -- capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()

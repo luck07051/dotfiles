@@ -7,7 +7,7 @@ if not status_ok then
     return
 end
 
-require("plug.lsp.installer")
+require("plug.lsp.lspinstaller")
 require("plug.lsp.lspconfig").setup()
 
 -- Setup for each sever --{{{
@@ -18,10 +18,12 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
         on_attach = config.on_attach,
         capabilities = config.capabilities,
     }
+    -- if have language specific file
     local has_opts, server_opts = pcall(require, "plug.lsp.settings."..server.name)
     if has_opts then
         opts = vim.tbl_deep_extend("force", server_opts, opts)
     end
+
     lspconfig[server.name].setup(opts)
 end
 --}}}

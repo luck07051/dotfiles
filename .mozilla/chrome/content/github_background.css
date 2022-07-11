@@ -23,8 +23,10 @@
     }
 
     /***** fix some thing *****/
-    /* explore top menu */
-    /* .site-subnav.site-subnav-sticky.js-sticky, */
+    /* explore top banner */
+    .site-subnav.site-subnav-sticky.js-sticky,
+    /* person page top banner */
+    #js-pjax-container div.position-sticky,
     /* wiki title */
     .d-flex.flex-column.flex-md-row.gh-header,
     /* discussion title */
