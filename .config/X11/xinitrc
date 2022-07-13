@@ -37,6 +37,7 @@ xset -dpms
 pgrep "nitrogen" || nitrogen --restore &
 pgrep "picom" || picom --experimental-backend &
 
+pgrep "sxhkd" || sxhkd &
 
 #exec qtile start
 #exec i3

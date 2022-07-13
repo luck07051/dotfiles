@@ -4,19 +4,19 @@ workspaces = []
 tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 layouts = [
     "MainAndVertStack",
-    "MainAndHorizontalStack",
-    "MainAndDeck",
-    "GridHorizontal",
-    "EvenHorizontal",
-    "EvenVertical",
-    "Fibonacci",
-    "LeftMain",
-    "CenterMain",
-    "CenterMainBalanced",
-    "CenterMainFluid",
+    #"MainAndHorizontalStack",
+    #"MainAndDeck",
+    #"GridHorizontal",
+    #"EvenHorizontal",
+    #"EvenVertical",
+    #"Fibonacci",
+    #"LeftMain",
+    #"CenterMain",
+    #"CenterMainBalanced",
+    #"CenterMainFluid",
     "Monocle",
-    "RightWiderLeftStack",
-    "LeftWiderRightStack"
+    #"RightWiderLeftStack",
+    #"LeftWiderRightStack"
 ]
 layout_mode = "Tag" # Workspace or Tag
 insert_behavior = "Bottom"
@@ -28,31 +28,29 @@ focus_new_windows = true
 scratchpad = []
 
 window_rules = [
+{ window_class = "firefox", spawn_on_tag = 1 },
 { window_class = "discord", spawn_on_tag = 9 },
+
 { window_class = "QjackCtl", spawn_floating = true },
 { window_class = "matplotlib", spawn_floating = true },
 ]
 
 
+
 # Basic {{{
-# reload
 [[keybind]]
 command = "SoftReload"
-value = ""
 modifier = ["modkey", "Control"]
 key = "r"
 
-# quit wm
 [[keybind]]
 command = "Execute"
 value = "loginctl kill-session $XDG_SESSION_ID"
 modifier = ["modkey", "Control"]
 key = "q"
 
-# close window
 [[keybind]]
 command = "CloseWindow"
-value = ""
 modifier = ["modkey"]
 key = "q"
 #}}}
@@ -60,15 +58,9 @@ key = "q"
 # Execute {{{
 [[keybind]]
 command = "Execute"
-value = "alacritty"
+value = "$TERMINAL"
 modifier = ["modkey"]
 key = "Return"
-
-[[keybind]]
-command = "Execute"
-value = "rofi -show combi -i -theme ui_theme"
-modifier = ["modkey"]
-key = "semicolon"
 
 [[keybind]]
 command = "Execute"
@@ -78,79 +70,92 @@ key = "b"
 
 [[keybind]]
 command = "Execute"
+value = "rofi -show combi -i -theme ui_theme"
+modifier = ["modkey"]
+key = "semicolon"
+
+[[keybind]]
+command = "Execute"
 value = "rofi -show power -modi power:power-menu -theme ui_theme"
 modifier = ["modkey"]
 key = "p"
 #}}}
-
 # Focus Window {{{
 [[keybind]]
 command = "FocusWindowUp"
-value = ""
 modifier = ["modkey"]
 key = "k"
 
 [[keybind]]
 command = "FocusWindowDown"
-value = ""
 modifier = ["modkey"]
 key = "j"
 #}}}
-
 # Move Window {{{
 [[keybind]]
-command = "MoveWindowTop"
-value = ""
-modifier = ["modkey"]
-key = "m"
-
-[[keybind]]
 command = "MoveWindowUp"
-value = ""
 modifier = ["modkey", "Shift"]
 key = "k"
 
 [[keybind]]
 command = "MoveWindowDown"
-value = ""
 modifier = ["modkey", "Shift"]
 key = "j"
+
+[[keybind]]
+command = "MoveWindowTop"
+modifier = ["modkey"]
+key = "m"
 #}}}
-
-# Layouts {{{
+# Floating {{{
 [[keybind]]
-command = "NextLayout"
-value = ""
-modifier = ["modkey", "Control"]
-key = "k"
-
-[[keybind]]
-command = "PreviousLayout"
-value = ""
-modifier = ["modkey", "Control"]
-key = "j"
+command = "ToggleFloating"
+modifier = ["modkey", "Shift"]
+key = "f"
 #}}}
 
 # Workspace {{{
 [[keybind]]
-command = "SwapTags"
+command = "FocusWorkspaceNext"
 modifier = ["modkey"]
-key = "w"
+key = "period"
 
 [[keybind]]
-command = "FocusWorkspaceNext"
-value = ""
+command = "FocusWorkspacePrevious"
+modifier = ["modkey"]
+key = "comma"
+
+[[keybind]]
+command = "SwapTags"
+modifier = ["modkey"]
+key = "n"
+#}}}
+
+# Layout {{{
+[[keybind]]
+command = "NextLayout"
+modifier = ["modkey"]
+key = "Tab"
+
+[[keybind]]
+command = "PreviousLayout"
+modifier = ["modkey", "Shift"]
+key = "Tab"
+
+[[keybind]]
+command = "IncreaseMainWidth"
+value = "5"
 modifier = ["modkey"]
 key = "l"
 
 [[keybind]]
-command = "FocusWorkspacePrevious"
-value = ""
+command = "DecreaseMainWidth"
+value = "5"
 modifier = ["modkey"]
 key = "h"
 #}}}
 
-# Go to Tags {{{
+# Goto Tag {{{
 [[keybind]]
 command = "GotoTag"
 value = "1"
@@ -205,8 +210,7 @@ value = "9"
 modifier = ["modkey"]
 key = "9"
 #}}}
-
-# Move to Tags {{{
+# Move To Tag {{{
 [[keybind]]
 command = "MoveToTag"
 value = "1"
