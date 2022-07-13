@@ -40,5 +40,6 @@ pgrep "picom" || picom --experimental-backend &
 
 #exec qtile start
 #exec i3
-exec bspwm
+#exec bspwm
 #exec bwm
+exec dbus-launch leftwm

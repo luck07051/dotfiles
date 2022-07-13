@@ -1,30 +1,22 @@
 local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 
--- Dont auto comment next line --
+-- Not auto comment --
 autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
--- When save file, delete trailing spaces and extra line -- {{{
+-- When save file, delete trailing spaces and extra line {{{
 local DeleteExtraSpaces = function()
-    vim.cmd [[ let b:nline= line('.') ]]
-    vim.cmd [[ %s/\s\+$//e ]]
-    vim.cmd [[ %s/\n\+\%$//e ]]
-    vim.cmd [[ execute "to ".b:nline ]]
+    cmd [[ let b:nline= line('.') ]]
+    cmd [[ %s/\s\+$//e ]]
+    cmd [[ %s/\n\+\%$//e ]]
+    cmd [[ execute "to ".b:nline ]]
 end
-autocmd('BufWrite', { pattern = '*', callback = DeleteExtraSpaces }) --}}}
+autocmd('BufWrite', { pattern = '*', callback = DeleteExtraSpaces })
+--}}}
 
-
--- Auto clear nonessential files when leave tex file --
-autocmd('VimLeave', { pattern = '*.tex', command = [[!latexmk -c %]] })
--- Fix filetype --
-autocmd({ 'BufRead', 'BufNewFile' },
-    { pattern = '*.tex', command = [[ set filetype=tex ]] })
--- Disable treesitter for conceal
-autocmd({ 'BufRead', 'BufNewFile' },
-    { pattern = '*.tex', command = [[ TSBufDisable highlight ]] })
-
+-- Change Fold Text --{{{
 cmd [[
-function! MyFoldText() "{{{
+function! MyFoldText()
     let foldedlinecount = v:foldend - v:foldstart
     let line = getline(v:foldstart)
     " remove mark
@@ -38,11 +30,24 @@ function! MyFoldText() "{{{
     let windowwidth = winwidth(0) - nucolwidth
     let fillcharcount = windowwidth - strdisplaywidth(showline) - len(foldedlinecount) -3
     return showline . repeat(" ",fillcharcount) . foldedlinecount . ' '
-endfunction "}}}
+endfunction
 set foldtext=MyFoldText()
 ]]
+--}}}
+
 
 -- Highlight 81 column
-cmd [[ call matchadd('ColorColumn', '\%81v', 100) ]]
+vim.fn.matchadd('ColorColumn', '\\%81v', 100)
 -- Show extra space
-cmd [[ call matchadd('ColorColumn', '\s$', 100) ]]
+vim.fn.matchadd('ColorColumn', '\\s$', 100)
+
+
+-- TEX --
+-- Fix filetype --
+autocmd({ 'BufRead', 'BufNewFile' },
+    { pattern = '*.tex', command = [[ set filetype=tex ]] })
+-- Auto clear nonessential files when leave tex file --
+autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
+-- Disable treesitter for conceal
+autocmd({ 'BufRead', 'BufNewFile' },
+    { pattern = '*.tex', command = [[ TSBufDisable highlight ]] })

@@ -7,10 +7,7 @@ bindkey -s '^H' 'cd ..\n'
 
 
 # Change working directories when exit filemanager
-alias ranger='ranger --choosedir=/tmp/last-dir; \
-    LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
-alias lf='lfrun -last-dir-path /tmp/last-dir; \
-    LASTDIR=`cat /tmp/last-dir`; cd "$LASTDIR"'
+alias lf="lfrun -last-dir-path=\"/tmp/lfcd\"; cd \`cat /tmp/lfcd\`"
 
 alias ..="cd .."
 

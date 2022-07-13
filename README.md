@@ -1,14 +1,15 @@
 # This Is My Configuration
 
-# Installed
+## Installed
 
 Basic
 ```
 base-devel
-xorg xorg-xinit xorg-fonts-misc
+xorg xorg-xinit
 xdg-user-dirs
 alsl-utils
 git
+wget
 openssh
 ```
 
@@ -42,15 +43,13 @@ Commandline tool
 ```
 tmux
 yay -S lf           # file manager
-ranger              # file manager
 - nsxiv             # image viewer (install from git@github.com:luck07051/nsxiv.git)
 ueberzug            # image viewer (to view image in terminal)
 zathura zathura-pdf-mupdf   # pdf viewer
-ncmpcpp             # music player
+#ncmpcpp             # music player
 #yay -S ncpamixer    # pulseaudio control
 
 icdiff              # diff tool
-wget                # download file from web
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
 youtube-dl          # youtube downloader
 pactl               # pulse control
@@ -59,12 +58,14 @@ fzf                 # fuzzy finder
 starship            # prompt
 exa                 # better ls
 htop                # better top
-btop                # better better top
+btop                # better top
 bat                 # better cat
 procs               # better ps
 zoxide              # better cd
 fd                  # better find
+sd                  # better sed
 ripgerp             # better gerp
+hexyl               # hex viewer
 ```
 
 Graphical app
@@ -104,13 +105,14 @@ Font
 yay -S nerd-fonts-complete
 yay -S adobe-source-han-sans-otc-fonts
 yay -S noto-fonts-cjk
+xorg-fonts-misc
 ```
 
 
 
 
 
-# NOTE
+## NOTE
 
 ### yay
 ```
@@ -238,7 +240,7 @@ systemctl enable cronie
 systemctl start cronie
 ```
 
-put this in `srontab -u root -e`
+put this in `crontab -u root -e`
 ```
 # sync time everyday at 8pm
 0 20 * * * /usr/bin/ntpd -qg; /usr/bin/hwclock --systohc

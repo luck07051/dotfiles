@@ -4,6 +4,7 @@ require 'plugins'
 require 'functions'
 require 'colorscheme'
 
+-- plugins --
 require 'plug.cmp'
 require 'plug.lsp'
 require 'plug.treesitter'
@@ -16,3 +17,4 @@ require 'plug.toggleterm'
 require 'plug.lualine'
 require 'plug.gitsigns'
 require 'plug.colorizer'
+require 'plug.vimwiki'

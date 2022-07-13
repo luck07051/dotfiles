@@ -1,0 +1,8 @@
+#!/bin/sh
+
+def_sink=$(pactl get-default-sink)
+next_sink=$(pactl list sinks short | grep -A 1 "$def_sink" | cut -f2 | tail -n1)
+if [ "$def_sink" == "$next_sink" ]; then
+    next_sink=$(pactl list sinks short | cut -f2 | head -n1)
+fi
+pactl set-default-sink $next_sink

@@ -15,7 +15,7 @@ local status_ok, packer = pcall(require, 'packer')
 if not status_ok then
     return
 end --}}}
--- Have packer use a popup window -- {{{
+-- Have packer using a popup window -- {{{
 packer.init {
     display = {
         open_fn = function()
@@ -30,7 +30,6 @@ vim.cmd [[
     autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]] --}}}
-
 
 return require('packer').startup(function(use)
     -- Packer can manage itself --
@@ -48,6 +47,8 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'akinsho/toggleterm.nvim'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-repeat'
 
     -- Treesitter --
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
@@ -56,11 +57,11 @@ return require('packer').startup(function(use)
     -- LSP --
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
-    --use'jose-elias-alvarez/null-ls.nvim'
-    -- highlighting other word under the cursor
+    -- Highlighting other uses of the current word under the cursor
     use 'RRethy/vim-illuminate'
-    -- function hint
+    -- Function hint
     use 'ray-x/lsp_signature.nvim'
+    --use'jose-elias-alvarez/null-ls.nvim'
 
     -- CMP --
     use 'hrsh7th/nvim-cmp'

@@ -67,7 +67,7 @@ $ pacman -S sudo
 $ visudo
 uncomment the line: %wheel ALL=(ALL) ALL
 
-# Install grub and Other
+# Install grub and Other (bootloader)
 $ pacman -S grub
 $ pacman -S efibootmgr dosfstools os-prober mtools
 $ mkdir /boot/EFI
