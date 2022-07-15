@@ -2,8 +2,6 @@
 bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
 # Quick run filemanager
 bindkey -M viins -s '^f' '^ulf\n'
-# Back to upper dir
-bindkey -s '^H' 'cd ..\n'
 
 
 # Change working directories when exit filemanager
@@ -39,6 +37,7 @@ alias cons="config status"
 
 # trans
 alias tt="trans :zh-TW"
+
 
 # Fix config file path
 # wget

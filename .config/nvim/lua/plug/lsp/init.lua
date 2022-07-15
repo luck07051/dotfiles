@@ -9,6 +9,7 @@ end
 
 require("plug.lsp.lspinstaller")
 require("plug.lsp.lspconfig").setup()
+require("plug.lsp.null-ls")
 
 -- Setup for each sever --{{{
 local config = require("plug.lsp.lspconfig")

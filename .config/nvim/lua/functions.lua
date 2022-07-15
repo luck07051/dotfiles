@@ -51,3 +51,8 @@ autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
 -- Disable treesitter for conceal
 autocmd({ 'BufRead', 'BufNewFile' },
     { pattern = '*.tex', command = [[ TSBufDisable highlight ]] })
+
+
+
+autocmd({ 'BufRead', 'BufNewFile' },
+    { pattern = '*.config', command = [[ set filetype=dosini ]] })

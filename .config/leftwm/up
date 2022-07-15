@@ -1,4 +1,4 @@
 #!/bin/sh
 
 pgrep "$BROWSER" || $BROWSER &
-pgrep "$TERMINAL" || $TERMINAL &
+#pgrep "$TERMINAL" || $TERMINAL &

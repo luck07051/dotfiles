@@ -6,25 +6,22 @@ super + ctrl + shift + r
 #===== AUDIO =====#
 # {Raise, Low} volume
 super + shift + {u,i}
-    pactl set-sink-volume @DEFAULT_SINK@ {+5,-5}%
+    volume {volUp,Down} 5
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
-    pactl set-sink-volume @DEFAULT_SINK@ {+5,-5}%
+    volume vol{Up,Down} 5
 
 {button10, button11}
-    pactl set-sink-volume @DEFAULT_SINK@ {+5,-5}%
+    volume vol{Up,Down} 5
 
 
 # switch output
 super + shift + o
-    pactl-next-sink; \
-    $XDG_CONFIG_HOME/bspwm/eww/bar/scripts/volume update-volume
-
+    volume nextSink
 
 # Mute output
 XF86AudioMute
     pactl set-source-mute @DEFAULT_SINK@ toggle; \
-    $XDG_CONFIG_HOME/bspwm/eww/bar/scripts/volume update-volume
 # Mute source
 XF86AudioMicMute
     pactl set-source-mute @DEFAULT_SOURCE@ toggle

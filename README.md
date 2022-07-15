@@ -21,6 +21,7 @@ sxhkd               # keybinding
 yay -S polybar      # status bar
 yay -S eww          # status bar
 zsh                 # shell
+nushell             # shell
 rofi                # launcher and more
 firefox             # browser
 qutebrowswer        # browser
@@ -198,7 +199,7 @@ xdg-mime default $(xdg-settings get default-web-browser) x-scheme-handler/https 
 
 ### xinput
 ```
-ln ~/.config/X11/xorg.conf.d/[] /etc/X11/xinit/xinitrc.d/
+ln ~/.config/X11/xorg.conf.d/[] /etc/X11/xinit/xorg.conf.d/
 ```
 
 

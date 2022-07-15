@@ -50,6 +50,8 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
 
+    use { 'LhKipp/nvim-nu', run = ':TSInstall nu' }
+
     -- Treesitter --
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
     use 'nvim-treesitter/playground'
@@ -57,11 +59,11 @@ return require('packer').startup(function(use)
     -- LSP --
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
+    use'jose-elias-alvarez/null-ls.nvim'
     -- Highlighting other uses of the current word under the cursor
     use 'RRethy/vim-illuminate'
     -- Function hint
     use 'ray-x/lsp_signature.nvim'
-    --use'jose-elias-alvarez/null-ls.nvim'
 
     -- CMP --
     use 'hrsh7th/nvim-cmp'

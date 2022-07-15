@@ -1,9 +1,10 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
-
 env:
   # TERM variable
   #TERM: alacritty
   TERM: xterm-256color
+
+shell:
+  program: /bin/nu
 
 # Font configuration
 font:

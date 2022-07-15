@@ -18,3 +18,6 @@ require 'plug.lualine'
 require 'plug.gitsigns'
 require 'plug.colorizer'
 require 'plug.vimwiki'
+
+
+require('nu').setup{}

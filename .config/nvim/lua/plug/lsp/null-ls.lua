@@ -8,9 +8,7 @@ local diagnostics = require("null-ls").builtins.diagnostics
 
 null.setup({
     sources = {
-        -- cargo install stylua
-        formatting.stylua,
-
+        --formatting.stylua,
 
     },
 })

@@ -9,38 +9,35 @@ fi
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
-
-# start some nice programs
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "$f" ] && . "$f"
-    done
-    unset f
-fi
-
-
-## set wacom area
-#if [$(xinput list | grep 'Wacom')]; then
-#    xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275
+## start some nice programs
+#if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+#    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+#        [ -x "$f" ] && . "$f"
+#    done
+#    unset f
 #fi
+
+
+# set wacom area
+if [$(xinput list | grep 'Wacom')]; then
+    xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275
+fi
 
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
 
-# Set 144 rate
+# Set screen to 144 rate
 xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
+
 # No screen saver
 xset s off
 xset -dpms
 
 pgrep "nitrogen" || nitrogen --restore &
 pgrep "picom" || picom --experimental-backend &
-
 pgrep "sxhkd" || sxhkd &
 
-#exec qtile start
-#exec i3
+
 #exec bspwm
-#exec bwm
 exec dbus-launch leftwm
