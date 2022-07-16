@@ -1,11 +1,9 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
+if not pcall(require, 'cmp') then return end
+local cmp = require 'cmp'
+
+if not pcall(require, "luasnip") then return end
+local luasnip = require 'luasnip'
+
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 

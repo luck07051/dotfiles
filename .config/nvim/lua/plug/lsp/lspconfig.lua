@@ -70,10 +70,9 @@ end
 
 -- illuminate {{{
 local function lsp_illuminate(client)
-    local status_ok, illuminate = pcall(require, "illuminate")
-    if not status_ok then
-        return
-    end
+    if not pcall(require, 'illuminate') then return end
+    local illuminate = require 'illuminate'
+
     illuminate.on_attach(client)
 end
 
@@ -81,10 +80,9 @@ end
 
 -- signature {{{
 local function lsp_signature(bufnr)
-    local status_ok, signature = pcall(require, "lsp_signature")
-    if not status_ok then
-        return
-    end
+    if not pcall(require, "lsp_signature") then return end
+    local signature = require "lsp_signature"
+
     signature.on_attach({
         floating_window = true,
         doc_lines = 0,
@@ -112,10 +110,10 @@ end
 
 -- capabilities {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-    return
-end
+
+if not pcall(require, "cmp_nvim_lsp") then return end
+local cmp_nvim_lsp = require "cmp_nvim_lsp"
+
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 --}}}
 

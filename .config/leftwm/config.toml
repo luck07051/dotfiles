@@ -70,13 +70,13 @@ key = "b"
 
 [[keybind]]
 command = "Execute"
-value = "rofi -show combi -i -theme ui_theme"
+value = "rofi -show combi -i"
 modifier = ["modkey"]
 key = "semicolon"
 
 [[keybind]]
 command = "Execute"
-value = "rofi -show power -modi power:power-menu -theme ui_theme"
+value = "rofi -show power -modi power:power-menu"
 modifier = ["modkey"]
 key = "p"
 #}}}

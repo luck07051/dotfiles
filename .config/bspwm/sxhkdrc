@@ -26,11 +26,11 @@ super + b
 
 # Open launcher
 super + semicolon
-    rofi -show combi -i -theme ui_theme
+    rofi -show combi -i
 
 # Open power menu
 super + p
-    rofi -show power -modi power:power-menu -theme ui_theme
+    rofi -show power -modi power:power-menu
 
 
 #==================== WORKSPACES & LAYOUT & WINDOWS ====================#

@@ -3,6 +3,5 @@
 # example:
 # $ pormpt "Do you want to Logout?" "i3-msg exit"
 
-[ $(echo -e "No\nYes" | rofi -dmenu -i -p "$1" -theme ui_theme) \
-    == "Yes" ] && $2
-
+[ $(echo -e "No\nYes" | rofi -dmenu -i -p "$1") == "Yes" ] \
+    && $2

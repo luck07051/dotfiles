@@ -1,7 +1,5 @@
-local status_ok, telescope = pcall(require, 'telescope')
-if not status_ok then
-    return
-end
+if not pcall(require, 'telescope') then return end
+local telescope = require 'telescope'
 
 local actions = require 'telescope.actions'
 

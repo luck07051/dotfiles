@@ -1,7 +1,5 @@
-local status_ok, comment = pcall(require, 'Comment')
-if not status_ok then
-  return
-end
+if not pcall(require, 'Comment') then return end
+local comment = require 'Comment'
 
 comment.setup(
 {
