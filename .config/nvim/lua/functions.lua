@@ -47,7 +47,8 @@ vim.fn.matchadd('ColorColumn', '\\s$', 100)
 autocmd({ 'BufRead', 'BufNewFile' },
     { pattern = '*.tex', command = [[ set filetype=tex ]] })
 -- Auto clear nonessential files when leave tex file --
-autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
+autocmd('VimLeave',
+    { pattern = '*.tex', command = [[ !latexmk -c % ]] })
 -- Disable treesitter for conceal
 autocmd({ 'BufRead', 'BufNewFile' },
     { pattern = '*.tex', command = [[ TSBufDisable highlight ]] })

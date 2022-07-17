@@ -5,7 +5,7 @@ bindkey -M viins -s '^f' '^ulf\n'
 
 
 # Change working directories when exit filemanager
-alias lf="lfrun -last-dir-path=\"/tmp/lfcd\"; cd \`cat /tmp/lfcd\`"
+alias lf="lfrun; cd \`cat /tmp/lfcd\`"
 
 alias ..="cd .."
 

@@ -1,6 +1,3 @@
-# If you using zsh, you need to cp/ln this file to home dir.
-# ln ~/.config/zsh/zshenv ~/.zshenv
-
 #==================== XDG Paths ====================#
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -11,6 +8,28 @@ export XDG_STATE_HOME=$HOME/.local/state
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and its subdir to path
 export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
+
+. "/home/ui/.local/share/cargo/env"
+
+
+#==================== Default App ====================#
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+
+#export TERM="xterm-256color"
+#export LANG=en_US.UTF-8
+
+# input method
+#export GTK_IM_MODULE='fcitx'
+#export QT_IM_MODULE='fcitx'
+#export SDL_IM_MODULE='fcitx'
+#export XMODIFIERS='@im=fcitx'
+
+# FZF
+export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
+    --color=pointer:5,gutter:-1,prompt:7 --info=default "
+export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
 #==================== Let Paths Right ====================#
@@ -42,33 +61,11 @@ export STACK_ROOT="$XDG_CONFIG_HOME"/stack
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 # go
 export GOPATH="$XDG_DATA_HOME"/go
-# matlab
-export MATLAB_LOG_DIR=/tmp
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 # rust
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
-
-#==================== Default App ====================#
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
-
-#==================== Misc ====================#
-export TERM="xterm-256color"
-export LANG=en_US.UTF-8
-
-# input method
-export GTK_IM_MODULE='fcitx'
-export QT_IM_MODULE='fcitx'
-export SDL_IM_MODULE='fcitx'
-export XMODIFIERS='@im=fcitx'
-
-# lf
-source "$XDG_CONFIG_HOME/lf/colors"
-
-# fix matlab
+# matlab
+export MATLAB_LOG_DIR=/tmp
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-. "/home/ui/.local/share/cargo/env"

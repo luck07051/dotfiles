@@ -17,6 +17,7 @@ Setup
 ```
 alacritty           # terminal emulator
 bspwm               # windows manager
+leftwm              # wm
 sxhkd               # keybinding
 yay -S polybar      # status bar
 yay -S eww          # status bar
@@ -54,6 +55,8 @@ icdiff              # diff tool
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
 youtube-dl          # youtube downloader
 pactl               # pulse control
+
+tldr                # help
 
 fzf                 # fuzzy finder
 starship            # prompt

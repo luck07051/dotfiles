@@ -2,31 +2,24 @@
 
 # prompt {{{
 def create_left_prompt [] {
-    let path_segment = if (is-admin) {
-        $"(ansi red_bold)($env.PWD)"
-    } else {
-        $"(ansi green_bold)($env.PWD)"
-    }
+    let path_segment = $"(ansi green_bold)($env.PWD)"
     $path_segment
 }
 
 def create_right_prompt [] {
-    let time_segment = ([
-        (date now | date format '%R') ] | str collect)
+    let time_segment = ([ (date now | date format '%R') ] | str collect)
     $time_segment
 }
 
 # Use nushell functions to define your right and left prompt
 let-env PROMPT_COMMAND = { create_left_prompt }
-let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
-#let-env PROMPT_COMMAND_RIGHT = { $nothing }
+#let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
+let-env PROMPT_COMMAND_RIGHT = { $nothing }
 
-# The prompt indicators are environmental variables that represent
-# the state of the prompt
-let-env PROMPT_INDICATOR = { " > " }
-let-env PROMPT_INDICATOR_VI_INSERT = { " > " }
-let-env PROMPT_INDICATOR_VI_NORMAL = { " < " }
-let-env PROMPT_MULTILINE_INDICATOR = { $"(ansi light_gray) " }
+let-env PROMPT_INDICATOR = " > "
+let-env PROMPT_INDICATOR_VI_INSERT = " > "
+let-env PROMPT_INDICATOR_VI_NORMAL = " < "
+let-env PROMPT_MULTILINE_INDICATOR = $"(ansi light_gray) "
 #}}}
 
 # Specifies how environment variables are:
@@ -38,27 +31,27 @@ let-env ENV_CONVERSIONS = {
         from_string: { |s| $s | split row (char esep) }
         to_string: { |v| $v | path expand | str collect (char esep) }
     }
-    "Path": {
-        from_string: { |s| $s | split row (char esep) }
-        to_string: { |v| $v | path expand | str collect (char esep) }
-    }
 }
 
 
-let-env NU_CONFIG_DIRS = ($nu.config-path | path dirname)
+let-env NU_CONFIG_DIR = ($nu.config-path | path dirname)
 # Directories to search for scripts when calling source or use
 let-env NU_LIB_DIRS = [
-    ($env.NU_CONFIG_DIRS | path join 'scripts')
+    ($env.NU_CONFIG_DIR | path join 'scripts')
 ]
 # Directories to search for plugin binaries when calling register
 let-env NU_PLUGIN_DIRS = [
-    ($env.NU_CONFIG_DIRS | path join 'plugins')
+    ($env.NU_CONFIG_DIR | path join 'plugins')
 ]
 
 
 
 # Use sh scripts to handle env
 ~/.config/nushell/profile
+
+# Add zoxid
+zoxide init nushell --hook prompt --cmd cd
+| save $"($env.NU_CONFIG_DIR)/zoxide.nu"
 
 # Shorthand
 let-env CONFIG  = $env.XDG_CONFIG_HOME

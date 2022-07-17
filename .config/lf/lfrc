@@ -56,12 +56,6 @@ cmd mv %{{
 
 cmd open-with %"$@" $fx
 
-# cd
-cmd zoxide %{{
-    eval "$(zoxide init zsh --cmd z)"
-    lf -remote "send $id cd '$(z $1; pwd)'"
-}}
-
 cmd chmod %{{
     printf "Mode Bits: "
     read ans
@@ -81,6 +75,18 @@ cmd excutable %{{
     done
 
     lf -remote 'send reload'
+}}
+#}}}
+
+# zoxide {{{
+cmd z %{{
+    result="$(zoxide query --exclude "${PWD}" -- "$1")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i -- "$1")"
+    lf -remote "send ${id} cd '${result}'"
 }}
 #}}}
 
@@ -105,8 +111,8 @@ cmd fzf_jump_dir ${{
     lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd fzf_jump_local_dir ${{
-    res="$(fd --type d --max-depth 1 -HL --exclude '.git' | fzf)"
+cmd fzf_jump_local ${{
+    res="$(fd --max-depth 1 -HL --exclude '.git' | fzf)"
     if [ -d "$res" ]; then
         cmd="cd"
     else
@@ -142,7 +148,7 @@ map '"'
 
 map <esc> clear
 map D delete
-map cd push :zoxide<space>
+map cd push :z<space>
 map o push :mkdir<space>
 map i push :mkfile<space>
 map O push :newdir<space>
@@ -151,7 +157,7 @@ map mv mv
 map ` push :open-with<space>
 
 map / fzf_jump_file
-map f fzf_jump_local_dir
+map f fzf_jump_local
 map <c-f> fzf_jump_dir
 
 map ; read

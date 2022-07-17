@@ -1,5 +1,7 @@
 # Nushell Config File
 
+# why i cant use this form
+#source $"($env.NU_CONFIG_DIR)/completions"
 source ~/.config/nushell/completions.nu
 source ~/.config/nushell/keybindings.nu
 source ~/.config/nushell/menus.nu
@@ -57,83 +59,33 @@ let dark_theme = { #{{{
     shape_nothing: light_cyan
 } #}}}
 
-# The default config record. This is where much of your global configuration is setup.
+
 let-env config = {
-    filesize_metric: false
     # basic, compact, compact_double, light, thin, with_love,
     # rounded, reinforced, heavy, none, other
     table_mode: light
-    use_ls_colors: true
-    rm_always_trash: false
     # if you want a light theme, replace `$dark_theme` to `$light_theme`
     color_config: $dark_theme
-    use_grid_icons: true
-    # always, never, number_of_rows, auto
-    #footer_mode: "25"
-    footer_mode: auto
-    # set this to false to prevent auto-selecting completions when only one remains
+    # set this to false to prevent auto-selecting
+    # completions when only one remains
     quick_completions: false
-    # set this to false to prevent partial filling of the prompt
-    partial_completions: true
     # prefix, fuzzy
     completion_algorithm: "fuzzy"
     # redraw the prompt every second
     animate_prompt: false
-    float_precision: 2
-    # command that will be used to edit the current line buffer with ctrl+o,
-    # if unset fallback to $env.EDITOR and $env.VISUAL
-    #buffer_editor: "emacs"
-    use_ansi_coloring: true
-    # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
-    filesize_format: "auto"
     # emacs, vi
     edit_mode: vi
     # Session has to be reloaded for this to take effect
     max_history_size: 10000
-    # Enable to share the history between multiple sessions,
-    # else you have to close the session to persist history to file
-    sync_history_on_enter: true
-    # "sqlite" or "plaintext"
-    history_file_format: "plaintext"
-    # enables terminal markers and a workaround to arrow keys stop working issue
-    shell_integration: true
-    # set to true to remove the index column from tables
-    disable_table_indexes: false
-    # set to true to allow you to do things like cd s/o/f and
-    # nushell expand it to cd some/other/folder
-    cd_with_abbreviations: false
-    # set to true to enable case-sensitive completions
-    case_sensitive_completions: false
-    # set to false to prevent nushell looking into $env.PATH to
-    # find more suggestions, `false` recommended for WSL users
-    # as this look up my be very slow
-    enable_external_completion: true
 
     keybindings: $keybindings
     menus: $menus
-    hooks: { #{{{
-        pre_prompt: [{
-            # replace with source code to run before the prompt is shown
-            $nothing
-        }]
-        pre_execution: [{
-            # replace with source code to run before the repl input is run
-            $nothing
-        }]
-        env_change: {
-            PWD: [{|before, after|
-                # replace with source code to run if the PWD environment
-                # is different since the last repl input
-                $nothing
-            }]
-        }
-    } #}}}
-
 }
 
 
 # use bare Git repository to manager my dotfiles
 alias conf = /usr/bin/git --git-dir $"($env.HOME)/.dotfiles/" --work-tree $env.HOME
+alias cons = conf status
 
 # vim
 alias vim = nvim
@@ -149,9 +101,14 @@ alias env = (env | where name != "config")
 # File manager
 def-env lf [] {
     with-env {
-        LF_COLORS: ( open $"($env.CONFIG)/lf/colors.txt" | str replace -a "\n" "" )
+        LF_COLORS:
+        ( open $"($env.CONFIG)/lf/colors.txt" | str replace -a "\n" "" )
     } {
         lf-imgview -last-dir-path="/tmp/lfcd"
     }
     cd ( open /tmp/lfcd )
 }
+
+# Add zoxide
+#source $"($env.NU_CONFIG_DIR)/zoxide.nu"
+source ~/.config/nushell/zoxide.nu

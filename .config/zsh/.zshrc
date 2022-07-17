@@ -21,12 +21,6 @@ bindkey "^?" backward-delete-char
 # Alias
 source "$XDG_CONFIG_HOME/zsh/alias.zsh"
 
-
-# FZF
-export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
-    --color=pointer:5,gutter:-1,prompt:7 --info=default "
-export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
-
 # Use starship prompt
 eval "$(starship init zsh)"
 
