@@ -1,0 +1,21 @@
+
+@-moz-document url-prefix("https://duckduckgo.com"){
+    :root{
+        --custom-background: rgba(28, 28, 28, 1);
+    }
+    html {
+        background: var(--custom-background) !important;
+    }
+
+    #header_wrapper{
+        background: var(--custom-background) !important;
+        box-shadow: none !important;
+    }
+    #web_content_wrapper{
+        background: var(--custom-background) !important;
+    }
+    .footer {
+        background: var(--custom-background) !important;
+        border-top: none !important;
+    }
+}

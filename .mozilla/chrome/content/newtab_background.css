@@ -9,14 +9,14 @@ See the above repository for updates as well as full license text. */
   body {
     --newtab-background-color: rgb(28,28,28) !important;
     --newtab-background-color-secondary: rgba(255,255,255,0.15) !important;
-    --newtab-primary-action-background: #FFB9DC !important;
+    --newtab-primary-action-background: rgb(255,185,220) !important;
   }
 }
 
 @-moz-document url("about:home"),
   url("about:blank"),
   url("about:privatebrowsing"){
-  body{background-color: rgb(28,28,28) !important;}
+  body{ background-color: rgb(28,28,28) !important; }
 }
 @-moz-document url("about:privatebrowsing"){
   .search-handoff-button{ background-color: rgba(100,100,100,0.1) !important; }

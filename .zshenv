@@ -9,16 +9,23 @@ export XDG_STATE_HOME=$HOME/.local/state
 # Add ~/.local/bin and its subdir to path
 export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
 
-. "/home/ui/.local/share/cargo/env"
+. $XDG_DATA_HOME/cargo/env
 
 
-#==================== Default App ====================#
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
+#==================== ====================#
+export EDITOR='nvim'
+export TERMINAL='alacritty'
+export BROWSER='firefox'
 
+export LANG=en_US.UTF-8
 #export TERM="xterm-256color"
-#export LANG=en_US.UTF-8
+
+# zsh
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=$XDG_CACHE_HOME/history
+export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
 
 # input method
 #export GTK_IM_MODULE='fcitx'
@@ -33,38 +40,33 @@ export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
 #==================== Let Paths Right ====================#
-# zsh
-export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 # X11
-export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
-export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
+export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
+export XSERVERRC=$XDG_CONFIG_HOME/X11/xserverrc
 export XAUTHORITY=$XDG_CONFIG_HOME/X11/xauthority
 # cabal
-export CABAL_CONFIG="$XDG_CONFIG_HOME"/cabal/config
-export CABAL_DIR="$XDG_CACHE_HOME"/cabal
+export CABAL_CONFIG=$XDG_CONFIG_HOME/cabal/config
+export CABAL_DIR=$XDG_CACHE_HOME/cabal
 # wget
-export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
 # npm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # GunPG
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export GNUPGHOME=$XDG_DATA_HOME/gnupg
 # Java
 export _JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
     -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export JDK_JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
-    -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
-export JAVA_TOOL_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
-    -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export JDK_JAVA_OPTIONS=$_JAVA_OPTIONS
+export JAVA_TOOL_OPTIONS=$_JAVA_OPTIONS
 # Stack (Haskell)
-export STACK_ROOT="$XDG_CONFIG_HOME"/stack
+export STACK_ROOT=$XDG_CONFIG_HOME/stack
 # gradle
-export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
 # go
-export GOPATH="$XDG_DATA_HOME"/go
+export GOPATH=$XDG_DATA_HOME/go
 # rust
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-
+export CARGO_HOME=$XDG_DATA_HOME/cargo
+export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 # matlab
 export MATLAB_LOG_DIR=/tmp
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk

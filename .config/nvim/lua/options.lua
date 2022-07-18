@@ -1,5 +1,4 @@
 local opt = vim.opt
-local cmd = vim.cmd
 
 opt.ruler = true
 opt.number = true
@@ -34,8 +33,8 @@ opt.pumheight = 10
 -- ===== Misc ==== --
 opt.linebreak = true
 opt.showbreak = '↪ '
--- opt.list = true
--- opt.listchars = { tab = '» ', eol = '↲', trail = '_' }
+--opt.list = true
+--opt.listchars = { tab = '» ', eol = '↲', trail = '_' }
 
 opt.splitbelow = true
 opt.splitright = true

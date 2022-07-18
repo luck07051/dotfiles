@@ -107,10 +107,15 @@ command = "MoveWindowTop"
 modifier = ["modkey"]
 key = "m"
 #}}}
-# Floating {{{
+# Floating and Fullscreen {{{
 [[keybind]]
 command = "ToggleFloating"
 modifier = ["modkey", "Shift"]
+key = "f"
+
+[[keybind]]
+command = "ToggleFullScreen"
+modifier = ["modkey"]
 key = "f"
 #}}}
 

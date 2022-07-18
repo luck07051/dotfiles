@@ -1,6 +1,0 @@
-#!/bin/sh
-
-sudo ntpd -qg
-sudo hwclock --systohc
-
-sudo pacman -Syu

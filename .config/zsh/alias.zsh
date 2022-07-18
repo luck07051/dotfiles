@@ -1,11 +1,13 @@
-# F5 to resource
-bindkey -s '\e[15~' 'source $XDG_CONFIG_HOME/zsh/.zshrc\n'
-# Quick run filemanager
-bindkey -M viins -s '^f' '^ulf\n'
-
-
 # Change working directories when exit filemanager
-alias lf="lfrun; cd \`cat /tmp/lfcd\`"
+lf () {
+    source $XDG_CONFIG_HOME/lf/colors;\
+    lf-imgview -last-dir-path="/tmp/lfcd"
+    cd `cat /tmp/lfcd`
+}
+# Quick open filemanager
+bindkey -M viins -s '^f' '^ulf\n'
+bindkey -M vicmd -s '^f' 'cclf\n'
+
 
 alias ..="cd .."
 
@@ -22,9 +24,6 @@ alias ww="nvim ~/vimwiki/index.md"
 
 # ls
 alias ls="exa -al --icons --group-directories-first --color=always"
-alias ll="exa -al --icons --group-directories-first --color=always"
-alias la="exa -a --icons --group-directories-first --color=always"
-alias l="exa --icons --group-directories-first --color=always"
 
 # grep
 alias grep="grep --color=auto"

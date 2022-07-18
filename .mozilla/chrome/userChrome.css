@@ -1,21 +1,18 @@
-
 @import "chrome/navbar_tabs_oneliner.css";
-
 
 #identity-icon-box {
   visibility: collapse;
 }
+
 :root {
+   --primary-color: rgba(255,185,220,0.85);
+
   /* background */
   --lwt-accent-color: rgb(28,28,28) !important;
   --toolbar-field-background-color: rgb(28,28,28) !important;
   --toolbar-bgcolor: rgb(28,28,28) !important;
 
-  /* menu background */
-  --arrowpanel-background: rgba(28,28,28,0.85) !important;
-  --toolbar-field-focus-background-color: rgba(28,28,28,0.95) !important;
-
-  /* button */
+  /* tab button */
   --button-active-bgcolor: rgba(255,255,255,0.2) !important;
   --button-hover-bgcolor: rgba(255,255,255,0.15) !important;
   --lwt-selected-tab-background-color: rgba(255,255,255,0.15) !important;
@@ -25,31 +22,36 @@
   --panel-separator-zap-gradient: rgba(255,255,255,0.15) !important;
   --arrowpanel-border-color: rgba(255,185,220,0.8) !important;
 
+  /* a line between chrome and content */
   --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
 
+  /* url border color */
+  --focus-outline-color: var(--primary-color) !important;
+  --focus-outline-width: 1px !important;
+  --toolbar-field-focus-border-color: var(--focus-outline-color)!important;
 }
 
-:root:-moz-lwtheme {
-  --focus-outline-color: rgb(255,185,220) !important;
-}
-:root {
-  --toolbar-field-focus-border-color: color-mix(in srgb, var(--focus-outline-color) 95%, transparent) !important;
-  --focus-outline-width: 1px !important;
-}
-/* book menu */
-#PlacesToolbar menupopup{
-  background: rgba(28,28,28,0.85) !important;
-  border: 2px solid var(--arrowpanel-border-color) !important;
-  border-radius: 10px !important;
-}
-.menupopup-arrowscrollbox {
-  background: rgba(0,0,0,0) !important;
-  border: none !important;
-}
-/* right click menu */
-#contentAreaContextMenu,
-#contentAreaContextMenu menupopup {
+#urlbar-background
+{
   background: rgba(28,28,28,0.90) !important;
-  border: 2px solid var(--arrowpanel-border-color) !important;
   border-radius: 10px !important;
+}
+
+/* popup menu */
+#mainPopupSet panel,
+#mainPopupSet menupopup,
+#PlacesToolbar menupopup,
+#nav-bar panel
+{
+  background: rgba(28,28,28,0.90) !important;
+  border: 2px solid var(--primary-color) !important;
+  border-radius: 10px !important;
+
+}
+/* fix */
+menupopup, panel{
+  --panel-background: rgba(0,0,0,0) !important;
+  --panel-border-color: rgba(0,0,0,0) !important;
+  --arrowpanel-background: rgba(0,0,0,0) !important;
+  --arrowpanel-border-color: rgba(0,0,0,0) !important;
 }

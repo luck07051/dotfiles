@@ -126,29 +126,18 @@ $ makepkg -si
 rm yay-git
 ```
 
-### **[vim-plug](https://github.com/junegunn/vim-plug)**
-```
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
-  --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
-Make sure nodejs and yarn installed
+### vim
 
-If markdown-preview dont work, `:call mkdp#util#install()`
+If markdown-preview dont work, try `:call mkdp#util#install()`
 
-ycm
+
+##### ycm
 ```
 yay -S vim-youcompleteme-git
 sudo pacman -S python-pynvim
 
 cd .../plugged/YouCompleteMe
 /usr/bin/python install.py --all
-```
-
-
-### Tmux
-[tmux plug manager](https://github.com/tmux-plugins/tpm)
-```
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
 
 

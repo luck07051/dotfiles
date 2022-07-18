@@ -1,25 +1,25 @@
 
 @-moz-document url-prefix("https://github.com/") {
     :root {
-        --custom-color: rgba(28, 28, 28, 1);
+        --custom-background: rgba(28, 28, 28, 1);
     }
     html {
-        background: var(--custom-color) !important;
+        background: var(--custom-background) !important;
     }
 
     .Header,
     .team-left-column,
     .flex-auto.col-md-8.col-lg-8.px-3.px-lg-5{
-        background-color: var(--custom-color) !important;
+        background-color: var(--custom-background) !important;
     }
 
     /***** Repositor *****/
     body {
-        background-color: var(--custom-color) !important;
+        background-color: var(--custom-background) !important;
     }
     /* header */
     #repository-container-header {
-        background-color: var(--custom-color) !important;
+        background-color: var(--custom-background) !important;
     }
 
     /***** fix some thing *****/
@@ -33,7 +33,7 @@
     .d-flex.width-full.flex-order-1.flex-md-order-none,
     /* discussion write */
     .discussion-timeline-actions {
-        background-color: var(--custom-color) !important;
+        background-color: var(--custom-background) !important;
     }
 
     /* let btn back */
@@ -48,6 +48,6 @@
 
     #partial-discussion-header,
     .color-bg-default.js-profile-timeline-year-list {
-        background-color: var(--custom-color) !important;
+        background-color: var(--custom-background) !important;
     }
 }

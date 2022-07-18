@@ -59,7 +59,7 @@ return require('packer').startup(function(use)
     -- LSP --
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
-    use'jose-elias-alvarez/null-ls.nvim'
+    use 'jose-elias-alvarez/null-ls.nvim'
     -- Highlighting other uses of the current word under the cursor
     use 'RRethy/vim-illuminate'
     -- Function hint

@@ -2,13 +2,21 @@
 @import "content/newtab_background.css";
 @import "content/dark_settings_pages.css";
 
-@import "content/youtube_background.css";
-@import "content/duckduckgo_background.css";
-@import "content/github_background.css";
-@import "content/arch_background.css";
+@import "content/youtube.css";
+@import "content/duckduckgo.css";
+@import "content/github.css";
+@import "content/arch.css";
+@import "content/rust_book.css";
 
 /* invert pdf reader color */
 #viewerContainer > #viewer > .page > .canvasWrapper > canvas{
     filter: grayscale(100%);
     filter: invert(87%);
+}
+
+
+/* reader mode */
+body.dark {
+  --main-background: #1c1c1c !important;
+  --main-foreground: #d0d0d0;
 }
