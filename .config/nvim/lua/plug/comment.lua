@@ -2,7 +2,7 @@ if not pcall(require, 'Comment') then return end
 local comment = require 'Comment'
 
 comment.setup(
-{
+  {
     --Add a space b/w comment and the line
     --@type boolean|fun():boolean
     padding = true,
@@ -21,46 +21,46 @@ comment.setup(
     --LHS of toggle mappings in NORMAL + VISUAL mode
     --@type table
     toggler = {
-        --Line-comment toggle keymap
-        line = 'gcc',
-        --Block-comment toggle keymap
-        block = 'gbc',
+      --Line-comment toggle keymap
+      line = 'gcc',
+      --Block-comment toggle keymap
+      block = 'gbc',
     },
 
     --LHS of operator-pending mappings in NORMAL + VISUAL mode
     --@type table
     opleader = {
-        --Line-comment keymap
-        line = 'gc',
-        --Block-comment keymap
-        block = 'gb',
+      --Line-comment keymap
+      line = 'gc',
+      --Block-comment keymap
+      block = 'gb',
     },
 
     --LHS of extra mappings
     --@type table
     extra = {
-        --Add comment on the line above
-        above = 'gcO',
-        --Add comment on the line below
-        below = 'gco',
-        --Add comment at the end of line
-        eol = 'gcA',
+      --Add comment on the line above
+      above = 'gcO',
+      --Add comment on the line below
+      below = 'gco',
+      --Add comment at the end of line
+      eol = 'gcA',
     },
 
     --Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
     --NOTE: If `mappings = false` then the plugin won't create any mappings
     --@type boolean|table
     mappings = {
-        --Operator-pending mapping
-        --Includes `gcc`, `gbc`, `gc[count]{motion}` and `gb[count]{motion}`
-        --NOTE: These mappings can be changed individually by `opleader` and `toggler` config
-        basic = true,
-        --Extra mapping
-        --Includes `gco`, `gcO`, `gcA`
-        extra = true,
-        --Extended mapping
-        --Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-        extended = false,
+      --Operator-pending mapping
+      --Includes `gcc`, `gbc`, `gc[count]{motion}` and `gb[count]{motion}`
+      --NOTE: These mappings can be changed individually by `opleader` and `toggler` config
+      basic = true,
+      --Extra mapping
+      --Includes `gco`, `gcO`, `gcA`
+      extra = true,
+      --Extended mapping
+      --Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
+      extended = false,
     },
 
     --Pre-hook, called before commenting the line
@@ -70,4 +70,4 @@ comment.setup(
     --Post-hook, called after commenting is done
     --@type fun(ctx: CommentCtx)
     post_hook = nil,
-})
+  })

@@ -1,4 +1,4 @@
-if not pcall(require, "colorizer") then return end
+if not pcall(require, 'colorizer') then return end
 local colorizer = require "colorizer"
 
 colorizer.setup({

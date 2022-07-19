@@ -1,57 +1,65 @@
-local function keymap(mode, lhs, rhs, opts)
-    local options = { noremap = true }
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    --vim.keymap.set(mode, lhs, rhs, options)
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+function _G.Keymap(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then options = vim.tbl_extend('force', options, opts) end
+  vim.keymap.set(mode, lhs, rhs, options)
+  --vim.api.nvim_set_Keymap(mode, lhs, rhs, options)
 end
 
-local silent = { noremap = true, silent = true }
+Silent = { noremap = true, silent = true }
 
 
 -- Make space as leader key --
-keymap('', '<Space>', '<Nop>')
+Keymap('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Resource config --
-keymap('n', '<F5>', ':w<CR>:source %<CR>:nohlsearch<CR>', silent)
+Keymap('n', '<F5>', ':w<CR>:source %<CR>:nohlsearch<CR>', Silent)
 
 
 -- Change default key behavior --
-keymap('', 'Y', 'y$')
-keymap('', '~', 'g~')
+Keymap('', 'Y', 'y$')
+Keymap('', '~', 'g~')
 -- No Ex mode
-keymap('', 'Q', 'qq')
+Keymap('', 'Q', 'qq')
 -- Swap ; and :
-keymap('', ';', ':')
-keymap('', ':', ';')
+Keymap('', ';', ':')
+Keymap('', ':', ';')
 -- Change method not change register
-keymap('', 'c', '"_c')
-keymap('', 'C', '"_C')
+Keymap('', 'c', '"_c')
+Keymap('', 'C', '"_C')
 
 -- Delete with black hole --
-keymap('', '<Leader>d', '"_d')
-keymap('', '<Leader>D', '"_D')
+Keymap('', '<Leader>d', '"_d')
+Keymap('', '<Leader>D', '"_D')
 -- Copy paste from system clipboard --
-keymap('', '<Leader>y', '"+y')
-keymap('', '<Leader>Y', '"+y$')
-keymap('', '<Leader>p', '"+p')
-keymap('', '<Leader>P', '"+P')
+Keymap('', '<Leader>y', '"+y')
+Keymap('', '<Leader>Y', '"+y$')
+Keymap('', '<Leader>p', '"+p')
+Keymap('', '<Leader>P', '"+P')
 -- Copy all file to clipboard --
-keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
+Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 -- Paste in visual mode but not change register --
-keymap('v', 'p', '"_dP')
-keymap('v', 'gp', '"_d"+P')
+Keymap('v', 'p', '"_dP')
+Keymap('v', 'gp', '"_d"+P')
 
 -- Cancel search highlight --
-keymap('n', '<Leader>nh', ':nohlsearch<CR>', silent)
+Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
 
 -- Split windows --
-keymap('n', '<Leader>v', ':vsplit<CR>', silent)
-keymap('n', '<Leader>x', ':split<CR>', silent)
+Keymap('n', '<Leader>v', ':vsplit<CR>', Silent)
+Keymap('n', '<Leader>x', ':split<CR>', Silent)
 
 -- Navigation windows --
-keymap('n', '<C-h>', '<C-w>h')
-keymap('n', '<C-j>', '<C-w>j')
-keymap('n', '<C-k>', '<C-w>k')
-keymap('n', '<C-l>', '<C-w>l')
+Keymap('n', '<C-h>', '<C-w>h')
+Keymap('n', '<C-j>', '<C-w>j')
+Keymap('n', '<C-k>', '<C-w>k')
+Keymap('n', '<C-l>', '<C-w>l')
+
+Keymap("n", "<Leader>c", function()
+  if vim.o.conceallevel > 0 then
+    vim.o.conceallevel = 0
+  else
+    vim.o.conceallevel = 2
+  end
+end, Silent)

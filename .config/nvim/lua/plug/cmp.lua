@@ -1,9 +1,8 @@
 if not pcall(require, 'cmp') then return end
 local cmp = require 'cmp'
 
-if not pcall(require, "luasnip") then return end
+if not pcall(require, 'luasnip') then return end
 local luasnip = require 'luasnip'
-
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
@@ -39,65 +38,65 @@ local kind_icons = {
 --}}}
 
 cmp.setup {
-    mapping = { --{{{
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-z>"] = cmp.mapping.abort(),
-        ["<C-x>"] = cmp.mapping.close(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ["<C-y>"] = cmp.mapping(
-            cmp.mapping.confirm {
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true,
-            }, { "i", "c" } ),
+  mapping = { --{{{
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-z>"] = cmp.mapping.abort(),
+    ["<C-x>"] = cmp.mapping.close(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ["<C-y>"] = cmp.mapping(
+      cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      }, { "i", "c" }),
+  },
+  --}}}
+
+  sources = { --{{{
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+  },
+  --}}}
+
+  formatting = { --{{{
+    fields = { "abbr", "kind", "menu" },
+    format = function(entry, vim_item)
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[LUA]",
+        luasnip  = "[Snip]",
+        buffer   = "[Buff]",
+        path     = "[Path]",
+      })[entry.source.name]
+      return vim_item
+    end,
+  },
+  --}}}
+
+  window = { --{{{
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
-    --}}}
+  },
+  --}}}
 
-    sources = { --{{{
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-    },
-    --}}}
+  --experimental = { ghost_text = true },
 
-    formatting = { --{{{
-        fields = { "abbr", "kind", "menu" },
-        format = function(entry, vim_item)
-            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            vim_item.menu = ({
-                nvim_lsp  = "[LSP]",
-                nvim_lua  = "[LUA]",
-                luasnip = "[Snip]",
-                buffer = "[Buff]",
-                path = "[Path]",
-            })[entry.source.name]
-            return vim_item
-        end,
-    },
-    --}}}
+  --completion = { keyword_length = 2 },
 
-    window = { --{{{
-        documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
-    },
-    --}}}
-
-    --experimental = { ghost_text = true },
-
-    --completion = { keyword_length = 2 },
-
-    snippet = { --{{{
-        expand = function(args)
-            -- For luasnip --
-            luasnip.lsp_expand(args.body)
-            -- For UltiSnips --
-            --vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        end,
+  snippet = { --{{{
+    expand = function(args)
+      -- For luasnip --
+      luasnip.lsp_expand(args.body)
+      -- For UltiSnips --
+      --vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
   },
   --}}}
 
@@ -106,18 +105,18 @@ cmp.setup {
 
 -- Cmdline '/' --{{{
 cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
 --}}}
 
 -- Cmdline ':' --{{{
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' },
-        { name = 'cmdline' } })
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' },
+    { name = 'cmdline' } })
 })
 --}}}

@@ -1,23 +1,26 @@
-if not pcall(require, "nvim-treesitter.configs") then return end
+if not pcall(require, 'nvim-treesitter.configs') then return end
 local treesitter = require "nvim-treesitter.configs"
 
 treesitter.setup {
-    ensure_installed = "all",
-    ignore_install = { "" },
-    highlight = {
-        enable = true,
-        disable = { "" },
-        --additional_vim_regex_highlighting = true,
-    },
-    --indent = { enable = true, disable = { "yaml" } },
-    playground = {
-        enable = true,
-    },
-    query_linter = {
-        enable = true,
-    },
+  ensure_installed = "all",
+  ignore_install = { "" },
+  highlight = {
+    enable = true,
+    disable = { "" },
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+    enable = true,
+    disable = { "yaml" }
+  },
+  playground = {
+    enable = true,
+  },
+  query_linter = {
+    enable = true,
+  },
 }
 
--- fix
-vim.cmd [[ hi! link TSVariable Identifier ]]
-vim.cmd [[ hi! link TSNamespace Identifier ]]
+
+Keymap('n', '<Leader>tp', ':TSPlaygroundToggle<CR>', Silent)
+Keymap('n', '<Leader>tc', ':TSCaptureUnderCursor<CR>', Silent)

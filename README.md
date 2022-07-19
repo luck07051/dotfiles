@@ -19,8 +19,8 @@ alacritty           # terminal emulator
 bspwm               # windows manager
 leftwm              # wm
 sxhkd               # keybinding
-yay -S polybar      # status bar
-yay -S eww          # status bar
+(aur) polybar       # status bar
+(aur) eww           # status bar
 zsh                 # shell
 nushell             # shell
 rofi                # launcher and more
@@ -31,25 +31,29 @@ pipewire-jack       # audio
 pipewire-pulse
 pipewire-alsa
 
-yay -S picom-jonaburg-git   # compositor
+(aur) picom-jonaburg-git    # compositor
 nitrogen            # wallpaper
 setxkbmap           # uses it to remap capslock to ctrl
 
 cronie              # auto exec tasks at pre-determined times
 ntp                 # clock fixer
 xclip               # let nvim can use system clipboard
+
+#(aur) quickemu quickgui     # virtual machines
+qemu
+(aur) aqemu
 ```
 
 
 Commandline tool
 ```
 tmux
-yay -S lf           # file manager
+(aur) lf            # file manager
 - nsxiv             # image viewer (install from git@github.com:luck07051/nsxiv.git)
 ueberzug            # image viewer (to view image in terminal)
 zathura zathura-pdf-mupdf   # pdf viewer
 #ncmpcpp             # music player
-#yay -S ncpamixer    # pulseaudio control
+#(aur) ncpamixer     # pulseaudio control
 
 icdiff              # diff tool
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
@@ -106,9 +110,9 @@ papirus-icon-theme
 
 Font
 ```
-yay -S nerd-fonts-complete
-yay -S adobe-source-han-sans-otc-fonts
-yay -S noto-fonts-cjk
+(aur) nerd-fonts-complete
+(aur) adobe-source-han-sans-otc-fonts
+(aur) noto-fonts-cjk
 xorg-fonts-misc
 ```
 
@@ -130,10 +134,9 @@ rm yay-git
 
 If markdown-preview dont work, try `:call mkdp#util#install()`
 
-
 ##### ycm
 ```
-yay -S vim-youcompleteme-git
+(aur) vim-youcompleteme-git
 sudo pacman -S python-pynvim
 
 cd .../plugged/YouCompleteMe
@@ -154,7 +157,7 @@ sudo pacman -S gcc python3-dev python-pip
 ### qutebrowser
 Unable to view DRM content
 ```
-yay -S chromium-widevine
+(aur) chromium-widevine
 ```
 
 
@@ -255,3 +258,23 @@ remember comment default setting
 ### rime
 If not want fcitx5 overrides xkeyboard.
 Use fcitx5-configtool to uncheck Addons → XCB → Allow Overriding System XKB Settings.
+
+
+
+### QEMU libvirt
+```
+sudo pacman -S libvirt
+sudo pacman -S qemu
+sudo pacman -S iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat
+sudo pacman -S virt-manager
+
+sudo nvim /etc/libvirt/libvirtd.conf
+uncomment
+#unix_sock_group = "libvirt"
+#unix_sock_ro_perms = "0777"  # set to 0770 to deny non-group libvirt users
+#unix_sock_rw_perms = "0770"
+
+systemctl start libvirtd
+
+sudo usermod -aG libvirt [username]
+```

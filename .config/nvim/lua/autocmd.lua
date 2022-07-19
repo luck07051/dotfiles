@@ -4,15 +4,14 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Not auto comment --
 autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
--- When save file, delete trailing spaces and extra line {{{
+-- When save file, delete trailing spaces and extra line
 local DeleteExtraSpaces = function()
-    cmd [[ let b:nline= line('.') ]]
-    cmd [[ %s/\s\+$//e ]]
-    cmd [[ %s/\n\+\%$//e ]]
-    cmd [[ execute "to ".b:nline ]]
+  cmd [[ let b:nline= line('.') ]]
+  cmd [[ %s/\s\+$//e ]]
+  cmd [[ %s/\n\+\%$//e ]]
+  cmd [[ execute "to ".b:nline ]]
 end
 autocmd('BufWrite', { pattern = '*', callback = DeleteExtraSpaces })
---}}}
 
 -- Change Fold Text --{{{
 cmd [[
@@ -42,18 +41,5 @@ vim.fn.matchadd('ColorColumn', '\\%81v', 100)
 vim.fn.matchadd('ColorColumn', '\\s$', 100)
 
 
--- TEX --
--- Fix filetype --
-autocmd({ 'BufRead', 'BufNewFile' },
-    { pattern = '*.tex', command = [[ set filetype=tex ]] })
--- Auto clear nonessential files when leave tex file --
-autocmd('VimLeave',
-    { pattern = '*.tex', command = [[ !latexmk -c % ]] })
--- Disable treesitter for conceal
-autocmd({ 'BufRead', 'BufNewFile' },
-    { pattern = '*.tex', command = [[ TSBufDisable highlight ]] })
-
-
-
-autocmd({ 'BufRead', 'BufNewFile' },
-    { pattern = '*.config', command = [[ set filetype=dosini ]] })
+-- Auto clear nonessential files when leave Tex file --
+autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })

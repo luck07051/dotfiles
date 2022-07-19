@@ -32,6 +32,6 @@ while read -r width x y; do
   monitor=$(sed "$indextemp!d" <<<"$monitors")
   barname="mainbar$index"
   monitor=$monitor offset=$x width=$width \
-      polybar -c $SCRIPTPATH/polybar.config $barname &> /dev/null &
+      polybar -c $SCRIPTPATH/polybar.ini $barname &> /dev/null &
   let index=indextemp
 done

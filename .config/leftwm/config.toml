@@ -4,7 +4,7 @@ workspaces = []
 tags = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 layouts = [
     "MainAndVertStack",
-    #"MainAndHorizontalStack",
+    "MainAndHorizontalStack",
     #"MainAndDeck",
     #"GridHorizontal",
     #"EvenHorizontal",
@@ -29,10 +29,13 @@ scratchpad = []
 
 window_rules = [
 { window_class = "firefox", spawn_on_tag = 1 },
+{ window_class = "osu!",    spawn_on_tag = 8 },
 { window_class = "discord", spawn_on_tag = 9 },
+{ window_class = "virt-manager", spawn_on_tag = 5, spawn_floating = true},
 
 { window_class = "QjackCtl", spawn_floating = true },
 { window_class = "matplotlib", spawn_floating = true },
+{ window_title = "archlinux-latest", spawn_floating = true },
 ]
 
 
