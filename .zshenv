@@ -1,13 +1,14 @@
 #==================== XDG Paths ====================#
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
+export XDG_BIN_HOME=$HOME/.local/bin
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and its subdir to path
-export PATH="${PATH}:$(find $HOME/.local/bin -type d -printf "%p:" | sed -e 's/:$//g')"
+export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//g')"
 
 . $XDG_DATA_HOME/cargo/env
 

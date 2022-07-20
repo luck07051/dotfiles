@@ -53,7 +53,7 @@ local plugins = {
       'airblade/vim-rooter',
     },
   },
-  {
+  { -- Status Line --
     'nvim-lualine/lualine.nvim',
     config = conf 'lualine',
     requires = {
@@ -62,18 +62,16 @@ local plugins = {
   },
   {
     'vimwiki/vimwiki',
-    config = function()
-      vim.cmd [[
-        " use markdown syntax
-        let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-        " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
-        let g:vimwiki_markdown_link_ext = 1
-      ]]
-    end
+    config = vim.cmd[[
+      " use markdown syntax
+      let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+      " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
+      let g:vimwiki_markdown_link_ext = 1
+    ]]
   },
   {
     'numToStr/Comment.nvim',
-    config = conf 'comment',
+    config = require('Comment').setup(),
   },
   {
     'tpope/vim-surround',
@@ -85,10 +83,10 @@ local plugins = {
     'christoomey/vim-tmux-navigator',
   },
   {
-  {
     'norcalli/nvim-colorizer.lua',
-    config = conf 'colorizer',
+    config = require('colorizer').setup(),
   },
+  {
     'akinsho/toggleterm.nvim',
     config = conf 'toggleterm',
   },
@@ -122,15 +120,15 @@ vim.cmd [[
 
 local ok, packer = pcall(require, 'packer')
 if ok then
-  -- Packer using popup window -- {{{
   packer.init {
+    compile_path = vim.fn.stdpath 'data' .. '/site/plugin/packer_compiled.lua',
+    package_root = vim.fn.stdpath 'data' .. '/site/pack',
     display = {
       open_fn = function()
         return require('packer.util').float { border = 'rounded' }
       end,
     },
   }
-  --}}}
 
   return packer.startup(function(use)
     use 'wbthomason/packer.nvim'

@@ -6,7 +6,7 @@ local diagnostics = require("null-ls").builtins.diagnostics
 
 null.setup({
   sources = {
-    --formatting.stylua,
+    formatting.stylua,
 
   },
 })

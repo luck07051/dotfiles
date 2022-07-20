@@ -1,10 +1,8 @@
-# No beep sound
-unsetopt autocd beep
-# F5 to resource
-bindkey -s '\e[15~' 'source $ZDOTDIR/.zshrc\n'
+unsetopt autocd beep        # No beep sound
+set -o ignoreeof            # Prevent <C-D> to colse window
+stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
-
-# Auto Complete
+# Auto Complete #
 autoload -U compinit
 compinit
 _comp_options+=(globdots)   # Include hidden files
@@ -13,28 +11,28 @@ zstyle ":completion:*" menu yes select
 zstyle ":completion:*" matcher-list \
     "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
 
+# Bindkey #
+bindkey " " magic-space     # Expand `!!` and other history thing
 
-# Vim mode
+# Vim mode #
 bindkey -v
 export KEYTIMEOUT=1
-# Let backspace work normal
-bindkey "^?" backward-delete-char
-# Use <C-N> to complete (map <C-N> to tab)
-bindkey -M viins -s "^N" "^I"
-
+bindkey "^?" backward-delete-char   # Let backspace work normal
+bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 
 # Alias
-source "$XDG_CONFIG_HOME/zsh/alias.zsh"
+source $ZDOTDIR/alias.zsh
+# Some utility
+for file in $ZDOTDIR/utils/*; do
+  source $file
+done
 
-# Use starship prompt
-eval "$(starship init zsh)"
+eval "$(starship init zsh)"         # Use starship prompt
+eval "$(zoxide init zsh --cmd cd)"  # Zoxide
 
-# Zoxide
-eval "$(zoxide init zsh --cmd cd)"
-
-# PLUGINS #
+# Plugins #
 # Adding plugin function {{{
-# I found this function on https://www.youtube.com/watch?v=bTLYiNvRIVI
+# I found this from https://www.youtube.com/watch?v=bTLYiNvRIVI
 function zsh_add_file() { [[ -f "$ZDOTDIR/$1" ]] && source "$ZDOTDIR/$1" }
 function zsh_add_plugin() {
     PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
@@ -47,12 +45,7 @@ function zsh_add_plugin() {
     fi
 }
 #}}}
-
-# Use fzf to select complete option
 zsh_add_plugin "Aloxaf/fzf-tab"
-# Additional completion definitions
 zsh_add_plugin "zsh-users/zsh-completions"
-# Suggests from history
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
-# Syntax highlighting
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"

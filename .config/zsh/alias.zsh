@@ -1,29 +1,20 @@
-# Change working directories when exit filemanager
-lf () {
-    source $XDG_CONFIG_HOME/lf/colors;\
-    lf-imgview -last-dir-path="/tmp/lfcd"
-    cd `cat /tmp/lfcd`
-}
-# Quick open filemanager
-bindkey -M viins -s '^f' '^ulf\n'
-bindkey -M vicmd -s '^f' 'cclf\n'
-
-
-alias ..="cd .."
+# F5 to resource
+bindkey -s '\e[15~' 'source $ZDOTDIR/.zshrc\n'
 
 # Confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 # Auto make parent directories
-alias mkdir="mkdir -p"
+alias mkdir="mkdir -pv"
 
 # vim
 alias vim="nvim"
 alias ww="nvim ~/vimwiki/index.md"
 
 # ls
-alias ls="exa -al --icons --group-directories-first --color=always"
+alias ls="exa -al --icons --group-directories-first --color=auto"
+alias l="exa --icons --group-directories-first --color=auto"
 
 # grep
 alias grep="grep --color=auto"
@@ -34,12 +25,9 @@ alias gs="git status"
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias cons="config status"
 
-# trans
-alias tt="trans :zh-TW"
-
 
 # Fix config file path
 # wget
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 # yarn
-alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias yarn="yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config'"

@@ -1,0 +1,14 @@
+h       ~
+
+# Config
+c       ~/.config
+nv      ~/.config/nvim
+zh      ~/.config/zsh
+ui      ~/.local/share/nvim/site/pack/packer/start/ui-colors
+
+bin     ~/.local/bin
+mbin    ~/.local/bin/mybin
+sh      ~/.local/share
+
+dl      ~/downloads
+do      ~/documents

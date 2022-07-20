@@ -93,11 +93,12 @@ M.on_attach = function(client, bufnr)
   end
 
 
-  local no_format_list = { 'tsserver', }
+  local no_format_list = { 'tsserver', 'sumneko_lua'}
   local no_format = false
   for _, value in pairs(no_format_list) do
     if value == client.name then
       no_format = true
+      break
     end
   end
   if no_format then
