@@ -20,5 +20,5 @@ See the above repository for updates as well as full license text. */
 }
 @-moz-document url("about:privatebrowsing"){
   .search-handoff-button{ background-color: rgba(100,100,100,0.1) !important; }
-  .fake-textbox{ color: rgb(200,200,200) !important }
+  .fake-textbox{ color: rgb(100,100,100) !important }
 }
