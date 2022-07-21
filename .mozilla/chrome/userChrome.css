@@ -1,3 +1,4 @@
+@import "colors.css";
 @import "chrome/navbar_tabs_oneliner.css";
 
 #identity-icon-box {
@@ -5,12 +6,10 @@
 }
 
 :root {
-   --primary-color: rgba(255,185,220,0.85);
-
   /* background */
-  --lwt-accent-color: rgb(28,28,28) !important;
-  --toolbar-field-background-color: rgb(28,28,28) !important;
-  --toolbar-bgcolor: rgb(28,28,28) !important;
+  --lwt-accent-color: var(--background) !important;
+  --toolbar-field-background-color: var(--background) !important;
+  --toolbar-bgcolor: var(--background) !important;
 
   /* tab button */
   --button-active-bgcolor: rgba(255,255,255,0.2) !important;
@@ -20,20 +19,20 @@
   /* menu separator and border */
   --autocomplete-popup-separator-color: rgba(255,255,255,0.15) !important;
   --panel-separator-zap-gradient: rgba(255,255,255,0.15) !important;
-  --arrowpanel-border-color: rgba(255,185,220,0.8) !important;
+  --arrowpanel-border-color: var(--primary-90tran) !important;
 
   /* a line between chrome and content */
   --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
 
   /* url border color */
-  --focus-outline-color: var(--primary-color) !important;
+  --focus-outline-color: var(--primary-90tran) !important;
   --focus-outline-width: 1px !important;
   --toolbar-field-focus-border-color: var(--focus-outline-color)!important;
 }
 
 #urlbar-background
 {
-  background: rgba(28,28,28,0.90) !important;
+  background: var(--background-90tran) !important;
   border-radius: 10px !important;
 }
 
@@ -43,8 +42,8 @@
 #PlacesToolbar menupopup,
 #nav-bar panel
 {
-  background: rgba(28,28,28,0.90) !important;
-  border: 2px solid var(--primary-color) !important;
+  background: var(--background-90tran) !important;
+  border: 2px solid var(--primary-90tran) !important;
   border-radius: 10px !important;
 
 }

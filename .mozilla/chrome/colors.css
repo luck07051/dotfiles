@@ -1,0 +1,9 @@
+
+:root{
+  --background: #1c1c1c !important;
+  --foreground: #d0d0d0 !important;
+  --primary: #FFB9DC !important;
+
+  --background-90tran: color-mix(in srgb, var(--background) 90%, transparent);
+  --primary-90tran: color-mix(in srgb, var(--primary) 90%, transparent);
+}

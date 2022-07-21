@@ -1,7 +1,8 @@
 @-moz-document url-prefix("https://doc.rust-lang.org/stable/book/") {
   .navy {
-    --bg: #1c1c1c !important;
-    --fg: #d0d0d0 !important;
+    --bg: var(--background) !important;
+    --fg: var(--foreground) !important;
+    /*
     --sidebar-bg: #282d3f;
     --sidebar-fg: #c8c9db;
     --sidebar-non-existant: #505274;
@@ -28,5 +29,6 @@
     --searchresults-border-color: #5c5c68;
     --searchresults-li-bg: #242430;
     --search-mark-bg: #a2cff5;
+    */
   }
 }

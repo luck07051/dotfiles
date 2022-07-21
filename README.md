@@ -1,5 +1,7 @@
 # This Is My Configuration
 
+[screenshot](./pictures/screenshot.png)
+
 ## Installed
 
 Basic

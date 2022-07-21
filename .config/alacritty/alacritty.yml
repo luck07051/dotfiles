@@ -35,14 +35,14 @@ colors:
 
   # Bright colors
   bright:
-    black:   '#444444'
-    red:     '#D7afaf'
-    green:   '#A3B262'
-    yellow:  '#D8AF5F'
-    blue:    '#3a94c5'
-    magenta: '#DF5F87'
-    cyan:    '#7FBBB3'
-    white:   '#808080'
+    black:   '#1C1C1C'
+    red:     '#E67e80'
+    green:   '#87AF87'
+    yellow:  '#EBCB8B'
+    blue:    '#81A1C1'
+    magenta: '#FFB9DC'
+    cyan:    '#87AFAF'
+    white:   '#D0D0D0'
 
 # Background opacity
 window:

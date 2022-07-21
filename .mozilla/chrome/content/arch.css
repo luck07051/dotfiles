@@ -1,11 +1,9 @@
-
-/****** need spilt webside ******/
-
 @-moz-document domain(archlinux.org){
   :root {
-    --background-color: rgb(28,28,28);
+    --background-color: var(--background);
     --main-background-color: rgb(34,34,34);
-    --color: rgb(208,208,208);
+
+    --color: var(--foreground);
     --color-light: rgb(220,220,220);
     --color-gray: rgb(153,153,153);
     --color-dark: rgb(56,56,56);

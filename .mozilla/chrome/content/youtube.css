@@ -1,10 +1,7 @@
 
 @-moz-document url-prefix("https://www.youtube.com/"){
-    :root{
-        --custom-background: rgba(28, 28, 28, 1);
-    }
     html {
-        background: var(--custom-background) !important;
+        background: var(--background) !important;
     }
 
     /* Main Area */
@@ -19,7 +16,7 @@
     /* channel banner */
     #channel-header.style-scope,
     #tabs-inner-container.style-scope {
-        background-color: var(--custom-background) !important;
+        background-color: var(--background) !important;
     }
 
     /* Topic Botton */
