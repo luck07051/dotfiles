@@ -1,6 +1,3 @@
-# F5 to resource
-bindkey -s '\e[15~' 'source $ZDOTDIR/.zshrc\n'
-
 # Confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"

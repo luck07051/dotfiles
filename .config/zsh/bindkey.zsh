@@ -2,6 +2,11 @@ for file in $ZDOTDIR/utils/*; do
   source $file
 done
 
+# F5 to resource
+bindkey -s '\e[15~' 'source $ZDOTDIR/.zshrc\n'
+# Expand `!!` and other history stuff
+bindkey " " magic-space
+
 # Jump to mark
 bindkey -M viins ';' magic-semicolon
 bindkey -M vicmd ';' dirmark

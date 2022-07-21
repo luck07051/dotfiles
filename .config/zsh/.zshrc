@@ -10,9 +10,6 @@ zstyle ":completion:*" menu yes select
 # Case insensitive
 zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
 
-# Bindkey #
-bindkey " " magic-space     # Expand `!!` and other history thing
-
 # Vim mode #
 bindkey -v
 export KEYTIMEOUT=1
@@ -22,7 +19,7 @@ bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 # Alias
 source $ZDOTDIR/alias.zsh
 # Some utility
-source $ZDOTDIR/utils/init.zsh
+source $ZDOTDIR/bindkey.zsh
 
 
 eval "$(starship init zsh)"         # Use starship prompt
