@@ -1,6 +1,6 @@
 # This Is My Configuration
 
-[screenshot](./pictures/screenshot.png)
+[screenshot](./screenshot.png)
 
 ## Installed
 
