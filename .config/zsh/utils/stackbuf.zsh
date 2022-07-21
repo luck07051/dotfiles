@@ -21,6 +21,6 @@ stack_buf_clear() {
 }
 zle -N stack_buf_clear
 
-bindkey -M viins '^O' stack_buf_push
-bindkey -M viins '^P' stack_buf_pop
+bindkey -M viins '^P' stack_buf_push
+bindkey -M viins '^O' stack_buf_pop
 bindkey -M viins '^A' stack_buf_clear

@@ -33,7 +33,6 @@ window_rules = [
 { window_class = "discord", spawn_on_tag = 9 },
 { window_class = "virt-manager", spawn_on_tag = 5, spawn_floating = true},
 
-{ window_class = "gpick", spawn_floating = true },
 { window_class = "QjackCtl", spawn_floating = true },
 { window_class = "matplotlib", spawn_floating = true },
 { window_title = "archlinux-latest", spawn_floating = true },

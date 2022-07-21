@@ -60,7 +60,7 @@ local plugins = {
       'kyazdani42/nvim-web-devicons',
     },
   },
-  {
+  { -- Note --
     'vimwiki/vimwiki',
     config = vim.cmd[[
       " use markdown syntax
@@ -69,6 +69,7 @@ local plugins = {
       let g:vimwiki_markdown_link_ext = 1
     ]]
   },
+
   {
     'numToStr/Comment.nvim',
     config = require('Comment').setup(),
@@ -83,19 +84,19 @@ local plugins = {
     'christoomey/vim-tmux-navigator',
   },
   {
-    'norcalli/nvim-colorizer.lua',
-    config = require('colorizer').setup(),
-  },
-  {
     'akinsho/toggleterm.nvim',
     config = conf 'toggleterm',
+  },
+
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = require('colorizer').setup(),
   },
   {
     'lewis6991/gitsigns.nvim',
     config = conf 'gitsigns',
   },
 }
-
 
 
 -- Automatically install packer --{{{

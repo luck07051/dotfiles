@@ -12,3 +12,5 @@ sh      ~/.local/share
 
 dl      ~/downloads
 do      ~/documents
+
+usd     /usr/share/doc

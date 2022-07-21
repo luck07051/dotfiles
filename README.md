@@ -1,6 +1,6 @@
 # This Is My Configuration
 
-[screenshot](./screenshot.png)
+![screenshot](./screenshot.png)
 
 ## Installed
 
@@ -258,6 +258,7 @@ remember comment default setting
 
 
 ### rime
+fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-nord fcitx5-qt fcitx5-rime
 If not want fcitx5 overrides xkeyboard.
 Use fcitx5-configtool to uncheck Addons → XCB → Allow Overriding System XKB Settings.
 

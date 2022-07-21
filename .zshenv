@@ -10,12 +10,13 @@ export XDG_STATE_HOME=$HOME/.local/state
 # Add ~/.local/bin and its subdir to path
 export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//g')"
 
-. $XDG_DATA_HOME/cargo/env
+[[ if -f $XDG_DATA_HOME/cargo/env ]] && . $XDG_DATA_HOME/cargo/env
 
 
 #==================== ====================#
 export EDITOR='nvim'
-export TERMINAL='alacritty'
+export TERMINAL='kitty'
+#export TERMINAL='alacritty'
 export BROWSER='firefox'
 
 export LANG=en_US.UTF-8
@@ -23,22 +24,34 @@ export LANG=en_US.UTF-8
 
 # zsh
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTSIZE=100000
+export SAVEHIST=100000
 export HISTFILE=$XDG_CACHE_HOME/history
 export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
-
-# input method
-#export GTK_IM_MODULE='fcitx'
-#export QT_IM_MODULE='fcitx'
-#export SDL_IM_MODULE='fcitx'
-#export XMODIFIERS='@im=fcitx'
 
 # FZF
 export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
     --color=pointer:5,gutter:-1,prompt:7 --info=default "
 export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
+
+# Colors
+export COLOR00='#1C1C1C'
+export COLOR01='#E67e80'
+export COLOR02='#87AF87'
+export COLOR03='#EBCB8B'
+export COLOR04='#81A1C1'
+export COLOR05='#FFB9DC'
+export COLOR06='#87AFAF'
+export COLOR07='#D0D0D0'
+export COLOR08='#303030'
+export COLOR09='#444444'
+export COLOR10='#585858'
+export COLOR11='#6C6C6C'
+export COLOR12='#808080'
+export COLOR13='#9E9E9E'
+export COLOR14='#BCBCBC'
+export COLOR15='#D0D0D0'
 
 #==================== Let Paths Right ====================#
 # X11

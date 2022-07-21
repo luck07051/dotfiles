@@ -8,8 +8,7 @@ compinit
 _comp_options+=(globdots)   # Include hidden files
 zstyle ":completion:*" menu yes select
 # Case insensitive
-zstyle ":completion:*" matcher-list \
-    "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
+zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
 
 # Bindkey #
 bindkey " " magic-space     # Expand `!!` and other history thing
@@ -49,3 +48,5 @@ zsh_add_plugin "Aloxaf/fzf-tab"
 zsh_add_plugin "zsh-users/zsh-completions"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$COLOR10"

@@ -2,10 +2,13 @@
 
 userresources=$XDG_CONFIG_HOME/X11/xresources
 usermodmap=$XDG_CONFIG_HOME/X11/xmodmap
+
 # merge in defaults and keymaps
 if [ -f "$userresources" ]; then
-    xrdb -merge "$userresources"
+    # define base00 to $COLOR00 and so on
+    xrdb $(echo "$(for i in `seq -w 0 15`; do echo -n -Dbase$i=$(eval "echo \$COLOR$i")\ ; done)") -merge "$userresources"
 fi
+
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi

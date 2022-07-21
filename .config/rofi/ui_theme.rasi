@@ -34,7 +34,7 @@ configuration {
 
     bg: #1C1C1CDA;
     fg: #D0D0D0;
-    fg-alt: #FFB9DC;
+    primary: #FFB9DC;
 
     background-color: transparent;
     text-color: @fg;
@@ -45,7 +45,7 @@ window {
     background-color: @bg;
     y-offset: -220;
     border: 2;
-    border-color: @fg-alt;
+    border-color: @primary;
     border-radius: 10;
 }
 
@@ -88,5 +88,5 @@ element-text {
 }
 
 element-text selected {
-    text-color: @fg-alt;
+    text-color: @primary;
 }

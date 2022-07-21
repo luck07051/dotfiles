@@ -1,27 +1,5 @@
-! not support
-! alacritty
-! rofi
-! zathura
-! eww
-
-
-! color scheme
-#define base00  #1C1C1C
-#define base01  #E67e80
-#define base02  #87AF87
-#define base03  #EBCB8B
-#define base04  #81A1C1
-#define base05  #FFB9DC
-#define base06  #87AFAF
-#define base07  #D0D0D0
-#define base08  #303030
-#define base09  #D7AFAF
-#define base0A  #A3B262
-#define base0B  #DFA000
-#define base0C  #3A94C5
-#define base0D  #DF69BA
-#define base0E  #7FBBB3
-#define base0F  #808080
+! xrdb -merge ~/.config/X11/xresources
+! see xinitrc
 
 *.color0:   base00
 *.color1:   base01
@@ -33,12 +11,12 @@
 *.color7:   base07
 *.color8:   base08
 *.color9:   base09
-*.color10:  base0A
-*.color11:  base0B
-*.color12:  base0C
-*.color13:  base0D
-*.color14:  base0E
-*.color15:  base0F
+*.color10:  base10
+*.color11:  base11
+*.color12:  base12
+*.color13:  base13
+*.color14:  base14
+*.color15:  base15
 
 *color0:    base00
 *color1:    base01
@@ -50,30 +28,29 @@
 *color7:    base07
 *color8:    base08
 *color9:    base09
-*color10:   base0A
-*color11:   base0B
-*color12:   base0C
-*color13:   base0D
-*color14:   base0E
-*color15:   base0F
+*color10:   base10
+*color11:   base11
+*color12:   base12
+*color13:   base13
+*color14:   base14
+*color15:   base15
 
-*black        : base00
-*blue         : base01
-*cyan         : base02
-*green        : base03
-*purple       : base04
-*red          : base05
-*white        : base06
-*yellow       : base07
-*brightBlack  : base08
-*brightBlue   : base09
-*brightCyan   : base0A
-*brightGreen  : base0B
-*brightPurple : base0C
-*brightRed    : base0D
-*brightWhite  : base0E
-*brightYellow : base0F
-
+*black:         base00
+*blue:          base01
+*cyan:          base02
+*green:         base03
+*purple:        base04
+*red:           base05
+*white:         base06
+*yellow:        base07
+*brightBlack:   base08
+*brightBlue:    base09
+*brightCyan:    base10
+*brightGreen:   base11
+*brightPurple:  base12
+*brightRed:     base13
+*brightWhite:   base14
+*brightYellow:  base15
 
 
 *.background: base00
