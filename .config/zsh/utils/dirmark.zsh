@@ -15,5 +15,3 @@ magic-semicolon() {
   fi
 }
 zle -N magic-semicolon
-bindkey -M viins ';' magic-semicolon
-bindkey -M vicmd ';' dirmark

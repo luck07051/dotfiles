@@ -10,7 +10,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 # Add ~/.local/bin and its subdir to path
 export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//g')"
 
-[[ if -f $XDG_DATA_HOME/cargo/env ]] && . $XDG_DATA_HOME/cargo/env
+[ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
 
 
 #==================== ====================#

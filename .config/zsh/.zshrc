@@ -22,9 +22,8 @@ bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 # Alias
 source $ZDOTDIR/alias.zsh
 # Some utility
-for file in $ZDOTDIR/utils/*; do
-  source $file
-done
+source $ZDOTDIR/utils/init.zsh
+
 
 eval "$(starship init zsh)"         # Use starship prompt
 eval "$(zoxide init zsh --cmd cd)"  # Zoxide

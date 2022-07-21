@@ -9,14 +9,14 @@
 *.color5:   base05
 *.color6:   base06
 *.color7:   base07
-*.color8:   base08
-*.color9:   base09
-*.color10:  base10
-*.color11:  base11
-*.color12:  base12
-*.color13:  base13
-*.color14:  base14
-*.color15:  base15
+*.color8:   base00
+*.color9:   base01
+*.color10:  base02
+*.color11:  base03
+*.color12:  base04
+*.color13:  base05
+*.color14:  base06
+*.color15:  base07
 
 *color0:    base00
 *color1:    base01
@@ -26,14 +26,14 @@
 *color5:    base05
 *color6:    base06
 *color7:    base07
-*color8:    base08
-*color9:    base09
-*color10:   base10
-*color11:   base11
-*color12:   base12
-*color13:   base13
-*color14:   base14
-*color15:   base15
+*color8:    base00
+*color9:    base01
+*color10:   base02
+*color11:   base03
+*color12:   base04
+*color13:   base05
+*color14:   base06
+*color15:   base07
 
 *black:         base00
 *blue:          base01
@@ -43,14 +43,14 @@
 *red:           base05
 *white:         base06
 *yellow:        base07
-*brightBlack:   base08
-*brightBlue:    base09
-*brightCyan:    base10
-*brightGreen:   base11
-*brightPurple:  base12
-*brightRed:     base13
-*brightWhite:   base14
-*brightYellow:  base15
+*brightBlack:   base00
+*brightBlue:    base01
+*brightCyan:    base02
+*brightGreen:   base03
+*brightPurple:  base04
+*brightRed:     base05
+*brightWhite:   base06
+*brightYellow:  base07
 
 
 *.background: base00

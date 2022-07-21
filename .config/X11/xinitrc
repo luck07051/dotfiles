@@ -37,9 +37,9 @@ xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
 xset s off
 xset -dpms
 
-pgrep "nitrogen" || nitrogen --restore &
-pgrep "picom" || picom --experimental-backend &
-pgrep "sxhkd" || sxhkd &
+pgrep "nitrogen" > /dev/null || nitrogen --restore &
+pgrep "picom" > /dev/null || picom --experimental-backend &
+pgrep "sxhkd" > /dev/null || sxhkd &
 
 
 #exec bspwm
