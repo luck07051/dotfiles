@@ -1,18 +1,22 @@
-for file in $ZDOTDIR/utils/*; do
+for file in $ZDOTDIR/function/*; do
   source $file
 done
 
+# auto ls
+chpwd_functions=(auto_ls $chpwd_functions)
+
 # F5 to resource
 bindkey -s '\e[15~' 'source $ZDOTDIR/.zshrc\n'
-# Expand `!!` and other history stuff
-bindkey " " magic-space
 
 # Jump to mark
-bindkey -M viins ';' magic-semicolon
-bindkey -M vicmd ';' dirmark
+bindkey -M viins ';' magic_dir_mark
+bindkey -M vicmd ';' dir_mark
 
+# <C-F> to fzf files
 bindkey -M viins '^f' fzf_local
 bindkey -M vicmd '^f' fzf_local
+bindkey -M viins ' ' magic_fzf_local
+bindkey -M vicmd ' ' fzf_local
 
 # Quick open filemanager
 #bindkey -M viins -s '^f' '^ulf\n'

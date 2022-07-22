@@ -7,8 +7,6 @@ cleanup() {
     rm "$FIFO_UEBERZUG"
 }
 
-
-
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     lf "$@"
 else

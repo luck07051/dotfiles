@@ -3,14 +3,16 @@ h       ~
 # Config
 c       ~/.config
 nv      ~/.config/nvim
-zh      ~/.config/zsh
+zsh     ~/.config/zsh
+# vim colors
 ui      ~/.local/share/nvim/site/pack/packer/start/ui-colors
 
-bin     ~/.local/bin
-mbin    ~/.local/bin/mybin
-sh      ~/.local/share
+b       ~/.local/bin
+mb      ~/.local/bin/mybin
+s       ~/.local/share
 
 dl      ~/downloads
 do      ~/documents
 
+usd     /usr/share
 usd     /usr/share/doc

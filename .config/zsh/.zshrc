@@ -19,7 +19,7 @@ bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 # Alias
 source $ZDOTDIR/alias.zsh
 # Some utility
-source $ZDOTDIR/bindkey.zsh
+source $ZDOTDIR/utilits.zsh
 
 
 eval "$(starship init zsh)"         # Use starship prompt

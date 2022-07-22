@@ -18,6 +18,7 @@ openssh
 Setup
 ```
 alacritty           # terminal emulator
+kitty               # terminal
 bspwm               # windows manager
 leftwm              # wm
 sxhkd               # keybinding
