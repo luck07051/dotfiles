@@ -1,0 +1,31 @@
+#!/bin/sh
+
+case $1 in
+    "get-icon")
+        case "$(pactl info | grep "Default Sink:" | cut -d' ' -f3)" in
+            "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra1")
+                echo "奔";;
+            "alsa_output.pci-0000_00_1f.3.analog-stereo")
+                echo "";;
+        esac;;
+
+    "get-volume")
+        pamixer --get-volume
+        ;;
+
+    "is-mute")
+        vol="$(pamixer --get-volume-human)"
+        if [ "$vol" == "0%" ] || [ "$vol" == "muted" ]; then
+            echo "muted"
+        else
+            echo "unmute"
+        fi
+        ;;
+
+    "update-volume")
+        DIR="$XDG_CONFIG_HOME/eww/bar"
+        eww -c $DIR update volume_vol="$("$DIR"/scripts/volume get-volume)"
+        eww -c $DIR update volume_icon="$("$DIR"/scripts/volume get-icon)"
+        eww -c $DIR update volume_is_mute="$("$DIR"/scripts/volume is-mute)"
+        ;;
+esac

@@ -72,9 +72,9 @@ M.on_attach = function(client, bufnr)
   --}}}
 
 
-  if pcall(require, 'illuminate') then
-    require 'illuminate'.on_attach(client)
-  end
+  -- if pcall(require, 'illuminate') then
+  --   require 'illuminate'.on_attach(client)
+  -- end
 
   if pcall(require, 'lsp_signature') then
     require 'lsp_signature'.on_attach({ --{{{

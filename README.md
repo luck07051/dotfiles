@@ -174,12 +174,16 @@ chsh -s full-path-to-shell
 ### [dotfile](https://www.atlassian.com/git/tutorials/dotfiles)
 Install onto a new system
 ```
-git clone --bare alias config='/usr/bin/git --git-dir=$HOME/.cfg/ \
-    --work-tree=$HOME' $HOME/dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-# Checkout the actual content from the bare repository to your $HOME
-# If error, check webpage
-config checkout
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+echo ".dotfiles" >> .gitignore
+git clone --bare git@github.com:luck07051/dotfiles.git $HOME/dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# backup the file will be overwritten
+if config checkout > /dev/null 2>&1; then
+  mkdir -p .config-backup && \
+    config checkout 2>&1 | grep "^\s+" | awk {'print $1'} | \
+    xargs -I{} mv {} .config-backup/{}
+fi
 config config --local status.showUntrackedFiles no
 ```
 

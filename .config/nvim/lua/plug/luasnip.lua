@@ -1,6 +1,13 @@
 if not pcall(require, 'luasnip') then return end
 local ls = require "luasnip"
 
+-- local feedkey = function(key, mode)
+--   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+-- end
+-- if vim.fn["vsnip#available"](1) == 1 then
+--   feedkey("<Plug>(vsnip-expand-or-jump)", "")
+-- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+--   feedkey("<Plug>(vsnip-jump-prev)", "")
 
 -- My snippets --
 require('luasnip.loaders.from_lua').load({ paths = '~/.config/nvim/snippets/' })

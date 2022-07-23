@@ -1,0 +1,47 @@
+#!/bin/bash
+
+workspaces () {
+    ws=$(bspc query -D --names | sort)
+
+    icon[1]="1"
+    icon[2]="2" #""
+    icon[3]="3" #""
+    icon[4]="4" #""
+    icon[5]="5"
+    icon[6]="6"
+    icon[7]="7"
+    icon[8]="8"
+    icon[9]="9"
+
+    echo -n "(box :class \"workspaces\" :orientation \"horizontal\" "
+    echo -n ":space-evenly true :spacing 10 "
+    echo -n ":halign \"center\" :space-evenly true :spaceing 10 "
+
+    for i in $ws; do
+        if [ $(bspc wm --get-status | sed 's/L/\n/g' | grep "$1" | grep -G "[OF]$i") ]; then
+            echo -n "(button :onclick \"bsp_desktop_switcher $i\" \
+                    :class \"foc\" \"${icon[$i]}\") "
+            continue;
+        fi
+        case $(bspc wm --get-status | sed 's/:/\n/g' | grep -G "^.$i") in
+            "f$i")
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" \
+                    :class \"emt\" \"${icon[$i]}\") ";;
+            "u$i")
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" \
+                    :class \"urg\" \"${icon[$i]}\") ";;
+            *)
+                echo -n "(button :onclick \"bsp_desktop_switcher $i\" \
+                    :class \"occ\" \"${icon[$i]}\") ";;
+        esac
+
+    done
+
+    echo ")"
+}
+
+workspaces $1
+bspc subscribe desktop node_transfer | while read -r _ ; do
+workspaces $1
+done
+

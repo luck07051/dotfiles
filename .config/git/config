@@ -2,6 +2,9 @@
 	email = luck0751@gmail.com
 	name = luck07051
 
+[alias]
+  s = status
+
 
 #[diff]
 #    tool = icdiff

@@ -20,7 +20,7 @@ alias grep="grep --color=auto"
 alias gs="git status"
 # use bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias cons="config status"
+alias cs="config status"
 
 
 # Fix config file path

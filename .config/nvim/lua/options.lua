@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-vim.opt.termguicolors = true
+opt.termguicolors = true
 
 opt.ruler = true
 opt.number = true
