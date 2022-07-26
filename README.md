@@ -186,6 +186,7 @@ if config checkout > /dev/null 2>&1; then
 fi
 config config --local status.showUntrackedFiles no
 ```
+or `curl -Lks https://raw.githubusercontent.com/luck07051/dotfiles/main/.local/bin/mybin/config-install | /bin/bash` (tesing yet)
 
 
 ### [steam](https://www.chrisatmachine.com/Linux/08-steam-on-linux/)

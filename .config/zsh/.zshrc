@@ -23,7 +23,7 @@ source $ZDOTDIR/utilits.zsh
 
 
 eval "$(starship init zsh)"         # Use starship prompt
-eval "$(zoxide init zsh --cmd cd)"  # Zoxide
+eval "$(zoxide init zsh)"  # Zoxide
 
 # Plugins #
 # Adding plugin function {{{

@@ -26,11 +26,12 @@ opt.autoindent = true
 opt.smartindent = true
 opt.shiftround = true
 
--- Wild Menu --
+-- Menu --
 opt.wildmenu = true
 opt.wildignorecase = true
 opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
 opt.pumheight = 10
+opt.pumblend = 10 -- semi-transparent popupmenu
 
 -- Special Char Visualize --
 opt.linebreak = true

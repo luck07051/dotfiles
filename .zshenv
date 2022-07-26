@@ -49,9 +49,9 @@ export COLOR09='#444444'
 export COLOR10='#585858'
 export COLOR11='#6C6C6C'
 export COLOR12='#808080'
-export COLOR13='#9E9E9E'
-export COLOR14='#BCBCBC'
-export COLOR15='#D0D0D0'
+export COLOR13='#949494'
+export COLOR14='#a8a8a8'
+export COLOR15='#bcbcbc'
 
 #==================== Let Paths Right ====================#
 # X11

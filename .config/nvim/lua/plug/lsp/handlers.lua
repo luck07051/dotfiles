@@ -47,7 +47,7 @@ M.on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- jump to ...
-  --map('gd', vim.lsp.buf.definition)
+  map('gd', vim.lsp.buf.definition)
   map('gD', vim.lsp.buf.declaration)
   map('<Leader>D', vim.lsp.buf.type_definition)
   map('gi', vim.lsp.buf.implementation)
@@ -71,16 +71,15 @@ M.on_attach = function(client, bufnr)
   map('<Leader>=', vim.lsp.buf.formatting_sync)
   --}}}
 
-
-  -- if pcall(require, 'illuminate') then
-  --   require 'illuminate'.on_attach(client)
-  -- end
+  if pcall(require, 'illuminate') then
+    require 'illuminate'.on_attach(client)
+  end
 
   if pcall(require, 'lsp_signature') then
     require 'lsp_signature'.on_attach({ --{{{
-      floating_window = true,
-      doc_lines = 0,
-      handler_opts = { border = 'none' },
+      floating_window = false,
+      doc_lines = 10,
+      handler_opts = { border = 'rounded' },
       floating_window_off_x = 0,
 
       hint_enable = false,
@@ -89,21 +88,23 @@ M.on_attach = function(client, bufnr)
       hint_scheme = "String",
       hi_parameter = "LspSignatureActiveParameter",
     }, bufnr)
+
+    -- Show signature uses echo
+    local current_signature = function()
+      -- if not pcall(require, 'lsp_signature') then return end
+      local sig = require("lsp_signature").status_line(vim.fn.winwidth(0))
+      if not (sig.label == '') then
+        print(sig.label .. '   ' .. sig.hint)
+      end
+    end
+    vim.api.nvim_create_augroup('echo_lsp_sign', {})
+    vim.api.nvim_create_autocmd('InsertCharPre', {
+      group = 'echo_lsp_sign',
+      callback = current_signature
+    })
     --}}}
   end
 
-
-  local no_format_list = { 'tsserver', 'sumneko_lua'}
-  local no_format = false
-  for _, value in pairs(no_format_list) do
-    if value == client.name then
-      no_format = true
-      break
-    end
-  end
-  if no_format then
-    client.server_capabilities.document_formatting = false
-  end
 end
 
 

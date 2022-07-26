@@ -1,18 +1,21 @@
 h       ~
 
-# Config
 c       ~/.config
 nv      ~/.config/nvim
 zsh     ~/.config/zsh
 # vim colors
 ui      ~/.local/share/nvim/site/pack/packer/start/ui-colors
+n       ~/notes
 
 b       ~/.local/bin
 mb      ~/.local/bin/mybin
 s       ~/.local/share
 
 dl      ~/downloads
-do      ~/documents
+d       ~/documents
 
 usd     /usr/share
 usd     /usr/share/doc
+
+r       ~/code/rust/rust_test/src
+l       ~/code/rust/leetcode/src

@@ -6,12 +6,14 @@ autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
 -- When save file, delete trailing spaces and extra line
 local DeleteExtraSpaces = function()
-  cmd [[ let b:nline= line('.') ]]
-  cmd [[ %s/\s\+$//e ]]
-  cmd [[ %s/\n\+\%$//e ]]
-  cmd [[ execute "to ".b:nline ]]
+  cmd [[
+    let b:nline= line('.')
+    %s/\s\+$//e
+    %s/\n\+\%$//e
+    execute "to ".b:nline
+  ]]
 end
-autocmd('BufWrite', { pattern = '*', callback = DeleteExtraSpaces })
+autocmd('BufWrite', { callback = DeleteExtraSpaces })
 
 -- Change Fold Text --{{{
 cmd [[

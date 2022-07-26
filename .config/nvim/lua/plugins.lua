@@ -36,6 +36,7 @@ local plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
+      'ray-x/cmp-treesitter'
     },
   },
   { -- Snipptes --
@@ -53,6 +54,7 @@ local plugins = {
       'airblade/vim-rooter',
     },
   },
+
   { -- Status Line --
     'nvim-lualine/lualine.nvim',
     config = conf 'lualine',
@@ -61,14 +63,19 @@ local plugins = {
     },
   },
   { -- Note --
-    'vimwiki/vimwiki',
-    config = vim.cmd[[
-      " use markdown syntax
-      let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-      " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
-      let g:vimwiki_markdown_link_ext = 1
-    ]]
+    'nvim-neorg/neorg',
+    config = conf 'neorg',
+    requires = "nvim-lua/plenary.nvim",
   },
+  -- { -- Note --
+  --   'vimwiki/vimwiki',
+  --   config = vim.cmd[[
+  --     " use markdown syntax
+  --     let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+  --     " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
+  --     let g:vimwiki_markdown_link_ext = 1
+  --   ]]
+  -- },
 
   {
     'numToStr/Comment.nvim',

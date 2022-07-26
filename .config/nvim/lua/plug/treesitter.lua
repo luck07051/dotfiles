@@ -2,16 +2,16 @@ if not pcall(require, 'nvim-treesitter.configs') then return end
 local treesitter = require "nvim-treesitter.configs"
 
 treesitter.setup {
-  ensure_installed = "all",
-  ignore_install = { "" },
+  ensure_installed = 'all',
+  ignore_install = { '' },
   highlight = {
     enable = true,
-    disable = { "" },
+    disable = { '' },
     additional_vim_regex_highlighting = true,
   },
   indent = {
     enable = true,
-    disable = { "yaml" }
+    disable = { 'yaml' }
   },
   playground = {
     enable = true,

@@ -2,8 +2,7 @@ dir_mark() {
   dirmarks=~/dirmarks
   target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)
   if [ -n "$target" ]; then
-    result=$(eval "echo $(grep -E "^$target\s" $dirmarks | awk '{print $2}')")
-    dir=$(eval "echo $result")
+    dir=$(eval "echo $(grep -E "^$target\s" $dirmarks | awk '{print $2}')")
     cd $dir
     if [ -n "$(echo $chpwd_functions | grep -w "auto_ls")" ]; then
       print "\n"

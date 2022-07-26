@@ -4,6 +4,7 @@
 
 [alias]
   s = status
+  am = commit -am
 
 
 #[diff]

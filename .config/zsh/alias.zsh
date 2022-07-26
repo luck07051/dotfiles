@@ -1,27 +1,38 @@
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
 # Confirm before overwriting something
-alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
-# Auto make parent directories
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -iv"
 alias mkdir="mkdir -pv"
 
-# vim
-alias vim="nvim"
-alias ww="nvim ~/vimwiki/index.md"
+alias p="sudo pacman"
+
+# Editor
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+alias v="$EDITOR"
+alias ww="vim ~/vimwiki/index.md"
+alias n="vim ~/notes/note.norg"
 
 # ls
 alias ls="exa -al --icons --group-directories-first --color=auto"
 alias l="exa --icons --group-directories-first --color=auto"
 
-# grep
-alias grep="grep --color=auto"
-
 # git
-alias gs="git status"
+alias g='git'
 # use bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias c="config"
 alias cs="config status"
 
+
+# cargo
+alias cr="cargo run"
+
+# grep
+alias grep="grep --color=auto"
 
 # Fix config file path
 # wget

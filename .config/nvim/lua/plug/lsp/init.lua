@@ -4,9 +4,9 @@ local lspconfig = require 'lspconfig'
 if not pcall(require, 'nvim-lsp-installer') then return end
 local lsp_installer = require 'nvim-lsp-installer'
 
-
 local config = require("plug.lsp.handlers")
 config.setup()
+
 require("plug.lsp.null-ls")
 
 

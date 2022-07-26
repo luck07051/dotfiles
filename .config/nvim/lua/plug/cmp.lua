@@ -5,7 +5,7 @@ if not pcall(require, 'luasnip') then return end
 local luasnip = require 'luasnip'
 
 -- vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.completeopt = { "menu", "menuone" }
+-- vim.opt.completeopt = { "menu", "menuone" }
 
 -- Kind icons --{{{
 local kind_icons = {
@@ -39,31 +39,11 @@ local kind_icons = {
 --}}}
 
 -- mapping function
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
 
 cmp.setup {
   mapping = {
-    ['<C-n>'] = function(fallback)
-      if not cmp.select_next_item() then
-        if vim.bo.buftype ~= 'prompt' and has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end
-    end,
-    ['<C-p>'] = function(fallback)
-      if not cmp.select_prev_item() then
-        if vim.bo.buftype ~= 'prompt' and has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end
-    end,
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-z>"] = cmp.mapping.abort(),
     ["<C-x>"] = cmp.mapping.close(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -77,13 +57,16 @@ cmp.setup {
   },
 
   sources = {
+    { name = 'neorg' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'luasnip' },
+    { name = 'treesitter' },
     { name = 'buffer' },
     { name = 'path' },
   },
 
+  preselect = cmp.PreselectMode.None,
   completion = {
     -- autocomplete = false
     -- keyword_length = 2
@@ -120,7 +103,6 @@ cmp.setup {
       --vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
   },
-
 }
 
 

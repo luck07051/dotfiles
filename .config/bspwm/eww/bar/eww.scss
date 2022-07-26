@@ -10,14 +10,14 @@ $color04: #81A1C1;
 $color05: #FFB9DC;
 $color06: #87AFAF;
 $color07: #d0d0d0;
-$color08: #444444;
-$color09: #D7AFAF;
-$color10: #A3B262;
-$color11: #DFA000;
-$color12: #3A94C5;
-$color13: #DF69BA;
-$color14: #7FBBB3;
-$color15: #808080;
+$color08: #303030;
+$color09: #444444;
+$color10: #585858;
+$color11: #6c6c6c;
+$color12: #808080;
+$color13: #949494;
+$color14: #a8a8a8;
+$color15: #bcbcbc;
 
 $bg: $color00;
 $fg: $color07;
@@ -34,7 +34,7 @@ $scale_bg: #303030;
 
 ///////////////////SEPAR//////////////////
 .separ {
-    color: $color08;
+    color: $color09;
     font-size: 14;
     margin-right: 4px;
     margin-left: 4px;
@@ -57,7 +57,7 @@ $scale_bg: #303030;
 .foc { color: $color01; }
 .act { color: $color05; }
 .occ { color: $fg; }
-.emt { color: $color15; }
+.emt { color: $color12; }
 .urg { color: $fg; background-color: $color01; }
 
 
@@ -68,7 +68,7 @@ $scale_bg: #303030;
 .clock {
     font-size: 14;
     font-weight : bold;
-    background-color: $color08;
+    background-color: $color09;
     padding-top: 2px;
     padding-right: 10px;
     padding-left: 10px;
@@ -111,7 +111,7 @@ $scale_bg: #303030;
     font-size: 18;
     padding-top: 0.1rem;
 }
-.volume.icon.muted { color: $color15; }
+.volume.icon.muted { color: $color12; }
 .volume.icon.unmute { color: $color06; }
 
 
@@ -129,7 +129,7 @@ $scale_bg: #303030;
 .power.logout { color: $color04; }
 .power.restartwm { color: $color06; }
 
-.power.prompt.yes { color: $color15; }
+.power.prompt.yes { color: $color12; }
 .power.prompt.no { color: $color07; }
 
 
