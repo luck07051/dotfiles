@@ -11,7 +11,7 @@ telescope.setup {
       i = { --{{{
         ["<C-c>"] = actions.close,
         ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
+        ["<C-s>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
 
@@ -35,9 +35,12 @@ telescope.setup {
       n = { --{{{
         ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
+        ["<C-s>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
+        ["s"] = actions.select_horizontal,
+        ["v"] = actions.select_vertical,
+        ["t"] = actions.select_tab,
 
         ["j"] = actions.move_selection_next,
         ["k"] = actions.move_selection_previous,
@@ -68,11 +71,11 @@ telescope.setup {
 
 local builtin = '<cmd>lua require("telescope.builtin").'
 Keymap('n', '<C-f>', builtin .. 'find_files()<cr>', Silent)
-Keymap('n', '<Leader>fb', builtin .. 'buffers()<cr>', Silent)
-Keymap('n', '<Leader>fl', builtin .. 'grep_string()<cr>', Silent)
+-- Keymap('n', '<Leader>fb', builtin .. 'buffers()<cr>', Silent)
+-- Keymap('n', '<Leader>fl', builtin .. 'grep_string()<cr>', Silent)
 
 Keymap('n', '<Leader>fe', builtin .. 'diagnostics()<cr>', Silent)
 Keymap('n', 'gd', builtin .. 'lsp_definitions()<cr>', Silent)
-Keymap('n', '<Leader>fr', builtin .. 'lsp_references()<cr>', Silent)
-Keymap('n', '<Leader>fi', builtin .. 'lsp_implementations()<cr>', Silent)
-Keymap('n', '<Leader>ft', builtin .. 'lsp_type_definitions()<cr>', Silent)
+Keymap('n', 'gD', builtin .. 'lsp_type_definitions()<cr>', Silent)
+Keymap('n', 'gi', builtin .. 'lsp_implementations()<cr>', Silent)
+Keymap('n', 'gr', builtin .. 'lsp_references()<cr>', Silent)

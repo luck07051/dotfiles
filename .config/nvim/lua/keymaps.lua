@@ -15,20 +15,17 @@ Keymap('n', '<F5>', ':w<CR>:source %<CR>:nohlsearch<CR>', Silent)
 
 -- Change default key behavior --
 Keymap('', 'Y', 'y$')
-Keymap('', '~', 'g~')
--- No Ex mode
-Keymap('', 'Q', 'qq')
 -- Swap ; and :
 Keymap('', ';', ':')
 Keymap('', ':', ';')
--- Change method not change register
+-- Change method do not change register
 Keymap('', 'c', '"_c')
 Keymap('', 'C', '"_C')
 
 -- Delete with black hole --
 Keymap('', '<Leader>d', '"_d')
 Keymap('', '<Leader>D', '"_D')
--- Copy paste from system clipboard --
+-- Copy paste with system clipboard --
 Keymap('', '<Leader>y', '"+y')
 Keymap('', '<Leader>Y', '"+y$')
 Keymap('', '<Leader>p', '"+p')
@@ -44,14 +41,14 @@ Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
 
 -- Split windows --
+--Keymap('n', '<Leader>s', ':split<CR>', Silent)
 --Keymap('n', '<Leader>v', ':vsplit<CR>', Silent)
---Keymap('n', '<Leader>x', ':split<CR>', Silent)
 
 -- Navigation windows --
-Keymap('n', '<C-h>', '<C-w>h')
-Keymap('n', '<C-j>', '<C-w>j')
-Keymap('n', '<C-k>', '<C-w>k')
-Keymap('n', '<C-l>', '<C-w>l')
+-- Keymap('n', '<C-h>', '<C-w>h')
+-- Keymap('n', '<C-j>', '<C-w>j')
+-- Keymap('n', '<C-k>', '<C-w>k')
+-- Keymap('n', '<C-l>', '<C-w>l')
 
 -- Switch conceal --
 Keymap("n", "<Leader>c", function()

@@ -1,5 +1,5 @@
 fzf_local() {
-  target="$(fd --max-depth 2 -HL -E '.git' -E '.cache' | fzf)"
+  target="$(fd --max-depth 3 -HL -E '.git' -E '.cache' | fzf)"
   if [ -n "$target" ]; then
     if [ -d "$target" ]; then
       cd $target

@@ -28,7 +28,7 @@ filetype on             " detect type of file
 set t_RV=
 
 
-set expandtab           " tab always insert softtabstop of amonut spaces 
+set expandtab           " tab always insert softtabstop of amonut spaces
 set matchtime=1
 set background=dark
-colorscheme lucius
+" colorscheme lucius

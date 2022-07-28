@@ -45,5 +45,3 @@ opt.splitright = true
 
 opt.swapfile = false
 opt.path:append('**')
-
-opt.foldmethod = 'marker'

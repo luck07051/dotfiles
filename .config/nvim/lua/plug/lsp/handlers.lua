@@ -47,11 +47,10 @@ M.on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- jump to ...
-  map('gd', vim.lsp.buf.definition)
-  map('gD', vim.lsp.buf.declaration)
-  map('<Leader>D', vim.lsp.buf.type_definition)
-  map('gi', vim.lsp.buf.implementation)
-  map('gr', vim.lsp.buf.references)
+    -- map('gd', vim.lsp.buf.definition)
+    -- map('gD', vim.lsp.buf.type_definition)
+    -- map('gi', vim.lsp.buf.implementation)
+    -- map('gr', vim.lsp.buf.references)
   -- show help
   map('K', vim.lsp.buf.hover)
   map('<Leader>k', vim.lsp.buf.signature_help)
@@ -68,7 +67,7 @@ M.on_attach = function(client, bufnr)
   --map('<Leader>q', vim.diagnostic.setloclist)
 
   map('<Leader>rn', vim.lsp.buf.rename)
-  map('<Leader>=', vim.lsp.buf.formatting_sync)
+  map('g=', vim.lsp.buf.formatting_sync)
   --}}}
 
   if pcall(require, 'illuminate') then

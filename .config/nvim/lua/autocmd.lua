@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 
 -- Not auto comment --
@@ -6,7 +5,7 @@ autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
 -- When save file, delete trailing spaces and extra line
 local DeleteExtraSpaces = function()
-  cmd [[
+  vim.cmd [[
     let b:nline= line('.')
     %s/\s\+$//e
     %s/\n\+\%$//e
@@ -15,15 +14,16 @@ local DeleteExtraSpaces = function()
 end
 autocmd('BufWrite', { callback = DeleteExtraSpaces })
 
--- Change Fold Text --{{{
-cmd [[
+-- Fold --{{{
+vim.cmd [[
+set foldmethod=marker
 function! MyFoldText()
     let foldedlinecount = v:foldend - v:foldstart
     let line = getline(v:foldstart)
     " remove mark
     let line = substitute(line, '["\#]\?\(\*\)\?\(--\)\?\s*{{'.'{\s*', '', 'g')
     let line = substitute(line, '^["\#]\?\(\*\)\?\(--\)\?', '', 'g')
-    " may sure line not too long
+    " may sure text not too long
     let line = strpart(line, 0, windowwidth - 8 - len(foldedlinecount))
     let showline = " " . line
 
