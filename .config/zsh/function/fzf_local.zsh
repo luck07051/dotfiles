@@ -1,3 +1,6 @@
+# use fzf select file,
+# if is dir, cd it
+# if is file, edit it
 fzf_local() {
   target="$(fd --max-depth 3 -HL -E '.git' -E '.cache' | fzf)"
   if [ -n "$target" ]; then
@@ -23,3 +26,9 @@ magic_fzf_local() {
   fi
 }
 zle -N magic_fzf_local
+
+
+bindkey -M viins '^f' fzf_local
+bindkey -M vicmd '^f' fzf_local
+bindkey -M viins ' ' magic_fzf_local
+bindkey -M vicmd ' ' fzf_local

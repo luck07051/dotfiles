@@ -92,7 +92,11 @@ return packer.startup(function(use)
     config = conf 'telescope',
     requires = {
       'nvim-lua/plenary.nvim',
-      'airblade/vim-rooter',
+      -- 'airblade/vim-rooter',
+      {
+        "ahmedkhalf/project.nvim",
+        config = require("project_nvim").setup {}
+      },
     },
   }
 

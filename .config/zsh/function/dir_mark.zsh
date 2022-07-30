@@ -1,3 +1,4 @@
+# Jump to dir mark
 dir_mark() {
   dirmarks=~/dirmarks
   target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)
@@ -20,3 +21,7 @@ magic_dir_mark() {
   fi
 }
 zle -N magic_dir_mark
+
+
+bindkey -M viins ';' magic_dir_mark
+bindkey -M vicmd ';' dir_mark

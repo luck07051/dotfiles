@@ -10,7 +10,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Resource config --
-Keymap('n', '<F5>', ':w<CR>:source %<CR>:nohlsearch<CR>', Silent)
+Keymap('n', '<F5>', ':source %<CR>:nohlsearch<CR>', Silent)
 
 
 -- Change default key behavior --
@@ -18,6 +18,7 @@ Keymap('', 'Y', 'y$')
 -- Swap ; and :
 Keymap('', ';', ':')
 Keymap('', ':', ';')
+Keymap('n', 'q;', 'q:')
 -- Change method do not change register
 Keymap('', 'c', '"_c')
 Keymap('', 'C', '"_C')
@@ -33,6 +34,10 @@ Keymap('', '<Leader>P', '"+P')
 -- Paste in visual mode but not change register --
 Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
+
+-- Wizard --
+Keymap('n', 'R', '!!$SHELL<CR>')
+Keymap('v', 'R', '!$SHELL<CR>')
 
 -- Copy all file to clipboard --
 Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')

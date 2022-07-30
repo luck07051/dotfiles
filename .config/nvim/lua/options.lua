@@ -4,7 +4,7 @@ opt.termguicolors = true
 
 opt.ruler = true
 opt.number = true
-opt.relativenumber = true
+-- opt.relativenumber = true
 opt.showcmd = true
 opt.cursorline = true
 opt.laststatus = 2
@@ -45,3 +45,8 @@ opt.splitright = true
 
 opt.swapfile = false
 opt.path:append('**')
+
+-- Highlight 81 column
+vim.fn.matchadd('ColorColumn', '\\%81v', 100)
+-- Show extra space
+vim.fn.matchadd('ColorColumn', '\\s$', 100)

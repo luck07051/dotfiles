@@ -27,6 +27,9 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias c="config"
 alias cs="config status"
 
+# cd
+alias z-='z -'
+alias z.='z ..'
 
 # cargo
 alias cr="cargo run"

@@ -1,3 +1,5 @@
+# push current command to stack,
+# for late pop out
 stack_buf_file=$XDG_CACHE_HOME/stackbuffile
 
 stack_buf_push() {
@@ -20,3 +22,7 @@ stack_buf_clear() {
   rm -f $stack_buf_file
 }
 zle -N stack_buf_clear
+
+bindkey -M viins '^P' stack_buf_push
+bindkey -M viins '^O' stack_buf_pop
+bindkey -M viins '^A' stack_buf_clear

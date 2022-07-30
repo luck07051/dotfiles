@@ -1,24 +1,16 @@
 if not pcall(require, 'luasnip') then return end
 local ls = require "luasnip"
 
--- local feedkey = function(key, mode)
---   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
--- end
--- if vim.fn["vsnip#available"](1) == 1 then
---   feedkey("<Plug>(vsnip-expand-or-jump)", "")
--- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
---   feedkey("<Plug>(vsnip-jump-prev)", "")
-
 -- My snippets --
 require('luasnip.loaders.from_lua').load({ paths = '~/.config/nvim/snippets/' })
 -- Use snip from friendly-snippets --
-require('luasnip.loaders.from_vscode').lazy_load()
+-- require('luasnip.loaders.from_vscode').lazy_load()
 
 
 local types = require("luasnip.util.types")
 ls.config.set_config {
-  --history = true,
-  --updateevents = 'TextChanged,TextChangedI',
+  history = true,
+  updateevents = 'TextChanged,TextChangedI',
   enable_autosnippets = true,
   ext_opts = {
     [types.choiceNode] = {
@@ -26,34 +18,40 @@ ls.config.set_config {
         virt_text = { { "●", "Type" } },
       },
     },
-    [types.insertNode] = {
-      active = {
-        virt_text = { { "●", "Statement" } },
-      },
-    },
+    -- [types.insertNode] = {
+    --   active = {
+    --     virt_text = { { "●", "Statement" } },
+    --   },
+    -- },
   },
 }
 
-
 -- Keymapping --
-Keymap({ 'i', 's' }, '<C-J>', function()
+Keymap({ 'i', 's' }, 'jj', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
 end, Silent)
 
-Keymap({ 'i', 's' }, '<C-K>', function()
+Keymap({ 'i', 's' }, 'JJ', function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
 end, Silent)
 
-Keymap('i', '<C-L>', function()
+Keymap('i', '<C-l>', function()
   if ls.choice_active() then
-    ls.choice(1)
+    ls.change_choice(1)
   end
 end, Silent)
 
--- reload snippets
-Keymap('n', '<Leader><Leader>s',
-  '<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<cr>')
+-- Autocmd --
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*/snippets/*.lua',
+  command = [[
+  if (getfsize(expand('%:t'))) == 0
+    read template.lua
+    1;+1d
+    w
+  ]]
+})

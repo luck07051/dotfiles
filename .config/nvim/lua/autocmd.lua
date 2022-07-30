@@ -36,12 +36,5 @@ set foldtext=MyFoldText()
 ]]
 --}}}
 
-
--- Highlight 81 column
-vim.fn.matchadd('ColorColumn', '\\%81v', 100)
--- Show extra space
-vim.fn.matchadd('ColorColumn', '\\s$', 100)
-
-
 -- Auto clear nonessential files when leave Tex file --
 autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })

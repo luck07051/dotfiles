@@ -118,3 +118,6 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' } })
 })
 --}}}
+
+-- Close cmp menu when in <C-f> --
+Keymap('c', '<C-f>', '<C-f>i<Esc>')
