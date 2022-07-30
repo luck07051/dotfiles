@@ -30,10 +30,6 @@ local packer = require 'packer'
 --   },
 -- }
 
-packer.init {
-  log = { level = 'trace' },
-}
-
 local function conf(name)
   return require(string.format('plug.%s', name))
 end
@@ -45,8 +41,6 @@ return packer.startup(function(use)
 
   use { -- Color --
     'luck07051/ui-colors',
-    config = function() print("this didn't work") end,
-    run = function() print("this same") end
   }
 
   use { -- Treesitter --
@@ -99,7 +93,7 @@ return packer.startup(function(use)
       -- 'airblade/vim-rooter',
       {
         "ahmedkhalf/project.nvim",
-        config = require("project_nvim").setup {}
+        config = function() require("project_nvim").setup {} end,
       },
     },
   }
@@ -120,17 +114,20 @@ return packer.startup(function(use)
 
   -- use { -- Note --
   --   'vimwiki/vimwiki',
-  --   config = vim.cmd[[
+  --   config = function()
+  --   vim.cmd[[
   --     " use markdown syntax
   --     let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
   --     " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
   --     let g:vimwiki_markdown_link_ext = 1
   --   ]]
+  --   end
   -- }
 
   use { -- Tmux --
     "aserowy/tmux.nvim",
-    config = require("tmux").setup({
+    config = function()
+      require("tmux").setup({
         copy_sync = {
           enable = true,
         },
@@ -144,11 +141,12 @@ return packer.startup(function(use)
           resize_step_y = 2,
         }
       })
+    end,
   }
 
   use { -- gc to comment text --
     'numToStr/Comment.nvim',
-    config = require('Comment').setup(),
+    config = function() require('Comment').setup() end,
   }
 
   use { -- Add ys,cs,ds method --
@@ -164,11 +162,13 @@ return packer.startup(function(use)
 
   use { -- Preview registers content --
     'tversteeg/registers.nvim',
-    config = vim.cmd [[
+    config = function()
+      vim.cmd [[
       let g:registers_delay = 75
       let g:registers_window_border = "rounded"
       let g:registers_window_max_width = 40
     ]]
+    end,
   }
 
   use { -- <C-t> to use terminal --
@@ -176,19 +176,19 @@ return packer.startup(function(use)
     config = conf 'toggleterm',
   }
 
-  use { --  --
+  use { -- git sign --
     'lewis6991/gitsigns.nvim',
     config = conf 'gitsigns',
   }
 
   use { -- stabilize buffer on window open/close --
     'luukvbaal/stabilize.nvim',
-    config = require("stabilize").setup(),
+    config = function() require("stabilize").setup() end,
   }
 
   use { -- Display color on color code --
     'norcalli/nvim-colorizer.lua',
-    config = require('colorizer').setup(),
+    config = function() require('colorizer').setup() end,
   }
 
   if packer_bootstrap then
