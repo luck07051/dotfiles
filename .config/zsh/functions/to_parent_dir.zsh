@@ -1,5 +1,6 @@
 # Quick cd ..
-to_parent_dir() {
+
+function to_parent_dir() {
   cd ..
   print "\n"
   zle reset-prompt

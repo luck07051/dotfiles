@@ -22,5 +22,5 @@ treesitter.setup {
 }
 
 
-Keymap('n', '<Leader>tp', ':TSPlaygroundToggle<CR>', Silent)
-Keymap('n', '<Leader>tt', ':TSCaptureUnderCursor<CR>', Silent)
+Keymap('n', '<Leader><Leader>tp', ':TSPlaygroundToggle<CR>', Silent)
+Keymap('n', '<Leader><Leader>tc', ':TSCaptureUnderCursor<CR>', Silent)

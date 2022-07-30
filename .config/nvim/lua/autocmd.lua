@@ -14,27 +14,12 @@ local DeleteExtraSpaces = function()
 end
 autocmd('BufWrite', { callback = DeleteExtraSpaces })
 
--- Fold --{{{
-vim.cmd [[
-set foldmethod=marker
-function! MyFoldText()
-    let foldedlinecount = v:foldend - v:foldstart
-    let line = getline(v:foldstart)
-    " remove mark
-    let line = substitute(line, '["\#]\?\(\*\)\?\(--\)\?\s*{{'.'{\s*', '', 'g')
-    let line = substitute(line, '^["\#]\?\(\*\)\?\(--\)\?', '', 'g')
-    " may sure text not too long
-    let line = strpart(line, 0, windowwidth - 8 - len(foldedlinecount))
-    let showline = " " . line
-
-    let nucolwidth = &foldcolumn + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth
-    let fillcharcount = windowwidth - strdisplaywidth(showline) - len(foldedlinecount) -3
-    return showline . repeat(" ",fillcharcount) . foldedlinecount . ' '
-endfunction
-set foldtext=MyFoldText()
-]]
---}}}
-
 -- Auto clear nonessential files when leave Tex file --
 autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
+
+-- Auto in insert mode at terminal --
+autocmd('TermOpen', { command = 'startinsert' })
+
+-- No relativenumber in insert mode --
+autocmd('InsertEnter', { command = 'set norelativenumber' })
+autocmd('InsertLeave', { command = 'set relativenumber' })

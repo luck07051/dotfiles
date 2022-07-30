@@ -31,7 +31,7 @@ opt.wildmenu = true
 opt.wildignorecase = true
 opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
 opt.pumheight = 10
-opt.pumblend = 10 -- semi-transparent popupmenu
+-- opt.pumblend = 10 -- semi-transparent popupmenu
 
 -- Special Char Visualize --
 opt.linebreak = true
@@ -50,3 +50,25 @@ opt.path:append('**')
 vim.fn.matchadd('ColorColumn', '\\%81v', 100)
 -- Show extra space
 vim.fn.matchadd('ColorColumn', '\\s$', 100)
+
+-- Fold --{{{
+vim.cmd [[
+set foldmethod=marker
+function! MyFoldText()
+    let foldedlinecount = v:foldend - v:foldstart
+    let line = getline(v:foldstart)
+    " remove mark
+    let line = substitute(line, '["\#]\?\(\*\)\?\(--\)\?\s*{{'.'{\s*', '', 'g')
+    let line = substitute(line, '^["\#]\?\(\*\)\?\(--\)\?', '', 'g')
+    " may sure text not too long
+    let line = strpart(line, 0, windowwidth - 8 - len(foldedlinecount))
+    let showline = " " . line
+
+    let nucolwidth = &foldcolumn + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth
+    let fillcharcount = windowwidth - strdisplaywidth(showline) - len(foldedlinecount) -3
+    return showline . repeat(" ",fillcharcount) . foldedlinecount . ' '
+endfunction
+set foldtext=MyFoldText()
+]]
+--}}}

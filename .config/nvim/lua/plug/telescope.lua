@@ -9,6 +9,7 @@ telescope.setup {
 
     mappings = {
       i = { --{{{
+        ["<Esc>"] = actions.close,
         ["<C-c>"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-s>"] = actions.select_horizontal,
@@ -33,7 +34,7 @@ telescope.setup {
       },
       --}}}
       n = { --{{{
-        ["<esc>"] = actions.close,
+        ["<Esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-s>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,

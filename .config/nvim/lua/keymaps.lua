@@ -1,6 +1,5 @@
-function _G.Keymap(mode, lhs, rhs, opts)
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
+-- Setup global keymap short hand --
+Keymap = vim.keymap.set     -- This have default noremap = true
 Silent = { noremap = true, silent = true }
 
 
@@ -44,6 +43,12 @@ Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Cancel search highlight --
 Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
+
+-- Terminal --
+Keymap('n', '<Leader>t', ':15%sp term://$SHELL<CR>', Silent)
+Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
+Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
+
 
 -- Split windows --
 --Keymap('n', '<Leader>s', ':split<CR>', Silent)

@@ -17,5 +17,5 @@ d       ~/documents
 usd     /usr/share
 usd     /usr/share/doc
 
-r       ~/code/rust/rust_test/src
-l       ~/code/rust/leetcode/src
+r       ~/code/rust/rust_test
+l       ~/code/rust/leetcode

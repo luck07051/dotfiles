@@ -2,9 +2,8 @@
 -- Automatically install packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({
-    'git', 'clone', '--depth', '1',
-    'https://github.com/wbthomason/packer.nvim',
+  packer_bootstrap = vim.fn.system({
+    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
     install_path,
   })
   vim.cmd [[packadd packer.nvim]]
@@ -15,25 +14,30 @@ if not pcall(require, 'packer') then return end
 local packer = require 'packer'
 
 -- Autocmd that sync packer whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup packer_user_config
+--   autocmd!
+--   autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]
 
 -- init
+-- packer.init {
+--   display = {
+--     open_fn = function()
+--       return require('packer.util').float { border = 'rounded' }
+--     end,
+--   },
+-- }
+
 packer.init {
-  display = {
-    open_fn = function()
-      return require('packer.util').float { border = 'rounded' }
-    end,
-  },
+  log = { level = 'trace' },
 }
 
 local function conf(name)
   return require(string.format('plug.%s', name))
 end
+
 --}}}
 
 return packer.startup(function(use)
@@ -41,6 +45,8 @@ return packer.startup(function(use)
 
   use { -- Color --
     'luck07051/ui-colors',
+    config = function() print("this didn't work") end,
+    run = function() print("this same") end
   }
 
   use { -- Treesitter --
@@ -58,10 +64,8 @@ return packer.startup(function(use)
     requires = {
       'williamboman/nvim-lsp-installer',
       'jose-elias-alvarez/null-ls.nvim',
-      -- Highlighting other uses of the current word under the cursor
-      'RRethy/vim-illuminate',
-      -- Function hint
-      'ray-x/lsp_signature.nvim',
+      'RRethy/vim-illuminate', -- Highlight the keyword under the cursor
+      'ray-x/lsp_signature.nvim', -- Function hint
     },
   }
 
@@ -187,4 +191,7 @@ return packer.startup(function(use)
     config = require('colorizer').setup(),
   }
 
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
