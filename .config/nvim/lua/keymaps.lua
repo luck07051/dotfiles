@@ -48,6 +48,7 @@ Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
 Keymap('n', '<Leader>t', ':15%sp term://$SHELL<CR>', Silent)
 Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
 Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
+Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
 
 -- Split windows --

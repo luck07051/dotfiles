@@ -40,7 +40,8 @@ colors:
 
 # Background opacity
 window:
-  opacity: 0.85
+  # opacity: 0.85
+  opacity: 1
   padding:
     x: 12
     y: 12

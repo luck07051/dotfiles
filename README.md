@@ -45,6 +45,9 @@ xclip               # let nvim can use system clipboard
 #(aur) quickemu quickgui     # virtual machines
 qemu
 (aur) aqemu
+
+neomutt
+isync
 ```
 
 

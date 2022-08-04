@@ -6,8 +6,8 @@ opt.ruler = true
 opt.number = true
 -- opt.relativenumber = true
 opt.showcmd = true
+opt.laststatus = 3
 opt.cursorline = true
-opt.laststatus = 2
 opt.scrolloff = 5
 opt.signcolumn = 'yes'
 opt.conceallevel = 2
@@ -47,7 +47,7 @@ opt.swapfile = false
 opt.path:append('**')
 
 -- Highlight 81 column
-vim.fn.matchadd('ColorColumn', '\\%81v', 100)
+vim.fn.matchadd('ColorColumn', '\\%101v', 100)
 -- Show extra space
 vim.fn.matchadd('ColorColumn', '\\s$', 100)
 

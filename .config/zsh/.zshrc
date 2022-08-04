@@ -35,11 +35,9 @@ function zsh_add_fun() { #{{{
 zsh_add_fun lf
 zsh_add_fun auto_ls
 zsh_add_fun nvim_man
-
 zsh_add_fun dir_mark
 zsh_add_fun fzf_local
 zsh_add_fun to_parent_dir
-
 zsh_add_fun stack_buf
 
 
@@ -65,3 +63,20 @@ zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$COLOR10"
+
+function sconda() {
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/home/ui/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/home/ui/anaconda3/etc/profile.d/conda.sh" ]; then
+          . "/home/ui/anaconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/home/ui/anaconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+}

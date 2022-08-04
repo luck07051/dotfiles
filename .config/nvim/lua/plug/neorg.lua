@@ -69,10 +69,4 @@ return function()
 
     }
   }
-
-  -- Dont folding
-  vim.api.nvim_create_autocmd('BufEnter',
-    { pattern = "*.norg",
-      command = "set foldlevel=999"
-    })
 end

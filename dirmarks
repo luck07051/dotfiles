@@ -1,21 +1,24 @@
-h       ~
-
-c       ~/.config
-nv      ~/.config/nvim
-zsh     ~/.config/zsh
+~
+~/.config
+~/.config/nvim
+~/.config/zsh
 # vim colors
-ui      ~/.local/share/nvim/site/pack/packer/start/ui-colors
-n       ~/notes
+~/.local/share/nvim/site/pack/packer/start/ui-colors
+~/notes
 
-b       ~/.local/bin
-mb      ~/.local/bin/mybin
-s       ~/.local/share
+~/documents
+~/downloads
 
-dl      ~/downloads
-d       ~/documents
+~/.local/bin
+~/.local/bin/mybin
+~/.local/share
 
-usd     /usr/share
-usd     /usr/share/doc
+/usr/share
+/usr/share/doc
 
-r       ~/code/rust/rust_test
-l       ~/code/rust/leetcode
+~/code/ML
+~/code/rust/rust_test
+~/code/rust/leetcode
+
+# auto managed
+~/.config/alacritty

@@ -160,17 +160,6 @@ return packer.startup(function(use)
     'tpope/vim-speeddating',
   }
 
-  use { -- Preview registers content --
-    'tversteeg/registers.nvim',
-    config = function()
-      vim.cmd [[
-      let g:registers_delay = 75
-      let g:registers_window_border = "rounded"
-      let g:registers_window_max_width = 40
-    ]]
-    end,
-  }
-
   use { -- <C-t> to use terminal --
     'akinsho/toggleterm.nvim',
     config = conf 'toggleterm',

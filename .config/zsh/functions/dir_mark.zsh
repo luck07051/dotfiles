@@ -1,10 +1,12 @@
 # directory bookmark, using fzf to select.
 
+export dirmarks=~/dirmarks
+
 function dir_mark() {
-  dirmarks=~/dirmarks
-  target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)
+  # target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)
+  target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | fzf)
   if [ -n "$target" ]; then
-    dir=$(eval "echo $(grep -E "^$target\s" $dirmarks | awk '{print $2}')")
+    dir=$(eval "echo $target")
     cd $dir
     if [ -n "$(echo $chpwd_functions | grep -w "auto_ls")" ]; then
       print "\n"
@@ -19,6 +21,10 @@ function magic_dir_mark() {
   else
     zle .self-insert
   fi
+}
+
+function add_dir() {
+  echo $PWD | sed "s#$HOME#~#" >> $dirmarks
 }
 
 zle -N dir_mark
