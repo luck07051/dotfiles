@@ -2,7 +2,7 @@
     all: unset; //Unsets everything so you can style everything from scratch
 }
 
-$color00: #1C1C1C;
+$color00: #080808;
 $color01: #E67e80;
 $color02: #87AF87;
 $color03: #EBCB8B;
@@ -10,18 +10,18 @@ $color04: #81A1C1;
 $color05: #FFB9DC;
 $color06: #87AFAF;
 $color07: #d0d0d0;
-$color08: #303030;
-$color09: #444444;
-$color10: #585858;
-$color11: #6c6c6c;
-$color12: #808080;
-$color13: #949494;
+$color08: #1c1c1c;
+$color09: #303030;
+$color10: #444444;
+$color11: #585858;
+$color12: #6c6c6c;
+$color13: #8a8a8a;
 $color14: #a8a8a8;
 $color15: #bcbcbc;
 
 $bg: $color00;
 $fg: $color07;
-$scale_bg: #303030;
+$scale_bg: $color09;
 
 
 .bar0, .bar1, .bar, .all {

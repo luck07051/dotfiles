@@ -15,8 +15,8 @@ export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//
 
 #==================== ====================#
 export EDITOR='nvim'
-export TERMINAL='kitty'
-#export TERMINAL='alacritty'
+# export TERMINAL='kitty'
+export TERMINAL='alacritty'
 export BROWSER='firefox'
 
 export LANG=en_US.UTF-8
@@ -44,14 +44,14 @@ export COLOR04='#81A1C1'
 export COLOR05='#FFB9DC'
 export COLOR06='#87AFAF'
 export COLOR07='#D0D0D0'
-export COLOR08='#303030'
-export COLOR09='#444444'
-export COLOR10='#585858'
-export COLOR11='#6C6C6C'
-export COLOR12='#808080'
-export COLOR13='#949494'
-export COLOR14='#a8a8a8'
-export COLOR15='#bcbcbc'
+export COLOR08='#1C1C1C'
+export COLOR09='#303030'
+export COLOR10='#444444'
+export COLOR11='#585858'
+export COLOR12='#6C6C6C'
+export COLOR13='#8A8A8A'
+export COLOR14='#A8A8A8'
+export COLOR15='#BCBCBC'
 
 #==================== Let Paths Right ====================#
 # X11
@@ -85,3 +85,9 @@ export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export MATLAB_LOG_DIR=/tmp
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export _JAVA_AWT_WM_NONREPARENTING=1
+# cuda
+export CUDA_CACHE_PATH=$XDG_CACHE_HOME/nv
+# python
+export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
+# conda
+export CONDARC=$XDG_CONFIG_HOME/conda/condarc

@@ -10,10 +10,10 @@
 @import "content/rust_book.css";
 
 /* invert pdf reader color */
-#viewerContainer > #viewer > .page > .canvasWrapper > canvas{
+/* #viewerContainer > #viewer > .page > .canvasWrapper > canvas{
     filter: grayscale(100%);
     filter: invert(87%);
-}
+} */
 
 
 /* reader mode */

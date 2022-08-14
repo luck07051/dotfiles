@@ -69,3 +69,6 @@ Keymap("n", "<Leader>c", function()
     vim.o.conceallevel = 2
   end
 end, Silent)
+
+
+Keymap('n', '<Leader>v', '<C-W><C-J>a<Up><CR><C-\\><C-N><C-w><C-K>', Silent)

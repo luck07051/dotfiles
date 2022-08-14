@@ -1,20 +1,20 @@
 
 #==================== THEME ====================#
 set font                    "MesloLGS Nerd Font 11"
-set default-bg              rgba(28,28,28,0.85)
+set default-bg              rgba(8,8,8,0.85)
 set default-fg              "#d0d0d0"
 
-set statusbar-bg            "#1c1c1c"
+set statusbar-bg            "#080808"
 set statusbar-fg            "#d0d0d0"
 
 # sceach color
 set highlight-color         "#ebcb8b"
 set highlight-active-color  "#81a1c1"
 
-set completion-bg           "#1c1c1c"
+set completion-bg           "#080808"
 set completion-fg           "#d0d0d0"
 
-set notification-bg         "#1c1c1c"
+set notification-bg         "#080808"
 set notification-fg         "#d0d0d0"
 
 # context color

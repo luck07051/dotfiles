@@ -8,7 +8,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#1c1c1c'
+    background: '#080808'
     foreground: '#D0D0D0'
 
   # Cursor colors
@@ -18,7 +18,7 @@ colors:
 
   # Normal colors
   normal:
-    black:   '#1C1C1C'
+    black:   '#080808'
     red:     '#E67e80'
     green:   '#87AF87'
     yellow:  '#EBCB8B'
@@ -29,7 +29,7 @@ colors:
 
   # Bright colors
   bright:
-    black:   '#1C1C1C'
+    black:   '#080808'
     red:     '#E67e80'
     green:   '#87AF87'
     yellow:  '#EBCB8B'

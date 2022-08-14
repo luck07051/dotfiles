@@ -62,6 +62,7 @@ return function()
           },
           dim_code_blocks = {
             enabled = true,
+            width = "content",
           },
 
         }
