@@ -1,4 +1,0 @@
-#!/bin/sh
-
-pgrep "$BROWSER" > /dev/null || $BROWSER &
-#pgrep "$TERMINAL" > /dev/null || $TERMINAL &

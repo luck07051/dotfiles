@@ -45,6 +45,6 @@ sxhkd -c ~/.config/bspwm/sxhkdrc &
 xsetroot -cursor_name left_ptr &
 
 # Auto start programs if the programs not running
-pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
-pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL &)
+# pgrep "$BROWSER" || (bspc rule -a $BROWSER -o desktop='1'; $BROWSER &)
+# pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL &)
 #pgrep "$TERMINAL" || (bspc rule -a '*' -o desktop='2'; $TERMINAL -e tmux &)

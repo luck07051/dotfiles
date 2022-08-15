@@ -1,4 +1,5 @@
 local opt = vim.opt
+local autocmd = vim.api.nvim_create_autocmd
 
 opt.termguicolors = true
 
@@ -19,8 +20,9 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- Indent --
-opt.shiftwidth = 2
-opt.softtabstop = 2
+opt.shiftwidth = 4
+opt.tabstop = 4
+opt.softtabstop = 4
 opt.expandtab = true
 opt.autoindent = true
 opt.smartindent = true
@@ -51,14 +53,14 @@ vim.fn.matchadd('ColorColumn', '\\%101v', 100)
 -- Show extra space
 vim.fn.matchadd('ColorColumn', '\\s$', 100)
 
--- Fold --{{{
+-- Fold --
+opt.foldmethod = "marker"
 vim.cmd [[
-set foldmethod=marker
-function! MyFoldText()
+function! MyFoldText() "{{{
     let foldedlinecount = v:foldend - v:foldstart
     let line = getline(v:foldstart)
     " remove mark
-    let line = substitute(line, '\s*{{'.'{\s*', '', '')
+    let line = substitute(line, '\([#"]\|\(--\)\|\(//\)\)\s*{{'.'{\s*$', '', '')
     " add icon
     let line = substitute(line, '^\(\([#" ]\s\)\|\(--\)\|\(//\)\)', ' ', '')
     " may sure text not too long
@@ -70,5 +72,45 @@ function! MyFoldText()
     return line . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 set foldtext=MyFoldText()
+"}}}
 ]]
---}}}
+
+-- Not auto comment --
+autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
+
+-- Indent width by file type --
+vim.api.nvim_create_autocmd('FileType',
+  { pattern = { 'lua', 'css', 'html' },
+    callback = function()
+      vim.bo.shiftwidth = 2
+      vim.bo.tabstop = 2
+      vim.bo.softtabstop = 2
+    end })
+
+-- When save file, delete trailing spaces and extra line
+local DeleteExtraSpaces = function() --{{{
+  vim.cmd [[
+    let b:nline= line('.')
+    %s/\s\+$//e
+    %s/\n\+\%$//e
+    execute "to ".b:nline
+  ]]
+end --}}}
+autocmd('BufWrite', { callback = DeleteExtraSpaces })
+
+-- Auto clear nonessential files when leave Tex file --
+autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
+
+-- Setting for terminal mode --
+autocmd('TermOpen', { command = 'normal! G' })
+autocmd('TermOpen', { command = 'startinsert' })
+autocmd('TermOpen', { command = 'set nonumber' })
+autocmd('TermEnter', { command = 'set nocursorline' })
+
+-- No relativenumber in insert mode --
+-- autocmd('InsertEnter', { command = 'set norelativenumber' })
+-- autocmd('InsertLeave', { command = 'set relativenumber' })
+
+-- Only focus window have cursorline --
+autocmd('WinEnter', { command = 'set cursorline' })
+autocmd('WinLeave', { command = 'set nocursorline' })

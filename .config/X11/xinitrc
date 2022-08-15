@@ -5,7 +5,7 @@ usermodmap=$XDG_CONFIG_HOME/X11/xmodmap
 
 # merge in defaults and keymaps
 if [ -f "$userresources" ]; then
-    # define base00 to $COLOR00 and so on
+    # define base00 to $COLOR00 using env
     xrdb $(echo "$(for i in `seq -w 0 15`; do echo -n -Dbase$i=$(eval "echo \$COLOR$i")\ ; done)") -merge "$userresources"
 fi
 
@@ -19,7 +19,6 @@ fi
 #    done
 #    unset f
 #fi
-
 
 # set wacom area
 if [$(xinput list | grep 'Wacom')]; then
@@ -38,9 +37,21 @@ xset s off
 xset -dpms
 
 pgrep "nitrogen" > /dev/null || nitrogen --restore &
-pgrep "picom" > /dev/null || picom --experimental-backend &
 pgrep "sxhkd" > /dev/null || sxhkd &
+if [ $WM != "dwm" ]; then
+  pgrep "picom" > /dev/null || picom --experimental-backend &
+fi
 
+pgrep "$BROWSER" > /dev/null || $BROWSER &
 
-#exec bspwm
-exec dbus-launch leftwm
+# Use loop to exec wm, so you can kill wm if you want to restart it.
+while true; do
+  case $WM in
+    bspwm)
+      bspwm ;;
+    leftwm)
+      dbus-launch leftwm ;;
+    dwm)
+      dwm ;;
+  esac
+done
