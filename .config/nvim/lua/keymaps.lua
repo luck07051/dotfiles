@@ -11,7 +11,6 @@ vim.g.maplocalleader = ' '
 -- Resource config --
 Keymap('n', '<F5>', ':source %<CR>:nohlsearch<CR>', Silent)
 
-
 -- Change default key behavior --
 Keymap('', 'Y', 'y$')
 -- Swap ; and :

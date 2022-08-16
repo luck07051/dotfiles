@@ -20,9 +20,9 @@ opt.ignorecase = true
 opt.smartcase = true
 
 -- Indent --
-opt.shiftwidth = 4
-opt.tabstop = 4
-opt.softtabstop = 4
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.softtabstop = 2
 opt.expandtab = true
 opt.autoindent = true
 opt.smartindent = true
@@ -80,11 +80,11 @@ autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
 -- Indent width by file type --
 vim.api.nvim_create_autocmd('FileType',
-  { pattern = { 'lua', 'css', 'html' },
+  { pattern = { 'c' },
     callback = function()
-      vim.bo.shiftwidth = 2
-      vim.bo.tabstop = 2
-      vim.bo.softtabstop = 2
+      vim.bo.shiftwidth = 4
+      vim.bo.tabstop = 4
+      vim.bo.softtabstop = 4
     end })
 
 -- When save file, delete trailing spaces and extra line

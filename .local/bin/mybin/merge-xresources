@@ -1,0 +1,9 @@
+#!/bin/sh
+
+resources=$XDG_CONFIG_HOME/X11/xresources
+
+if [ -f "$resources" ] ;then
+    # define base00 to $COLOR00 using env
+    xrdb $(echo "$(for i in `seq -w 0 15`; do echo -n -Dbase$i=$(eval "echo \$COLOR$i")\ ; done)") \
+        -merge $XDG_CONFIG_HOME/X11/xresources
+fi

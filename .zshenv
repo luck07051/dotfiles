@@ -13,7 +13,7 @@ export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//
 [ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
 
 
-#==================== ====================#
+#==================== Main Stuff ====================#
 export WM='dwm'
 export EDITOR='nvim'
 # export TERMINAL='kitty'
@@ -37,7 +37,7 @@ export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
 # Colors
-export COLOR00='#1C1C1C'
+export COLOR00='#080808'
 export COLOR01='#E67e80'
 export COLOR02='#87AF87'
 export COLOR03='#EBCB8B'
@@ -54,7 +54,7 @@ export COLOR13='#8A8A8A'
 export COLOR14='#A8A8A8'
 export COLOR15='#BCBCBC'
 
-#==================== Let Paths Right ====================#
+#==================== Lets Paths Right ====================#
 # X11
 export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
 export XSERVERRC=$XDG_CONFIG_HOME/X11/xserverrc
