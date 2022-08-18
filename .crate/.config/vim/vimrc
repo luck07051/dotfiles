@@ -1,0 +1,169 @@
+set nocompatible
+set t_RV=
+set encoding=utf-8
+filetype plugin indent on
+syntax enable
+
+"====================GENERAL===================="
+"===Basic==="
+set ruler               " show the cursor position below
+set number              " show line number on left side
+set showcmd             " show incomplete commad in last line
+set cursorline          " highlight cursor line
+set laststatus=2        " always show statusline
+set scrolloff=3         " keep 3 line when scrolling
+
+
+"===Theme==="
+set background=dark     " dark back ground
+"colorscheme lucius      " theme
+"colorscheme ui_theme
+"=Cursor="
+hi CursorLine                   ctermbg=236 cterm=none
+hi CursorLineNr     ctermfg=7   ctermbg=236 cterm=bold
+hi LineNr           ctermfg=8
+"=Syntax="
+hi Comment          ctermfg=15
+hi Statement        ctermfg=4
+hi Identifier       ctermfg=6
+hi PreProc          ctermfg=6
+hi Constant         ctermfg=11
+hi Identifier       ctermfg=10
+hi Type             ctermfg=14
+"=Misc="
+hi ErrorMsg         ctermfg=7
+" listchars eol
+hi NonText          ctermfg=238
+" listchars space, tab
+hi SpecialKey       ctermfg=238
+
+
+"===Search==="
+set hlsearch            " highlight search result
+set incsearch           " do incremental searching
+set ignorecase          " ignore case when searching, use \c turn off
+set smartcase           " no ignorecase if uppercase char present
+
+
+"===Indent==="
+set shiftwidth=4        " indent width
+set softtabstop=4       " tab width
+set expandtab           " tab always insert softtabstop of amonut spaces
+set autoindent          " copy the indentation of the previous line
+set smartindent         " auto indent to next level, work on C-like file
+set shiftround          " round the indentation to the nearest multiple of shiftwidth
+
+
+"===Misc==="
+set nobackup            " not keep the backup file
+
+set showmatch           " when you insert bracket,
+set matchtime=1         "    the cursor will briefly jump to the matching one
+
+set backspace=indent,eol,start  " make that backspace key work the way it should
+
+set linebreak           " if text warp, no break on word
+
+set novisualbell        " turn off visual bell
+set visualbell t_vb=    " turn off error beep/flash
+
+set t_Co=256            " set 256 colors if term supports
+set t_ut=""
+
+set wildmenu            " show the commom complete list, can use Tab and S-Tab
+
+set list
+set listchars=tab:»\ ,eol:↲,trail:_
+set showbreak=↪\
+
+set viminfo='10,<100,:100,%,n~/.vim/.viminfo
+
+
+"====================KEYMAP===================="
+" let space useless and be Leader Key
+noremap <Space> <nop>
+let mapleader="\<Space>"
+" resource vimrc
+nnoremap <F5> :source $MYVIMRC<CR>
+
+"===Remap Defalut Key==="
+noremap Y y$
+noremap ~ g~
+
+"===Add a Empty Line==="
+nnoremap <silent><C-j> :set paste<CR>m'o<Esc>'':set nopaste<CR>
+nnoremap <silent><C-k> :set paste<CR>m'O<Esc>'':set nopaste<CR>
+
+
+"===Leader Key==="
+" let d purely for deleting
+noremap <Leader>d "_d
+noremap <Leader>D "_D
+" let y and p can use clipboard
+noremap <Leader>y "+y
+noremap <Leader>Y "+Y
+noremap <Leader>p "+p
+noremap <Leader>P "+P
+" cancel search highlight
+nnoremap <silent><Leader>nh :nohlsearch<CR>
+
+"===Copy or Change Search==="
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap s :normal vs<CR>
+
+
+
+"====================AUTOCMD===================="
+" not auto comment new line
+autocmd filetype * set formatoptions-=c formatoptions-=r formatoptions-=o
+
+" delete extra space
+autocmd BufWrite *.cpp,*.h,makefile call DeleteExtraSpaces()
+function DeleteExtraSpaces()
+    :let b:nline= line('.')
+    :%s/\s\+$//e
+    :execute "to ".b:nline
+endfunction
+
+
+
+
+"====================PLUGIN===================="
+call plug#begin('~/.vim/plugged')
+"===Basic==="
+Plug 'itchyny/lightline.vim'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app && yarn install'  }
+
+Plug 'godlygeek/tabular', {'for': 'markdown'}
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+
+Plug 'ap/vim-css-color'
+
+call plug#end()
+" :PlugInstall
+
+
+"===lightline==="
+" Set lightline theme
+let g:lightline = { 'colorscheme': 'seoul256' }
+set noshowmode          " dont show mode below
+
+
+"===vimwiki==="
+" use markdown syntax
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+
+"===markdown preview==="
+let g:mkdp_browser = 'surf'
+nmap <Leader>md <Plug>MarkdownPreview
+nmap <Leader>ms <Plug>MarkdownPreviewStop
+
+
+"===markdown==="
+let g:vim_markdown_math = 1

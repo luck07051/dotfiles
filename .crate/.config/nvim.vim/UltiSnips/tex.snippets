@@ -1,0 +1,62 @@
+
+#==================== Begin / End ====================#
+snippet beg "begin{} / end{}" bA
+\begin{${1:document}}
+	$0
+\end{$1}
+endsnippet
+
+#==================== Section ====================#
+snippet sec "section{}" bA
+\section{$1}
+$0
+endsnippet
+
+snippet ssec "subsection{}" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet sssec "subsubsection{}" bA
+\subsubsection{$1}
+$0
+endsnippet
+
+
+#==================== Math Zone ====================#
+snippet ;i "Inline Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+snippet ;d "Displayed Math" wA
+\[
+$1
+.\] $0
+endsnippet
+
+#==================== Sub/Super Script ====================#
+snippet '([A-Za-z])_(..)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`$1}
+endsnippet
+snippet '([A-Za-z])\^(..)' "auto superscript" wrA
+`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`$1}
+endsnippet
+
+#==================== Fractions ====================#
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+# 3/ -> /frac{3}{$}
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+snippet / "Fraction" iA
+\\frac{${VISUAL}}{$1}$0
+endsnippet

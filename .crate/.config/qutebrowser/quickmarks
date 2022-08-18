@@ -1,0 +1,76 @@
+#===qtile===#
+q                       qute://bookmarks
+b                       qute://bookmarks/#bookmarks
+
+#===audio===#
+yt                      https://youtube.com
+odysee                  https://odysee.com
+spotift                 https://open.spotify.com
+
+#===doc===#
+qutebrowser             https://qutebrowser.org
+qmk                     https://docs.qmk.fm/#
+i3                      https://i3wm.org
+qtile                   http://www.qtile.org
+xmonad                  https://xmonad.org
+suckless                https://suckless.org
+taskwarrior             https://taskwarrior.org
+polybar                 https://github.com/polybar/polybar/wiki
+rust                    https://www.rust-lang.org/
+rust book               https://doc.rust-lang.org/book/title-page.html
+
+#=== ===#
+aw                      https://archlinux.org
+gh                      https://github.com
+gitlab                  https://about.gitlab.com
+bit                     https://vault.bitwarden.com
+desmos                  https://www.desmos.com/calculator?lang=en
+stack overflow          https://stackoverflow.com
+nerd font               https://github.com/ryanoasis/nerd-fonts
+nerd icon               https://www.nerdfonts.com/cheat-sheet
+awesome icon            https://fontawesome.com/icons
+material icons          https://fonts.google.com/icons?selected=Material+Icons
+greasy fork             https://greasyfork.org/en
+
+symbolab                https://www.symbolab.com/solver
+desmos                  https://www.desmos.com/calculator
+osu                     https://osu.ppy.sh/home
+ogs                     https://online-go.com
+
+
+#===social===#
+reddit                  https://www.reddit.com
+twitter                 https://twitter.com/home
+
+#===translator===#
+google translate        https://translate.google.com
+gt                      https://translate.google.com
+deepl translator        https://www.deepl.com/translator
+cambridge dictionsry    https://dictionary.cambridge.org
+merriam dictionary      https://www.merriam-webster.com
+
+#===google===#
+google drive            https://drive.google.com/drive
+gmail                   https://mail.google.com/mail
+
+#===meet===#
+google classroom        https://classroom.google.com
+google meet             https://meet.google.com
+microsoft teams         https://teams.microsoft.com
+np                      https://nportal.ntut.edu.tw
+ntutee                  https://www.ee.ntut.edu.tw/index.php
+
+#===shop===#
+shop shopee             https://shopee.tw
+shop ruten              https://www.ruten.com.tw
+shop pchome             https://24h.pchome.com.tw
+shop books              https://www.books.com.tw
+shop inpad              https://www.inpad.com.tw
+shop armygroup          http://www.armygroup.com.tw/shop
+shop playkeyboard       https://playkeyboard.tw
+shop bookwalker         https://www.bookwalker.com.tw
+shop ergotaiwan         https://ergotaiwan.tw/
+shop taobao             https://world.taobao.com
+
+#=== ===#
+xdg                     https://wiki.archlinux.org/title/XDG_Base_Directory

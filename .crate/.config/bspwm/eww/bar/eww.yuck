@@ -1,0 +1,341 @@
+; cpu
+; mem
+; uptime
+; dirve
+
+; network
+; wifi
+
+; light
+; battery
+
+
+; base on https://github.com/saimoomedits/eww-widgets
+; and https://github.com/druskus20/eugh
+
+(defvar eww "eww -c $HOME/.config/bspwm/eww/bar")
+
+;==================== WIDGETS ====================;
+
+;===== WORKSPACES =====;
+
+;(deflisten workspace_HDMI-0 "scripts/workspace_with_monitor HDMI-0")
+;(deflisten workspace_HDMI-1 "scripts/workspace_with_monitor HDMI-1")
+(deflisten workspace_main "scripts/workspace_main_monitor_only")
+(defwidget workspaces [content]
+  (literal :class "workspaces" :content content))
+
+;===== CLOCK =====;
+
+(defpoll clock_hour :interval "5s" "date +\%I")
+(defpoll clock_minute :interval "5s" "date +\%M")
+(defpoll clock_date :interval "10m" "date '+%d/%m'")
+(defvar clock_rev false)
+
+(defwidget clock []
+  (eventbox :onhover "${eww} update clock_rev=true"
+            :onhoverlost "${eww} update clock_rev=false"
+    (box :space-evenly false
+      (revealer :reveal {!clock_rev}
+                :duration "200ms"
+                :transition "slideleft"
+        (clock_time))
+      (revealer :reveal {clock_rev}
+                :duration "200ms"
+                :transition "slideleft"
+        (clock_date)))))
+
+(defwidget clock_time []
+  (box  :class "time clock"
+        :orientation "h"
+        :halign "start"
+        :space-evenly false
+    (label :text clock_hour)
+    (label :text ":")
+    (label :text clock_minute)))
+
+(defwidget clock_date []
+  (box  :class "date clock"
+        :orientation "h"
+        :halign "start"
+        :space-evenly false
+    (button :class "clock_date"
+            :onclick "./scripts/pop calendar" clock_date)))
+
+
+(defpoll calendar_day :interval "20m" "date '+%d'")
+(defpoll calendar_year :interval "20h" "date '+%Y'")
+
+(defwidget cal []
+  (box :class "cal" :orientation "v"
+    (box :class "cal-in"
+      (calendar :class "cal"
+                :day calendar_day
+                :year calendar_year))))
+
+
+;===== VOLUME =====;
+(defvar volume_rev false)
+(defpoll volume_vol :interval "1s" "scripts/volume get-volume")
+(defpoll volume_icon :interval "1s" "scripts/volume get-icon")
+(defpoll volume_is_mute :interval "1s" "scripts/volume is-mute")
+
+(defwidget volume []
+  (eventbox :onhover "${eww} update volume_rev=true"
+            :onhoverlost "${eww} update volume_rev=false"
+    (box :class "volume" :space-evenly "false" :orientation "h" :spacing "3"
+      (revealer :transition "slideright"
+                :reveal volume_rev
+                :duration "350ms"
+        (scale    :class "bar volume"
+                  :value volume_vol
+                  :orientation "h"
+                  :tooltip "${volume_vol}%"
+                  :max 150
+                  :min 0
+                  :onchange "volume set-volume $(echo {} | cut -d'.' -f1)" ))
+      (button   :class "${volume_is_mute} icon volume"
+                :onrightclick "volume next-sink" volume_icon))))
+
+
+
+;===== SYSTEM =====;
+(defwidget system-bar [name value icon]
+  (box  :class "${name} system"
+        :space-evenly "false"
+        :orientation "h"
+    (label  :class "${name} icon system"
+            :text icon)
+    (scale  :class "${name} bar system"
+            :value value
+            :min 0
+            :max 100
+            :tooltip "${round(value,0)}%"
+            :active "false")))
+
+
+(defwidget cpu []
+  (system-bar :name "cpu"
+              :value {EWW_CPU.avg}
+              :icon ""))
+
+(defwidget mem []
+  (system-bar :name "mem"
+              :value {EWW_RAM.used_mem_perc}
+              :icon ""))
+
+
+(defpoll uptime :interval "1m" "./scripts/uptime")
+(defwidget uptime []
+  (box :class "uptime system" :space-evenly "false"
+    (label :class "uptime icon system" :text "祥")
+    (label :class "uptime data system" :text uptime)))
+
+
+;===== POWER =====;
+(defvar power_rev false)
+(defvar power_prompt_rev false)
+(defvar power_command "")
+
+(defwidget power []
+  (eventbox :onhover "${eww} update power_rev=true"
+            :onhoverlost "${eww} update power_rev=false"
+    (box  :space-evenly "false"
+          :class "power"
+      (eventbox :onhoverlost "${eww} update power_prompt_rev=false"
+        (box  :space-evenly "false"
+              :class "power"
+          (revealer	:transition "slideleft"
+                        :reveal power_rev
+                        :duration "350ms"
+            (box  :orientation "h"
+                  :space-evenly "false"
+
+              ;          (button :class "restartwm power"
+              ;                  :tooltip "Restart Windows Manager"
+              ;                  :onclick "${eww} update power_prompt_rev=true;
+              ;                           ${eww} update power_command=\"bsp_restart\"" "" )
+
+              (button :class "logout power"
+                      :tooltip "Logout"
+                      :onclick "${eww} update power_prompt_rev=true;
+                               ${eww} update power_command=\"killall bspwm\"" "")
+
+              (button :class "lock power"
+                      :tooltip "Lock Screen"
+                      :onclick "${eww} update power_prompt_rev=true;
+                               ${eww} update power_command=\"betterlockscreen -l\"" "")
+
+              (button :class "reboot power"
+                      :tooltip "Reboot"
+                      :onclick "${eww} update power_prompt_rev=true;
+                               ${eww} update power_command=\"reboot\"" "")))
+
+          (button :class "shutdown power"
+                  :tooltip "Shutdown"
+                  :onclick "${eww} update power_prompt_rev=true;
+                           ${eww} update power_command=\"systemctl poweroff\"" "")
+
+          (revealer :transition "slideleft"
+                    :reveal power_prompt_rev
+                    :duration "200ms"
+            (box  :orientation "h"
+                  :space-evenly "false"
+              (button :class "yes prompt power"
+                      :onclick power_command "Yes")
+              (button :class "no prompt power"
+                      :onclick "${eww} update power_prompt_rev=false" "No"))))))))
+
+
+;===== UPDATE =====;
+(defvar update_show false)
+(defvar update_rev false)
+(defpoll update_num :interval "3h" "./scripts/update")
+
+(defwidget update []
+  (revealer :reveal update_show
+            :duration "350ms"
+            :transition "slideleft"
+    (eventbox :onhover "${eww} update update_rev=true"
+              :onhoverlost "${eww} update update_rev=false"
+      (box  :class "update"
+            :space-evenly false
+        (revealer :reveal {!update_rev}
+                  :duration "200ms"
+                  :transition "slideleft"
+          (label  :class "icon update"
+                  :text ""))
+        (revealer :reveal {update_rev}
+                  :duration "200ms"
+                  :transition "slideleft"
+          (button :class "data update"
+                  :onclick "./scripts/update do-update" update_num))))))
+
+;===== SEP =====;
+
+(defwidget sep []
+  (box :class "separ"
+    (label :class "separ" :text "|")))
+
+
+
+
+;=====  =====;
+
+(defwidget right []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "end"
+       :class "right"
+    (update)
+    (uptime)
+    (mem)
+    (cpu)
+    (sep)
+    (volume)
+    (clock)
+    (power)
+    ))
+
+(defwidget center []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "center"
+       :class "centr"
+    ))
+
+;(defwidget left0 []
+;  (box :orientation "h"
+;       :space-evenly false
+;       :halign "start"
+;       :class "left"
+;    (workspaces :content workspace_HDMI-0)))
+;(defwidget left1 []
+;  (box :orientation "h"
+;       :space-evenly false
+;       :halign "start"
+;       :class "left"
+;    (workspaces :content workspace_HDMI-1)))
+(defwidget left []
+  (box :orientation "h"
+       :space-evenly false
+       :halign "start"
+       :class "left"
+    (workspaces :content workspace_main)))
+
+
+;(defwidget all0 []
+;  (box :orientation "h"
+;       :class "all"
+;    (left0)
+;    (center)
+;    (right)))
+;(defwidget all1 []
+;  (box :orientation "h"
+;       :class "all"
+;    (left1)
+;    (center)
+;    (right)))
+(defwidget all []
+  (box :orientation "h"
+       :class "all"
+    (left)
+    (center)
+    (right)))
+
+
+
+;==================== WINDOWS ====================;
+
+;(defwindow bar0
+;  :monitor 0
+;  :geometry
+;  (geometry
+;    :x "0px"
+;    :y "0px"
+;    :width "100%"
+;    :height "26px"
+;    :anchor "top center")
+;  :stacking "bg"
+;  :wm-ignore false
+;  :windowtype "dock"
+;  :reserve (struts :distance "26px" :side "top")
+;  (all0))
+;
+;(defwindow bar1
+;  :monitor 1
+;  :geometry
+;  (geometry
+;    :x "0px"
+;    :y "0px"
+;    :width "100%"
+;    :height "26px"
+;    :anchor "top center")
+;  :stacking "bg"
+;  :wm-ignore false
+;  :windowtype "dock"
+;  :reserve (struts :distance "26px" :side "top")
+;  (all1))
+(defwindow bar
+  :geometry
+  (geometry
+    :x "0px"
+    :y "-1px"
+    :width "100%"
+    :height "26px"
+    :anchor "top center")
+  :stacking "bg"
+  :wm-ignore false
+  :windowtype "dock"
+  :reserve (struts :distance "26px" :side "top")
+  (all))
+
+
+
+(defwindow calendar
+  :geometry (geometry :x "-20px"
+    :y "40px"
+    :anchor "top right"
+    :width "270px"
+    :height "60px")
+  (cal))

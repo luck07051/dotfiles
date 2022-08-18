@@ -1,0 +1,11 @@
+#!/bin/sh
+
+EWW="eww -c $HOME/.config/bspwm/eww/bar"
+
+rm -f $HOME/.cache/eww*.lock
+${EWW} kill
+${EWW} daemon
+
+#${EWW} open bar0
+#${EWW} open bar1
+${EWW} open bar
