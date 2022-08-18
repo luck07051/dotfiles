@@ -32,7 +32,7 @@ configuration {
     padding: 0;
     spacing: 0;
 
-    bg: #080808DA;
+    bg: #121212DA;
     fg: #D0D0D0;
     primary: #FFB9DC;
 

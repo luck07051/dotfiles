@@ -36,24 +36,6 @@ export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
 export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
-# Colors
-export COLOR00='#080808'
-export COLOR01='#E67e80'
-export COLOR02='#87AF87'
-export COLOR03='#EBCB8B'
-export COLOR04='#81A1C1'
-export COLOR05='#FFB9DC'
-export COLOR06='#87AFAF'
-export COLOR07='#D0D0D0'
-export COLOR08='#1C1C1C'
-export COLOR09='#303030'
-export COLOR10='#444444'
-export COLOR11='#585858'
-export COLOR12='#6C6C6C'
-export COLOR13='#8A8A8A'
-export COLOR14='#A8A8A8'
-export COLOR15='#BCBCBC'
-
 #==================== Lets Paths Right ====================#
 # X11
 export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc

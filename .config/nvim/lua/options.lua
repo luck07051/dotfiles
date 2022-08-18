@@ -80,7 +80,7 @@ autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
 -- Indent width by file type --
 vim.api.nvim_create_autocmd('FileType',
-  { pattern = { 'c' },
+  { pattern = { 'c', 'h', 'cpp' },
     callback = function()
       vim.bo.shiftwidth = 4
       vim.bo.tabstop = 4
@@ -97,9 +97,6 @@ local DeleteExtraSpaces = function() --{{{
   ]]
 end --}}}
 autocmd('BufWrite', { callback = DeleteExtraSpaces })
-
--- Auto clear nonessential files when leave Tex file --
-autocmd('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
 
 -- Setting for terminal mode --
 autocmd('TermOpen', { command = 'normal! G' })

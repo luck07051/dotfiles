@@ -1,3 +1,7 @@
+!xrdb -merge $XDG_CONFIG_HOME/X11/xresources
+
+#include "color"
+
 *color0:    base00
 *color1:    base01
 *color2:    base02
@@ -6,23 +10,23 @@
 *color5:    base05
 *color6:    base06
 *color7:    base07
-*color8:    base08
-*color9:    base09
-*color10:   base10
-*color11:   base11
-*color12:   base12
-*color13:   base13
-*color14:   base14
-*color15:   base15
+*color8:    base00
+*color9:    base01
+*color10:   base02
+*color11:   base03
+*color12:   base04
+*color13:   base05
+*color14:   base06
+*color15:   base07
 
 *black:     base00
-*red:       base05
-*green:     base03
-*yellow:    base07
-*blue:      base01
-*magenta:   base04
-*cyan:      base02
-*white:     base06
+*red:       base01
+*green:     base02
+*yellow:    base03
+*blue:      base04
+*magenta:   base05
+*cyan:      base06
+*white:     base07
 
 *background: base00
 *foreground: base07
@@ -33,7 +37,11 @@
 dwm.font: MesloLGS Nerd Font:size=10
 dwm.fgalt: base12
 dwm.bgalt: base09
-!dwm.borderpx: 0
+
+st.font: MesloLGS Nerd Font:size=11
+st.cursorColor: base07
+st.shell: /bin/zsh
+st.alpha: 1
 
 Nsxiv.window.alpha: 0.85
 

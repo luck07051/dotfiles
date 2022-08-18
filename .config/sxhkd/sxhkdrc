@@ -19,6 +19,7 @@ super + shift + {u,i}
 super + shift + o
     volume nextSink
 
+
 # Mute output
 XF86AudioMute
     pactl set-source-mute @DEFAULT_SINK@ toggle; \

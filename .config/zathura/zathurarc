@@ -1,25 +1,25 @@
 
 #==================== THEME ====================#
 set font                    "MesloLGS Nerd Font 11"
-set default-bg              rgba(8,8,8,0.85)
+set default-bg              rgba(18,18,18,0.85)
 set default-fg              "#d0d0d0"
 
-set statusbar-bg            "#080808"
+set statusbar-bg            "#121212"
 set statusbar-fg            "#d0d0d0"
 
 # sceach color
 set highlight-color         "#ebcb8b"
 set highlight-active-color  "#81a1c1"
 
-set completion-bg           "#080808"
+set completion-bg           "#121212"
 set completion-fg           "#d0d0d0"
 
-set notification-bg         "#080808"
+set notification-bg         "#121212"
 set notification-fg         "#d0d0d0"
 
 # context color
 set recolor                 true
-set recolor-lightcolor      rgba(28,28,28,0.5)
+set recolor-lightcolor      rgba(18,18,18,0.5)
 set recolor-darkcolor       "#e4e4e4"
 set recolor-keephue         true      # keep original color
 

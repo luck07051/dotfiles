@@ -2,10 +2,13 @@
 ~/.config
 ~/.config/nvim
 ~/.config/zsh
+~/.config/X11
 # vim colors
 ~/.local/share/nvim/site/pack/packer/start/ui-colors
 ~/notes
-~/.local/share/dwm
+
+~/suckless/dwm
+~/suckless/st
 
 ~/documents
 ~/downloads

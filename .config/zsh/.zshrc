@@ -16,6 +16,12 @@ export KEYTIMEOUT=1
 bindkey "^?" backward-delete-char   # Let backspace work normal
 bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+bindkey -M vicmd '^e' edit-command-line
+
+
 # Alias
 source $ZDOTDIR/alias.zsh
 
@@ -62,7 +68,8 @@ zsh_add_plugin "zsh-users/zsh-completions"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$COLOR10"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#444444"
+
 
 function sconda() {
   # >>> conda initialize >>>

@@ -1,19 +1,5 @@
 #!/bin/sh
 
-userresources=$XDG_CONFIG_HOME/X11/xresources
-if [ -f "$userresources" ]; then
-  if [ -f "$(which merge-xresources)" ]; then
-    merge-xresources
-  else
-    xrdb -merge "$userresources"
-  fi
-fi
-
-usermodmap=$XDG_CONFIG_HOME/X11/xmodmap
-if [ -f "$usermodmap" ]; then
-  xmodmap "$usermodmap"
-fi
-
 # set wacom area
 if [$(xinput list | grep 'Wacom')]; then
   xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275
@@ -33,10 +19,12 @@ xset -dpms
 pgrep "$BROWSER" > /dev/null || $BROWSER &
 
 while true; do
+  xrdb -merge $XDG_CONFIG_HOME/X11/xresources
+
   # Start regular thing
   pgrep "nitrogen" > /dev/null || nitrogen --restore &
   pgrep "sxhkd" > /dev/null || sxhkd &
-  # pgrep "picom" > /dev/null || picom $picom_conf --experimental-backend &
+  killall picom > /dev/null 2>&1; picom --experimental-backend &
 
   case $WM in
     bspwm)
@@ -44,8 +32,7 @@ while true; do
     leftwm)
       dbus-launch leftwm ;;
     dwm)
-      pgrep "picom" > /dev/null || picom --inactive-dim 0.1 --corner-radius 0 --experimental-backend &
-      dwmbar &
+      killall dwmbar > /dev/null 2>&1; dwmbar &
       dwm ;;
   esac
 done

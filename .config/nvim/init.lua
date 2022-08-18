@@ -1,6 +1,6 @@
 require 'options'
 require 'keymaps'
 require 'plugins'
--- require 'function'
+require 'autocmd'
 
 vim.cmd [[ colorscheme ui_colors ]]
