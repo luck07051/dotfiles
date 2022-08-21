@@ -14,3 +14,7 @@
 #define base13 #8A8A8A
 #define base14 #A8A8A8
 #define base15 #BCBCBC
+
+#define bg    base00
+#define fg    base07
+#define main  base05

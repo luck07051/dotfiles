@@ -2,22 +2,26 @@
 super + ctrl + shift + r
     killall sxhkd; sxhkd
 
+# {Raise, Low} volume
+super + shift + z
+  notify-send 'pacman -Syuu completed!' 'this is content, brabra'
+
 
 #===== AUDIO =====#
 # {Raise, Low} volume
 super + shift + {u,i}
-    volume {volUp,Down} 5
+    vl {up,down} 5
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
-    volume vol{Up,Down} 5
+    vl {up,down} 5
 
 {button10, button11}
-    volume vol{Up,Down} 5
+    vl {up,down} 5
 
 
 # switch output
 super + shift + o
-    volume nextSink
+    vl switch
 
 
 # Mute output

@@ -16,12 +16,10 @@ export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//
 #==================== Main Stuff ====================#
 export WM='dwm'
 export EDITOR='nvim'
-# export TERMINAL='kitty'
-export TERMINAL='alacritty'
+export TERMINAL='st'
 export BROWSER='firefox'
 
 export LANG=en_US.UTF-8
-#export TERM="xterm-256color"
 
 # zsh
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh

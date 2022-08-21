@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) vl toggle ;;
+	3) vl switch ;;
+	4) vl up ;;
+	5) vl down ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+
+[ $(pamixer --get-mute) = true ] &&
+  printf " " && exit
+
+vol=$(pamixer --get-volume)
+icon=" "
+#   
+printf "$icon$vol%%"

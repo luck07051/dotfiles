@@ -208,12 +208,16 @@ xdg-mime default $(xdg-settings get default-web-browser) x-scheme-handler/https 
 ln ~/.config/X11/xorg.conf.d/[] /etc/X11/xinit/xorg.conf.d/
 ```
 
-
 ### clock drift
 ```
 sudo pacman -S ntp
 sudo ntpd -qg
 sudo hwclock --systohc
+```
+or (idk this will work)
+```
+sudo systemctl enable ntpd.service
+sudo systemctl start ntpd.service
 ```
 
 
@@ -249,7 +253,7 @@ systemctl start cronie
 
 put this in `crontab -u root -e`
 ```
-# sync time everyday at 8pm
+# sync clock everyday at 8pm
 0 20 * * * /usr/bin/ntpd -qg; /usr/bin/hwclock --systohc
 ```
 

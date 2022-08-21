@@ -21,6 +21,8 @@ cmd open ${{
         application/pdf) zathura "$f" &;;
         # Image
         image/*) nsxiv "$f" &;;
+        # font
+        font/*) display "$f" & ;;
 
         *) xdg-open "$f" ;;
     esac

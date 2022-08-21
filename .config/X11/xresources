@@ -1,49 +1,68 @@
 !xrdb -merge $XDG_CONFIG_HOME/X11/xresources
 
+! not thing here {{{
 #include "color"
 
-*color0:    base00
-*color1:    base01
-*color2:    base02
-*color3:    base03
-*color4:    base04
-*color5:    base05
-*color6:    base06
-*color7:    base07
-*color8:    base00
-*color9:    base01
-*color10:   base02
-*color11:   base03
-*color12:   base04
-*color13:   base05
-*color14:   base06
-*color15:   base07
+#define black   base00
+#define red     base01
+#define green   base02
+#define yellow  base03
+#define blue    base04
+#define magenta base05
+#define cyan    base06
+#define white   base07
 
-*black:     base00
-*red:       base01
-*green:     base02
-*yellow:    base03
-*blue:      base04
-*magenta:   base05
-*cyan:      base06
-*white:     base07
+*.black:     base00
+*.red:       base01
+*.green:     base02
+*.yellow:    base03
+*.blue:      base04
+*.magenta:   base05
+*.cyan:      base06
+*.white:     base07
 
-*background: base00
-*foreground: base07
-*primary: base05
-*font: MesloLGS Nerd Font
+*.color0:    base00
+*.color1:    base01
+*.color2:    base02
+*.color3:    base03
+*.color4:    base04
+*.color5:    base05
+*.color6:    base06
+*.color7:    base07
+*.color8:    base00
+*.color9:    base01
+*.color10:   base02
+*.color11:   base03
+*.color12:   base04
+*.color13:   base05
+*.color14:   base06
+*.color15:   base07
 
+*.background: bg
+*.foreground: fg
+*.primary:    main
+!}}}
 
-dwm.font: MesloLGS Nerd Font:size=10
+*.font: MesloLGS Nerd Font
+*.alpha: 1
+
+dwm.font: MesloLGS Nerd Font:size=9
+!dwm.font: ProggyCleanTT Nerd Font:size=12
 dwm.fgalt: base12
 dwm.bgalt: base09
+!dwm.horizpadbar: 4
+!dwm.vertpadbar: 2
 
 st.font: MesloLGS Nerd Font:size=11
-st.cursorColor: base07
+st.cursorColor: fg
 st.shell: /bin/zsh
-st.alpha: 1
+st.cwscale: 1.05
 
-Nsxiv.window.alpha: 0.85
+dmenu.font: MesloLGS Nerd Font:size=10
+dmenu.normfgcolor: fg
+dmenu.normbgcolor: bg
+dmenu.selfgcolor: bg
+dmenu.selbgcolor: main
 
 Xft.antialias: 1
 Xft.hinting: 1

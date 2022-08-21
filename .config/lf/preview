@@ -90,6 +90,15 @@ case "$(printf "%s\n" "$(readlink -f "$file")" | awk '{print tolower($0)}')" in
     *.ino)
         batorcat --language=cpp "$file"
         ;;
+    *.ttf|*.otf)
+        [ ! -f "${CACHE}.png" ] && \
+            fontimage "$file" -o "${CACHE}.png" \
+              --text "$(echo $file | awk -F/ '{print $NF}')" \
+              --text "abcdefghijklmnopqrstuvwxyz" \
+              --text "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+              --text "0123456789!@#\$%^&*()" > /dev/null
+        image "${CACHE}.png" "$w" "$h" "$x" "$y"
+        ;;
     *)
         batorcat "$file"
         ;;

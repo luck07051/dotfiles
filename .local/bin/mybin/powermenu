@@ -1,0 +1,14 @@
+#!/bin/sh
+
+declare -A list
+list["log out"]="loginctl terminate-session ${XDG_SESSION_ID-}"
+list["suspend"]="systemctl suspend"
+list["hibernate"]="systemctl hibernate"
+list["reboot"]="systemctl reboot"
+list["shut down"]="systemctl poweroff"
+
+option=$(printf '%s\n' "${!list[@]}" | dmenu)
+
+[ -n "$option" ] &&
+[ $(echo -e "No\nYes" | dmenu -p "Do you want to $option?") == "Yes" ] &&
+  ${list[$option]}

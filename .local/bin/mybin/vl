@@ -1,0 +1,34 @@
+#!/bin/sh
+
+MAX_VOL=150
+STEP=5
+
+up() {
+  [ -n "$1" ] && STEP=$1
+  pactl set-sink-volume @DEFAULT_SINK@ +"$STEP"%
+}
+
+down() {
+  [ -n "$1" ] && STEP=$1
+  pactl set-sink-volume @DEFAULT_SINK@ -"$STEP"%
+}
+
+mute() {
+  pactl set-sink-mute @DEFAULT_SINK@ 1
+}
+
+toggle() {
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+}
+
+switch() {
+  def=$(pactl get-default-sink)
+  pactl list short sinks | cut -f2 | tr '\n' ' ' |
+    sed "s/^.*$def\s\(\S*\)\s.*/\1/; s/^\(\S*\)\s.*/\1/" | # looking for next sink
+    xargs pactl set-default-sink
+}
+
+
+"$@"
+
+kill -36 $(pidof dwm)
