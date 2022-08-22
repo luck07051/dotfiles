@@ -28,6 +28,7 @@ while true; do
 
   # killall picom > /dev/null 2>&1; picom --experimental-backend &
 
+  (sleep 2s && kill -36 "$(pidof dwm)") &
   dwm
 
 done

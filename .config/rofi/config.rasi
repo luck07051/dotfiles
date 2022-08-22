@@ -16,4 +16,5 @@ configuration {
         ml-row-up: "ScrollUp";
         ml-row-down: "ScrollDown";
 }
-@theme "ui_theme"
+
+@theme "dmenu"

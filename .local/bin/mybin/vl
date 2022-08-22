@@ -1,6 +1,5 @@
 #!/bin/sh
 
-MAX_VOL=150
 STEP=5
 
 up() {
@@ -31,4 +30,4 @@ switch() {
 
 "$@"
 
-kill -36 $(pidof dwm)
+kill -36 "$(pidof dwm)"

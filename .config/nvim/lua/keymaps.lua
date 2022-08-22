@@ -44,11 +44,12 @@ Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
 
 -- Terminal --
-Keymap('n', '<Leader>t', ':15%sp term://$SHELL<CR>', Silent)
 Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
 Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
+Keymap('n', '<Leader>t', ':15%sp term://$SHELL<CR>', Silent)
+Keymap('n', '<Leader>v', '<C-W><C-J>a<Up><CR><C-\\><C-N>G<C-w><C-K>', Silent)
 
 -- Split windows --
 --Keymap('n', '<Leader>s', ':split<CR>', Silent)
@@ -68,6 +69,3 @@ Keymap("n", "<Leader>c", function()
     vim.o.conceallevel = 2
   end
 end, Silent)
-
-
-Keymap('n', '<Leader>v', '<C-W><C-J>a<Up><CR><C-\\><C-N><C-w><C-K>', Silent)

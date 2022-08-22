@@ -294,3 +294,8 @@ systemctl start libvirtd
 
 sudo usermod -aG libvirt [username]
 ```
+
+### st emoji support
+```
+yay -S libxft-bgra
+```

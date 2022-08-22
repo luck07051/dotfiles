@@ -1,7 +1,7 @@
 # if PWD changed, execute ls
 
 function auto_ls() {
-  echo
+  printf "\n"
   if [ -x "$(which exa)" ]; then
     exa -a --icons --group-directories-first
   else

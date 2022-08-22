@@ -7,11 +7,10 @@ alias mv="mv -iv"
 alias rm="rm -iv"
 alias mkdir="mkdir -pv"
 
-alias p="sudo pacman"
-
 # Editor
 # Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+[ -x "$(command -v nvim)" ] && \
+  alias vim="nvim" vimdiff="nvim -d"
 alias v="$EDITOR"
 alias ww="vim ~/vimwiki/index.md"
 alias n="vim ~/notes/note.norg"
@@ -21,7 +20,6 @@ alias ls="exa -al --icons --group-directories-first --color=auto"
 alias l="exa --icons --group-directories-first --color=auto"
 
 # git
-alias g='git'
 # use bare Git repository to manager my dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias c="config"
@@ -33,6 +31,9 @@ alias z.='z ..'
 
 # cargo
 alias cr="cargo run"
+
+# trans
+alias tt="trans :zh-TW"
 
 # grep
 alias grep="grep --color=auto"

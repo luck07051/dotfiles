@@ -1,8 +1,6 @@
 !xrdb -merge $XDG_CONFIG_HOME/X11/xresources
 
-! not thing here {{{
 #include "color"
-
 #define black   base00
 #define red     base01
 #define green   base02
@@ -11,6 +9,42 @@
 #define magenta base05
 #define cyan    base06
 #define white   base07
+
+*.background: bg
+*.foreground: fg
+*.primary:    main
+
+*.font: MesloLGS Nerd Font
+*.alpha: 1
+
+
+dwm.font: MesloLGS Nerd Font:size=9
+dwm.fgalt: base12
+dwm.bgalt: base09
+!dwm.horizpadbar: 4
+!dwm.vertpadbar: 4
+
+st.font: MesloLGS Nerd Font:size=11
+st.cursorColor: fg
+st.shell: /bin/zsh
+st.cwscale: 1.05
+
+dmenu.font: MesloLGS Nerd Font:size=10
+dmenu.normfgcolor: fg
+dmenu.normbgcolor: bg
+dmenu.selfgcolor: bg
+dmenu.selbgcolor: main
+
+
+! for font render
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+
 
 *.black:     base00
 *.red:       base01
@@ -37,35 +71,3 @@
 *.color13:   base05
 *.color14:   base06
 *.color15:   base07
-
-*.background: bg
-*.foreground: fg
-*.primary:    main
-!}}}
-
-*.font: MesloLGS Nerd Font
-*.alpha: 1
-
-dwm.font: MesloLGS Nerd Font:size=9
-!dwm.font: ProggyCleanTT Nerd Font:size=12
-dwm.fgalt: base12
-dwm.bgalt: base09
-!dwm.horizpadbar: 4
-!dwm.vertpadbar: 2
-
-st.font: MesloLGS Nerd Font:size=11
-st.cursorColor: fg
-st.shell: /bin/zsh
-st.cwscale: 1.05
-
-dmenu.font: MesloLGS Nerd Font:size=10
-dmenu.normfgcolor: fg
-dmenu.normbgcolor: bg
-dmenu.selfgcolor: bg
-dmenu.selbgcolor: main
-
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.rgba: rgb
-Xft.hintstyle: hintslight
-Xft.lcdfilter: lcddefault
