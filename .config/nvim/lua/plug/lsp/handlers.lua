@@ -27,9 +27,9 @@ M.setup = function()
     },
   })
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
+  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  --   border = "rounded",
+  -- })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
@@ -69,10 +69,6 @@ M.on_attach = function(client, bufnr)
   map('<Leader>rn', vim.lsp.buf.rename)
   map('g=', vim.lsp.buf.formatting_sync)
   --}}}
-
-  if pcall(require, 'illuminate') then
-    require 'illuminate'.on_attach(client)
-  end
 
   if pcall(require, 'lsp_signature') then
     require 'lsp_signature'.on_attach({ --{{{

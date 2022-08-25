@@ -2,6 +2,29 @@ unsetopt autocd beep        # No beep sound
 set -o ignoreeof            # Prevent <C-D> to colse window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
+function zsh_add_fun() { #{{{
+  file="$ZDOTDIR/functions/$1.zsh"
+  if [ -f "$file" ]; then
+    source $file
+  fi
+}
+#}}}
+function zsh_add_plug() { #{{{
+  function zsh_add_file() {
+    [[ -f "$ZDOTDIR/$1" ]] && source "$ZDOTDIR/$1"
+  }
+
+  PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+  if [[ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]]; then
+    # For plugins
+    zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+    zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+  else
+    git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+  fi
+}
+#}}}
+
 # Auto Complete #
 autoload -U compinit
 compinit
@@ -25,50 +48,34 @@ bindkey -M vicmd '^e' edit-command-line
 # Alias
 source $ZDOTDIR/alias.zsh
 
-
 eval "$(starship init zsh)"         # Use starship prompt
 eval "$(zoxide init zsh)"           # Zoxide
 
 
 # Functions #
-function zsh_add_fun() { #{{{
-  file="$ZDOTDIR/functions/$1.zsh"
-  if [ -f "$file" ]; then
-    source $file
-  fi
-}
-#}}}
 zsh_add_fun lf
-zsh_add_fun auto_ls
 zsh_add_fun nvim_man
 zsh_add_fun dir_mark
-zsh_add_fun fzf_local
+# zsh_add_fun fzf_local
 zsh_add_fun to_parent_dir
 zsh_add_fun stack_buf
+zsh_add_fun yank
+# zsh_add_fun auto_ls
 
 
 # Plugins #
-function zsh_add_plugin() { #{{{
-  function zsh_add_file() {
-    [[ -f "$ZDOTDIR/$1" ]] && source "$ZDOTDIR/$1"
-  }
-
-  PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-  if [[ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]]; then
-    # For plugins
-    zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
-      zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
-  else
-    git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
-  fi
-}
-#}}}
-zsh_add_plugin "Aloxaf/fzf-tab"
-zsh_add_plugin "zsh-users/zsh-completions"
-zsh_add_plugin "zsh-users/zsh-autosuggestions"
-zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+zsh_add_plug "Aloxaf/fzf-tab"
+zsh_add_plug "zsh-users/zsh-completions"
+zsh_add_plug "zsh-users/zsh-autosuggestions"
+zsh_add_plug "zsh-users/zsh-syntax-highlighting"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#444444"
+
+
+
+
+
+
 
 
 function sconda() {

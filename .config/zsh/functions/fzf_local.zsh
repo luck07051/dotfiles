@@ -43,15 +43,17 @@ function fzf_local() {
   fi
   zle reset-prompt; zle -R
 }
-zle -N fzf_local
 
 function magic_fzf_local() {
-  if [[ -z $BUFFER ]]; then
+  # if buf is empty, press key will toggle fzf_local()
+  if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
     fzf_local
   else
     zle .self-insert
   fi
 }
+
+zle -N fzf_local
 zle -N magic_fzf_local
 
 

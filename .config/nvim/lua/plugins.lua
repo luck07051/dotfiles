@@ -43,6 +43,10 @@ return packer.startup(function(use)
     'luck07051/ui-colors',
   }
 
+  use { -- Window manager --
+    'luck07051/dwm.vim',
+  }
+
   use { -- Treesitter --
     'nvim-treesitter/nvim-treesitter',
     config = conf 'treesitter',
@@ -58,7 +62,7 @@ return packer.startup(function(use)
     requires = {
       'williamboman/nvim-lsp-installer',
       'jose-elias-alvarez/null-ls.nvim',
-      'RRethy/vim-illuminate', -- Highlight the keyword under the cursor
+      -- 'RRethy/vim-illuminate', -- Highlight the keyword under the cursor
       'ray-x/lsp_signature.nvim', -- Function hint
     },
   }
@@ -90,7 +94,6 @@ return packer.startup(function(use)
     config = conf 'telescope',
     requires = {
       'nvim-lua/plenary.nvim',
-      -- 'airblade/vim-rooter',
       {
         "ahmedkhalf/project.nvim",
         config = function() require("project_nvim").setup {} end,
@@ -115,34 +118,34 @@ return packer.startup(function(use)
   -- use { -- Note --
   --   'vimwiki/vimwiki',
   --   config = function()
-  --   vim.cmd[[
+  --    vim.cmd[[
   --     " use markdown syntax
   --     let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
   --     " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
   --     let g:vimwiki_markdown_link_ext = 1
   --   ]]
-  --   end
+  --  end
   -- }
 
-  use { -- Tmux --
-    "aserowy/tmux.nvim",
-    config = function()
-      require("tmux").setup({
-        copy_sync = {
-          enable = true,
-        },
-        navigation = {
-          cycle_navigation = false,
-          enable_default_keybindings = true,
-        },
-        resize = {
-          enable_default_keybindings = true,
-          resize_step_x = 4,
-          resize_step_y = 2,
-        }
-      })
-    end,
-  }
+  -- use { -- Tmux --
+  --   "aserowy/tmux.nvim",
+  --   config = function()
+  --     require("tmux").setup({
+  --       copy_sync = {
+  --         enable = true,
+  --       },
+  --       navigation = {
+  --         cycle_navigation = false,
+  --         enable_default_keybindings = true,
+  --       },
+  --       resize = {
+  --         enable_default_keybindings = true,
+  --         resize_step_x = 4,
+  --         resize_step_y = 2,
+  --       }
+  --     })
+  --   end,
+  -- }
 
   use { -- gc to comment text --
     'numToStr/Comment.nvim',

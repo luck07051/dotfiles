@@ -5,9 +5,12 @@ export dirmarks=~/dirmarks
 function dir_mark() {
   # target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)
   target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | fzf)
+
   if [ -n "$target" ]; then
+    # extend ~ or env
     dir=$(eval "echo $target")
     cd $dir
+
     if [ -n "$(echo $chpwd_functions | grep -w "auto_ls")" ]; then
       print "\n"
     fi
@@ -16,7 +19,8 @@ function dir_mark() {
 }
 
 function magic_dir_mark() {
-  if [[ -z $BUFFER ]]; then
+  # if buf is empty, press key will toggle dir_mark()
+  if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
     dir_mark
   else
     zle .self-insert

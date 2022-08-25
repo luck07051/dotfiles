@@ -37,21 +37,15 @@ opt.pumheight = 10
 
 -- Special Char Visualize --
 opt.linebreak = true
-opt.showbreak = '↪ '
---opt.list = true
---opt.listchars = { tab = '» ', eol = '↲', trail = '_' }
+opt.showbreak = '↪'
+-- opt.list = true
+-- opt.listchars = { tab = '» ', eol = '↲', trail = '_' }
 
 -- Msic --
-opt.splitbelow = true
-opt.splitright = true
-
 opt.swapfile = false
 opt.path:append('**')
-
--- Highlight 81 column
-vim.fn.matchadd('ColorColumn', '\\%101v', 100)
--- Show extra space
-vim.fn.matchadd('ColorColumn', '\\s$', 100)
+vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column
+vim.fn.matchadd('ColorColumn', '\\s$', 100)     -- Show extra space
 
 -- Fold --
 opt.foldmethod = "marker"
@@ -75,19 +69,16 @@ set foldtext=MyFoldText()
 "}}}
 ]]
 
--- Not auto comment --
+-- Not auto comment new line --
 autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
--- Indent width by file type --
+-- Specify indent width by file type --
 vim.api.nvim_create_autocmd('FileType',
   { pattern = { 'c', 'h', 'cpp' },
-    callback = function()
-      vim.bo.shiftwidth = 4
-      vim.bo.tabstop = 4
-      vim.bo.softtabstop = 4
-    end })
+    command = [[ setlocal sw=4 ts=4 sts=4 ]]
+  })
 
--- When save file, delete trailing spaces and extra line
+-- Delete trailing spaces and extra line when save file --
 local DeleteExtraSpaces = function() --{{{
   vim.cmd [[
     let b:nline= line('.')
@@ -99,15 +90,13 @@ end --}}}
 autocmd('BufWrite', { callback = DeleteExtraSpaces })
 
 -- Setting for terminal mode --
-autocmd('TermOpen', { command = 'normal! G' })
 autocmd('TermOpen', { command = 'startinsert' })
-autocmd('TermOpen', { command = 'set nonumber' })
-autocmd('TermEnter', { command = 'set nocursorline' })
+autocmd('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
 
 -- No relativenumber in insert mode --
 -- autocmd('InsertEnter', { command = 'set norelativenumber' })
 -- autocmd('InsertLeave', { command = 'set relativenumber' })
 
--- Only focus window have cursorline --
-autocmd('WinEnter', { command = 'set cursorline' })
-autocmd('WinLeave', { command = 'set nocursorline' })
+-- Only focused window have cursorline --
+autocmd('WinEnter', { command = 'setlocal cursorline' })
+autocmd('WinLeave', { command = 'setlocal nocursorline' })
