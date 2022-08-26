@@ -80,6 +80,7 @@ fd                  # better find
 sd                  # better sed
 ripgerp             # better gerp
 hexyl               # hex viewer
+xdotool
 ```
 
 Graphical app

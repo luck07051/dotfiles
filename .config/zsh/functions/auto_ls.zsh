@@ -1,6 +1,6 @@
 # if PWD changed, execute ls
 
-function auto_ls() {
+function _auto_ls() {
   printf "\n"
   if [ -x "$(which exa)" ]; then
     exa -a --icons --group-directories-first
@@ -9,4 +9,4 @@ function auto_ls() {
   fi
 }
 
-chpwd_functions=(auto_ls $chpwd_functions)
+chpwd_functions=(_auto_ls $chpwd_functions)

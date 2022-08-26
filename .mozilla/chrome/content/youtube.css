@@ -11,11 +11,14 @@
     #player-container,
     /* Search Bar */
     #container.ytd-masthead.style-scope,
-    /* Left Pane */
-    #sections,
     /* channel banner */
     #channel-header.style-scope,
-    #tabs-inner-container.style-scope {
+    #tabs-inner-container.style-scope,
+    /* Left Pane */
+    #sections,
+    /* Mini guide bar */
+    ytd-mini-guide-renderer,
+    ytd-mini-guide-entry-renderer {
         background-color: var(--background) !important;
     }
 

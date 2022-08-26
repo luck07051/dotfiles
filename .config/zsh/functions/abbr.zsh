@@ -1,34 +1,33 @@
 # abbreviations function
 
+# TODO
+# highlight support
+# better 'cmd' (syntax) analyze
+
 abbr_cache_file="$HOME/.cache/zsh_abbr"
-# clean file
+# clean file when i open a zsh
 : > $abbr_cache_file
 
 function abbr() {
-  c=${1%%=*}
-  a=${1##*=}
-  echo "$c;$a" >> $abbr_cache_file
+  # "$1" looks like sp="sudo pacman"
+  echo "${1%%=*};${1##*=}" >> $abbr_cache_file
 }
 
-function abbr_expand() {
-  if [ -z "$LBUFFER" ]; then
-    return
-  fi
+function _abbr_expand() {
+  [ -z "$LBUFFER" ] && return
 
-  # abbr only works on after these pattern or beginning of the buffer
-  #   ; | || & && $(
-  # 'then', 'do' not works very well, so i not inclued them in the pattern list
+  # I want abbr only works on 'cmd', meaning abbr not works on 'option'. A
+  # 'cmd' only appear after these patterns ; | || & && $( [ { and beginning of
+  # buffer.
+  # ('then', 'do'... don't works very well on current function, so i not
+  # inclued them in the pattern list)
   local cmd="$(echo $PREBUFFER $LBUFFER | tr -d '\\\n' | tr -d '\n' |
-    sed 's/^.*[;|&\(||\)\(&&\)\($(\)]\s*//g')"
+    sed 's/^.*[;|&\[{(]\s*//g')"
 
-  if [[ ! "$cmd" =~ "^\S*$" ]]; then
-    return
-  fi
+  [[ ! "$cmd" =~ "^\S*$" ]] && return
 
   local abb="$(grep "^$cmd;" $abbr_cache_file | cut -d';' -f2)"
-  if [ -z "$abb" ]; then
-    return
-  fi
+  [ -z "$abb" ] && return
 
   LBUFFER=${LBUFFER%$cmd}
   LBUFFER=$LBUFFER$abb
@@ -36,11 +35,11 @@ function abbr_expand() {
 }
 
 function magic_abbr() {
-  abbr_expand
+  _abbr_expand
   zle .self-insert
 }
 function magic_abbr_return() {
-  abbr_expand
+  _abbr_expand
   zle accept-line
 }
 

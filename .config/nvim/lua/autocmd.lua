@@ -7,3 +7,7 @@ au('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
 au('BufWritePost',
   { pattern = { 'xresources', '.Xresources' },
     command = [[ !xrdb -merge % ]] })
+
+au('BufEnter',
+  { pattern = {'*manuscript/*.txt' },
+    command = [[ set ft=markdown ]] } )

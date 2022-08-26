@@ -1,8 +1,6 @@
 local opt = vim.opt
 local autocmd = vim.api.nvim_create_autocmd
 
-opt.termguicolors = true
-
 opt.ruler = true
 opt.number = true
 -- opt.relativenumber = true
@@ -32,6 +30,7 @@ opt.shiftround = true
 opt.wildmenu = true
 opt.wildignorecase = true
 opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
+opt.path:append('**')
 opt.pumheight = 10
 -- opt.pumblend = 10 -- semi-transparent popupmenu
 
@@ -42,8 +41,12 @@ opt.showbreak = '↪'
 -- opt.listchars = { tab = '» ', eol = '↲', trail = '_' }
 
 -- Msic --
+opt.splitbelow = true
+opt.splitright = true
+-- opt.inccommand = 'split'
+opt.termguicolors = true
 opt.swapfile = false
-opt.path:append('**')
+
 vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column
 vim.fn.matchadd('ColorColumn', '\\s$', 100)     -- Show extra space
 

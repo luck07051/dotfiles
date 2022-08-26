@@ -1,0 +1,3 @@
+#!/bin/sh
+
+dmenu -n -p "RUN" | ${SHELL:-/bin/sh}

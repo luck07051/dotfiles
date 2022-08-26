@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# st sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"
+
+st -n "fzfmenu" -t "fzfmenu" -z 20 \
+  sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"

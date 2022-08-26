@@ -2,6 +2,7 @@ unsetopt autocd beep        # No beep sound
 set -o ignoreeof            # Prevent <C-D> to colse window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
+# The function
 function zsh_add_fun() { #{{{
   file="$ZDOTDIR/functions/$1.zsh"
   if [ -f "$file" ]; then
@@ -57,8 +58,6 @@ zsh_add_fun lf
 zsh_add_fun nvim_man
 zsh_add_fun dir_mark
 # zsh_add_fun fzf_local
-zsh_add_fun to_parent_dir
-zsh_add_fun stack_buf
 zsh_add_fun yank
 # zsh_add_fun auto_ls
 

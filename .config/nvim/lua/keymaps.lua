@@ -2,23 +2,24 @@
 Keymap = vim.keymap.set     -- This have default noremap = true
 Silent = { noremap = true, silent = true }
 
+--
+-- Keymap('n', '', ':w !sudo tee %<CR>')
+
 -- Make space as leader key --
 Keymap('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Resource config --
-Keymap('n', '<F5>', ':source %<CR>:nohlsearch<CR>', Silent)
-
 -- Change default key behavior --
-Keymap('', 'Y', 'y$')  -- not needed for neovim, but...
+Keymap('', 'Y', 'y$')  -- didn;t needed for neovim, but...
 -- Swap ; and :
 Keymap('', ';', ':')
 Keymap('', ':', ';')
 Keymap('n', 'q;', 'q:')
 -- Change method do not change register
 Keymap('', 'c', '"_c')
-Keymap('', 'C', '"_C')
+Keymap('', '<C-E>', '3<C-E>')
+Keymap('', '<C-Y>', '3<C-Y>')
 
 -- Delete with black hole --
 Keymap('', '<Leader>d', '"_d')
@@ -29,6 +30,8 @@ Keymap('', '<Leader>y', '"+y')
 Keymap('', '<Leader>Y', '"+y$')
 Keymap('', '<Leader>p', '"+p')
 Keymap('', '<Leader>P', '"+P')
+-- Copy all file to clipboard --
+Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 -- Paste in visual mode but not change register --
 Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
@@ -37,24 +40,32 @@ Keymap('v', 'gp', '"_d"+P')
 Keymap('n', 'R', '!!$SHELL<CR>')
 Keymap('v', 'R', '!$SHELL<CR>')
 
--- Keymap('n', '', ':w !sudo tee %<CR>')
-
--- Copy all file to clipboard --
-Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
-
 -- Cancel search highlight --
 Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
+
+-- Spell check --
+Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Terminal --
 Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
 Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
-Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
+-- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
-Keymap('n', '<Leader>t', ':belowright 15%sp term://$SHELL<CR>', Silent)
-Keymap('n', '<Leader>v', '<C-W><C-J>a<Up><CR><C-\\><C-N>G<C-w><C-K>', Silent)
-
-
-Keymap('t', '<C-R>', [[<C-\><C-N>" nr2char(getchar()) pi]], {expr=true, silent=true})
+-- Create a terminal if not have one --
+Keymap('n', '<Leader>tt', function() vim.cmd [[
+  if !exists("t:terminal_id") || !win_gotoid(t:terminal_id)
+    belowright 15%split term://$SHELL
+    let t:terminal_id = win_getid()
+  endif
+]] end, Silent)
+-- Goto terminal and exec last command --
+Keymap('n', '<Leader>te', function() vim.cmd [[
+  let t:cur_win_id = win_getid()
+  if exists("t:terminal_id") && win_gotoid(t:terminal_id)
+    call win_gotoid(t:terminal_id)
+    call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>\<C-W>p")
+  endif
+]] end, Silent)
 
 -- Navigation windows --
 Keymap('n', '<A-h>', '<C-w>h')
@@ -69,8 +80,20 @@ Keymap('t', '<A-h>', '<C-\\><C-N><C-w>h')
 Keymap('t', '<A-j>', '<C-\\><C-N><C-w>j')
 Keymap('t', '<A-k>', '<C-\\><C-N><C-w>k')
 Keymap('t', '<A-l>', '<C-\\><C-N><C-w>l')
+
+-- Resize windows --
+Keymap('n', '<A-H>', '3<C-w><')
 Keymap('n', '<A-J>', '3<C-w>+')
 Keymap('n', '<A-K>', '3<C-w>-')
+Keymap('n', '<A-L>', '3<C-w>>')
+Keymap('i', '<A-H>', '<C-\\><C-N><C-w><gi')
+Keymap('i', '<A-J>', '<C-\\><C-N><C-w>+gi')
+Keymap('i', '<A-K>', '<C-\\><C-N><C-w>-gi')
+Keymap('i', '<A-L>', '<C-\\><C-N><C-w>>gi')
+Keymap('t', '<A-H>', '<C-\\><C-N><C-w><gi')
+Keymap('t', '<A-J>', '<C-\\><C-N><C-w>+i')
+Keymap('t', '<A-K>', '<C-\\><C-N><C-w>-i')
+Keymap('t', '<A-L>', '<C-\\><C-N><C-w>>i')
 
 -- Switch conceal --
 Keymap("n", "<Leader>c", function()

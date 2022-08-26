@@ -1,9 +1,9 @@
 zsh_add_fun abbr
 # zsh_add_plug "olets/zsh-abbr"
-# alias abbr="abbr -S --quiet"
 
 abbr sp="sudo pacman"
 abbr v="$EDITOR"
+abbr vim="$EDITOR"
 abbr ww="vim ~/vimwiki/index.md"
 abbr n="vim ~/notes/note.norg"
 abbr c="config"
@@ -33,7 +33,8 @@ alias mkdir="mkdir -pv"
 
 # ls
 if [ -x "$(command -v exa)" ]; then
-  alias ls="export COLUMNS=80; exa -a --icons --group-directories-first"
+  alias ls='[ "$COLUMNS" -gt "80" ] && export COLUMNS=80;
+    exa -a --icons --group-directories-first'
   alias ll="exa -al --icons --group-directories-first --git -H"
 fi
 
@@ -54,5 +55,3 @@ alias grep="grep --color=auto"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 # yarn
 alias yarn="yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config'"
-
-alias eee="word 'some' word'space'"
