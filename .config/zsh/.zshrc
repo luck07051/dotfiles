@@ -2,7 +2,7 @@ unsetopt autocd beep        # No beep sound
 set -o ignoreeof            # Prevent <C-D> to colse window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
-# The function
+# The function #
 function zsh_add_fun() { #{{{
   file="$ZDOTDIR/functions/$1.zsh"
   if [ -f "$file" ]; then
@@ -29,7 +29,7 @@ function zsh_add_plug() { #{{{
 # Auto Complete #
 autoload -U compinit
 compinit
-_comp_options+=(globdots)   # Include hidden files
+_comp_options+=(globdots)           # Include hidden files
 zstyle ":completion:*" menu yes select
 # Case insensitive
 zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
@@ -40,7 +40,7 @@ export KEYTIMEOUT=1
 bindkey "^?" backward-delete-char   # Let backspace work normal
 bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 
-# Edit line in vim with ctrl-e:
+# Edit line in vim by ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 bindkey -M vicmd '^e' edit-command-line
@@ -71,25 +71,19 @@ zsh_add_plug "zsh-users/zsh-syntax-highlighting"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#444444"
 
 
-
-
-
-
-
-
-function sconda() {
-  # >>> conda initialize >>>
-  # !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/home/ui/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
-  else
-      if [ -f "/home/ui/anaconda3/etc/profile.d/conda.sh" ]; then
-          . "/home/ui/anaconda3/etc/profile.d/conda.sh"
-      else
-          export PATH="/home/ui/anaconda3/bin:$PATH"
-      fi
-  fi
-  unset __conda_setup
-  # <<< conda initialize <<<
-}
+# function sconda() {
+#   # >>> conda initialize >>>
+#   # !! Contents within this block are managed by 'conda init' !!
+#   __conda_setup="$('/home/ui/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#   if [ $? -eq 0 ]; then
+#       eval "$__conda_setup"
+#   else
+#       if [ -f "/home/ui/anaconda3/etc/profile.d/conda.sh" ]; then
+#           . "/home/ui/anaconda3/etc/profile.d/conda.sh"
+#       else
+#           export PATH="/home/ui/anaconda3/bin:$PATH"
+#       fi
+#   fi
+#   unset __conda_setup
+#   # <<< conda initialize <<<
+# }

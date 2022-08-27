@@ -7,7 +7,7 @@
 prompts_height=1
 if [ "$1" = "-p" ]; then
   prompts_height="$2"
-  shift 2
+  ph=$((prompts_height - 1))
 fi
 
 tmpfile=$(mktemp /tmp/st-cmd-output.XXXXXX)
@@ -19,7 +19,13 @@ chosen="$(grep -F "$ps1" "$tmpfile" | sed '$ d' | tac | dmenu -p "Copy which com
 eps1="$(echo "$ps1" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
 
 if [ "$prompts_height" = 1 ]; then
+
   awk "/^$chosen$/{p=1;print;next} p&&/$eps1/{p=0};p" "$tmpfile" | xclip -selection clipboard
+
 else
-  awk "/^$chosen$/{p=1;print;next} p&&/$eps1/{p=0};p" "$tmpfile" | xclip -selection clipboard
+
+  output="$(awk "/^$chosen$/{p=1;print;next} p&&/$eps1/{p=0};p" "$tmpfile" | head -n -"$ph")"
+  head="$(grep "$chosen" "$tmpfile" -B "$ph" | head -n -"$ph" )"
+  printf "%s%s" "$head" "$output"  | xclip -selection clipboard
+
 fi

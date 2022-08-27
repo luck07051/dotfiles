@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# tmpfile=$(mktemp /tmp/fzf-cd.XXXXXX)
+# trap 'rm "$tmpfile"' 0 1 15
+cache_file="$HOME/.cache/fzf_cd_cache_file"
+
+save_path() {
+  printf "%s\n" "$1" >> "$cache_file"
+}
+
+reload() {
+  p="$(tr '\n' '/' < "$cache_file")"
+  if [ -d "$p" ]; then
+    /bin/ls -A --group-directories-first "$p"
+  else
+    kill "$(pidof fzf)"
+  fi
+}
+
+if [ -n "$1" ]; then
+  "$@"
+else
+  # clean cache file
+  : > "$cache_file"
+
+  /bin/ls -A --group-directories-first |
+    fzf --bind '/:execute(fzf_cd save_path {})+reload(fzf_cd reload)+clear-query+first' \
+      --bind 'enter:execute(fzf_cd save_path {})+accept' \
+      --bind 'backward-eof:abort' >/dev/null
+
+  p="$(tr '\n' '/' < "$cache_file")"
+  if [ -n "$p" ]; then
+    if [ -d "$p" ]; then
+      cd "$p"
+    else
+      cd "$(dirname "$p")"
+      file="$(basename "$p")"
+      $EDITOR "$file"
+    fi
+  fi
+fi

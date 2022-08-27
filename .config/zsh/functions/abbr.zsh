@@ -26,7 +26,8 @@ function _abbr_expand() {
 
   [[ ! "$cmd" =~ "^\S*$" ]] && return
 
-  local abb="$(grep "^$cmd;" $abbr_cache_file | cut -d';' -f2)"
+  ecmd="$(echo "$cmd" | sed 's/[^^]/[&]/g; s/\^/\\^/g')"
+  local abb="$(grep "^$ecmd;" $abbr_cache_file | cut -d';' -f2)"
   [ -z "$abb" ] && return
 
   LBUFFER=${LBUFFER%$cmd}
