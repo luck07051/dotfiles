@@ -173,10 +173,10 @@ return packer.startup(function(use)
     config = conf 'gitsigns',
   }
 
-  use { -- stabilize buffer on window open/close --
-    'luukvbaal/stabilize.nvim',
-    config = function() require("stabilize").setup() end,
-  }
+  -- use { -- stabilize buffer on window open/close --
+  --   'luukvbaal/stabilize.nvim',
+  --   config = function() require("stabilize").setup() end,
+  -- }
 
   use { -- Display color on color code --
     'norcalli/nvim-colorizer.lua',

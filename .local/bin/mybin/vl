@@ -30,4 +30,5 @@ switch() {
 
 "$@"
 
+# update bar
 kill -36 "$(pidof dwm)"

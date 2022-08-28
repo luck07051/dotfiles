@@ -69,6 +69,7 @@ zsh_add_plug "zsh-users/zsh-autosuggestions"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#444444"
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="magic_abbr_return"
 
 
 # function sconda() {

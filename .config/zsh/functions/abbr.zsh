@@ -36,9 +36,17 @@ function _abbr_expand() {
 }
 
 function magic_abbr() {
-  _abbr_expand
-  zle .self-insert
+  if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
+    # if buffer empty, toggle fzf_cd
+    # not part of abbr
+    . fzf_cd
+    zle reset-prompt; zle -R
+  else
+    _abbr_expand
+    zle .self-insert
+  fi
 }
+
 function magic_abbr_return() {
   _abbr_expand
   zle accept-line
@@ -48,5 +56,4 @@ zle -N magic_abbr
 zle -N magic_abbr_return
 
 bindkey -M viins ' ' magic_abbr
-bindkey -M viins ';' magic_abbr
 bindkey -M viins '^M' magic_abbr_return

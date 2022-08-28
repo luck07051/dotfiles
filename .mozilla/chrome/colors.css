@@ -1,7 +1,7 @@
 
 :root{
   --background: #121212 !important;
-  --foreground: #d0d0d0 !important;
+  --foreground: #D0D0D0 !important;
   --primary: #FFB9DC !important;
 
   --background-90tran: color-mix(in srgb, var(--background) 90%, transparent);

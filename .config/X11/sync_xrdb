@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Get color from xresources
+color0=$(xrdb -get color0)
+color1=$(xrdb -get color1)
+color2=$(xrdb -get color2)
+color3=$(xrdb -get color3)
+color4=$(xrdb -get color4)
+color5=$(xrdb -get color5)
+color6=$(xrdb -get color6)
+color7=$(xrdb -get color7)
+bg=$(xrdb -get background)
+fg=$(xrdb -get foreground)
+pri=$(xrdb -get primary)
+
+
+# Vim Color
+vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
+
+sed -i "s/\['#\S\{6\}',\ '1'\]/['$color1', '1']/" "$vim_color_file"
+sed -i "s/\['#\S\{6\}',\ '2'\]/['$color2', '2']/" "$vim_color_file"
+sed -i "s/\['#\S\{6\}',\ '3'\]/['$color3', '3']/" "$vim_color_file"
+sed -i "s/\['#\S\{6\}',\ '4'\]/['$color4', '4']/" "$vim_color_file"
+sed -i "s/\['#\S\{6\}',\ '5'\]/['$color5', '5']/" "$vim_color_file"
+sed -i "s/\['#\S\{6\}',\ '6'\]/['$color6', '6']/" "$vim_color_file"
+echo "sync vim color!"
+
+
+# Firefox chrome
+firefox_color_file="$HOME/.mozilla/chrome/colors.css"
+
+sed -i "s/--background:\ #\S\{6\}/--background: $bg/" "$firefox_color_file"
+sed -i "s/--foreground:\ #\S\{6\}/--foreground: $fg/" "$firefox_color_file"
+sed -i "s/--primary:\ #\S\{6\}/--primary: $pri/"      "$firefox_color_file"
+echo "sync firefox chrome color!"
+
+
+# Alacritty
+alacritty_color_file="$XDG_CONFIG_HOME/alacritty/alacritty.yml"
+
+sed -i "s/background:\ '#\S\{6\}'/background: '$bg'/" "$alacritty_color_file"
+sed -i "s/foreground:\ '#\S\{6\}'/foreground: '$fg'/" "$alacritty_color_file"
+sed -i "s/cursor:\ '#\S\{6\}'/cursor: '$fg'/"         "$alacritty_color_file"
+
+sed -i "s/\(black:\s*\)'#\S\{6\}'/\1'$color0'/"       "$alacritty_color_file"
+sed -i "s/\(red:\s*\)'#\S\{6\}'/\1'$color1'/"         "$alacritty_color_file"
+sed -i "s/\(green:\s*\)'#\S\{6\}'/\1'$color2'/"       "$alacritty_color_file"
+sed -i "s/\(yellow:\s*\)'#\S\{6\}'/\1'$color3'/"      "$alacritty_color_file"
+sed -i "s/\(blue:\s*\)'#\S\{6\}'/\1'$color4'/"        "$alacritty_color_file"
+sed -i "s/\(magenta:\s*\)'#\S\{6\}'/\1'$color5'/"     "$alacritty_color_file"
+sed -i "s/\(cyan:\s*\)'#\S\{6\}'/\1'$color6'/"        "$alacritty_color_file"
+sed -i "s/\(white:\s*\)'#\S\{6\}'/\1'$color7'/"       "$alacritty_color_file"
+
+sed -i "s/\(opacity:\s*\).*/\1$(xrdb -get alacritty.alpha)/" "$alacritty_color_file"
+sed -i "s/\(family:\s*\).*/\1$(xrdb -get alacritty.font)/"     "$alacritty_color_file"
+echo "sync alacritty color!"
