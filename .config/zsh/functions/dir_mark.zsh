@@ -2,7 +2,7 @@
 
 export dirmarks=~/dirmarks
 
-function dir_mark() {
+function _dirmark() {
   # target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)
   target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | fzf)
 
@@ -18,10 +18,10 @@ function dir_mark() {
   zle reset-prompt; zle -R
 }
 
-function magic_dir_mark() {
+function _dirmark_keybind() {
   # if buf is empty, press key will toggle dir_mark()
-  if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
-    dir_mark
+  if [ -z "$BUFFER$PREBUFFER" ]; then
+    _dirmark
   else
     zle .self-insert
   fi
@@ -31,8 +31,7 @@ function add_dir() {
   echo $PWD | sed "s#$HOME#~#" >> $dirmarks
 }
 
-zle -N dir_mark
-zle -N magic_dir_mark
+zle -N _dirmark_keybind
 
-bindkey -M viins ';' magic_dir_mark
-bindkey -M vicmd ';' dir_mark
+bindkey -M viins ';' _dirmark_keybind
+bindkey -M vicmd ';' _dirmark_keybind

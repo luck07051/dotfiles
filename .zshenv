@@ -30,7 +30,7 @@ export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
 
 # FZF
 export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
-    --color=pointer:5,gutter:-1,prompt:7 --info=default "
+    --color=pointer:5,gutter:-1,prompt:15 --info=default"
 export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
@@ -72,3 +72,4 @@ export CUDA_CACHE_PATH=$XDG_CACHE_HOME/nv
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
 # conda
 export CONDARC=$XDG_CONFIG_HOME/conda/condarc
+export test5="test"

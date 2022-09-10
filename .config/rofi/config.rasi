@@ -17,4 +17,4 @@ configuration {
         ml-row-down: "ScrollDown";
 }
 
-@theme "dmenu"
+@theme "ui_theme"

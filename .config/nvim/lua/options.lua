@@ -3,9 +3,9 @@ local autocmd = vim.api.nvim_create_autocmd
 
 opt.ruler = true
 opt.number = true
--- opt.relativenumber = true
+opt.relativenumber = false
 opt.showcmd = true
-opt.laststatus = 3
+opt.laststatus = 3    -- global statusline
 opt.cursorline = true
 opt.scrolloff = 5
 opt.signcolumn = 'yes'
@@ -32,7 +32,7 @@ opt.wildignorecase = true
 opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
 opt.path:append('**')
 opt.pumheight = 10
--- opt.pumblend = 10 -- semi-transparent popupmenu
+-- opt.pumblend = 10    -- semi-transparent popupmenu
 
 -- Special Char Visualize --
 opt.linebreak = true
@@ -46,6 +46,8 @@ opt.splitright = true
 -- opt.inccommand = 'split'
 opt.termguicolors = true
 opt.swapfile = false
+opt.updatetime = 100
+opt.fillchars='eob: '    -- hide '~' for blank line
 
 vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column
 vim.fn.matchadd('ColorColumn', '\\s$', 100)     -- Show extra space

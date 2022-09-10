@@ -1,11 +1,8 @@
 zsh_add_fun abbr
 # zsh_add_plug "olets/zsh-abbr"
 
-bindkey -M viins -s "^F" "^u. fzf_cd\n"
-
 abbr sp="sudo pacman"
 abbr v="$EDITOR"
-abbr vim="$EDITOR"
 abbr ww="vim ~/vimwiki/index.md"
 abbr n="vim ~/notes/note.norg"
 abbr c="config"

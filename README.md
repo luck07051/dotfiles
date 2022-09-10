@@ -7,7 +7,7 @@
 Basic
 ```
 base-devel
-xorg xorg-xinit
+xorg xorg-xinit xwallpaper
 xdg-user-dirs
 alsl-utils
 git
@@ -93,7 +93,7 @@ vlc                 # video viewer
 mpv                 # video viewer
 ```
 
-Dependencie
+Dependency
 ```
 # vim plug markdown perviewer
 yarn
@@ -101,7 +101,7 @@ yarn
 texlive-most
 ```
 
-Nvidea
+Nvidia
 ```
 nvidia
 nvidia-utils
@@ -190,7 +190,7 @@ if config checkout > /dev/null 2>&1; then
 fi
 config config --local status.showUntrackedFiles no
 ```
-or `curl -Lks https://raw.githubusercontent.com/luck07051/dotfiles/main/.local/bin/mybin/config-install | /bin/bash` (tesing yet)
+or `curl -Lks https://raw.githubusercontent.com/luck07051/dotfiles/main/.local/bin/mybin/config-install | /bin/bash` (testing yet)
 
 
 ### [steam](https://www.chrisatmachine.com/Linux/08-steam-on-linux/)

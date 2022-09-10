@@ -1,6 +1,6 @@
 # use fzf select file
 
-function find_root() {
+function _fzflocal_find_root() {
   patterns=(.git _darcs .hg .bzr .svn Makefile package.json)
   dir=$PWD
   while [ $dir != "/" ]; do
@@ -14,8 +14,8 @@ function find_root() {
   done
 }
 
-function fzf_local() {
-  root="$(find_root)"
+function _fzflocal() {
+  root="$(_findroot)"
   if [ -n "$root" ]; then
     target="$(fd -HL -E '.git' -E '.cache' -- . $root |\
       sed "s#$root#...#g" |\
@@ -29,7 +29,7 @@ function fzf_local() {
     if [ -d "$target" ]; then
       cd $target
       # auto ls fix
-      if [ -n "$(echo $chpwd_functions | grep -w "auto_ls")" ]; then
+      if [ -n "$(echo $chpwd_functions | grep -w "_auto_ls")" ]; then
         print "\n"
       fi
     else
@@ -44,20 +44,16 @@ function fzf_local() {
   zle reset-prompt; zle -R
 }
 
-function magic_fzf_local() {
+function _fzflocal_keybind() {
   # if buf is empty, press key will toggle fzf_local()
-  if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
-    fzf_local
+  if [ -z "$BUFFER$PREBUFFER" ]; then
+    _fzflocal
   else
     zle .self-insert
   fi
 }
 
-zle -N fzf_local
-zle -N magic_fzf_local
+zle -N _fzflocal_keybind
 
-
-bindkey -M viins '^f' fzf_local
-bindkey -M vicmd '^f' fzf_local
-bindkey -M viins ' ' magic_fzf_local
-bindkey -M vicmd ' ' fzf_local
+bindkey -M viins ' ' _fzflocal_keybind
+bindkey -M vicmd ' ' _fzflocal_keybind

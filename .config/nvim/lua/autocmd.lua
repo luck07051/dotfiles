@@ -1,5 +1,12 @@
 local au = vim.api.nvim_create_autocmd
 
+au({ 'BufNewFile', 'BufRead' },
+  { pattern = '/*.rasi',
+    command = [[
+      setf css
+      LspStop
+    ]] })
+
 -- Clear nonessential files when leave Tex file
 au('VimLeave', { pattern = '*.tex', command = [[ !latexmk -c % ]] })
 

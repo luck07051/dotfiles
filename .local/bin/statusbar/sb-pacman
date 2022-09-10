@@ -2,12 +2,13 @@
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -t "upgrade" -e sb-popupgrade ;;
-	3) notify-send "$(/usr/bin/pacman -Qu | grep -Fv "[ignored]")" ;;
+	3) notify-send "Packages" "$(/usr/bin/pacman -Qu | grep -Fv "[ignored]")" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 icon=" "
 num=$(pacman -Qu | grep -Fcv "[ignored]")
 
-[ "$num" = "0" ] && exit
-printf "%s%s" "$icon" "$num"
+if [ "$num" != "0" ]; then
+  printf "%s%s" "$icon" "$num"
+fi

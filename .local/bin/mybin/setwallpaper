@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# `setwallpaper`
+#   set wallpaper (put in .xinit or startup propram)
+#
+# `setwallpaper /img/path`
+#   change wallpaper
+#
+# `setwallpaper /img/path -s1`
+#   use `-s` to specify screen
+#
+# `setwallpaper /img/path -t zoom`
+#   use `-t` to specify fill method
+
+wall_dir="$XDG_DATA_HOME/wallpaper"
+[ ! -d "$wall_dir" ] && mkdir -p "$wall_dir"
+
+if [ -n "$1" ]; then
+  screen=0
+  fill="zoom"
+
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -h|--help)
+        echo "no help"
+        exit
+        ;;
+      -s|--screen)
+        screen="$2"
+        shift 2
+        ;;
+      -s*)
+        screen="${1#-s}"
+        shift
+        ;;
+      -f|--fill)
+        fill="$2"
+        shift 2
+        ;;
+      -f*)
+        fill="${1#-f}"
+        shift
+        ;;
+      -*)
+        echo "Unknown option $1"
+        exit 1
+        ;;
+      *)
+        if [ ! -f "$1" ]; then
+          echo "file not exists $1"
+          exit 1
+        elif [ -z "$img" ]; then
+          img="$1"
+          shift
+        else
+          echo "Unknown arg $1"
+          exit 1
+        fi
+        ;;
+    esac
+  done
+
+  # file name look like: 0_zoom.jpg
+  rm -f "$wall_dir"/"$screen"_*
+  cp "$(readlink -f "$img")" "$wall_dir"/"$screen"_"$fill"."${img##*.}"
+fi
+
+# change wallpaper
+for file in "$wall_dir"/*; do
+  file_base=${file##*/}
+  file_base=${file_base%%.*}
+  screen=${file_base%%_*}
+  fill=${file_base##*_}
+  xwallpaper --screen "$screen" --"$fill" "$file"
+done

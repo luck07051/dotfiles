@@ -84,19 +84,19 @@ M.on_attach = function(client, bufnr)
       hi_parameter = "LspSignatureActiveParameter",
     }, bufnr)
 
-    -- Show signature uses echo
-    local current_signature = function()
-      -- if not pcall(require, 'lsp_signature') then return end
-      local sig = require("lsp_signature").status_line(vim.fn.winwidth(0))
-      if not (sig.label == '') then
-        print(sig.label .. '   ' .. sig.hint)
-      end
-    end
-    vim.api.nvim_create_augroup('echo_lsp_sign', {})
-    vim.api.nvim_create_autocmd('InsertCharPre', {
-      group = 'echo_lsp_sign',
-      callback = current_signature
-    })
+    -- -- Show signature uses echo
+    -- local current_signature = function()
+    --   -- if not pcall(require, 'lsp_signature') then return end
+    --   local sig = require("lsp_signature").status_line(vim.fn.winwidth(0))
+    --   if not (sig.label == '') then
+    --     print(sig.label .. '   ' .. sig.hint)
+    --   end
+    -- end
+    -- vim.api.nvim_create_augroup('echo_lsp_sign', {})
+    -- vim.api.nvim_create_autocmd('InsertCharPre', {
+    --   group = 'echo_lsp_sign',
+    --   callback = current_signature
+    -- })
     --}}}
   end
 

@@ -6,6 +6,8 @@ super + ctrl + shift + r
 super + shift + z
   notify-send 'pacman -Syuu completed!' 'this is content, brabra'
 
+super + F12
+  slock
 
 #===== AUDIO =====#
 # {Raise, Low} volume
@@ -36,3 +38,7 @@ XF86AudioMicMute
 # Screenshot
 Print
     flameshot gui
+
+
+super + o
+    menu_bookmark

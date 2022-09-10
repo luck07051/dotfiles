@@ -58,6 +58,7 @@ zsh_add_fun lf
 zsh_add_fun nvim_man
 zsh_add_fun dir_mark
 # zsh_add_fun fzf_local
+zsh_add_fun fzf_cd
 zsh_add_fun yank
 # zsh_add_fun auto_ls
 
@@ -65,12 +66,19 @@ zsh_add_fun yank
 # Plugins #
 zsh_add_plug "Aloxaf/fzf-tab"
 zsh_add_plug "zsh-users/zsh-completions"
-zsh_add_plug "zsh-users/zsh-autosuggestions"
+# zsh_add_plug "zsh-users/zsh-autosuggestions"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#444444"
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="magic_abbr_return"
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
+# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
 
+# add to .zshrc
+bindkey '^X^m' accept-line-swallow
+zle -N accept-line-swallow acceptandswallow
+acceptandswallow() {
+    dwmswallow $WINDOWID
+    zle accept-line
+}
 
 # function sconda() {
 #   # >>> conda initialize >>>

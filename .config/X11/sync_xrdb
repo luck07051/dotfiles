@@ -9,14 +9,31 @@ color4=$(xrdb -get color4)
 color5=$(xrdb -get color5)
 color6=$(xrdb -get color6)
 color7=$(xrdb -get color7)
+color8=$(xrdb -get color8)
+color9=$(xrdb -get color9)
+color10=$(xrdb -get color10)
+color11=$(xrdb -get color11)
+color12=$(xrdb -get color12)
+color13=$(xrdb -get color13)
+color14=$(xrdb -get color14)
+color15=$(xrdb -get color15)
 bg=$(xrdb -get background)
 fg=$(xrdb -get foreground)
 pri=$(xrdb -get primary)
 
+bakloc="$XDG_DATA_HOME/backup/x_xync_xrdb"
+if [ ! -d "$bakloc" ]; then
+  mkdir -p "$bakloc"
+fi
+backup() {
+  cp "$1" "$bakloc/$(basename "$1").bak"
+}
 
-# Vim Color
+# Vim Color {{{
 vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
+backup "$vim_color_file"
 
+# ['#XXXXXX', '1'] -> ['#YYYYYY', '1']
 sed -i "s/\['#\S\{6\}',\ '1'\]/['$color1', '1']/" "$vim_color_file"
 sed -i "s/\['#\S\{6\}',\ '2'\]/['$color2', '2']/" "$vim_color_file"
 sed -i "s/\['#\S\{6\}',\ '3'\]/['$color3', '3']/" "$vim_color_file"
@@ -24,33 +41,70 @@ sed -i "s/\['#\S\{6\}',\ '4'\]/['$color4', '4']/" "$vim_color_file"
 sed -i "s/\['#\S\{6\}',\ '5'\]/['$color5', '5']/" "$vim_color_file"
 sed -i "s/\['#\S\{6\}',\ '6'\]/['$color6', '6']/" "$vim_color_file"
 echo "sync vim color!"
+# }}}
 
-
-# Firefox chrome
+# Firefox chrome {{{
 firefox_color_file="$HOME/.mozilla/chrome/colors.css"
+backup "$firefox_color_file"
 
+# --background: #XXXXXX -> --background: #YYYYYY
 sed -i "s/--background:\ #\S\{6\}/--background: $bg/" "$firefox_color_file"
 sed -i "s/--foreground:\ #\S\{6\}/--foreground: $fg/" "$firefox_color_file"
 sed -i "s/--primary:\ #\S\{6\}/--primary: $pri/"      "$firefox_color_file"
 echo "sync firefox chrome color!"
+# }}}
 
-
-# Alacritty
+# Alacritty {{{
 alacritty_color_file="$XDG_CONFIG_HOME/alacritty/alacritty.yml"
+backup "$alacritty_color_file"
 
+# background: '#XXXXXX' -> background: '#YYYYYY'
 sed -i "s/background:\ '#\S\{6\}'/background: '$bg'/" "$alacritty_color_file"
 sed -i "s/foreground:\ '#\S\{6\}'/foreground: '$fg'/" "$alacritty_color_file"
 sed -i "s/cursor:\ '#\S\{6\}'/cursor: '$fg'/"         "$alacritty_color_file"
 
-sed -i "s/\(black:\s*\)'#\S\{6\}'/\1'$color0'/"       "$alacritty_color_file"
-sed -i "s/\(red:\s*\)'#\S\{6\}'/\1'$color1'/"         "$alacritty_color_file"
-sed -i "s/\(green:\s*\)'#\S\{6\}'/\1'$color2'/"       "$alacritty_color_file"
-sed -i "s/\(yellow:\s*\)'#\S\{6\}'/\1'$color3'/"      "$alacritty_color_file"
-sed -i "s/\(blue:\s*\)'#\S\{6\}'/\1'$color4'/"        "$alacritty_color_file"
-sed -i "s/\(magenta:\s*\)'#\S\{6\}'/\1'$color5'/"     "$alacritty_color_file"
-sed -i "s/\(cyan:\s*\)'#\S\{6\}'/\1'$color6'/"        "$alacritty_color_file"
-sed -i "s/\(white:\s*\)'#\S\{6\}'/\1'$color7'/"       "$alacritty_color_file"
+replacement="\
+  normal:
+    black:    '$color0'
+    red:      '$color1'
+    green:    '$color2'
+    yellow:   '$color3'
+    blue:     '$color4'
+    magenta:  '$color5'
+    cyan:     '$color6'
+    white:    '$color7'
 
+  bright:
+    black:    '$color8'
+    red:      '$color9'
+    green:    '$color10'
+    yellow:   '$color11'
+    blue:     '$color12'
+    magenta:  '$color13'
+    cyan:     '$color14'
+    white:    '$color15'
+"
+# delete color block
+sed -i "/^colors:/,\$ { /normal:$/,/white:$/ d }" "$alacritty_color_file"
+printf '%s' "$replacement" >> "$alacritty_color_file"
+
+# opacity: '#XXXXXX' -> opacity: '#YYYYYY'
 sed -i "s/\(opacity:\s*\).*/\1$(xrdb -get alacritty.alpha)/" "$alacritty_color_file"
 sed -i "s/\(family:\s*\).*/\1$(xrdb -get alacritty.font)/"     "$alacritty_color_file"
 echo "sync alacritty color!"
+# }}}
+
+# Picom {{{
+picom_file="$XDG_CONFIG_HOME/picom/picom.conf"
+backup "$picom_file"
+
+# transition-length = XX -> transition-length = YY
+sed -i "s/\(^transition-length\s*=\s*\)\S*;/\1$(xrdb -get picom.transition_length);/" "$picom_file"
+sed -i "s/\(^corner-radius\s*=\s*\)\S*;/\1$(xrdb -get picom.corner_radius);/"         "$picom_file"
+sed -i "s/\(^inactive-dim\s*=\s*\)\S*;/\1$(xrdb -get picom.inactive_dim);/"           "$picom_file"
+sed -i "s/\(^inactive-opacity\s*=\s*\)\S*;/\1$(xrdb -get picom.inactive_opacity);/"   "$picom_file"
+echo "sync picom!"
+# }}}
+
+# refresh WM
+pidof dwm >/dev/null && xdotool key super+F5

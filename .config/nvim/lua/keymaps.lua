@@ -2,7 +2,6 @@
 Keymap = vim.keymap.set     -- This have default noremap = true
 Silent = { noremap = true, silent = true }
 
---
 -- Keymap('n', '', ':w !sudo tee %<CR>')
 
 -- Make space as leader key --
@@ -11,7 +10,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Change default key behavior --
-Keymap('', 'Y', 'y$')  -- didn;t needed for neovim, but...
+Keymap('', 'Y', 'y$')
 -- Swap ; and :
 Keymap('', ';', ':')
 Keymap('', ':', ';')
@@ -40,9 +39,6 @@ Keymap('v', 'gp', '"_d"+P')
 Keymap('n', 'R', '!!$SHELL<CR>')
 Keymap('v', 'R', '!$SHELL<CR>')
 
--- Cancel search highlight --
-Keymap('n', '<Leader>nh', ':nohlsearch<CR>', Silent)
-
 -- Spell check --
 Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
@@ -63,7 +59,7 @@ Keymap('n', '<Leader>te', function() vim.cmd [[
   let t:cur_win_id = win_getid()
   if exists("t:terminal_id") && win_gotoid(t:terminal_id)
     call win_gotoid(t:terminal_id)
-    call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>\<C-W>p")
+    call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>G\<C-W>p")
   endif
 ]] end, Silent)
 

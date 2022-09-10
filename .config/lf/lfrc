@@ -12,22 +12,6 @@ set shell zsh
 # Basic #{{{
 cmd q %{{ lf -remote "send $id quit" }}
 
-cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        # Text
-        text/* | application/json | inode/x-empty | application/x-elc)
-            $EDITOR "$f";;
-        # PDF
-        application/pdf) zathura "$f" &;;
-        # Image
-        image/*) nsxiv "$f" &;;
-        # font
-        font/*) display "$f" & ;;
-
-        *) xdg-open "$f" ;;
-    esac
-}}
-
 cmd mkdir ${{
     mkdir -p $@
     lf -remote "send $id select \"$1\""
@@ -80,7 +64,7 @@ cmd excutable %{{
 }}
 #}}}
 
-# zoxide {{{
+# zoxide #{{{
 cmd z %{{
     result="$(zoxide query --exclude "${PWD}" -- "$1")"
     lf -remote "send ${id} cd '${result}'"
@@ -124,6 +108,57 @@ cmd fzf_jump_local ${{
 }}
 #}}}
 
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        # Text
+        text/* | application/json | inode/x-empty | application/x-elc)
+            $EDITOR "$f"
+            ;;
+        # PDF
+        application/pdf)
+            zathura "$f" &
+            ;;
+        # Image
+        image/*)
+            nsxiv "$f" &
+            ;;
+        # font
+        font/*)
+            display "$f" &
+            ;;
+        *)
+            xdg-open "$f"
+            ;;
+    esac
+}}
+
+cmd swallow ${{
+    case $(file --mime-type "$f" -bL) in
+        # Text
+        text/* | application/json | inode/x-empty | application/x-elc)
+            $EDITOR "$f"
+            ;;
+        # PDF
+        application/pdf)
+            dwmswallow $WINDOWID
+            zathura "$f" &
+            ;;
+        # Image
+        image/*)
+            dwmswallow $WINDOWID
+            nsxiv "$f" &
+            ;;
+        # font
+        font/*)
+            dwmswallow $WINDOWID
+            display "$f" &
+            ;;
+        *)
+            xdg-open "$f"
+            ;;
+    esac
+}}
+
 # Archive #{{{
 cmd unarchive ${{
   case "$f" in
@@ -148,6 +183,7 @@ map m
 map "'"
 map '"'
 
+map <enter> swallow
 map <esc> clear
 map D delete
 map cd push :z<space>

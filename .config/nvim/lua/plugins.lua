@@ -9,7 +9,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
--- require packer in safe way
 if not pcall(require, 'packer') then return end
 local packer = require 'packer'
 
@@ -21,55 +20,74 @@ local packer = require 'packer'
 --   augroup end
 -- ]]
 
--- init
--- packer.init {
---   display = {
---     open_fn = function()
---       return require('packer.util').float { border = 'rounded' }
---     end,
---   },
--- }
-
 local function conf(name)
   return require(string.format('plug.%s', name))
 end
 
 --}}}
 
-return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
+-- https://github.com/pwntester/octo.nvim
+-- Edit and review GitHub issues and pull requests from the comfort of your favorite editor
 
-  use { -- Color --
-    'luck07051/ui-colors',
+-- https://github.com/kevinhwang91/nvim-bqf#quickstart
+-- Better quickfix window in Neovim, polish old quickfix window.
+
+-- https://github.com/danymat/neogen
+-- A better annotation generator. Supports multiple languages and annotation conventions.
+
+-- https://github.com/simrat39/rust-tools.nvim
+-- Tools for better development in rust using neovim's builtin lsp
+
+-- https://github.com/TimUntersberger/neogit
+-- magit for neovim
+
+-- https://github.com/mfussenegger/nvim-dap
+-- Debug Adapter Protocol client implementation for Neovim
+--
+-- https://github.com/rcarriga/nvim-dap-ui
+-- https://github.com/Pocco81/dap-buddy.nvim
+
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+-- Syntax aware text-objects, select, move, swap, and peek support
+
+
+return packer.startup(function(use)
+  use {
+    'wbthomason/packer.nvim'
   }
 
-  use { -- Window manager --
-    'luck07051/dwm.vim',
+  use { -- Speed up startup time --
+    'lewis6991/impatient.nvim'
+  }
+
+  use { -- Color --
+    'luck07051/ui-colors'
   }
 
   use { -- Treesitter --
     'nvim-treesitter/nvim-treesitter',
+    requires = {
+      'nvim-treesitter/playground',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'windwp/nvim-ts-autotag',
+      'RRethy/nvim-treesitter-endwise',
+    },
     config = conf 'treesitter',
     run = ':TSUpdate',
-    requires = {
-      'nvim-treesitter/playground'
-    },
   }
 
   use { -- LSP --
     'neovim/nvim-lspconfig',
-    config = conf 'lsp',
     requires = {
       'williamboman/nvim-lsp-installer',
       'jose-elias-alvarez/null-ls.nvim',
-      -- 'RRethy/vim-illuminate', -- Highlight the keyword under the cursor
       'ray-x/lsp_signature.nvim', -- Function hint
     },
+    config = conf 'lsp',
   }
 
   use { -- CMP --
     'hrsh7th/nvim-cmp',
-    config = conf 'cmp',
     requires = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -77,110 +95,118 @@ return packer.startup(function(use)
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
-      'ray-x/cmp-treesitter'
+      'ray-x/cmp-treesitter',
     },
+    config = conf 'cmp',
   }
 
   use { -- Snipptes --
     'L3MON4D3/LuaSnip',
-    config = conf 'luasnip',
-    requires = {
-      'rafamadriz/friendly-snippets',
-    },
+    config = conf 'luasnip'
   }
 
   use { -- Fuzzy finder --
     'nvim-telescope/telescope.nvim',
-    config = conf 'telescope',
     requires = {
       'nvim-lua/plenary.nvim',
-      {
-        "ahmedkhalf/project.nvim",
-        config = function() require("project_nvim").setup {} end,
-      },
     },
+    config = conf 'telescope',
+  }
+
+  use{ -- Auto cd to project dir --
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {}
+    end,
   }
 
   use { -- Status Line --
     'nvim-lualine/lualine.nvim',
-    config = conf 'lualine',
     requires = {
       'kyazdani42/nvim-web-devicons',
     },
+    config = conf 'lualine',
   }
 
   use { -- Note --
     'nvim-neorg/neorg',
-    config = conf 'neorg',
     requires = "nvim-lua/plenary.nvim",
+    config = conf 'neorg',
   }
-
-  -- use { -- Note --
-  --   'vimwiki/vimwiki',
-  --   config = function()
-  --    vim.cmd[[
-  --     " use markdown syntax
-  --     let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-  --     " makes vimwiki markdown links ad [text](text.md) instead of [text](text)
-  --     let g:vimwiki_markdown_link_ext = 1
-  --   ]]
-  --  end
-  -- }
 
   -- use { -- Tmux --
   --   "aserowy/tmux.nvim",
-  --   config = function()
-  --     require("tmux").setup({
-  --       copy_sync = {
-  --         enable = true,
-  --       },
-  --       navigation = {
-  --         cycle_navigation = false,
-  --         enable_default_keybindings = true,
-  --       },
-  --       resize = {
-  --         enable_default_keybindings = true,
-  --         resize_step_x = 4,
-  --         resize_step_y = 2,
-  --       }
-  --     })
-  --   end,
+  --   config = conf 'tmux'
   -- }
 
   use { -- gc to comment text --
     'numToStr/Comment.nvim',
-    config = function() require('Comment').setup() end,
+    config = function() require('Comment').setup() end
   }
 
-  use { -- Add ys,cs,ds method --
-    'tpope/vim-surround',
-    requires = {
-      'tpope/vim-repeat',
-    },
+  use { -- Surround selections --
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
   }
 
-  use { -- Use <C-a>/<C-x> on date --
-    'tpope/vim-speeddating',
+  use { -- Enhanced <C-A> and <C-X> --
+    'monaqa/dial.nvim',
+    config = conf 'dial'
+  }
+
+  use {
+    'junegunn/vim-easy-align',
+    config = function()
+      Keymap('n', 'ga', '<Plug>(EasyAlign)')
+      Keymap('x', 'ga', '<Plug>(EasyAlign)')
+    end
   }
 
   use { -- <C-t> to use terminal --
     'akinsho/toggleterm.nvim',
-    config = conf 'toggleterm',
+    config = conf 'toggleterm'
   }
 
   use { -- git sign --
     'lewis6991/gitsigns.nvim',
-    config = conf 'gitsigns',
+    config = conf 'gitsigns'
   }
 
-  -- use { -- stabilize buffer on window open/close --
-  --   'luukvbaal/stabilize.nvim',
-  --   config = function() require("stabilize").setup() end,
-  -- }
+  use { -- scroll animation --
+    'karb94/neoscroll.nvim',
+    config = conf 'neoscroll'
+  }
+
+  use { -- Spell checker with TS support --
+    'lewis6991/spellsitter.nvim',
+    config = function() require('spellsitter').setup() end
+  }
 
   use { -- Display color on color code --
     'norcalli/nvim-colorizer.lua',
-    config = function() require('colorizer').setup() end,
+    config = function() require('colorizer').setup() end
+  }
+
+  use {
+    'ziontee113/color-picker.nvim',
+    config = function()
+      require("color-picker")
+      vim.keymap.set("n", "<C-c>", "<cmd>PickColor<cr>", Silent)
+      vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<cr>", Silent)
+    end
+  }
+
+  use { -- Visualize latex in nvim --
+    'jbyuki/nabla.nvim',
+    config = function()
+      vim.cmd [[nnoremap <leader>na :lua require("nabla").popup()<CR>]]
+      vim.cmd [[nnoremap <leader>nv :lua require("nabla").toggle_virt()<CR>]]
+    end
   }
 
   if packer_bootstrap then

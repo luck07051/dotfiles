@@ -35,10 +35,10 @@ function _abbr_expand() {
   CURSOR=$#LBUFFER
 }
 
-function magic_abbr() {
-  if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
+function _abbr_keybind() {
+  if [ -z "$BUFFER$PREBUFFER" ]; then
     # if buffer empty, toggle fzf_cd
-    # not part of abbr
+    # is not part of abbr
     . fzf_cd
     zle reset-prompt; zle -R
   else
@@ -47,13 +47,13 @@ function magic_abbr() {
   fi
 }
 
-function magic_abbr_return() {
+function _abbr_keybind_return() {
   _abbr_expand
   zle accept-line
 }
 
-zle -N magic_abbr
-zle -N magic_abbr_return
+zle -N _abbr_keybind
+zle -N _abbr_keybind_return
 
-bindkey -M viins ' ' magic_abbr
-bindkey -M viins '^M' magic_abbr_return
+bindkey -M viins ' ' _abbr_keybind
+bindkey -M viins '^M' _abbr_keybind_return

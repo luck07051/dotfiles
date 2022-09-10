@@ -19,16 +19,18 @@ xset -dpms
 pgrep "$BROWSER" > /dev/null || $BROWSER &
 
 while true; do
-  xrdb -merge $XDG_CONFIG_HOME/X11/xresources
+  xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
+  setwallpaper &
 
-  # Start regular thing
-  pgrep "nitrogen" > /dev/null || nitrogen --restore &
-  pgrep "sxhkd" > /dev/null || sxhkd &
-  pgrep "dunst" > /dev/null || dunst &
+  pidof -q sxhkd || sxhkd &
+  pidof -q dunst || dunst &
+  pidof -q unclutter || unclutter &
 
-  # killall picom > /dev/null 2>&1; picom --experimental-backend &
+  # killall picom >/dev/null 2>&1; picom &
 
+  # for `sb-vol`, because my status bar not able to show vol at startup
   (sleep 2s && kill -36 "$(pidof dwm)") &
+
   dwm
 
 done

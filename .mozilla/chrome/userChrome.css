@@ -54,3 +54,12 @@ menupopup, panel{
   --arrowpanel-background: rgba(0,0,0,0) !important;
   --arrowpanel-border-color: rgba(0,0,0,0) !important;
 }
+
+#tabbrowser-arrowscrollbox:not([scrolledtostart])::part(overflow-start-indicator),
+#tabbrowser-arrowscrollbox:not([scrolledtoend])::part(overflow-end-indicator){
+  border-left: none !important;
+}
+
+.tab-background{
+  outline: 0px !important;
+}

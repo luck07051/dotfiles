@@ -60,6 +60,7 @@ return function()
               },
             }
           },
+
           dim_code_blocks = {
             enabled = true,
             width = "content",
@@ -67,6 +68,14 @@ return function()
 
         }
       },
+
+      ["core.keybinds"] = {
+        config = {
+          hook = function(keybinds)
+            keybinds.map("norg", "n", "econ", ":e $XDG_CONFIG_HOME/nvim/lua/plug/neorg.lua<CR>")
+          end,
+        }
+      }
 
     }
   }

@@ -15,14 +15,18 @@
 *.primary:    main
 
 *.font: MesloLGS Nerd Font
-*.alpha: 1
+*.alpha: 0.85
 
+picom.corner_radius: 0
+picom.transition_length: 0
+picom.inactive_dim: 0
+picom.inactive_opacity: 1
 
 dwm.font: MesloLGS Nerd Font:size=9
-dwm.fgalt: base12
-dwm.bgalt: base09
-!dwm.horizpadbar: 4
-!dwm.vertpadbar: 4
+dwm.maincolor: main
+dwm.bgaltcolor: #444444
+dwm.fgaltcolor: #6c6c6c
+dwm.gappx: 0
 
 st.font: MesloLGS Nerd Font:size=11
 st.cursorColor: fg
@@ -63,11 +67,11 @@ Xft.lcdfilter: lcdfilter
 *.color5:    base05
 *.color6:    base06
 *.color7:    base07
-*.color8:    base00
-*.color9:    base01
-*.color10:   base02
-*.color11:   base03
-*.color12:   base04
-*.color13:   base05
-*.color14:   base06
-*.color15:   base07
+*.color8:    base08
+*.color9:    base09
+*.color10:   base10
+*.color11:   base11
+*.color12:   base12
+*.color13:   base13
+*.color14:   base14
+*.color15:   base15

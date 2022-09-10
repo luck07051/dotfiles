@@ -7,21 +7,23 @@ font:
 
 # Background opacity
 window:
-  opacity: 1
+  opacity: 0.85
   padding:
-    x: 8
-    y: 8
+    x: 4
+    y: 4
   dynamic_padding: true
 
 key_bindings:
-  - { key: K,   mods: Alt,   action: ScrollHalfPageUp }
-  - { key: J,   mods: Alt,   action: ScrollHalfPageDown }
-  - { key: H,   mods: Alt,   action: DecreaseFontSize }
-  - { key: L,   mods: Alt,   action: IncreaseFontSize }
-  - { key: Y,   mods: Alt,   action: Copy }
-  - { key: P,   mods: Alt,   action: Paste }
+  - { key: K,   mods: Shift|Control,    action: ScrollHalfPageUp }
+  - { key: J,   mods: Shift|Control,    action: ScrollHalfPageDown }
+  - { key: H,   mods: Shift|Control,    action: DecreaseFontSize }
+  - { key: L,   mods: Shift|Control,    action: IncreaseFontSize }
+  - { key: Y,   mods: Alt,              action: Copy }
+  - { key: P,   mods: Alt,              action: Paste }
 
 
+# place `colors` block in the end (to uses `sync_xrdb` script to automatically
+# sync with xresource)
 colors:
   primary:
     background: '#121212'
@@ -31,13 +33,14 @@ colors:
    text: CellBackground
    cursor: '#D0D0D0'
 
+  # place `normal` and `bright` block in the end of the file
   normal:
     black:    '#121212'
     red:      '#E67E80'
     green:    '#87AF87'
     yellow:   '#EBCB8B'
     blue:     '#81A1C1'
-    magenta:  '#FFB9DC'
+    magenta:  '#ECB2CF'
     cyan:     '#87AFAF'
     white:    '#D0D0D0'
 
@@ -47,6 +50,6 @@ colors:
     green:    '#87AF87'
     yellow:   '#EBCB8B'
     blue:     '#81A1C1'
-    magenta:  '#FFB9DC'
+    magenta:  '#ECB2CF'
     cyan:     '#87AFAF'
     white:    '#D0D0D0'
