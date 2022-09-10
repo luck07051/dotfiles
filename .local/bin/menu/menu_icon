@@ -1,0 +1,12 @@
+#!/bin/sh
+
+chosen="$(dmenu -i -F -p "ICON" -l 20 < ~/.local/share/icons/nerd_icons | cut -d' ' -f1)"
+
+[ -z "$chosen" ] && exit
+
+if [ "$1" = "-a" ]; then
+  xdotool type "$chosen"
+else
+  printf "%s" "$chosen" | xclip -selection clipboard
+  notify-send "'$chosen' copied to clipboard." &
+fi
