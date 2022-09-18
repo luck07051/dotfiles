@@ -22,22 +22,20 @@ picom.transition_length: 0
 picom.inactive_dim: 0
 picom.inactive_opacity: 1
 
-dwm.font: MesloLGS Nerd Font:size=9
 dwm.maincolor: main
 dwm.bgaltcolor: #444444
 dwm.fgaltcolor: #6c6c6c
 dwm.gappx: 0
 
-st.font: MesloLGS Nerd Font:size=11
-st.cursorColor: fg
-st.shell: /bin/zsh
-st.cwscale: 1.05
-
-dmenu.font: MesloLGS Nerd Font:size=10
 dmenu.normfgcolor: fg
 dmenu.normbgcolor: bg
 dmenu.selfgcolor: bg
 dmenu.selbgcolor: main
+
+st.font: MesloLGS Nerd Font:size=11
+st.cursorColor: fg
+st.shell: /bin/zsh
+st.cwscale: 1.05
 
 
 ! for font render

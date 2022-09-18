@@ -5,6 +5,8 @@ return function()
 
   telescope.setup {
     defaults = {
+      -- border = false,
+
       path_display = { 'smart' },
 
       mappings = {
@@ -65,13 +67,16 @@ return function()
       },
     },
     pickers = {
+      -- find_files = {
+      --   theme = "ivy",
+      -- }
     },
     extensions = {
     }
   }
 
   local builtin = '<cmd>lua require("telescope.builtin").'
-  Keymap('n', '<C-f>', builtin .. 'find_files()<cr>', Silent)
+  Keymap('n', '<CR>', builtin .. 'find_files()<cr>', Silent)
   -- Keymap('n', '<Leader>fb', builtin .. 'buffers()<cr>', Silent)
   -- Keymap('n', '<Leader>fl', builtin .. 'grep_string()<cr>', Silent)
 

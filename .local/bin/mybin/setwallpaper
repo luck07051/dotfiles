@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # `setwallpaper`
-#   set wallpaper (put in .xinit or startup propram)
+#   set wallpaper (put in ".xinit" or startup propram)
 #
 # `setwallpaper /img/path`
 #   change wallpaper
@@ -9,13 +9,14 @@
 # `setwallpaper /img/path -s1`
 #   use `-s` to specify screen
 #
-# `setwallpaper /img/path -t zoom`
-#   use `-t` to specify fill method
+# `setwallpaper /img/path -f zoom`
+#   use `-f` to specify fill method
 
-wall_dir="$XDG_DATA_HOME/wallpaper"
+wall_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper"
 [ ! -d "$wall_dir" ] && mkdir -p "$wall_dir"
 
 if [ -n "$1" ]; then
+  # default value
   screen=0
   fill="zoom"
 
@@ -25,6 +26,7 @@ if [ -n "$1" ]; then
         echo "no help"
         exit
         ;;
+
       -s|--screen)
         screen="$2"
         shift 2
@@ -33,6 +35,7 @@ if [ -n "$1" ]; then
         screen="${1#-s}"
         shift
         ;;
+
       -f|--fill)
         fill="$2"
         shift 2
@@ -41,34 +44,40 @@ if [ -n "$1" ]; then
         fill="${1#-f}"
         shift
         ;;
+
       -*)
         echo "Unknown option $1"
         exit 1
         ;;
+
       *)
-        if [ ! -f "$1" ]; then
-          echo "file not exists $1"
+        if [ -n "$img" ]; then
+          echo "Unknow option $1"
           exit 1
-        elif [ -z "$img" ]; then
+        elif [ ! -f "$1" ]; then
+          echo "File not exists $1"
+          exit 1
+        else
           img="$1"
           shift
-        else
-          echo "Unknown arg $1"
-          exit 1
         fi
         ;;
     esac
   done
 
-  # file name look like: 0_zoom.jpg
+  # file name look like `0_zoom.jpg`
+  # which first char `0` stand for screen, `zoom` stand for fill method.
   rm -f "$wall_dir"/"$screen"_*
   cp "$(readlink -f "$img")" "$wall_dir"/"$screen"_"$fill"."${img##*.}"
 fi
 
 # change wallpaper
 for file in "$wall_dir"/*; do
-  file_base=${file##*/}
+  # get base name of `file`
+  file_base="$(basename "$file")"
+  # remove suffix
   file_base=${file_base%%.*}
+
   screen=${file_base%%_*}
   fill=${file_base##*_}
   xwallpaper --screen "$screen" --"$fill" "$file"

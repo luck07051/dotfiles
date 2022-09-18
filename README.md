@@ -300,3 +300,5 @@ sudo usermod -aG libvirt [username]
 ```
 yay -S libxft-bgra
 ```
+
+$x=1+2$

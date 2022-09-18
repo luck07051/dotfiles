@@ -2,7 +2,7 @@ unsetopt autocd beep        # No beep sound
 set -o ignoreeof            # Prevent <C-D> to colse window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
-# The function #
+# The Function
 function zsh_add_fun() { #{{{
   file="$ZDOTDIR/functions/$1.zsh"
   if [ -f "$file" ]; then
@@ -26,7 +26,7 @@ function zsh_add_plug() { #{{{
 }
 #}}}
 
-# Auto Complete #
+# Auto Complete
 autoload -U compinit
 compinit
 _comp_options+=(globdots)           # Include hidden files
@@ -34,33 +34,41 @@ zstyle ":completion:*" menu yes select
 # Case insensitive
 zstyle ":completion:*" matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
 
-# Vim mode #
+# Vim Mode
 bindkey -v
 export KEYTIMEOUT=1
 bindkey "^?" backward-delete-char   # Let backspace work normal
 bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 
-# Edit line in vim by ctrl-e:
+# Edit line in vim by Ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 bindkey -M vicmd '^e' edit-command-line
 
 
 # Alias
-source $ZDOTDIR/alias.zsh
+source "$ZDOTDIR/alias.zsh"
 
-eval "$(starship init zsh)"         # Use starship prompt
-eval "$(zoxide init zsh)"           # Zoxide
+# Prompt
+if [ ! -x "$(which starship)" ]; then
+  eval "$(starship init zsh)"
+else
+  PS1="%B%F{cyan}%~%f%b$ "
+fi
+
+# cd Alternatives
+[ -x "$(which zoxide)" ] &&
+  eval "$(zoxide init zsh)"
 
 
 # Functions #
-zsh_add_fun lf
-zsh_add_fun nvim_man
-zsh_add_fun dir_mark
-# zsh_add_fun fzf_local
-zsh_add_fun fzf_cd
-zsh_add_fun yank
-# zsh_add_fun auto_ls
+zsh_add_fun lf                # lf with several setup
+zsh_add_fun nvim_man          # using nvim to read `man`
+zsh_add_fun dir_mark          # goto dirmark
+# zsh_add_fun fzf_local         # open or cd to selected
+zsh_add_fun fzf_cd            # browser dir with fzf
+zsh_add_fun yank              # yank prev command
+# zsh_add_fun auto_ls           # ls when $PWD changed
 
 
 # Plugins #
@@ -72,7 +80,8 @@ zsh_add_plug "zsh-users/zsh-syntax-highlighting"
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
 # ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
 
-# add to .zshrc
+
+# swallow
 bindkey '^X^m' accept-line-swallow
 zle -N accept-line-swallow acceptandswallow
 acceptandswallow() {

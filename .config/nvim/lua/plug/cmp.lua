@@ -68,8 +68,11 @@ return function()
     },
 
     window = {
+      -- documentation = {
+      --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      -- },
       documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        border = { " ", " ", " ", " ", " ", " ", " ", " " },
       },
     },
 

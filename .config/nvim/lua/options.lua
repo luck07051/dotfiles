@@ -59,10 +59,10 @@ function! MyFoldText() "{{{
     let foldedlinecount = v:foldend - v:foldstart
     let line = getline(v:foldstart)
     " remove mark
-    let line = substitute(line, '\([#"]\|\(--\)\|\(//\)\)\s*{{'.'{\s*$', '', '')
-    " add icon
+    let line = substitute(line, '\([#"]\|\(--\)\|\(//\)\)\?\s*{{'.'{\s*$', '', '')
+    " add icon at beginning
     let line = substitute(line, '^\(\([#" ]\s\)\|\(--\)\|\(//\)\)', ' ', '')
-    " may sure text not too long
+    " make sure text is not too long
     let line = strpart(line, 0, windowwidth - 8 - len(foldedlinecount))
 
     let nucolwidth = &foldcolumn + &number * &numberwidth
@@ -95,7 +95,7 @@ end --}}}
 autocmd('BufWrite', { callback = DeleteExtraSpaces })
 
 -- Setting for terminal mode --
-autocmd('TermOpen', { command = 'startinsert' })
+-- autocmd('TermOpen', { command = 'startinsert' })
 autocmd('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
 
 -- No relativenumber in insert mode --

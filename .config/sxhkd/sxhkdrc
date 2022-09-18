@@ -2,10 +2,6 @@
 super + ctrl + shift + r
     killall sxhkd; sxhkd
 
-# {Raise, Low} volume
-super + shift + z
-  notify-send 'pacman -Syuu completed!' 'this is content, brabra'
-
 super + F12
   slock
 
@@ -20,11 +16,9 @@ super + shift + {u,i}
 {button10, button11}
     vl {up,down} 5
 
-
 # switch output
 super + shift + o
     vl switch
-
 
 # Mute output
 XF86AudioMute
@@ -39,6 +33,8 @@ XF86AudioMicMute
 Print
     flameshot gui
 
-
 super + o
     menu_bookmark
+
+super + t
+    menu_trans

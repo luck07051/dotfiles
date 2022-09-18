@@ -1,5 +1,5 @@
 -- Setup global keymap short hand --
-Keymap = vim.keymap.set     -- This have default noremap = true
+Keymap = vim.keymap.set     -- This command have default option `noremap = true`
 Silent = { noremap = true, silent = true }
 
 -- Keymap('n', '', ':w !sudo tee %<CR>')
@@ -36,8 +36,8 @@ Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
 
 -- Wizard --
-Keymap('n', 'R', '!!$SHELL<CR>')
-Keymap('v', 'R', '!$SHELL<CR>')
+Keymap('n', '<Leader>r', '!!$SHELL<CR>')
+Keymap('v', '<Leader>r', '!$SHELL<CR>')
 
 -- Spell check --
 Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
@@ -48,14 +48,14 @@ Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 -- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
 -- Create a terminal if not have one --
-Keymap('n', '<Leader>tt', function() vim.cmd [[
+Keymap('n', '<Leader>t', function() vim.cmd [[
   if !exists("t:terminal_id") || !win_gotoid(t:terminal_id)
     belowright 15%split term://$SHELL
     let t:terminal_id = win_getid()
   endif
 ]] end, Silent)
 -- Goto terminal and exec last command --
-Keymap('n', '<Leader>te', function() vim.cmd [[
+Keymap('n', '<Leader><Leader>e', function() vim.cmd [[
   let t:cur_win_id = win_getid()
   if exists("t:terminal_id") && win_gotoid(t:terminal_id)
     call win_gotoid(t:terminal_id)

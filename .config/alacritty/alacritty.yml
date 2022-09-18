@@ -22,8 +22,9 @@ key_bindings:
   - { key: P,   mods: Alt,              action: Paste }
 
 
-# place `colors` block in the end (to uses `sync_xrdb` script to automatically
-# sync with xresource)
+
+# place `colors` block in the end (for `sync_xrdb` script to automatically
+# sync colors with xresource)
 colors:
   primary:
     background: '#121212'

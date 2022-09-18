@@ -8,8 +8,8 @@ suspend;    systemctl suspend
 hibernate;  systemctl hibernate
 "
 
-option=$(printf "$list" | sed '/^$/d; s/;\ \+.*//g' | dmenu -i -p "POWER")
+option=$(echo "$list" | sed '/^$/d; s/;\ \+.*//g' | dmenu -i -p "POWER")
 
 [ -n "$option" ] &&
 [ "$(printf "No\nYes" | dmenu -i -p "Do you want to $option?")" = "Yes" ] &&
-  eval "$(printf "$list" | grep "$option" | sed 's/.*;\ \+//g')"
+  eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//g')"
