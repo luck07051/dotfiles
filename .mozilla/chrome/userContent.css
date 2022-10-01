@@ -25,3 +25,11 @@ body.dark {
 /* html, body { */
 /*     background-color: var(--background) !important; */
 /* } */
+
+
+html {
+    background-color: var(--background) !important;
+}
+html, body {
+    background-color: var(--background) !important;
+}

@@ -103,6 +103,9 @@ return packer.startup(function(use)
   use { -- Snipptes --
     'L3MON4D3/LuaSnip',
     config = conf 'luasnip'
+    -- snippets collection
+    -- https://github.com/rafamadriz/friendly-snippets
+    -- https://github.com/molleweide/LuaSnip-snippets.nvim
   }
 
   use { -- Fuzzy finder --
@@ -132,6 +135,16 @@ return packer.startup(function(use)
     'nvim-neorg/neorg',
     requires = "nvim-lua/plenary.nvim",
     config = conf 'neorg',
+  }
+
+  use { -- Live Edit html/css/js --
+    'turbio/bracey.vim',
+    config = function()
+      Keymap('n', '<Leader>le', '<cmd>Bracey<cr>')
+      Keymap('n', '<Leader>ls', '<cmd>BraceyStop<cr>')
+      Keymap('n', '<Leader>lr', '<cmd>BraceyReload<cr>')
+    end,
+    run = 'npm install --prefix server'
   }
 
   -- use { -- Tmux --

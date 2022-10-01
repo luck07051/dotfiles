@@ -22,9 +22,9 @@
         background-color: var(--background) !important;
     }
 
-    /* Topic Botton */
-    #chips-wrapper,
-    #header.ytd-rich-grid-renderer.style-scope {
-        visibility: collapse;
+    /* Topic Botton on Home Page */
+    #primary #header.ytd-rich-grid-renderer {
+        visibility: collapse !important;
+        display: none !important;
     }
 }

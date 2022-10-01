@@ -48,14 +48,14 @@ Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 -- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
 -- Create a terminal if not have one --
-Keymap('n', '<Leader>t', function() vim.cmd [[
+Keymap('n', '<Leader>tt', function() vim.cmd [[
   if !exists("t:terminal_id") || !win_gotoid(t:terminal_id)
     belowright 15%split term://$SHELL
     let t:terminal_id = win_getid()
   endif
 ]] end, Silent)
 -- Goto terminal and exec last command --
-Keymap('n', '<Leader><Leader>e', function() vim.cmd [[
+Keymap('n', '<Leader>te', function() vim.cmd [[
   let t:cur_win_id = win_getid()
   if exists("t:terminal_id") && win_gotoid(t:terminal_id)
     call win_gotoid(t:terminal_id)
@@ -99,3 +99,15 @@ Keymap("n", "<Leader>c", function()
     vim.o.conceallevel = 2
   end
 end, Silent)
+
+
+
+-- Alias --
+local function cabbrev(lhs, rhs)
+ local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"
+  vim.cmd(command:format(lhs, lhs, rhs, lhs))
+end
+cabbrev('sudow', 'w !sudo tee %')
+
+-- nvim_eval
+-- command

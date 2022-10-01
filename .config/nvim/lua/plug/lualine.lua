@@ -1,6 +1,10 @@
 return function()
   local lualine = require "lualine"
 
+  local function tabsize()
+    return ' '..vim.o.tabstop
+  end
+
   lualine.setup {
     options = {
       icons_enabled = true,
@@ -9,16 +13,25 @@ return function()
       section_separators = { left = '', right = '' },
       globalstatus = true,
     },
+
     -- | A | B | C         X | Y | Z |
     sections = {
       lualine_a = { 'mode' },
       lualine_b = { 'filename' },
-      lualine_c = { 'branch', 'diff',
+      lualine_c = {
+        'branch',
+        'diff',
         { 'diagnostics',
-          symbols = { error = '✗', warn = '', info = '', hint = '' } }
+          symbols = { error = '✗', warn = '', info = '', hint = '' }
+        },
       },
 
-      lualine_x = { 'encoding', { 'filetype', colored = false }, '%L' },
+      lualine_x = {
+        tabsize,
+        'encoding',
+        { 'filetype', colored = false },
+        '%L'
+      },
       lualine_y = {},
       lualine_z = { 'progress', 'location' }
     },

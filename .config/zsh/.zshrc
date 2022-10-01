@@ -50,10 +50,10 @@ bindkey -M vicmd '^e' edit-command-line
 source "$ZDOTDIR/alias.zsh"
 
 # Prompt
-if [ ! -x "$(which starship)" ]; then
+if [ -x "$(which starship)" ]; then
   eval "$(starship init zsh)"
 else
-  PS1="%B%F{cyan}%~%f%b$ "
+  PS1="%B%F{cyan}%4~%f%b$ "
 fi
 
 # cd Alternatives

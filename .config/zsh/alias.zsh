@@ -9,6 +9,7 @@ abbr c="config"
 abbr cs="config status"
 abbr cr="cargo run"
 abbr tt="trans :zh-TW"
+abbr py="python3"
 
 # Confirm before overwriting something
 alias cp="cp -iv"
@@ -40,7 +41,6 @@ alias grep="grep --color=auto"
 
 # Fix config file path
 # Use $XINITRC variable if file exists.
-[ -f "$XINITRC" ] &&
-  alias startx="startx $XINITRC"
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 alias yarn="yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config'"
