@@ -58,7 +58,7 @@ fi
 
 # cd Alternatives
 [ -x "$(which zoxide)" ] &&
-  eval "$(zoxide init zsh)"
+  eval "$(zoxide init zsh --cmd cd)"
 
 
 # Functions #

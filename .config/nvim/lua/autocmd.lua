@@ -15,6 +15,7 @@ au('BufWritePost',
   { pattern = { 'xresources', '.Xresources' },
     command = [[ !xrdb -merge %; $XDG_CONFIG_HOME/X11/sync_xrdb ]] })
 
+-- use md syntax highlight to read the book 'pure bash bible'
 au('BufEnter',
   { pattern = {'*manuscript/*.txt' },
     command = [[ set ft=markdown ]] } )

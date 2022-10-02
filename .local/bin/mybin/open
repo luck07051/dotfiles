@@ -1,0 +1,14 @@
+#!/bin/sh
+
+file="$(readlink -f "$1")"
+dir=${file%/*}
+base="${file%.*}"
+ext="${file##*.}"
+
+open_pdf() {
+  zathura "$base.pdf" &
+}
+
+case "$ext" in
+  tex|md) open_pdf ;;
+esac

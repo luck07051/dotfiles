@@ -42,26 +42,14 @@ Keymap('v', '<Leader>r', '!$SHELL<CR>')
 -- Spell check --
 Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
+-- Compiler script --
+Keymap('n', '<Leader>dl', ':!compiler "%:p"<CR>')
+Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
+
 -- Terminal --
 Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
 Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 -- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
-
--- Create a terminal if not have one --
-Keymap('n', '<Leader>tt', function() vim.cmd [[
-  if !exists("t:terminal_id") || !win_gotoid(t:terminal_id)
-    belowright 15%split term://$SHELL
-    let t:terminal_id = win_getid()
-  endif
-]] end, Silent)
--- Goto terminal and exec last command --
-Keymap('n', '<Leader>te', function() vim.cmd [[
-  let t:cur_win_id = win_getid()
-  if exists("t:terminal_id") && win_gotoid(t:terminal_id)
-    call win_gotoid(t:terminal_id)
-    call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>G\<C-W>p")
-  endif
-]] end, Silent)
 
 -- Navigation windows --
 Keymap('n', '<A-h>', '<C-w>h')
@@ -100,14 +88,28 @@ Keymap("n", "<Leader>c", function()
   end
 end, Silent)
 
+-- Create a terminal if not have one --
+Keymap('n', '<Leader>tt', function() vim.cmd [[
+  if !exists("t:terminal_id") || !win_gotoid(t:terminal_id)
+    belowright 15%split term://$SHELL
+    let t:terminal_id = win_getid()
+  endif
+]] end, Silent)
+-- Goto terminal and exec last command --
+Keymap('n', '<Leader>te', function() vim.cmd [[
+  let t:cur_win_id = win_getid()
+  if exists("t:terminal_id") && win_gotoid(t:terminal_id)
+    call win_gotoid(t:terminal_id)
+    call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>G\<C-W>p")
+  endif
+]] end, Silent)
 
 
 -- Alias --
 local function cabbrev(lhs, rhs)
- local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"
+  -- only working on ':' mode
+  local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"
   vim.cmd(command:format(lhs, lhs, rhs, lhs))
 end
 cabbrev('sudow', 'w !sudo tee %')
-
--- nvim_eval
--- command
+cabbrev('za', '!zathura')

@@ -68,7 +68,7 @@ return packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     requires = {
       'nvim-treesitter/playground',
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- 'nvim-treesitter/nvim-treesitter-textobjects',
       'windwp/nvim-ts-autotag',
       'RRethy/nvim-treesitter-endwise',
     },
@@ -103,7 +103,7 @@ return packer.startup(function(use)
   use { -- Snipptes --
     'L3MON4D3/LuaSnip',
     config = conf 'luasnip'
-    -- snippets collection
+    -- snippets collection:
     -- https://github.com/rafamadriz/friendly-snippets
     -- https://github.com/molleweide/LuaSnip-snippets.nvim
   }
@@ -139,6 +139,7 @@ return packer.startup(function(use)
 
   use { -- Live Edit html/css/js --
     'turbio/bracey.vim',
+    ft = { 'html', 'css', 'js' },
     config = function()
       Keymap('n', '<Leader>le', '<cmd>Bracey<cr>')
       Keymap('n', '<Leader>ls', '<cmd>BraceyStop<cr>')
@@ -180,7 +181,7 @@ return packer.startup(function(use)
     end
   }
 
-  use { -- <C-t> to use terminal --
+  use { -- <C-t> to call a terminal --
     'akinsho/toggleterm.nvim',
     config = conf 'toggleterm'
   }

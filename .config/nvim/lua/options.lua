@@ -74,10 +74,10 @@ set foldtext=MyFoldText()
 "}}}
 ]]
 
--- Not auto comment new line --
+-- Disable auto comment new line -
 autocmd('BufEnter', { command = [[set formatoptions-=cro]] })
 
--- Specify indent width by file type --
+-- Specify indent width by filetype --
 vim.api.nvim_create_autocmd('FileType',
   { pattern = { 'c', 'h', 'cpp' },
     command = [[ setlocal sw=4 ts=4 sts=4 ]]
@@ -102,6 +102,6 @@ autocmd('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
 -- autocmd('InsertEnter', { command = 'set norelativenumber' })
 -- autocmd('InsertLeave', { command = 'set relativenumber' })
 
--- Only focused window have cursorline --
+-- Cursorline on focused window --
 autocmd('WinEnter', { command = 'setlocal cursorline' })
 autocmd('WinLeave', { command = 'setlocal nocursorline' })

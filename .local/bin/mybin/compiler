@@ -1,0 +1,10 @@
+#!/bin/sh
+
+file="$(readlink -f "$1")"
+dir=${file%/*}
+base="${file%.*}"
+ext="${file##*.}"
+
+case "$ext" in
+  tex) pdflatex "$file" ;;
+esac
