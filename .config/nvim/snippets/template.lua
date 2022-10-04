@@ -1,5 +1,5 @@
 -- vim: foldlevel=99
--- Coolest stuff {{{
+-- Some stuff {{{
 local ls = require 'luasnip'
 
 local s = ls.snippet

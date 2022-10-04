@@ -134,6 +134,7 @@ return packer.startup(function(use)
   use { -- Note --
     'nvim-neorg/neorg',
     requires = "nvim-lua/plenary.nvim",
+    run = ":Neorg sync-parsers",  -- install treesitter parser for neorg
     config = conf 'neorg',
   }
 
@@ -189,6 +190,14 @@ return packer.startup(function(use)
   use { -- git sign --
     'lewis6991/gitsigns.nvim',
     config = conf 'gitsigns'
+  }
+
+  use {
+    'Pocco81/true-zen.nvim',
+    requires = {
+      'folke/twilight.nvim',
+    },
+    config = conf 'zen'
   }
 
   use { -- scroll animation --

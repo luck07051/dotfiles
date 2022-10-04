@@ -1,3 +1,4 @@
+-- vim: foldmethod=indent foldlevel=4
 return function()
   local neorg = require 'neorg'
 
@@ -5,46 +6,59 @@ return function()
     load = {
       ["core.defaults"] = {},
 
-      ["core.norg.completion"] = {
+      ["core.norg.dirman"] = {
         config = {
-          engine = 'nvim-cmp'
+          workspaces = {
+            main = "~/notes",
+          }
         }
       },
 
       ["core.highlights"] = {
         config = {
           highlights = {
-            Heading = { --{{{
+            headings = {
               ["1"] = {
-                Title = "+NeorgTitle1",
-                Prefix = "+NeorgTitle1",
+                title = "+NeorgHeading1",
+                prefix = "+NeorgHeading1",
               },
               ["2"] = {
-                Title = "+NeorgTitle2",
-                Prefix = "+NeorgTitle2",
+                title = "+NeorgHeading2",
+                prefix = "+NeorgHeading2",
               },
               ["3"] = {
-                Title = "+NeorgTitle3",
-                Prefix = "+NeorgTitle3",
+                title = "+NeorgHeading3",
+                prefix = "+NeorgHeading3",
               },
               ["4"] = {
-                Title = "+NeorgTitle4",
-                Prefix = "+NeorgTitle4",
+                title = "+NeorgHeading4",
+                prefix = "+NeorgHeading4",
               },
               ["5"] = {
-                Title = "+NeorgTitle5",
-                Prefix = "+NeorgTitle5",
+                title = "+NeorgHeading5",
+                prefix = "+NeorgHeading5",
               },
               ["6"] = {
-                Title = "+NeorgTitle6",
-                Prefix = "+NeorgTitle6",
+                title = "+NeorgHeading6",
+                prefix = "+NeorgHeading6",
               },
-            }, --}}}
+            },
+          },
 
-            Markup = {
-              Verbatim = {
-                [""] = "+PreProc",
-              },
+          dim = {
+            tags = {
+              ranged_verbatim = {
+                code_block = {
+                  reference = "NeorgCodeBlock",
+                  percentage = 10,
+                  affect = "background",
+                },
+                begin = {
+                  reference = "Normal",
+                  percentage = 10,
+                  affect = "fg",
+                },
+              }
             },
           },
         }
@@ -52,7 +66,6 @@ return function()
 
       ["core.norg.concealer"] = {
         config = {
-
           icons = {
             todo = {
               undone = {
@@ -63,19 +76,22 @@ return function()
 
           dim_code_blocks = {
             enabled = true,
-            width = "content",
+            conceal = true,
           },
-
         }
       },
 
       ["core.keybinds"] = {
         config = {
-          hook = function(keybinds)
-            keybinds.map("norg", "n", "econ", ":e $XDG_CONFIG_HOME/nvim/lua/plug/neorg.lua<CR>")
-          end,
+
         }
-      }
+      },
+
+      ["core.norg.completion"] = {
+        config = {
+          engine = 'nvim-cmp'
+        }
+      },
 
     }
   }

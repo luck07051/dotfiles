@@ -26,6 +26,7 @@ return function()
     },
   }
 
+
   -- Keymapping --
   Keymap({ 'i', 's' }, 'jj', function()
     if ls.expand_or_jumpable() then

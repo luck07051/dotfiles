@@ -1,21 +1,14 @@
--- Setup global keymap short hand --
-Keymap = vim.keymap.set     -- This command have default option `noremap = true`
-Silent = { noremap = true, silent = true }
-
--- Keymap('n', '', ':w !sudo tee %<CR>')
-
 -- Make space as leader key --
 Keymap('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Change default key behavior --
-Keymap('', 'Y', 'y$')
--- Swap ; and :
+-- Swap ';' and ':'
 Keymap('', ';', ':')
 Keymap('', ':', ';')
 Keymap('n', 'q;', 'q:')
--- Change method do not change register
+-- Let 'c' command not change register
 Keymap('', 'c', '"_c')
 Keymap('', '<C-E>', '3<C-E>')
 Keymap('', '<C-Y>', '3<C-Y>')
@@ -35,6 +28,9 @@ Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
 
+-- Quick replace
+Keymap('n', 's', ':%s/')
+
 -- Wizard --
 Keymap('n', '<Leader>r', '!!$SHELL<CR>')
 Keymap('v', '<Leader>r', '!$SHELL<CR>')
@@ -43,7 +39,7 @@ Keymap('v', '<Leader>r', '!$SHELL<CR>')
 Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Compiler script --
-Keymap('n', '<Leader>dl', ':!compiler "%:p"<CR>')
+Keymap('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
 Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
 
 -- Terminal --
@@ -80,7 +76,7 @@ Keymap('t', '<A-K>', '<C-\\><C-N><C-w>-i')
 Keymap('t', '<A-L>', '<C-\\><C-N><C-w>>i')
 
 -- Switch conceal --
-Keymap("n", "<Leader>c", function()
+Keymap("n", "<Leader>zc", function()
   if vim.o.conceallevel > 0 then
     vim.o.conceallevel = 0
   else
@@ -105,7 +101,7 @@ Keymap('n', '<Leader>te', function() vim.cmd [[
 ]] end, Silent)
 
 
--- Alias --
+-- Alias for command mode --
 local function cabbrev(lhs, rhs)
   -- only working on ':' mode
   local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"
@@ -113,3 +109,4 @@ local function cabbrev(lhs, rhs)
 end
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('za', '!zathura')
+cabbrev('pa', 'so % \\| PackerCompile')
