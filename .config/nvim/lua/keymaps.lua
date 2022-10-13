@@ -3,33 +3,41 @@ Keymap('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Change default key behavior --
--- Swap ';' and ':'
+-- Swap ';' and ':' --
 Keymap('', ';', ':')
 Keymap('', ':', ';')
 Keymap('n', 'q;', 'q:')
--- Let 'c' command not change register
+
+-- Let 'c' command not change register --
 Keymap('', 'c', '"_c')
+
+-- Quicker move --
 Keymap('', '<C-E>', '3<C-E>')
 Keymap('', '<C-Y>', '3<C-Y>')
+
+-- Paste in visual mode but not change register --
+Keymap('v', 'p', '"_dP')
+Keymap('v', 'gp', '"_d"+P')
+
+-- Quick replace --
+Keymap('n', 's', ':%s/')
+Keymap('v', 's', ':s/')
 
 -- Delete with black hole --
 Keymap('', '<Leader>d', '"_d')
 Keymap('', '<Leader>D', '"_D')
+
 -- Copy paste with system clipboard --
 -- (y/p to + (or *) register)
 Keymap('', '<Leader>y', '"+y')
 Keymap('', '<Leader>Y', '"+y$')
 Keymap('', '<Leader>p', '"+p')
 Keymap('', '<Leader>P', '"+P')
+
 -- Copy all file to clipboard --
 Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
--- Paste in visual mode but not change register --
-Keymap('v', 'p', '"_dP')
-Keymap('v', 'gp', '"_d"+P')
 
--- Quick replace
-Keymap('n', 's', ':%s/')
+Keymap('n', '<Leader>=', ':lua vim.lsp.buf.format()<CR>')
 
 -- Wizard --
 Keymap('n', '<Leader>r', '!!$SHELL<CR>')
@@ -47,6 +55,8 @@ Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
 Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 -- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
+
+
 -- Navigation windows --
 Keymap('n', '<A-h>', '<C-w>h')
 Keymap('n', '<A-j>', '<C-w>j')
@@ -60,6 +70,12 @@ Keymap('t', '<A-h>', '<C-\\><C-N><C-w>h')
 Keymap('t', '<A-j>', '<C-\\><C-N><C-w>j')
 Keymap('t', '<A-k>', '<C-\\><C-N><C-w>k')
 Keymap('t', '<A-l>', '<C-\\><C-N><C-w>l')
+-- Keymap('n', '<A-j>', '<C-w>w')
+-- Keymap('n', '<A-k>', '<C-w>W')
+-- Keymap('i', '<A-j>', '<C-\\><C-N><C-w>w')
+-- Keymap('i', '<A-k>', '<C-\\><C-N><C-w>W')
+-- Keymap('t', '<A-j>', '<C-\\><C-N><C-w>w')
+-- Keymap('t', '<A-k>', '<C-\\><C-N><C-w>W')
 
 -- Resize windows --
 Keymap('n', '<A-H>', '3<C-w><')
@@ -90,7 +106,9 @@ Keymap('n', '<Leader>tt', function() vim.cmd [[
     belowright 15%split term://$SHELL
     let t:terminal_id = win_getid()
   endif
-]] end, Silent)
+]]
+end, Silent)
+
 -- Goto terminal and exec last command --
 Keymap('n', '<Leader>te', function() vim.cmd [[
   let t:cur_win_id = win_getid()
@@ -98,15 +116,19 @@ Keymap('n', '<Leader>te', function() vim.cmd [[
     call win_gotoid(t:terminal_id)
     call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>G\<C-W>p")
   endif
-]] end, Silent)
+]]
+end, Silent)
 
 
 -- Alias for command mode --
-local function cabbrev(lhs, rhs)
+local function cabbrev(lhs, rhs) -- {{{
   -- only working on ':' mode
   local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"
   vim.cmd(command:format(lhs, lhs, rhs, lhs))
 end
+
+-- }}}
+
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('za', '!zathura')
 cabbrev('pa', 'so % \\| PackerCompile')

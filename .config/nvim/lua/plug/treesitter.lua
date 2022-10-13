@@ -7,6 +7,7 @@ return function()
 
     highlight = {
       enable = true,
+      disable = { "help" },
     },
 
     indent = {

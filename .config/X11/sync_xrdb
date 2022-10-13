@@ -30,17 +30,17 @@ backup() {
 }
 
 # Vim Color {{{
-vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
-backup "$vim_color_file"
-
-# ['#XXXXXX', '1'] -> ['#YYYYYY', '1']
-sed -i "s/\['#\S\{6\}',\ '1'\]/['$color1', '1']/" "$vim_color_file"
-sed -i "s/\['#\S\{6\}',\ '2'\]/['$color2', '2']/" "$vim_color_file"
-sed -i "s/\['#\S\{6\}',\ '3'\]/['$color3', '3']/" "$vim_color_file"
-sed -i "s/\['#\S\{6\}',\ '4'\]/['$color4', '4']/" "$vim_color_file"
-sed -i "s/\['#\S\{6\}',\ '5'\]/['$color5', '5']/" "$vim_color_file"
-sed -i "s/\['#\S\{6\}',\ '6'\]/['$color6', '6']/" "$vim_color_file"
-echo "sync vim color!"
+# vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
+# backup "$vim_color_file"
+#
+# # ['#XXXXXX', '1'] -> ['#YYYYYY', '1']
+# sed -i "s/\['#\S\{6\}',\ '1'\]/['$color1', '1']/" "$vim_color_file"
+# sed -i "s/\['#\S\{6\}',\ '2'\]/['$color2', '2']/" "$vim_color_file"
+# sed -i "s/\['#\S\{6\}',\ '3'\]/['$color3', '3']/" "$vim_color_file"
+# sed -i "s/\['#\S\{6\}',\ '4'\]/['$color4', '4']/" "$vim_color_file"
+# sed -i "s/\['#\S\{6\}',\ '5'\]/['$color5', '5']/" "$vim_color_file"
+# sed -i "s/\['#\S\{6\}',\ '6'\]/['$color6', '6']/" "$vim_color_file"
+# echo "sync vim color!"
 # }}}
 
 # Firefox chrome {{{

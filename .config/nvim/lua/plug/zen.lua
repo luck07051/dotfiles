@@ -1,9 +1,29 @@
 return function()
 
+  local fix_cursorline = function()
+    vim.opt_local.cursorline = true
+  end
+
   require('true-zen').setup {
+
+    modes = {
+      ataraxis = {
+        callbacks = { -- run functions when opening/closing Ataraxis mode
+          close_pos = fix_cursorline
+        },
+      },
+      narrow = {
+        folds_style = "invisible",
+        callbacks = { -- run functions when opening/closing Narrow mode
+          close_pos = fix_cursorline
+        },
+      },
+    },
+
+
     integrations = {
       -- tmux = false,
-      twilight = true,
+      -- twilight = true,
       lualine = true
     },
   }

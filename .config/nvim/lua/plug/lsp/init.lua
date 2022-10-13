@@ -1,22 +1,12 @@
 return function()
   local lspconfig = require 'lspconfig'
   local lsp_installer = require 'nvim-lsp-installer'
+  local handlers = require 'plug.lsp.handlers'
 
-  local handlers = require("plug.lsp.handlers")
   handlers.setup()
 
-  require("plug.lsp.null-ls")
+  require 'plug.lsp.null-ls'
 
-  lsp_installer.setup({ --{{{
-    ui = {
-      icons = {
-        server_installed = "✓",
-        server_pending = "➜",
-        server_uninstalled = "✗"
-      }
-    }
-  })
-  --}}}
 
   -- Setup for each sever
   for _, server in ipairs(lsp_installer.get_installed_servers()) do

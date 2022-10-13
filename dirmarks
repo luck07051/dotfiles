@@ -4,7 +4,7 @@
 ~/.config/zsh
 ~/.config/X11
 # vim colors
-~/.local/share/nvim/site/pack/packer/start/ui-colors
+~/.local/share/nvim/site/pack/packer/start/uima-colors
 ~/notes
 
 ~/suckless/dwm

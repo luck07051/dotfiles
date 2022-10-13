@@ -2,10 +2,11 @@ return function()
   local telescope = require 'telescope'
   local actions = require 'telescope.actions'
 
+  require("project_nvim").setup {}
+  require('telescope').load_extension('projects')
+
   telescope.setup {
     defaults = {
-      -- border = false,
-
       path_display = { 'smart' },
 
       mappings = {
@@ -65,23 +66,60 @@ return function()
         --}}}
       },
     },
+
     pickers = {
-      -- find_files = {
-      --   theme = "ivy",
-      -- }
+
     },
+
     extensions = {
+
+      file_browser = { --{{{
+        theme = "ivy",
+        -- disables netrw and use telescope-file-browser in its place
+        hijack_netrw = true,
+        mappings = {
+          ["i"] = {
+            -- your custom insert mode mappings
+          },
+          ["n"] = {
+            -- your custom normal mode mappings
+          },
+        },
+      },
+      --}}}
+
     }
   }
 
-  local builtin = '<cmd>lua require("telescope.builtin").'
-  Keymap('n', '<CR>', builtin .. 'find_files()<cr>', Silent)
-  -- Keymap('n', '<Leader>fb', builtin .. 'buffers()<cr>', Silent)
-  -- Keymap('n', '<Leader>fl', builtin .. 'grep_string()<cr>', Silent)
+  local map = function(key, opt)
+    vim.keymap.set('n', key, ':Telescope ' .. opt .. '<CR>', { noremap = true, silent = true })
+  end
 
-  Keymap('n', '<Leader>fe', builtin .. 'diagnostics()<cr>', Silent)
-  Keymap('n', 'gd', builtin .. 'lsp_definitions()<cr>', Silent)
-  Keymap('n', 'gD', builtin .. 'lsp_type_definitions()<cr>', Silent)
-  Keymap('n', 'gi', builtin .. 'lsp_implementations()<cr>', Silent)
-  Keymap('n', 'gr', builtin .. 'lsp_references()<cr>', Silent)
+  map('<Leader>ff', 'find_files')
+  map('<Leader>fe', 'find_files')
+  map('<Leader>fb', 'buffers')
+  map('<Leader>fs', 'grep_string')
+  map('<Leader>fq', 'quickfix')
+
+  map('<Leader>ge', 'diagnostics')
+  -- LSP stuff
+  map('gd', 'lsp_definitions')
+  map('gD', 'lsp_type_definitions')
+  map('gi', 'lsp_implementations')
+  map('gr', 'lsp_references')
+
+  -- lists command history
+  Keymap("c", "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)", { noremap = false, nowait = true })
+
+  -- lists function names, variables
+  map('<leader>ft', 'treesitter')
+
+  map('<leader>bb', 'builtin')
+  map('<leader>br', 'reloader')
+  map('<leader>bs', 'symbols')
+
+  map('<leader>fj', 'projects')
+
+  map('<leader>fl', 'file_browser')
+
 end

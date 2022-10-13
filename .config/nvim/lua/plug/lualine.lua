@@ -1,6 +1,7 @@
 return function()
   local lualine = require "lualine"
 
+  -- Customize module
   local function tabsize()
     return ' '..vim.o.tabstop
   end
@@ -8,7 +9,7 @@ return function()
   lualine.setup {
     options = {
       icons_enabled = true,
-      theme = 'ui_colors',
+      theme = 'uima-colors',
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       globalstatus = true,

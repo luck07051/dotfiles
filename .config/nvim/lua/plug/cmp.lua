@@ -55,6 +55,7 @@ return function()
       { name = 'neorg' },
       { name = 'nvim_lsp' },
       { name = 'nvim_lua' },
+      { name = 'latex_symbols' },
       { name = 'luasnip' },
       { name = 'treesitter' },
       { name = 'buffer' },
@@ -62,31 +63,26 @@ return function()
     },
 
     preselect = cmp.PreselectMode.None,
+
     completion = {
       -- autocomplete = false
       -- keyword_length = 2
     },
 
     window = {
-      -- documentation = {
-      --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      -- },
+      completion = {
+        col_offset = -2,
+        side_padding = 1,
+      },
       documentation = {
-        border = { " ", " ", " ", " ", " ", " ", " ", " " },
+        border = { " " },
       },
     },
 
     formatting = {
-      fields = { "abbr", "kind", "menu" },
+      fields = { "kind", "abbr" },
       format = function(entry, vim_item)
         vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-        vim_item.menu = ({
-          nvim_lsp = "[LSP]",
-          nvim_lua = "[LUA]",
-          luasnip  = "[Snip]",
-          buffer   = "[Buff]",
-          path     = "[Path]",
-        })[entry.source.name]
         return vim_item
       end,
     },
@@ -97,31 +93,39 @@ return function()
       expand = function(args)
         -- For luasnip --
         luasnip.lsp_expand(args.body)
-        -- For UltiSnips --
-        --vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
   }
 
 
-  -- Cmdline '/' --{{{
-  cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-  --}}}
-
-  -- Cmdline ':' --{{{
+  -- ':' mode
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
+
     sources = cmp.config.sources({
       { name = 'path' },
-      { name = 'cmdline' } })
-  })
-  --}}}
+      { name = 'cmdline' }
+    }),
 
-  -- Close cmp menu when in <C-f> --
-  Keymap('c', '<C-f>', '<C-f>i<Esc>')
+    formatting = {
+      fields = { "abbr" },
+    },
+  })
+
+
+  -- '/' mode
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+
+    sources = {
+      { name = 'buffer' }
+    },
+
+    formatting = {
+      fields = { "abbr" },
+    }
+  })
+
+  -- Close cmp menu when press <C-f> --
+  Keymap('c', '<C-f>', '<C-f>a<Esc>')
 end

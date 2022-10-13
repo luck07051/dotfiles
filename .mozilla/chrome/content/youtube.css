@@ -27,4 +27,9 @@
         visibility: collapse !important;
         display: none !important;
     }
+
+    /* make element on video semiopacity */
+    .ytp-ce-element.ytp-ce-element-show {
+      opacity: 0.6;
+    }
 }
