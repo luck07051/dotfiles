@@ -8,9 +8,6 @@ Keymap('', ';', ':')
 Keymap('', ':', ';')
 Keymap('n', 'q;', 'q:')
 
--- Let 'c' command not change register --
-Keymap('', 'c', '"_c')
-
 -- Quicker move --
 Keymap('', '<C-E>', '3<C-E>')
 Keymap('', '<C-Y>', '3<C-Y>')
@@ -132,3 +129,5 @@ end
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('za', '!zathura')
 cabbrev('pa', 'so % \\| PackerCompile')
+
+Keymap('n', '<Leader><Leader>ng', ':!sudo rm -rf /usr/share/nginx/html<CR>:!sudo cp -rf /home/ui/.local/share/web /usr/share/nginx/html<CR>')

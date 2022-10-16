@@ -35,15 +35,15 @@ end
 cs("html", fmt([[
 <!DOCTYPE html>
 <html lang="en">
-\t<head>
-\t\t<meta charset="UTF-8">
-\t\t<meta name="viewport" content="width=device-width, initial-scale=1">
-\t\t<link href="{}" rel="stylesheet">
-\t\t<title>{}</title>
-\t</head>
-\t<body>
-\t\t{}
-\t</body>
+  <head>
+    <title>{}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{}" rel="stylesheet">
+  </head>
+  <body>
+    {}
+  </body>
 </html>
 ]], {
     i(1, "title"),

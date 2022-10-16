@@ -1,9 +1,37 @@
 @import "colors.css";
 @import "chrome/navbar_tabs_oneliner.css";
 
-#identity-icon-box {
-  visibility: collapse;
+
+/* transition of urlbar */
+#urlbar-container
+{
+  min-width: 0vw !important;
+  transition: min-width 0.3s;
 }
+#urlbar-container:hover
+{
+  min-width: 20vw !important;
+}
+
+/* icon on urlbar */
+/* #identity-icon-box, */
+/* #tracking-protection-icon-container, */
+/* #identity-box, */
+#page-action-buttons
+{
+  visibility: collapse;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+/* #urlbar-container:hover #identity-icon-box, */
+/* #urlbar-container:hover #tracking-protection-icon-container, */
+/* #urlbar-container:hover #identity-box, */
+#urlbar-container:hover #page-action-buttons
+{
+  visibility: visible;
+  opacity: 1;
+}
+
 
 :root {
   /* background */
