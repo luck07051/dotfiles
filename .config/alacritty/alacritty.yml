@@ -7,7 +7,7 @@ font:
 
 # Background opacity
 window:
-  opacity: 0.85
+  # opacity: 0.85
   padding:
     x: 4
     y: 4
@@ -27,30 +27,30 @@ key_bindings:
 # sync colors with xresource)
 colors:
   primary:
-    background: '#121212'
-    foreground: '#D0D0D0'
+    background: '#161616'
+    foreground: '#bcbcbc'
 
   cursor:
    text: CellBackground
-   cursor: '#D0D0D0'
+   cursor: '#bcbcbc'
 
   # place `normal` and `bright` block in the end of the file
   normal:
-    black:    '#121212'
-    red:      '#E67E80'
-    green:    '#87AF87'
-    yellow:   '#EBCB8B'
-    blue:     '#81A1C1'
-    magenta:  '#ECB2CF'
-    cyan:     '#87AFAF'
-    white:    '#D0D0D0'
+    black:    '#161616'
+    red:      '#c68586'
+    green:    '#86a586'
+    yellow:   '#d5be95'
+    blue:     '#83a0af'
+    magenta:  '#d8afad'
+    cyan:     '#8caeaf'
+    white:    '#bcbcbc'
 
   bright:
-    black:    '#121212'
-    red:      '#E67E80'
-    green:    '#87AF87'
-    yellow:   '#EBCB8B'
-    blue:     '#81A1C1'
-    magenta:  '#ECB2CF'
-    cyan:     '#87AFAF'
-    white:    '#D0D0D0'
+    black:    '#161616'
+    red:      '#c68586'
+    green:    '#86a586'
+    yellow:   '#d5be95'
+    blue:     '#83a0af'
+    magenta:  '#d8afad'
+    cyan:     '#8caeaf'
+    white:    '#bcbcbc'

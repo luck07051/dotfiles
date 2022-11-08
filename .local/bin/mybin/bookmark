@@ -1,0 +1,20 @@
+#!/bin/sh
+
+BOOKMARKS_FILE="$HOME/bookmarks/bookmark"
+
+chosen="$(sed "/^\s*\(#\)\|\(--\)/d; /^\$/d" "$BOOKMARKS_FILE" \
+    | dmenu -i -l 20 -p 'OPEN')"
+
+[ -z "$chosen" ] && exit 1
+
+if grep -qF "$chosen" "$BOOKMARKS_FILE"; then
+  echo "${chosen##* }"
+else
+  engine="$(grep "^\s*--\s*${chosen%% *}\s" "$BOOKMARKS_FILE")"
+  if [ -n "$engine" ]; then
+    echo "${engine##* }" | sed "s/{}/${chosen#* }/g; s/\s/+/g"
+  else
+    engine="$(grep "^\s*--\s*DEFAULT" "$BOOKMARKS_FILE")"
+    echo "${engine##* }" | sed "s/{}/$chosen/g; s/\s/+/g"
+  fi
+fi

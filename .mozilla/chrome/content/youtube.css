@@ -23,7 +23,8 @@
     }
 
     /* Topic Botton on Home Page */
-    #primary #header.ytd-rich-grid-renderer {
+    #primary #header.ytd-rich-grid-renderer,
+    yt-related-chip-cloud-renderer {
         visibility: collapse !important;
         display: none !important;
     }

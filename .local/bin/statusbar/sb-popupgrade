@@ -3,6 +3,7 @@
 printf "Beginning upgrade.\\n"
 
 yay -Syu
+
 kill -37 "$(pidof dwm)"
 
 printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"

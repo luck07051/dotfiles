@@ -13,7 +13,7 @@ export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//
 [ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
 
 
-#==================== Main Stuff ====================#
+#==================== Main ====================#
 export WM='dwm'
 export EDITOR='nvim'
 export TERMINAL='alacritty'

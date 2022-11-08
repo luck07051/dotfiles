@@ -1,15 +1,16 @@
 #!/bin/sh
 
-list="
+list="$(cat <<EOF
 reboot;     systemctl reboot
 shut down;  systemctl poweroff
 log out;    loginctl terminate-session ${XDG_SESSION_ID-}
 suspend;    systemctl suspend
 hibernate;  systemctl hibernate
-"
+EOF
+)"
 
-option=$(echo "$list" | sed '/^$/d; s/;\ \+.*//g' | dmenu -i -p "POWER")
+option=$(echo "$list" | sed 's/; .*//g' | dmenu -i -p "POWER")
 
 [ -n "$option" ] &&
 [ "$(printf "No\nYes" | dmenu -i -p "Do you want to $option?")" = "Yes" ] &&
-  eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//g')"
+  eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//')"

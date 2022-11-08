@@ -46,7 +46,10 @@ bindkey '^e' edit-command-line
 bindkey -M vicmd '^e' edit-command-line
 
 
+
 # Alias
+zsh_add_fun abbr
+# zsh_add_plug "olets/zsh-abbr"
 source "$ZDOTDIR/alias.zsh"
 
 # Prompt
@@ -59,6 +62,7 @@ fi
 # cd Alternatives
 [ -x "$(which zoxide)" ] &&
   eval "$(zoxide init zsh --cmd cd)"
+
 
 
 # Functions #

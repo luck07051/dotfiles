@@ -29,8 +29,3 @@ Au('WinLeave', { command = 'setlocal nocursorline' })
 Au('BufWritePost',
   { pattern = { 'xresources', '.Xresources' },
     command = [[ !xrdb -merge %; $XDG_CONFIG_HOME/X11/sync_xrdb ]] })
-
--- Automatic compile packer
-Au('BufWritePost',
-  { pattern = { '*plug/*.lua', 'plug*.lua' },
-    command = [[ PackerCompile ]] })

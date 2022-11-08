@@ -15,6 +15,12 @@ return function()
       shortcut = 'p  '
     },
     {
+      icon = '  ',
+      desc = 'New File                                ',
+      action = 'DashboardNewFile',
+      shortcut = 'e  '
+    },
+    {
       icon = '  ',
       desc = 'Quit                                    ',
       action = 'quit',

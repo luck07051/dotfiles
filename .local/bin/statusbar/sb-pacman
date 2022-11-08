@@ -7,8 +7,6 @@ case $BLOCK_BUTTON in
 esac
 
 icon=" "
-num=$(pacman -Qu | grep -Fcv "[ignored]")
+num="$(pacman -Qu | grep -Fcv "[ignored]")"
 
-if [ "$num" != "0" ]; then
-  printf "%s%s" "$icon" "$num"
-fi
+printf "%s%s" "$icon" "$num"

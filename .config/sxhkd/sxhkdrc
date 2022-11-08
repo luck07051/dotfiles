@@ -17,7 +17,7 @@ super + shift + {u,i}
     vl {up,down} 5
 
 # switch output
-super + shift + o
+super + ctrl + o
     vl switch
 
 # Mute output
@@ -33,8 +33,11 @@ XF86AudioMicMute
 Print
     flameshot gui
 
-super + o
-    menu_bookmark
-
 super + t
-    menu_trans
+    menutrans
+
+super + o
+    bookmark | xargs -r firefox --new-tab
+
+super + shift + o
+    xdotool type "$(bookmark)"

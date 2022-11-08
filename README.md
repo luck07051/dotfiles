@@ -62,6 +62,7 @@ zathura zathura-pdf-mupdf   # pdf viewer
 #(aur) ncpamixer     # pulseaudio control
 
 icdiff              # diff tool
+delta               # diff tool (called 'git-delta' in pacman)
 ffmpeg ffmpegthumbnailer    # audio/video conversion tool
 youtube-dl          # youtube downloader
 pactl               # pulse control

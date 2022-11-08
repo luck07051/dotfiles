@@ -1,6 +1,6 @@
 
 
-(((command_name) @TSFunction (#eq? @TSFunction "\\\\")) (#set! conceal "R"))
+; (((command_name) @TSFunction (#eq? @TSFunction "\\\\")) (#set! conceal "R"))
 
 ;; (("}" @command) (#set! conceal "T"))
 

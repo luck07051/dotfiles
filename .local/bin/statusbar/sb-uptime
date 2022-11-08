@@ -4,7 +4,7 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-printf "%s  %s" "" \
+printf "%s %s" "" \
   "$(uptime --pretty |
       sed -e 's/up //' \
           -e 's/\ years\?,\?/y/' \

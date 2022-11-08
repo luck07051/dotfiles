@@ -1,6 +1,6 @@
 # directory bookmark, using fzf to select.
 
-export dirmarks=~/dirmarks
+export dirmarks=~/bookmarks/dirmark
 
 function _dirmark() {
   # target=$(sed '/^#/d' $dirmarks | sed '/^$/d' | awk '{print $1}' | fzf)

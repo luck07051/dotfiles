@@ -1,3 +1,6 @@
+-- snippets collection:
+-- https://github.com/rafamadriz/friendly-snippets
+-- https://github.com/molleweide/LuaSnip-snippets.nvim
 return function()
   local ls = require "luasnip"
 

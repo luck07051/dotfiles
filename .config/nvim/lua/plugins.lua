@@ -1,4 +1,4 @@
--- Coolest stuff --{{{
+-- Setting --{{{
 -- Automatically install packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -20,6 +20,18 @@ local packer = require 'packer'
 --   augroup end
 -- ]]
 
+local packer_group = vim.api.nvim_create_augroup('packer_user_config', {})
+
+vim.api.nvim_create_autocmd('BufwritePost',
+  { group = packer_group,
+    pattern = { 'plugins.lua' },
+    command = [[ source <afile> | PackerSync ]] })
+
+vim.api.nvim_create_autocmd('BufwritePost',
+  { group = packer_group,
+    pattern = { '*plug/*.lua' },
+    command = [[ PackerCompile ]] })
+
 packer.init {
   display = {
     open_fn = function()
@@ -40,9 +52,10 @@ return packer.startup(function(use)
     'lewis6991/impatient.nvim',
   }
 
-  use { -- Color Scheme --
+  use { -- Color Scheme -- --{{{
     'luck07051/uima-colors.nvim'
   }
+  --}}}
 
   use { -- Treesitter -- --{{{
     'nvim-treesitter/nvim-treesitter',
@@ -68,7 +81,7 @@ return packer.startup(function(use)
   }
   --}}}
 
-  use { -- CMP -- --{{{
+  use { -- Completion -- --{{{
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-buffer',
@@ -86,20 +99,7 @@ return packer.startup(function(use)
   }
   --}}}
 
-  use {
-    'glepnir/dashboard-nvim',
-    config = conf 'dashboard'
-  }
-
-  use { -- Snipptes --
-    'L3MON4D3/LuaSnip',
-    config = conf 'luasnip'
-    -- snippets collection:
-    -- https://github.com/rafamadriz/friendly-snippets
-    -- https://github.com/molleweide/LuaSnip-snippets.nvim
-  }
-
-  use { -- Fuzzy finder --
+  use { -- Fuzzy Finder -- --{{{
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
@@ -108,16 +108,30 @@ return packer.startup(function(use)
     },
     config = conf 'telescope',
   }
+  --}}}
 
-  use { -- Status Line --
+  use { -- Snipptes -- --{{{
+    'L3MON4D3/LuaSnip',
+    config = conf 'luasnip'
+  }
+  --}}}
+
+  use { -- Dashboard -- --{{{
+    'glepnir/dashboard-nvim',
+    config = conf 'dashboard'
+  }
+  --}}}
+
+  use { -- Status Line -- --{{{
     'nvim-lualine/lualine.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons',
     },
     config = conf 'lualine',
   }
+  --}}}
 
-  use { -- Note --
+  use { -- Note -- --{{{
     'nvim-neorg/neorg',
     ft = 'norg',
     requires = {
@@ -127,24 +141,14 @@ return packer.startup(function(use)
     run = ":Neorg sync-parsers", -- install treesitter parser for neorg
     config = conf 'neorg',
   }
+  --}}}
 
-  use { -- Live Edit html/css/js --
-    'turbio/bracey.vim',
-    ft = { 'html', 'css', 'js' },
-    config = function()
-      Keymap('n', '<Leader>le', '<cmd>Bracey<cr>')
-      Keymap('n', '<Leader>ls', '<cmd>BraceyStop<cr>')
-      Keymap('n', '<Leader>lr', '<cmd>BraceyReload<cr>')
-    end,
-    run = 'npm install --prefix server'
-  }
 
-  -- use { -- Tmux --
-  --   "aserowy/tmux.nvim",
-  --   config = conf 'tmux'
-  -- }
+  ---------------------------
+  --    Editing Ability    --
+  ---------------------------
 
-  use { -- gc to comment text --
+  use { -- `gc` to comment text --
     'numToStr/Comment.nvim',
     config = function() require('Comment').setup() end
   }
@@ -152,11 +156,7 @@ return packer.startup(function(use)
   use { -- Surround selections --
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end
+    config = function() require("nvim-surround").setup() end
   }
 
   use { -- Enhanced <C-A> and <C-X> --
@@ -172,10 +172,10 @@ return packer.startup(function(use)
     end
   }
 
-  -- use { -- <C-t> to call a terminal --
-  --   'akinsho/toggleterm.nvim',
-  --   config = conf 'toggleterm'
-  -- }
+
+  --------------------------
+  --    Other Function    --
+  --------------------------
 
   use { -- git sign --
     'lewis6991/gitsigns.nvim',
@@ -195,19 +195,56 @@ return packer.startup(function(use)
     config = conf 'neoscroll'
   }
 
-  use { -- Display color on color code --
-    'norcalli/nvim-colorizer.lua',
-    config = function() require('colorizer').setup() end
+  use {
+    'ziontee113/neo-minimap',
+    config = conf 'minimap'
   }
 
-  -- use {
-  --   'ziontee113/color-picker.nvim',
-  --   config = function()
-  --     require("color-picker")
-  --     vim.keymap.set("n", "<C-c>", "<cmd>PickColor<cr>", Silent)
-  --     vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<cr>", Silent)
-  --   end
+  -- use { -- <C-t> to call a terminal --
+  --   'akinsho/toggleterm.nvim',
+  --   config = conf 'toggleterm'
   -- }
+
+  -- use { -- Tmux --
+  --   "aserowy/tmux.nvim",
+  --   config = conf 'tmux'
+  -- }
+
+  use {
+    'uga-rosa/ccc.nvim',
+    config = function()
+      require('ccc').setup({
+        highlighter = {
+          auto_enable = true,
+          filetypes = {},
+          excludes = {},
+        },
+      })
+      Keymap('n', '<Leader>cc', ':CccPick<CR>')
+      Keymap('i', '<A-c>', '<Plug>(ccc-insert)')
+    end
+  }
+
+
+  ------------------------------
+  --    Compiler and Viwer    --
+  ------------------------------
+
+  -- use {
+  --   'lervag/vimtex',
+  --   ft = { 'tex' }
+  -- }
+
+  use { -- Live Edit html/css/js --
+    'turbio/bracey.vim',
+    ft = { 'html', 'css', 'js' },
+    config = function()
+      Keymap('n', '<Leader>le', '<cmd>Bracey<cr>')
+      Keymap('n', '<Leader>ls', '<cmd>BraceyStop<cr>')
+      Keymap('n', '<Leader>lr', '<cmd>BraceyReload<cr>')
+    end,
+    run = 'npm install --prefix server'
+  }
 
   -- use { -- Visualize latex in nvim --
   --   'jbyuki/nabla.nvim',
