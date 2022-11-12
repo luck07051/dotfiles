@@ -1,7 +1,7 @@
 
 @-moz-document url-prefix("https://www.youtube.com/"){
     html {
-        background: var(--background) !important;
+        background: var(--bg-color) !important;
     }
 
     /* Main Area */
@@ -19,7 +19,7 @@
     /* Mini guide bar */
     ytd-mini-guide-renderer,
     ytd-mini-guide-entry-renderer {
-        background-color: var(--background) !important;
+        background-color: var(--bg-color) !important;
     }
 
     /* Topic Botton on Home Page */

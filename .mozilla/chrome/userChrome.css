@@ -34,10 +34,12 @@
 
 
 :root {
+  --background: var(--bg-color) !important;
+
   /* background */
-  --lwt-accent-color: var(--background) !important;
-  --toolbar-field-background-color: var(--background) !important;
-  --toolbar-bgcolor: var(--background) !important;
+  --lwt-accent-color: var(--bg-color) !important;
+  --toolbar-field-background-color: var(--bg-color) !important;
+  --toolbar-bgcolor: var(--bg-color) !important;
 
   /* tab button */
   --button-active-bgcolor: rgba(255,255,255,0.2) !important;
@@ -47,20 +49,20 @@
   /* menu separator and border */
   --autocomplete-popup-separator-color: rgba(255,255,255,0.15) !important;
   --panel-separator-zap-gradient: rgba(255,255,255,0.15) !important;
-  --arrowpanel-border-color: var(--primary-90tran) !important;
+  --arrowpanel-border-color: var(--pr-90tran) !important;
 
   /* a line between chrome and content */
   --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
 
   /* url border color */
-  --focus-outline-color: var(--primary-90tran) !important;
+  --focus-outline-color: var(--pr-90tran) !important;
   --focus-outline-width: 1px !important;
   --toolbar-field-focus-border-color: var(--focus-outline-color)!important;
 }
 
 #urlbar-background
 {
-  background: var(--background-90tran) !important;
+  background: var(--bg-90tran) !important;
   border-radius: 10px !important;
 }
 
@@ -68,10 +70,12 @@
 #mainPopupSet panel,
 #mainPopupSet menupopup,
 #PlacesToolbar menupopup,
-#nav-bar panel
+#nav-bar panel,
+menupopup.new-tab-popup,
+menupopup.textbox-contextmenu
 {
-  background: var(--background-90tran) !important;
-  border: 2px solid var(--primary-90tran) !important;
+  background: var(--bg-90tran) !important;
+  border: 2px solid var(--pr-90tran) !important;
   border-radius: 10px !important;
 
 }

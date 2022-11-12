@@ -1,9 +1,9 @@
 @-moz-document domain(archlinux.org){
   :root {
     --main-background-color: rgb(34,34,34);
-    --background-color: var(--background);
+    --background-color: var(--bg-color);
 
-    --color: var(--foreground);
+    --color: var(--fg-color);
     --color-light: rgb(220,220,220);
     --color-gray: rgb(153,153,153);
     --color-dark: rgb(56,56,56);

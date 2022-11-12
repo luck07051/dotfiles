@@ -18,8 +18,8 @@
 
 /* reader mode */
 body.dark {
-  --main-background: var(--background) !important;
-  --main-foreground: var(--foreground) !important;
+  --main-background: var(--bg-color) !important;
+  --main-foreground: var(--fg-color) !important;
 }
 /**/
 /* html, body { */

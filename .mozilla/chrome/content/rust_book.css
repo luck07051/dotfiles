@@ -1,7 +1,7 @@
 @-moz-document url-prefix("https://doc.rust-lang.org/stable/book/") {
   .navy {
-    --bg: var(--background) !important;
-    --fg: var(--foreground) !important;
+    --bg: var(--bg-color) !important;
+    --fg: var(--fg-color) !important;
     /*
     --sidebar-bg: #282d3f;
     --sidebar-fg: #c8c9db;

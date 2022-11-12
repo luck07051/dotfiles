@@ -67,7 +67,7 @@ ffmpeg ffmpegthumbnailer    # audio/video conversion tool
 youtube-dl          # youtube downloader
 pactl               # pulse control
 
-tldr                # help
+tealdeer            # tl;dr
 
 fzf                 # fuzzy finder
 starship            # prompt
@@ -80,6 +80,7 @@ zoxide              # better cd
 fd                  # better find
 sd                  # better sed
 ripgerp             # better gerp
+dust                # disk usage
 hexyl               # hex viewer
 xdotool
 ```

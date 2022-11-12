@@ -17,7 +17,7 @@ See the above repository for updates as well as full license text. */
     html|html{
       --in-content-page-color: rgb(210,210,210) !important;
       --in-content-text-color: rgb(210,210,210) !important;
-      --in-content-page-background: var(--background) !important;
+      --in-content-page-background: var(--bg-color) !important;
       --in-content-box-background: rgba(255,255,255,0.07) !important;
       --in-content-deemphasized-text: var(--in-content-text-color) !important;
       scrollbar-color: var(--in-content-text-color) var(--in-content-page-background) !important;
