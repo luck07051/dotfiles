@@ -1,58 +1,20 @@
 @import "colors.css";
-@import "chrome/navbar_tabs_oneliner.css";
 
-
-/* transition of urlbar */
-#urlbar-container
-{
-  min-width: 0vw !important;
-  transition: min-width 0.3s;
-}
-#urlbar-container:hover
-{
-  min-width: 20vw !important;
-}
-
-/* icon on urlbar */
-/* #identity-icon-box, */
-/* #tracking-protection-icon-container, */
-/* #identity-box, */
-#page-action-buttons
-{
-  visibility: collapse;
-  transition: opacity 0.3s;
-  opacity: 0;
-}
-/* #urlbar-container:hover #identity-icon-box, */
-/* #urlbar-container:hover #tracking-protection-icon-container, */
-/* #urlbar-container:hover #identity-box, */
-#urlbar-container:hover #page-action-buttons
-{
-  visibility: visible;
-  opacity: 1;
-}
+/* @import "chrome/navbar_tabs_oneliner.css"; */
+/* @import "chrome/responsive_oneliner.css"; */
+@import "chrome/oneliner.css";
 
 
 :root {
   --background: var(--bg-color) !important;
 
-  /* background */
-  --lwt-accent-color: var(--bg-color) !important;
-  --toolbar-field-background-color: var(--bg-color) !important;
+  /* tab */
   --toolbar-bgcolor: var(--bg-color) !important;
-
-  /* tab button */
+  --lwt-accent-color: var(--bg-color) !important;
+  --lwt-selected-tab-background-color: rgba(255,255,255,0.15) !important;
   --button-active-bgcolor: rgba(255,255,255,0.2) !important;
   --button-hover-bgcolor: rgba(255,255,255,0.15) !important;
-  --lwt-selected-tab-background-color: rgba(255,255,255,0.15) !important;
 
-  /* menu separator and border */
-  --autocomplete-popup-separator-color: rgba(255,255,255,0.15) !important;
-  --panel-separator-zap-gradient: rgba(255,255,255,0.15) !important;
-  --arrowpanel-border-color: var(--pr-90tran) !important;
-
-  /* a line between chrome and content */
-  --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
 
   /* url border color */
   --focus-outline-color: var(--pr-90tran) !important;
@@ -60,38 +22,32 @@
   --toolbar-field-focus-border-color: var(--focus-outline-color)!important;
 }
 
-#urlbar-background
-{
+menupopup, panel {
+  --panel-background: var(--bg-90tran) !important;
+  --panel-border-color: var(--pr-90tran) !important;
+  --panel-border-radius: 0px !important;
+  --arrowpanel-background: var(--bg-90tran) !important;
+  --arrowpanel-border-color: var(--pr-90tran) !important;
+  --arrowpanel-border-radius: 0px !important;
+}
+
+#navigator-toolbox {
+  border-bottom: none !important;
+}
+
+.urlbarView {
   background: var(--bg-90tran) !important;
-  border-radius: 10px !important;
+  border: 1px solid var(--pr-90tran) !important;
 }
 
-/* popup menu */
-#mainPopupSet panel,
-#mainPopupSet menupopup,
-#PlacesToolbar menupopup,
-#nav-bar panel,
-menupopup.new-tab-popup,
-menupopup.textbox-contextmenu
-{
-  background: var(--bg-90tran) !important;
-  border: 2px solid var(--pr-90tran) !important;
-  border-radius: 10px !important;
-
-}
-/* fix */
-menupopup, panel{
-  --panel-background: rgba(0,0,0,0) !important;
-  --panel-border-color: rgba(0,0,0,0) !important;
-  --arrowpanel-background: rgba(0,0,0,0) !important;
-  --arrowpanel-border-color: rgba(0,0,0,0) !important;
-}
-
-#tabbrowser-arrowscrollbox:not([scrolledtostart])::part(overflow-start-indicator),
-#tabbrowser-arrowscrollbox:not([scrolledtoend])::part(overflow-end-indicator){
-  border-left: none !important;
+#urlbar-background {
+  background: rgba(0, 0, 0, 0) !important;
 }
 
 .tab-background{
   outline: 0px !important;
+}
+
+spacer {
+  border: none !important;
 }

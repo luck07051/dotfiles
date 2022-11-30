@@ -51,6 +51,7 @@ bindkey -M vicmd '^e' edit-command-line
 zsh_add_fun abbr
 # zsh_add_plug "olets/zsh-abbr"
 source "$ZDOTDIR/alias.zsh"
+[ -f "$ZDOTDIR/local_alias.zsh" ] && source "$ZDOTDIR/local_alias.zsh"
 
 # Prompt
 if [ -x "$(which starship)" ]; then

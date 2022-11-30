@@ -8,20 +8,16 @@
 @import "content/github.css";
 @import "content/arch.css";
 @import "content/rust_book.css";
-
-/* invert pdf reader color */
-/* #viewerContainer > #viewer > .page > .canvasWrapper > canvas{
-    filter: grayscale(100%);
-    filter: invert(87%);
-} */
-
+@import "content/biligame.css";
 
 /* reader mode */
 body.dark {
   --main-background: var(--bg-color) !important;
   --main-foreground: var(--fg-color) !important;
 }
-/**/
-/* html, body { */
-/*     background-color: var(--background) !important; */
-/* } */
+
+/* invert pdf reader color */
+/* #viewerContainer > #viewer > .page > .canvasWrapper > canvas{
+    filter: grayscale(100%);
+    filter: invert(87%);
+} */

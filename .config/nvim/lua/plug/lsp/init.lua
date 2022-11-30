@@ -22,4 +22,5 @@ return function()
 
     lspconfig[server.name].setup(opts)
   end
+
 end

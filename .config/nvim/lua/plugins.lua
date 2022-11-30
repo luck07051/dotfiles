@@ -1,4 +1,4 @@
--- Setting --{{{
+-- Setting -- {{{
 -- Automatically install packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -131,17 +131,17 @@ return packer.startup(function(use)
   }
   --}}}
 
-  use { -- Note -- --{{{
-    'nvim-neorg/neorg',
-    ft = 'norg',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-neorg/neorg-telescope'
-    },
-    run = ":Neorg sync-parsers", -- install treesitter parser for neorg
-    config = conf 'neorg',
-  }
-  --}}}
+  -- use { -- Note -- --{{{
+  --   'nvim-neorg/neorg',
+  --   ft = 'norg',
+  --   requires = {
+  --     'nvim-lua/plenary.nvim',
+  --     'nvim-neorg/neorg-telescope'
+  --   },
+  --   run = ":Neorg sync-parsers", -- install treesitter parser for neorg
+  --   config = conf 'neorg',
+  -- }
+  -- --}}}
 
 
   ---------------------------
@@ -223,6 +223,14 @@ return packer.startup(function(use)
       Keymap('n', '<Leader>cc', ':CccPick<CR>')
       Keymap('i', '<A-c>', '<Plug>(ccc-insert)')
     end
+  }
+
+  use {
+    'kevinhwang91/nvim-ufo',
+    config = conf 'ufo',
+    requires = {
+      'kevinhwang91/promise-async'
+    }
   }
 
 

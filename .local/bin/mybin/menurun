@@ -1,19 +1,22 @@
 #!/bin/sh
 
 dmenu_path() {
-  cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
-  cache="$cachedir/dmenu_run"
-
-  [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
-
-  IFS=:
-  if stest -dqr -n "$cache" "$PATH"; then
-    stest -flx "$PATH" | sort -u | tee "$cache"
-  else
-    cat "$cache"
-  fi
+  echo "$PATH $XDG_DATA_HOME/applications" | tr ':' '\n' | uniq |
+    xargs ls | sed '/\//d ; /^$/d' | sort
 }
 
-# dmenu_path | dmenu -i -p "RUN" "$@" | ${SHELL:-"/bin/sh"} &
+TERM="$TERMINAL -e sh -c"
 
-rofi -show combi
+RUN="$(dmenu_path | dmenu -i -p "RUN" "$@")"
+
+case "$RUN" in
+  # run command in terminal if end with ';'
+  *\;) $TERM "${RUN%;}" ;;
+
+  # run .desktop file
+  *.desktop) gtk-launch "$RUN" ;;
+
+  *) $RUN ;;
+esac
+
+# rofi -show combi

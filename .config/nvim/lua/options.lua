@@ -3,7 +3,7 @@ Opt.number = true
 Opt.signcolumn = 'yes'
 Opt.cursorline = true
 Opt.scrolloff = 5
-Opt.conceallevel = 2
+Opt.conceallevel = 0
 Opt.laststatus = 3    -- global statusline
 
 -- Indent --
@@ -29,7 +29,8 @@ Opt.splitbelow = true
 Opt.splitright = true
 Opt.swapfile = false
 Opt.updatetime = 100
-Opt.linebreak = true
+-- Opt.linebreak = true
+-- Opt.clipboard = 'unnamedplus'
 
 -- Special Char Visualization --
 Opt.showbreak = '↪'
@@ -38,25 +39,3 @@ if vim.o.filetype ~= 'dashboard' then
   vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column
   vim.fn.matchadd('ColorColumn', '\\s$', 100)     -- Show extra space
 end
-
--- Fold --
-Opt.foldmethod = "marker"
-vim.cmd [[
-function! MyFoldText() "{{{
-    let foldedlinecount = v:foldend - v:foldstart
-    let line = getline(v:foldstart)
-    " remove mark
-    let line = substitute(line, '\([#"]\|\(--\)\|\(//\)\)\?\s*{{'.'{\s*$', '', '')
-    " add icon at beginning
-    let line = substitute(line, '^\(\([#" ]\s\)\|\(--\)\|\(//\)\)', ' ', '')
-    " make sure text is not too long
-    let line = strpart(line, 0, windowwidth - 8 - len(foldedlinecount))
-
-    let nucolwidth = &foldcolumn + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth
-    let fillcharcount = windowwidth - strdisplaywidth(line) - len(foldedlinecount) -3
-    return line . repeat(" ",fillcharcount) . foldedlinecount . ' '
-endfunction
-set foldtext=MyFoldText()
-"}}}
-]]

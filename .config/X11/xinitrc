@@ -17,12 +17,13 @@ xset -dpms
 
 # Startup app
 pgrep "$BROWSER" > /dev/null || $BROWSER &
+syncthing serve --no-browser &
 
 while true; do
   xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
   setwallpaper &
 
-  pidof -q sxhkd || sxhkd &
+  # pidof -q sxhkd || sxhkd &
   pidof -q dunst || dunst &
   pidof -q unclutter || unclutter &
 

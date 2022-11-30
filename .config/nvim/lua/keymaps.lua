@@ -26,10 +26,12 @@ Keymap('', '<Leader>D', '"_D')
 
 -- Copy paste with system clipboard --
 -- (y/p to + (or *) register)
-Keymap('', '<Leader>y', '"+y')
-Keymap('', '<Leader>Y', '"+y$')
-Keymap('', '<Leader>p', '"+p')
-Keymap('', '<Leader>P', '"+P')
+-- Keymap('', '<Leader>y', '"+y')
+-- Keymap('', '<Leader>Y', '"+y$')
+-- Keymap('', '<Leader>p', '"+p')
+-- Keymap('', '<Leader>P', '"+P')
+Keymap('v', '<C-c>', '"+y')
+Keymap('v', '<C-v>', '"+p')
 
 -- Copy all file to clipboard --
 Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
@@ -51,7 +53,6 @@ Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
 Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
 Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 -- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
-
 
 
 -- Navigation windows --
@@ -87,6 +88,7 @@ Keymap('t', '<A-H>', '<C-\\><C-N><C-w><gi')
 Keymap('t', '<A-J>', '<C-\\><C-N><C-w>+i')
 Keymap('t', '<A-K>', '<C-\\><C-N><C-w>-i')
 Keymap('t', '<A-L>', '<C-\\><C-N><C-w>>i')
+
 
 -- Switch conceal --
 Keymap("n", "<Leader>zc", function()

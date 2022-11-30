@@ -3,7 +3,7 @@ abbr sps="sudo pacman -S"
 
 abbr v="vim"
 abbr ww="vim ~/vimwiki/index.md"
-abbr n="vim ~/notes/note.norg"
+abbr n="vim ~/notes/index.md"
 abbr m="vim ~/memo.md"
 
 abbr c="config"
@@ -14,6 +14,8 @@ abbr cr="cargo run"
 abbr tt="trans :zh-TW"
 abbr py="python3"
 abbr rc='rsync -vhP'
+abbr syncb='syncthing serve --browser-only'
+abbr nb='newsboat'
 
 
 # Confirm before overwriting something

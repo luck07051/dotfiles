@@ -20,6 +20,8 @@ key_bindings:
   - { key: L,   mods: Shift|Control,    action: IncreaseFontSize }
   - { key: Y,   mods: Alt,              action: Copy }
   - { key: P,   mods: Alt,              action: Paste }
+    #- { key: C,   mods: Shift|Control,    chars: "\x1b[67;5u" }
+    #- { key: V,   mods: Shift|Control,    chars: "\x1b[86;5u" }
 
 
 
