@@ -95,8 +95,7 @@ return function()
     vim.keymap.set('n', key, ':Telescope ' .. opt .. '<CR>', { noremap = true, silent = true })
   end
 
-  map('<Leader>ff', 'find_files')
-  map('<Leader>fe', 'find_files')
+  map('<M-e>', 'find_files')
   map('<Leader>fb', 'buffers')
   map('<Leader>fs', 'grep_string')
   map('<Leader>fq', 'quickfix')
@@ -120,10 +119,8 @@ return function()
 
   map('<leader>fj', 'projects')
 
-  map('<leader>fl', 'file_browser')
 
-
-  Find_file_under_cursor = function()
+  Find_file_under_cursor = function() -- {{{
     require 'telescope.builtin'.find_files({
       find_command = { 'fd', vim.fn.expand("<cword>") },
       on_complete = {
@@ -140,8 +137,7 @@ return function()
         end,
       },
     })
-  end
-  Keymap('n', '<CR>', ':lua Find_file_under_cursor()<CR>')
-  Keymap('n', '<BS>', ':bp<CR>')
+  end -- }}}
+  Keymap('n', 'gf', ':lua Find_file_under_cursor()<CR>', Silent)
 
 end

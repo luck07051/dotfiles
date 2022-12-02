@@ -1,3 +1,7 @@
+-------------------------------
+--          PLUGINS          --
+-------------------------------
+
 -- Setting -- {{{
 -- Automatically install packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -200,6 +204,11 @@ return packer.startup(function(use)
     config = conf 'minimap'
   }
 
+  use {
+    'jghauser/follow-md-links.nvim',
+    ft = { 'markdown' }
+  }
+
   -- use { -- <C-t> to call a terminal --
   --   'akinsho/toggleterm.nvim',
   --   config = conf 'toggleterm'
@@ -252,6 +261,10 @@ return packer.startup(function(use)
       Keymap('n', '<Leader>lr', '<cmd>BraceyReload<cr>')
     end,
     run = 'npm install --prefix server'
+  }
+
+  use {
+    'ellisonleao/glow.nvim'
   }
 
   -- use { -- Visualize latex in nvim --

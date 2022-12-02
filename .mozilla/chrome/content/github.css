@@ -1,5 +1,5 @@
 
-@-moz-document url-prefix("https://github.com/") {
+@-moz-document domain(github.com) {
     html {
         background: var(--bg-color) !important;
     }

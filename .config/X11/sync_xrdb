@@ -1,4 +1,5 @@
 #!/bin/sh
+# vim:foldmethod=marker:foldlevel=0
 
 # Get color from xresources
 color0=$(xrdb -get color0)
@@ -19,9 +20,9 @@ color14=$(xrdb -get color14)
 color15=$(xrdb -get color15)
 bg=$(xrdb -get background)
 fg=$(xrdb -get foreground)
-pri=$(xrdb -get primary)
+pr=$(xrdb -get primary)
 
-bakloc="$XDG_DATA_HOME/backup/x_xync_xrdb"
+bakloc="$XDG_CACHE_HOME/backup/x_xync_xrdb"
 if [ ! -d "$bakloc" ]; then
   mkdir -p "$bakloc"
 fi
@@ -29,7 +30,7 @@ backup() {
   cp "$1" "$bakloc/$(basename "$1").bak"
 }
 
-# Vim Color {{{
+## Vim Color {{{
 # vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
 # backup "$vim_color_file"
 #
@@ -48,9 +49,9 @@ firefox_color_file="$HOME/.mozilla/chrome/colors.css"
 backup "$firefox_color_file"
 
 # --background: #XXXXXX -> --background: #YYYYYY
-sed -i "s/--background:\ #\S\{6\}/--background: $bg/" "$firefox_color_file"
-sed -i "s/--foreground:\ #\S\{6\}/--foreground: $fg/" "$firefox_color_file"
-sed -i "s/--primary:\ #\S\{6\}/--primary: $pri/"      "$firefox_color_file"
+sed -i "s/--bg-color:\ #\S\{6\}/--bg-color: $bg/" "$firefox_color_file"
+sed -i "s/--fg-color:\ #\S\{6\}/--fg-color: $fg/" "$firefox_color_file"
+sed -i "s/--pr-color:\ #\S\{6\}/--pr-color: $pr/" "$firefox_color_file"
 echo "sync firefox chrome color!"
 # }}}
 

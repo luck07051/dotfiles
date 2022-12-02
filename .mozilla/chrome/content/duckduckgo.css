@@ -1,5 +1,5 @@
 
-@-moz-document url-prefix("https://duckduckgo.com"){
+@-moz-document domain(duckduckgo.com){
     html {
         background: var(--bg-color) !important;
     }

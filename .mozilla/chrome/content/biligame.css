@@ -1,4 +1,4 @@
-@-moz-document url-prefix("https://wiki.biligame.com/"){
+@-moz-document domain(wiki.biligame.com){
   .ft {
     min-width: 0 !important;
   }

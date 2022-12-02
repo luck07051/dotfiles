@@ -1,3 +1,7 @@
+-------------------------------
+--          KEYMAPS          --
+-------------------------------
+
 -- Make space as leader key --
 Keymap('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
@@ -48,6 +52,9 @@ Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 -- Compiler script --
 Keymap('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
 Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
+
+-- Goback prev file --
+Keymap('n', '<BS>', ':edit #<CR>', Silent)
 
 -- Terminal --
 Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)

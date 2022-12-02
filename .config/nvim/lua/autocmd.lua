@@ -1,3 +1,7 @@
+-------------------------------
+--          AUTOCMD          --
+-------------------------------
+
 -- Disable auto comment new lin
 Au('BufEnter', { command = [[ set formatoptions-=cro ]] })
 

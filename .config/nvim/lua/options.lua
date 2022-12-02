@@ -1,3 +1,7 @@
+-------------------------------
+--          OPTIONS          --
+-------------------------------
+
 Opt.number = true
 -- Opt.relativenumber = true
 Opt.signcolumn = 'yes'
