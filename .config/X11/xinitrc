@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# # set wacom area
-# if [$(xinput list | grep 'Wacom')]; then
-#   xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 0 4275
-# fi
+ # set wacom area
+ if xinput list | grep 'Wacom'; then
+   xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 10132 6332
+ fi
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
@@ -26,6 +26,7 @@ while true; do
   # pidof -q sxhkd || sxhkd &
   pidof -q dunst || dunst &
   pidof -q unclutter || unclutter &
+  pidof -q fcitx5 || fcitx5 -d &
 
   # killall picom >/dev/null 2>&1; picom &
 

@@ -1,0 +1,27 @@
+# rss source
+urls-source "miniflux"
+miniflux-url `gpg --decrypt ~/.config/newsboat/secret/url.gpg`
+miniflux-login `gpg --decrypt ~/.config/newsboat/secret/login.gpg`
+miniflux-password `gpg --decrypt ~/.config/newsboat/secret/password.gpg`
+
+# keybind
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+
+
+# color
+color background          white   black
+color listnormal          white   black
+color listfocus           black   white  bold
+color listnormal_unread   white   black
+color listfocus_unread    black   white  bold
+color title               white   black  bold
+color article             white   black
+
+color info                white   black
+color hint-key            black   black  bold
+color hint-keys-delimiter black   black
+color hint-separator      black   black
+color hint-description    black   black

@@ -48,6 +48,8 @@ qemu
 
 neomutt
 isync
+
+xf86-input-wacom            # wacom setting tool `$ xsetwacom `
 ```
 
 
@@ -68,6 +70,9 @@ youtube-dl          # youtube downloader
 pactl               # pulse control
 
 tealdeer            # tl;dr
+
+slidev              # slides maker. use this install `$npm i -g @slidev/cli`
+                    # for export, `$npm i -g -D playwright-chromium`
 
 fzf                 # fuzzy finder
 starship            # prompt
@@ -260,6 +265,16 @@ put this in `crontab -u root -e`
 0 20 * * * /usr/bin/ntpd -qg; /usr/bin/hwclock --systohc
 ```
 
+if `notify-send` didnt work, add this in `crontab -e`
+```
+DISPLAY=":0.0"
+XAUTHORITY="/home/ui/.Xauthority"
+XDG_RUNTIME_DIR="/run/user/1000"
+```
+
+if gui not work well, try `xhost +local:`
+(https://help.ubuntu.com/community/CronHowto#GUI%20Applications)
+
 
 ### GRUB
 [Hidden menu](https://wiki.archlinux.org/title/GRUB/Tips_and_tricks#Hidden_menu)
@@ -273,10 +288,26 @@ remember comment default setting
 
 
 
-### rime
-fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-nord fcitx5-qt fcitx5-rime
+### Input method
+install:
+- fcitx5
+- fcitx5-configtool
+- fcitx5-gtk
+- fcitx5-qt
+- fcitx5-rime
+- fcitx5-mozc
+- theme: https://github.com/catppuccin/fcitx5
+
 If not want fcitx5 overrides xkeyboard.
 Use fcitx5-configtool to uncheck Addons → XCB → Allow Overriding System XKB Settings.
+
+Add these to `/etc/environment`
+```
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+```
 
 
 
@@ -302,3 +333,10 @@ sudo usermod -aG libvirt [username]
 ```
 yay -S libxft-bgra
 ```
+
+
+### office
+install ms fonts
+`yay -S ttf-ms-fonts`
+
+[make libreoffice more compatible](https://yt.uima.xyz/https://www.youtube.com/watch?v=G0che2Az9hw#)

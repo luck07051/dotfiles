@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Add this script in cron or some thing similar.
+#
+# Add channel_id and channel_name in `$subscriptions` file, like:
+#
+# UCngn7SVujlvskHRvRKc1cTw BugsWriter
+# UCld68syR8Wi-GY_n4CaoJGA Brodie Robertson
+#
+# The channel_id first, and the channel_name after, use space split.
+# The '#' will be ignored.
+
+subscriptions="$HOME/bookmarks/subscriptions"
+cache="$HOME/.cache/yt_sub_feeds"
+feed_url="https://www.youtube.com/feeds/videos.xml?channel_id="
+
+[ ! -f "$subscriptions" ] && exit 1
+[ ! -f "$cache" ] && touch "$cache"
+
+# read each line in $subscriptions
+while read -r line; do
+  # ignore if opening in '#'
+  (echo "$line" | grep -q "^\s*#") && continue
+  # ignore if empty
+  (echo "$line" | grep -q "^$") && continue
+
+  # get channel id
+  channel_id="$(echo "$line" | cut -d' ' -f1)"
+  # get lastest video id
+  lastest="$(curl -s "$feed_url$channel_id" | grep "videoId" | head -n 1 | sed "s/.*>\(\S*\)<.*/\1/")"
+
+  # check the channel is in the cache
+  if grep -q "$channel_id" "$cache"; then
+    # get previous video id
+    prev="$(grep "$channel_id" "$cache" | cut -d' ' -f2)"
+
+    if [ "$prev" != "$lastest" ]; then
+      # update cache
+      sed -i "s/$channel_id .*/$channel_id $lastest/" "$cache"
+
+      # get channel name
+      channel_name="$(echo "$line" | sed 's/\S* //')"
+      # get video name
+      video_name="$(curl -s "$feed_url$channel_id" | grep "media:title" | head -n1 | sed "s/.*>\(.*\)<.*/\1/")"
+
+      # send notification
+      if which dunstify >/dev/null; then
+        (
+        # dunst have action support
+        case "$(dunstify --action="default,Reply" "$channel_name has new video!" "$video_name")" in
+          "default")
+            mpv "https://youtu.be/$lastest"
+            ;;
+        esac
+        ) &
+      else
+        notify-send "$channel_name has new video!" "$video_name\nhttps://youtu.be/$lastest"
+      fi
+
+    fi
+
+  else
+    # if the channel is new, add it in cache
+    echo "$channel_id $lastest" >> "$cache"
+  fi
+
+done <"$subscriptions"

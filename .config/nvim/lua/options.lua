@@ -37,7 +37,7 @@ Opt.updatetime = 100
 -- Opt.clipboard = 'unnamedplus'
 
 -- Special Char Visualization --
-Opt.showbreak = '↪'
+-- Opt.showbreak = '↪'
 Opt.fillchars='eob: '    -- hide '~' that fills in blank line
 if vim.o.filetype ~= 'dashboard' then
   vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column

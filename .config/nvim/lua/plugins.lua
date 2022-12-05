@@ -209,10 +209,10 @@ return packer.startup(function(use)
     ft = { 'markdown' }
   }
 
-  -- use { -- <C-t> to call a terminal --
-  --   'akinsho/toggleterm.nvim',
-  --   config = conf 'toggleterm'
-  -- }
+  use { -- <C-t> to call a terminal --
+    'akinsho/toggleterm.nvim',
+    config = conf 'toggleterm'
+  }
 
   -- use { -- Tmux --
   --   "aserowy/tmux.nvim",

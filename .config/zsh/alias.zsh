@@ -1,3 +1,5 @@
+abbr o="xdg-open"
+
 abbr sp="sudo pacman"
 abbr sps="sudo pacman -S"
 
@@ -16,6 +18,7 @@ abbr py="python3"
 abbr rc='rsync -vhP'
 abbr syncb='syncthing serve --browser-only'
 abbr nb='newsboat'
+abbr slidev='npx slidev'
 
 
 # Confirm before overwriting something

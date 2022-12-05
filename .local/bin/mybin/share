@@ -1,0 +1,27 @@
+#!/bin/sh
+
+host='0x0.st'
+
+# use `fd` if have
+if [ -x "$(which fd)" ]; then
+  findcmd="fd . $PWD -t f"
+else
+  findcmd="find $PWD -type f"
+fi
+
+# show '~' or '.' instead of full path
+if [ "$PWD" = "$HOME" ]; then
+  file="$($findcmd | sed "s#^$HOME#~#" |
+    dmenu -i -l 25 -p "Pick a File" | sed "s#^~#$HOME#")"
+else
+  pwd="$(echo "$PWD" | sed "s#^$HOME#~#")"
+  file="$($findcmd | sed "s#^$PWD#.#" |
+    dmenu -i -l 25 -p "Pick a File from $pwd" | sed "s#^\.#$PWD#")"
+fi
+[ -z "$file" ] && exit 0
+
+url="$(curl -F "file=@$file" "$host")"
+
+echo "$url" | xclip -selection clipboard
+echo "Your file ${file##*/} now in '$url'"
+notify-send "0x0.st" "Your file '${file##*/}' now in '$url'"

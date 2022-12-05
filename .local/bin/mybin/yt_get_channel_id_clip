@@ -1,0 +1,8 @@
+#!/bin/sh
+
+url="$(xclip -o)"
+
+id="$(yt_get_channel_id "$url")"
+
+echo "$id" | xclip -i -selection c
+notify-send "Channel id copied" "$url\n$id"

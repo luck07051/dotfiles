@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# pdf-decrypt password /path/to/pdf
+
+if [ -z "$3" ] || [ "$2" = "$3" ]; then
+  opt='--replace-input'
+  qpdf "$opt" -password="$1" -decrypt "$2"
+else
+  qpdf "$opt" -password="$1" -decrypt "$2" "$3"
+fi

@@ -3,3 +3,5 @@
 killall fcitx5
 rime_deployer --build ~/.local/share/fcitx5/rime /usr/share/rime-data ~/.local/share/fcitx5/rime/build
 fcitx5 -d &
+
+notify-send "rime" "Rebuild done."

@@ -7,7 +7,7 @@ dmenu_path() {
 
 TERM="$TERMINAL -e sh -c"
 
-RUN="$(dmenu_path | dmenu -i -p "RUN" "$@")"
+RUN="$(dmenu_path | dmenu -i -F -p "RUN" "$@")"
 
 case "$RUN" in
   # run command in terminal if end with ';'

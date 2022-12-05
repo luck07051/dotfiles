@@ -33,9 +33,10 @@ Au('WinLeave', { command = 'setlocal nocursorline' })
 Au('BufWritePost',
   { pattern = { 'xresources', '.Xresources' },
     command = [[ !xrdb -merge %; $XDG_CONFIG_HOME/X11/sync_xrdb ]] })
-Au('BufWritePost',
-  { pattern = { '*newsboat/urls' },
-    command = [[ !%:p:h/syncrss ]] })
+
+--Au('BufWritePost',
+--  { pattern = { '*newsboat/urls' },
+--    command = [[ !%:p:h/syncrss ]] })
 
 
 -- 4 width indent for yt-local
