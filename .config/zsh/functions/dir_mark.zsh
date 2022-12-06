@@ -33,5 +33,5 @@ function add_dir() {
 
 zle -N _dirmark_keybind
 
-bindkey -M viins ';' _dirmark_keybind
+bindkey ';' _dirmark_keybind
 bindkey -M vicmd ';' _dirmark_keybind

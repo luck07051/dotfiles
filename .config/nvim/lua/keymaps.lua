@@ -106,26 +106,6 @@ Keymap("n", "<Leader>zc", function()
   end
 end, Silent)
 
--- Create a terminal if not have one --
-Keymap('n', '<Leader>tt', function() vim.cmd [[
-  if !exists("t:terminal_id") || !win_gotoid(t:terminal_id)
-    belowright 15%split term://$SHELL
-    let t:terminal_id = win_getid()
-  endif
-]]
-end, Silent)
-
--- Goto terminal and exec last command --
-Keymap('n', '<Leader>te', function() vim.cmd [[
-  let t:cur_win_id = win_getid()
-  if exists("t:terminal_id") && win_gotoid(t:terminal_id)
-    call win_gotoid(t:terminal_id)
-    call feedkeys("a\<Up>\<CR>\<C-\>\<C-N>G\<C-W>p")
-  endif
-]]
-end, Silent)
-
-
 -- Alias for command mode --
 local function cabbrev(lhs, rhs) -- {{{
   -- only working on ':' mode

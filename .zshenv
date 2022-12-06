@@ -7,7 +7,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 # export XDG_RUNTIME_DIR=
 
 #==================== Bin Paths ====================#
-# Add ~/.local/bin and its subdir to path
+# Add ~/.local/bin and it's subdir to path
 export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//g')"
 
 [ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env

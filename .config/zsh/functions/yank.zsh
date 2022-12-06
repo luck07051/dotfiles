@@ -12,5 +12,5 @@ function _yank(){
 
 zle -N _yank
 
-bindkey -M viins '^Y' _yank
+bindkey '^Y' _yank
 bindkey -M vicmd '^Y' _yank

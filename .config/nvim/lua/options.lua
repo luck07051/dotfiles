@@ -37,6 +37,8 @@ Opt.updatetime = 100
 -- Opt.clipboard = 'unnamedplus'
 
 -- Special Char Visualization --
+Opt.list = true
+Opt.listchars = { tab = '▸ ' }
 -- Opt.showbreak = '↪'
 Opt.fillchars='eob: '    -- hide '~' that fills in blank line
 if vim.o.filetype ~= 'dashboard' then

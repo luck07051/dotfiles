@@ -1,14 +1,11 @@
-abbr o="xdg-open"
+abbr o="open"
 
 abbr sp="sudo pacman"
 abbr sps="sudo pacman -S"
 
 abbr v="vim"
-abbr ww="vim ~/vimwiki/index.md"
 abbr n="vim ~/notes/index.md"
-abbr m="vim ~/memo.md"
 
-abbr c="config"
 abbr cs="config status"
 abbr ca="config add"
 
@@ -44,15 +41,11 @@ fi
 # use bare Git repository to manage dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-# cd
-alias z-='z -'
-alias z.='z ..'
-
 # grep
 alias grep="grep --color=auto"
 
+
 # Fix config file path
-# Use $XINITRC variable if file exists.
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 alias yarn="yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config'"

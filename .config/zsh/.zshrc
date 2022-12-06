@@ -1,20 +1,20 @@
+# vim:foldmethod=marker:foldlevel=0
+
 unsetopt autocd beep        # No beep sound
 set -o ignoreeof            # Prevent <C-D> to colse window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
-# The Function
-function zsh_add_fun() { #{{{
-  file="$ZDOTDIR/functions/$1.zsh"
-  if [ -f "$file" ]; then
-    source $file
-  fi
+# Source function
+function zsh_add_file() { #{{{
+  [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+#}}}
+function zsh_add_util() { #{{{
+  file="functions/$1.zsh"
+  zsh_add_file "$file"
 }
 #}}}
 function zsh_add_plug() { #{{{
-  function zsh_add_file() {
-    [[ -f "$ZDOTDIR/$1" ]] && source "$ZDOTDIR/$1"
-  }
-
   PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
   if [[ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]]; then
     # For plugins
@@ -40,18 +40,11 @@ export KEYTIMEOUT=1
 bindkey "^?" backward-delete-char   # Let backspace work normal
 bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 
-# Edit line in vim by Ctrl-e:
+# Edit line in vim by <C-e>:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 bindkey -M vicmd '^e' edit-command-line
 
-
-
-# Alias
-zsh_add_fun abbr
-# zsh_add_plug "olets/zsh-abbr"
-source "$ZDOTDIR/alias.zsh"
-[ -f "$ZDOTDIR/local_alias.zsh" ] && source "$ZDOTDIR/local_alias.zsh"
 
 # Prompt
 if [ -x "$(which starship)" ]; then
@@ -65,48 +58,30 @@ fi
   eval "$(zoxide init zsh --cmd cd)"
 
 
+# Alias
+zsh_add_util abbr
+zsh_add_file "alias.zsh"
+zsh_add_file "local_alias.zsh"
 
-# Functions #
-zsh_add_fun lf                # lf with several setup
-zsh_add_fun nvim_man          # using nvim to read `man`
-zsh_add_fun dir_mark          # goto dirmark
-# zsh_add_fun fzf_local         # open or cd to selected
-zsh_add_fun fzf_cd            # browser dir with fzf
-zsh_add_fun yank              # yank prev command
-# zsh_add_fun auto_ls           # ls when $PWD changed
+# Util
+zsh_add_util lf                # lf with several setup
+zsh_add_util nvim_man          # using nvim to read `man`
+zsh_add_util yank              # <C-y> to yank prev command
+# zsh_add_util auto_ls           # run ls when $PWD changed
 
-
-# Plugins #
+# Plugins
 zsh_add_plug "Aloxaf/fzf-tab"
 zsh_add_plug "zsh-users/zsh-completions"
 # zsh_add_plug "zsh-users/zsh-autosuggestions"
+#   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
+#   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
+#   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"
 
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
-# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
-
-
-# swallow
-bindkey '^X^m' accept-line-swallow
-zle -N accept-line-swallow acceptandswallow
-acceptandswallow() {
-    dwmswallow $WINDOWID
-    zle accept-line
+# Functions
+ot() {
+  setsid -f "$@" >/dev/null 2>&1
 }
-
-# function sconda() {
-#   # >>> conda initialize >>>
-#   # !! Contents within this block are managed by 'conda init' !!
-#   __conda_setup="$('/home/ui/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-#   if [ $? -eq 0 ]; then
-#       eval "$__conda_setup"
-#   else
-#       if [ -f "/home/ui/anaconda3/etc/profile.d/conda.sh" ]; then
-#           . "/home/ui/anaconda3/etc/profile.d/conda.sh"
-#       else
-#           export PATH="/home/ui/anaconda3/bin:$PATH"
-#       fi
-#   fi
-#   unset __conda_setup
-#   # <<< conda initialize <<<
-# }
+sa() {
+  devour "$@"
+}

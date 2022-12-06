@@ -4,30 +4,33 @@ return function()
   toggleterm.setup({
     size = 20,
     open_mapping = [[<c-t>]],
-    hide_numbers = true,
-    shade_filetypes = {},
-    shade_terminals = true,
-    shading_factor = 2,
-    start_in_insert = true,
-    insert_mappings = true,
-    persist_size = true,
     direction = "float",
-    close_on_exit = true,
-    shell = vim.o.shell,
-    float_opts = {
-      border = "curved",
-      winblend = 0,
-      highlights = {
-        border = "Normal",
-        background = "Normal",
+    highlights = {
+      Normal = {
+        link = "Normal",
+      },
+      NormalFloat = {
+        link = 'NormalFloat'
+      },
+      FloatBorder = {
+        link = "FloatBorder",
       },
     },
   })
 
-  local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+  Keymap('n', '<Leader>th', ':ToggleTerm size=15 direction=horizontal<CR>', Silent)
+  Keymap('n', '<Leader>tf', ':ToggleTerm direction=float<CR>', Silent)
+  Keymap('n', '<Leader>te', ':TermExec cmd="!!"<CR>', Silent)
 
-  function _lazygit_toggle()
-    lazygit:toggle()
-  end
+
+  local Terminal  = require('toggleterm.terminal').Terminal
+
+  -- LazyGit
+  local lazygit = Terminal:new({
+    cmd = "lazygit",
+    hidden = true,
+  })
+  function _lazygit_toggle() lazygit:toggle() end
+  Keymap('n', '<Leader>git', ':lua _lazygit_toggle()<CR>', Silent)
+
 end

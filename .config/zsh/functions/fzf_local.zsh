@@ -55,5 +55,5 @@ function _fzflocal_keybind() {
 
 zle -N _fzflocal_keybind
 
-bindkey -M viins ' ' _fzflocal_keybind
+bindkey ' ' _fzflocal_keybind
 bindkey -M vicmd ' ' _fzflocal_keybind

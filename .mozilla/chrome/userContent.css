@@ -14,6 +14,7 @@
 body.dark {
   --main-background: var(--bg-color) !important;
   --main-foreground: var(--fg-color) !important;
+  --link-foreground: rgb(102, 162, 209) !important;
 }
 
 /* invert pdf reader color */
