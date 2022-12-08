@@ -1,3 +1,4 @@
+abbr c="cd"
 abbr o="open"
 
 abbr sp="sudo pacman"
@@ -16,6 +17,7 @@ abbr rc='rsync -vhP'
 abbr syncb='syncthing serve --browser-only'
 abbr nb='newsboat'
 abbr slidev='npx slidev'
+abbr lzg='lazygit'
 
 
 # Confirm before overwriting something

@@ -6,9 +6,10 @@
 Au('BufEnter', { command = [[ set formatoptions-=cro ]] })
 
 -- Specify indent width by filetype
-Au('FileType',
-  { pattern = { 'c', 'h', 'cpp' },
-    command = [[ setlocal sw=4 ts=4 sts=4 ]] })
+Au('FileType', {
+  pattern = { 'c', 'h', 'cpp' },
+  command = [[ setlocal sw=4 ts=4 sts=4 ]]
+})
 
 -- Delete trailing spaces and extra line when save file
 local DeleteExtraSpaces = function() --{{{
@@ -18,7 +19,8 @@ local DeleteExtraSpaces = function() --{{{
     %s/\n\+\%$//e
     execute "to ".b:nline
   ]]
-end --}}}
+end
+--}}}
 Au('BufWrite', { callback = DeleteExtraSpaces })
 
 -- Setting for terminal mode
@@ -29,17 +31,27 @@ Au('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
 Au('WinEnter', { command = 'setlocal cursorline' })
 Au('WinLeave', { command = 'setlocal nocursorline' })
 
+
+
 -- Update xresource when write the xresource file
-Au('BufWritePost',
-  { pattern = { 'xresources', '.Xresources' },
-    command = [[ !xrdb -merge %; $XDG_CONFIG_HOME/X11/sync_xrdb ]] })
-
---Au('BufWritePost',
---  { pattern = { '*newsboat/urls' },
---    command = [[ !%:p:h/syncrss ]] })
+Au('BufWritePost', {
+  pattern = { 'xresources', '.Xresources' },
+  command = [[ !xrdb -merge %; $XDG_CONFIG_HOME/X11/sync_xrdb ]]
+})
 
 
--- 4 width indent for yt-local
-Au('BufEnter',
-  { pattern = { '*/yt-local/*', '*/youtube-local/*' },
-    command = [[ setlocal sw=4 ts=4 sts=4 ]] })
+-- 4 width indent for 'yt-local'
+Au('BufEnter', {
+  pattern = { '*/yt-local/*', '*/youtube-local/*' },
+  command = [[ setlocal sw=4 ts=4 sts=4 ]]
+})
+
+
+-- use marker fold in nvim config file
+Au('BufEnter', {
+  pattern = { '*/nvim/*' },
+  command = [[
+     set foldmethod=marker
+     set foldlevel=0
+  ]]
+})

@@ -87,8 +87,6 @@ return function()
       end,
     },
 
-    --experimental = { ghost_text = true },
-
     snippet = {
       expand = function(args)
         -- For luasnip --

@@ -1,8 +1,8 @@
 # rss source
-urls-source "miniflux"
-miniflux-url `gpg --decrypt ~/.config/newsboat/secret/url.gpg`
-miniflux-login `gpg --decrypt ~/.config/newsboat/secret/login.gpg`
-miniflux-password `gpg --decrypt ~/.config/newsboat/secret/password.gpg`
+urls-source "freshrss"
+freshrss-url `gpg --decrypt ~/.config/newsboat/secret/url.gpg`
+freshrss-login `gpg --decrypt ~/.config/newsboat/secret/login.gpg`
+freshrss-password `gpg --decrypt ~/.config/newsboat/secret/password.gpg`
 
 # keybind
 bind-key j down

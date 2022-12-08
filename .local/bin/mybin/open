@@ -1,14 +1,29 @@
 #!/bin/sh
 
-case $(file --mime-type "$@" -bL) in
-   # Check for the mimetype of your file (This is POSIX regex)
-   video/* | audio/* | image/gif)
-      # Launch using your favorite application
+case $(file --mime-type "$1" -bL) in
+
+   video/* | audio/*)
       devour mpv "$@"
       ;;
-   # So on and so forth...
+
+   image/*)
+      devour nsxiv "$@"
+      ;;
+
    application/pdf | application/postscript)
       devour zathura "$@"
       ;;
-   *) exit 1 ;;
+
+   application/*wordprocessingml.document* )
+      devour libreoffice "$@"
+      ;;
+
+  text/*)
+      nvim "$@"
+      ;;
+
+   *)
+     echo "File type not support!"
+     exit 1
+     ;;
 esac

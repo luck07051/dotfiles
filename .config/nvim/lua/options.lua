@@ -26,7 +26,7 @@ Opt.wildignorecase = true
 Opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
 Opt.path:append('**')
 Opt.pumheight = 10
--- Opt.inccommand = 'split'
+Opt.inccommand = 'split'
 
 -- Msic --
 Opt.splitbelow = true
@@ -40,8 +40,33 @@ Opt.updatetime = 100
 Opt.list = true
 Opt.listchars = { tab = '▸ ' }
 -- Opt.showbreak = '↪'
-Opt.fillchars='eob: '    -- hide '~' that fills in blank line
+Opt.fillchars='eob: '    -- disable filler '~' at blank line
+
 if vim.o.filetype ~= 'dashboard' then
   vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column
   vim.fn.matchadd('ColorColumn', '\\s$', 100)     -- Show extra space
 end
+
+-- Fold --
+Opt.foldlevel = 9999
+Opt.foldmethod = 'expr'
+Opt.foldexpr = 'nvim_treesitter#foldexpr()'
+Opt.foldtext = 'MyFoldText()'
+vim.cmd [[
+function! MyFoldText() "{{{
+    let foldedlinecount = '[ ' . (v:foldend - v:foldstart) . ' ]'
+    let line = getline(v:foldstart)
+    " add end of fold
+    let line = line . ' ... ' . trim(getline(v:foldend))
+    " remove marker
+    let line = substitute(line, '\s*\([#"]\|\(--\)\|\(//\)\)\?\s*{{'.'{\s*', ' ', '')
+    let line = substitute(line, '\s*\([#"]\|\(--\)\|\(//\)\)\?\s*}}'.'}\s*', '', '')
+
+    let colwidth = &number * &numberwidth + (&signcolumn=='yes'?1:0) * 2 + &foldcolumn
+    let displaywidth = winwidth(0) - colwidth
+
+    let line = strpart(line, 0, displaywidth - len(foldedlinecount) - 8)
+    let fillcharcount = displaywidth - strdisplaywidth(line) - len(foldedlinecount)
+    return line . repeat(' ', fillcharcount-2) . foldedlinecount . '  '
+endfunction "}}}
+]]

@@ -234,13 +234,13 @@ return packer.startup(function(use)
     end
   }
 
-  use {
-    'kevinhwang91/nvim-ufo',
-    config = conf 'ufo',
-    requires = {
-      'kevinhwang91/promise-async'
-    }
-  }
+  -- use {
+  --   'kevinhwang91/nvim-ufo',
+  --   config = conf 'ufo',
+  --   requires = {
+  --     'kevinhwang91/promise-async'
+  --   }
+  -- }
 
 
   ------------------------------

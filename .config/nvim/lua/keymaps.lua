@@ -12,11 +12,19 @@ Keymap('', ';', ':')
 Keymap('', ':', ';')
 Keymap('n', 'q;', 'q:')
 
--- Quicker move --
+-- Move Quickly --
 Keymap('', '<C-E>', '3<C-E>')
 Keymap('', '<C-Y>', '3<C-Y>')
 
--- Paste in visual mode but not change register --
+-- Copy with clipboard --
+Keymap('', '<Leader>y', '"+y')
+Keymap('', '<Leader>Y', '"+y$')
+Keymap('', '<Leader>p', '"+p')
+Keymap('', '<Leader>P', '"+P')
+Keymap('v', '<C-c>', '"+y')
+Keymap('v', '<C-v>', '"+p')
+
+-- Paste in visual mode do not change register --
 Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
 
@@ -24,23 +32,8 @@ Keymap('v', 'gp', '"_d"+P')
 Keymap('n', 's', ':%s/')
 Keymap('v', 's', ':s/')
 
--- Delete with black hole --
-Keymap('', '<Leader>d', '"_d')
-Keymap('', '<Leader>D', '"_D')
-
--- Copy paste with system clipboard --
--- (y/p to + (or *) register)
--- Keymap('', '<Leader>y', '"+y')
--- Keymap('', '<Leader>Y', '"+y$')
--- Keymap('', '<Leader>p', '"+p')
--- Keymap('', '<Leader>P', '"+P')
-Keymap('v', '<C-c>', '"+y')
-Keymap('v', '<C-v>', '"+p')
-
 -- Copy all file to clipboard --
 Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
-
-Keymap('n', '<Leader>=', ':lua vim.lsp.buf.format()<CR>')
 
 -- Wizard --
 Keymap('n', '<Leader>r', '!!$SHELL<CR>')
@@ -50,8 +43,8 @@ Keymap('v', '<Leader>r', '!$SHELL<CR>')
 Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Compiler script --
-Keymap('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
-Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
+-- Keymap('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
+-- Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
 
 -- Goback prev file --
 Keymap('n', '<BS>', ':edit #<CR>', Silent)
@@ -62,39 +55,20 @@ Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
 -- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
 
 
--- Navigation windows --
-Keymap('n', '<A-h>', '<C-w>h')
-Keymap('n', '<A-j>', '<C-w>j')
-Keymap('n', '<A-k>', '<C-w>k')
-Keymap('n', '<A-l>', '<C-w>l')
-Keymap('i', '<A-h>', '<C-\\><C-N><C-w>h')
-Keymap('i', '<A-j>', '<C-\\><C-N><C-w>j')
-Keymap('i', '<A-k>', '<C-\\><C-N><C-w>k')
-Keymap('i', '<A-l>', '<C-\\><C-N><C-w>l')
-Keymap('t', '<A-h>', '<C-\\><C-N><C-w>h')
-Keymap('t', '<A-j>', '<C-\\><C-N><C-w>j')
-Keymap('t', '<A-k>', '<C-\\><C-N><C-w>k')
-Keymap('t', '<A-l>', '<C-\\><C-N><C-w>l')
--- Keymap('n', '<A-j>', '<C-w>w')
--- Keymap('n', '<A-k>', '<C-w>W')
--- Keymap('i', '<A-j>', '<C-\\><C-N><C-w>w')
--- Keymap('i', '<A-k>', '<C-\\><C-N><C-w>W')
--- Keymap('t', '<A-j>', '<C-\\><C-N><C-w>w')
--- Keymap('t', '<A-k>', '<C-\\><C-N><C-w>W')
-
--- Resize windows --
-Keymap('n', '<A-H>', '3<C-w><')
-Keymap('n', '<A-J>', '3<C-w>+')
-Keymap('n', '<A-K>', '3<C-w>-')
-Keymap('n', '<A-L>', '3<C-w>>')
-Keymap('i', '<A-H>', '<C-\\><C-N><C-w><gi')
-Keymap('i', '<A-J>', '<C-\\><C-N><C-w>+gi')
-Keymap('i', '<A-K>', '<C-\\><C-N><C-w>-gi')
-Keymap('i', '<A-L>', '<C-\\><C-N><C-w>>gi')
-Keymap('t', '<A-H>', '<C-\\><C-N><C-w><gi')
-Keymap('t', '<A-J>', '<C-\\><C-N><C-w>+i')
-Keymap('t', '<A-K>', '<C-\\><C-N><C-w>-i')
-Keymap('t', '<A-L>', '<C-\\><C-N><C-w>>i')
+-- Navigate windows --
+local function win_focus_resize(dir, cmd)
+  Keymap('n', '<A-'..dir..'>', '<C-w>'..dir)
+  Keymap('i', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
+  Keymap('t', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
+  dir = string.upper(dir)
+  Keymap('n', '<A-'..dir..'>', '3<C-w>'..cmd)
+  Keymap('i', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'gi')
+  Keymap('t', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'i')
+end
+win_focus_resize('h', '<')
+win_focus_resize('j', '+')
+win_focus_resize('k', '-')
+win_focus_resize('l', '>')
 
 
 -- Switch conceal --
@@ -107,16 +81,12 @@ Keymap("n", "<Leader>zc", function()
 end, Silent)
 
 -- Alias for command mode --
-local function cabbrev(lhs, rhs) -- {{{
+local function cabbrev(lhs, rhs)
   -- only working on ':' mode
   local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"
   vim.cmd(command:format(lhs, lhs, rhs, lhs))
 end
 
--- }}}
-
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('za', '!zathura')
 cabbrev('pa', 'so % \\| PackerCompile')
-
-Keymap('n', '<Leader><Leader>ng', ':!sudo rm -rf /usr/share/nginx/html<CR>:!sudo cp -rf /home/ui/.local/share/web /usr/share/nginx/html<CR>')

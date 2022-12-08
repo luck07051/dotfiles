@@ -96,12 +96,12 @@ return function()
   end
 
   map('<M-e>', 'find_files')
+  map('<Leader>fj', 'projects')
   map('<Leader>fb', 'buffers')
   map('<Leader>fs', 'grep_string')
   map('<Leader>fq', 'quickfix')
 
-  map('<Leader>ge', 'diagnostics')
-  -- LSP stuff
+  map('<Leader>gd', 'diagnostics')
   map('gd', 'lsp_definitions')
   map('gD', 'lsp_type_definitions')
   map('gi', 'lsp_implementations')
@@ -111,13 +111,12 @@ return function()
   Keymap("c", "<c-r><c-r>", "<Plug>(TelescopeFuzzyCommandSearch)", { noremap = false, nowait = true })
 
   -- lists function names, variables
-  map('<leader>ft', 'treesitter')
+  map('<Leader>ft', 'treesitter')
 
-  map('<leader>bb', 'builtin')
-  map('<leader>br', 'reloader')
-  map('<leader>bs', 'symbols')
+  map('<Leader>bb', 'builtin')
+  map('<Leader>br', 'reloader')
+  map('<Leader>bs', 'symbols')
 
-  map('<leader>fj', 'projects')
 
 
   Find_file_under_cursor = function() -- {{{
@@ -138,6 +137,6 @@ return function()
       },
     })
   end -- }}}
-  Keymap('n', 'gf', ':lua Find_file_under_cursor()<CR>', Silent)
+  -- Keymap('n', 'gf', ':lua Find_file_under_cursor()<CR>', Silent)
 
 end
