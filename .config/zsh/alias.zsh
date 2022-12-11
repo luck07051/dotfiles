@@ -1,11 +1,14 @@
 abbr c="cd"
 abbr o="open"
 
-abbr sp="sudo pacman"
-abbr sps="sudo pacman -S"
+abbr c.="cd .."
+abbr c-="cd -"
 
 abbr v="vim"
 abbr n="vim ~/notes/index.md"
+
+abbr sp="sudo pacman"
+abbr sps="sudo pacman -S"
 
 abbr cs="config status"
 abbr ca="config add"

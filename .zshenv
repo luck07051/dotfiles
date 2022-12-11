@@ -1,9 +1,16 @@
 #==================== XDG Paths ====================#
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_BIN_HOME=$HOME/.local/bin
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_BIN_HOME="$HOME/.local/bin"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+export XDG_DOWNLOAD_DIR="$HOME/dl"
+export XDG_DOCUMENTS_DIR="$HOME/doc"
+export XDG_MUSIC_DIR="$HOME/mu"
+export XDG_PICTURES_DIR="$HOME/img"
+export XDG_VIDEOS_DIR="$HOME/vid"
+
 # export XDG_RUNTIME_DIR=
 
 #==================== Bin Paths ====================#
@@ -20,13 +27,13 @@ export TERMINAL='alacritty'
 export TERM='alacritty'
 export BROWSER='firefox'
 
-export LANG=en_US.UTF-8
+export LANG='en_US.UTF-8'
 
 # zsh
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTSIZE=100000
 export SAVEHIST=100000
-export HISTFILE=$XDG_CACHE_HOME/history
+export HISTFILE="$XDG_CACHE_HOME/history"
 export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
 
 # FZF
@@ -74,3 +81,5 @@ export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
 # conda
 export CONDARC=$XDG_CONFIG_HOME/conda/condarc
 export test5="test"
+# docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker

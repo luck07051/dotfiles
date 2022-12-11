@@ -1,3 +1,0 @@
-#!/bin/sh
-
-curl -s "$1" | grep '"channelId" content="' | sed 's/.*"channelId" content="\(\S*\)".*/\1/'

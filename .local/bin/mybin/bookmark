@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BOOKMARKS_FILE="$HOME/bookmarks/bookmark"
+BOOKMARKS_FILE="${1:-$HOME/bm/bookmark}"
 
 chosen="$(sed "/^\s*\(#\)\|\(--\)/d; /^\$/d" "$BOOKMARKS_FILE" \
     | dmenu -i -l 20 -p 'OPEN')"

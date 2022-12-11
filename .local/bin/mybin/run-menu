@@ -18,5 +18,3 @@ case "$RUN" in
 
   *) $RUN ;;
 esac
-
-# rofi -show combi

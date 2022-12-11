@@ -25,7 +25,8 @@ picom.inactive_opacity: 1
 dwm.maincolor: main
 dwm.bgaltcolor: #444444
 dwm.fgaltcolor: #6c6c6c
-dwm.gappx: 0
+dwm.gappx: 5
+dwm.showbar: 0
 
 dmenu.normfgcolor: fg
 dmenu.normbgcolor: bg
