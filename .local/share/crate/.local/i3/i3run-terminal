@@ -1,9 +1,0 @@
-#!/bin/bash
-
-tit="$1"
-col="$2"
-lin="$3"
-shift 3
-
-i3run --title "$tit" -- \
-    i3-terminal "$tit" "$col" "$lin" "$@"
