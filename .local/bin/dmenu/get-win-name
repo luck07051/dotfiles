@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xprop -root _NET_CLIENT_LIST | sed 's/^.\+# //; s/, \+/\n/g' | sort | uniq |
+xargs -I {} xprop -id {} _NET_WM_NAME | sed 's/^.\+ = //; s/^"//; s/"$//'

@@ -24,6 +24,9 @@ Keymap('', '<Leader>P', '"+P')
 Keymap('v', '<C-c>', '"+y')
 Keymap('v', '<C-v>', '"+p')
 
+-- Copy whole file to clipboard --
+Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
+
 -- Paste in visual mode do not change register --
 Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
@@ -32,8 +35,12 @@ Keymap('v', 'gp', '"_d"+P')
 Keymap('n', 's', ':%s/')
 Keymap('v', 's', ':s/')
 
--- Copy all file to clipboard --
-Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
+-- Center the search --
+Keymap('n', 'n', 'nzzzv')
+Keymap('n', 'N', 'Nzzzv')
+Keymap('c', '<CR>', function()
+  return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>'
+end, { expr = true })
 
 -- Wizard --
 Keymap('n', '<Leader>r', '!!$SHELL<CR>')

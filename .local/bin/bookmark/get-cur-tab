@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case "$(bt active | wc -l)" in
+  0)
+    echo "no browser opened" >&2
+    exit 2
+    ;;
+  1)
+    result="$(bt list | grep -w "$(bt active | cut -f1)")"
+    ;;
+  *)
+    focused_window_name="$(xdotool getwindowname "$(xdotool getwindowfocus)" | sed 's/ — .*$//')"
+    result="$(bt list | grep -w "$focused_window_name")"
+    [ -z "$result" ] && echo "too many browser" >&2; exit 2
+    ;;
+esac
+
+echo "$result" | cut -f 2,3

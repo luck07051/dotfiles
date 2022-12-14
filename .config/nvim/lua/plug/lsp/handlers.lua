@@ -43,11 +43,18 @@ M.setup = function() --{{{
     }
   })
 
-end
---}}}
+end --}}}
 
 -- on attach
 M.on_attach = function(client, bufnr)
+
+  if not pcall(require, 'telescope') then
+    Keymap('n', '<space>gd', vim.diagnostic.setloclist)
+    Keymap('n', 'gd', vim.lsp.buf.definition)
+    Keymap('n', 'gD', vim.lsp.buf.declaration)
+    Keymap('n', 'gi', vim.lsp.buf.implementation)
+    Keymap('n', 'gr', vim.lsp.buf.references)
+  end
 
   Keymap('n', '<Leader>d', vim.diagnostic.open_float)
   Keymap('n', '[d', vim.diagnostic.goto_prev)
@@ -66,7 +73,7 @@ M.on_attach = function(client, bufnr)
   Keymap('n', '<Leader>rn', vim.lsp.buf.rename)
 
   -- Formatting
-  Keymap('n', '<Leader>=', ':lua vim.lsp.buf.format()<CR>')
+  Keymap('n', '<Leader>=', vim.lsp.buf.format)
 
 end
 

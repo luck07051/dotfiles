@@ -1,9 +1,9 @@
 #!/bin/sh
 
- # set wacom area
- if xinput list | grep 'Wacom'; then
-   xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 10132 6332
- fi
+# set wacom area
+if xinput list | grep 'Wacom'; then
+  xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 10132 6332
+fi
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
@@ -23,15 +23,13 @@ while true; do
   xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
   setwallpaper &
 
-  # pidof -q sxhkd || sxhkd &
-  pidof -q dunst || dunst &
+  pidof -q dunst     || dunst &
   pidof -q unclutter || unclutter &
-  pidof -q fcitx5 || fcitx5 -d &
+  pidof -q xcompmgr  || xcompmgr -n &
+  pidof -q fcitx5    || fcitx5 -d &
 
-  # killall picom >/dev/null 2>&1; picom &
-
-  # for `sb-vol`, because my status bar not able to show vol at startup
-  (sleep 2s && kill -36 "$(pidof dwm)") &
+  killall dwmblocks >/dev/null 2>&1; dwmblocks &
+  (sleep 2s && kill -55 "$(pidof dwm)") &
 
   dwm
 

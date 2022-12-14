@@ -1,0 +1,7 @@
+#!/bin/sh
+
+color="$(xcolor)"
+
+echo "$color" | xclip -sel clip
+
+notify-send "Copy!" "$color"

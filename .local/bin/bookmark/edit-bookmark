@@ -1,0 +1,7 @@
+#!/bin/sh
+
+bookmark_file="${1:-$HOME/bm/bookmark}"
+
+get-cur-tab | cut -f2 | xclip -sel clip
+
+"$TERMINAL" -e "$EDITOR" "$bookmark_file"

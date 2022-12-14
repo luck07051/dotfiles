@@ -6,7 +6,7 @@
     width = (0, 300)
     height = 300
     origin = top-right
-    offset = 10x50
+    offset = 20x35
     transparency = 0  # 0 to 100
     padding = 12
     horizontal_padding = 12

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+dirmark_file="${1:-$HOME/bm/dirmark}"
+
+chosen="$(sed '/^\s*#/d; /^$/d' "$dirmark_file" | fzf)"
+[ -z "$chosen" ] && exit
+
+echo "$chosen" | sed "s#^~#$HOME#"

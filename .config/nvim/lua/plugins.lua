@@ -16,14 +16,6 @@ end
 if not pcall(require, 'packer') then return end
 local packer = require 'packer'
 
--- Autocmd that sync packer whenever you save the plugins.lua file
--- vim.cmd [[
---   augroup packer_user_config
---   autocmd!
---   autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]]
-
 local packer_group = vim.api.nvim_create_augroup('packer_user_config', {})
 
 vim.api.nvim_create_autocmd('BufwritePost',
@@ -54,12 +46,8 @@ return packer.startup(function(use)
   use {
     'wbthomason/packer.nvim',
     'lewis6991/impatient.nvim',
-  }
-
-  use { -- Color Scheme -- --{{{
     'luck07051/uima-colors.nvim'
   }
-  --}}}
 
   use { -- Treesitter -- --{{{
     'nvim-treesitter/nvim-treesitter',
@@ -79,7 +67,6 @@ return packer.startup(function(use)
     requires = {
       'williamboman/nvim-lsp-installer',
       'jose-elias-alvarez/null-ls.nvim',
-      'ray-x/lsp_signature.nvim', -- Function hint
     },
     config = conf 'lsp',
   }
@@ -103,20 +90,19 @@ return packer.startup(function(use)
   }
   --}}}
 
+  use { -- Snipptes -- --{{{
+    'L3MON4D3/LuaSnip',
+    config = conf 'luasnip'
+  }
+  --}}}
+
   use { -- Fuzzy Finder -- --{{{
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-file-browser.nvim',
       'ahmedkhalf/project.nvim',
     },
     config = conf 'telescope',
-  }
-  --}}}
-
-  use { -- Snipptes -- --{{{
-    'L3MON4D3/LuaSnip',
-    config = conf 'luasnip'
   }
   --}}}
 
@@ -134,18 +120,6 @@ return packer.startup(function(use)
     config = conf 'lualine',
   }
   --}}}
-
-  -- use { -- Note -- --{{{
-  --   'nvim-neorg/neorg',
-  --   ft = 'norg',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-neorg/neorg-telescope'
-  --   },
-  --   run = ":Neorg sync-parsers", -- install treesitter parser for neorg
-  --   config = conf 'neorg',
-  -- }
-  -- --}}}
 
 
   ---------------------------
@@ -181,7 +155,7 @@ return packer.startup(function(use)
   --    Other Function    --
   --------------------------
 
-  use { -- git sign --
+  use { -- Git sign --
     'lewis6991/gitsigns.nvim',
     config = conf 'gitsigns'
   }
@@ -194,14 +168,9 @@ return packer.startup(function(use)
     config = conf 'zen'
   }
 
-  use { -- scroll animation --
+  use { -- Scroll animation --
     'karb94/neoscroll.nvim',
     config = conf 'neoscroll'
-  }
-
-  use {
-    'ziontee113/neo-minimap',
-    config = conf 'minimap'
   }
 
   use {
@@ -214,12 +183,7 @@ return packer.startup(function(use)
     config = conf 'toggleterm'
   }
 
-  -- use { -- Tmux --
-  --   "aserowy/tmux.nvim",
-  --   config = conf 'tmux'
-  -- }
-
-  use {
+  use { -- Color picker and color highlight --
     'uga-rosa/ccc.nvim',
     config = function()
       require('ccc').setup({
@@ -233,47 +197,6 @@ return packer.startup(function(use)
       Keymap('i', '<A-c>', '<Plug>(ccc-insert)')
     end
   }
-
-  -- use {
-  --   'kevinhwang91/nvim-ufo',
-  --   config = conf 'ufo',
-  --   requires = {
-  --     'kevinhwang91/promise-async'
-  --   }
-  -- }
-
-
-  ------------------------------
-  --    Compiler and Viwer    --
-  ------------------------------
-
-  -- use {
-  --   'lervag/vimtex',
-  --   ft = { 'tex' }
-  -- }
-
-  use { -- Live Edit html/css/js --
-    'turbio/bracey.vim',
-    ft = { 'html', 'css', 'js' },
-    config = function()
-      Keymap('n', '<Leader>le', '<cmd>Bracey<cr>')
-      Keymap('n', '<Leader>ls', '<cmd>BraceyStop<cr>')
-      Keymap('n', '<Leader>lr', '<cmd>BraceyReload<cr>')
-    end,
-    run = 'npm install --prefix server'
-  }
-
-  use {
-    'ellisonleao/glow.nvim'
-  }
-
-  -- use { -- Visualize latex in nvim --
-  --   'jbyuki/nabla.nvim',
-  --   config = function()
-  --     vim.cmd [[nnoremap <leader>na :lua require("nabla").popup()<CR>]]
-  --     vim.cmd [[nnoremap <leader>nv :lua require("nabla").toggle_virt()<CR>]]
-  --   end
-  -- }
 
   if Packer_bootstrap then
     require('packer').sync()

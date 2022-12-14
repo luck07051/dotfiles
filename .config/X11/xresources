@@ -15,7 +15,8 @@
 *.primary:    main
 
 *.font: MesloLGS Nerd Font
-*.alpha: 0.85
+*.font2: Noto Sans CJK TC
+*.alpha: 0.90
 
 picom.corner_radius: 0
 picom.transition_length: 0
@@ -26,17 +27,17 @@ dwm.maincolor: main
 dwm.bgaltcolor: #444444
 dwm.fgaltcolor: #6c6c6c
 dwm.gappx: 5
-dwm.showbar: 0
+dwm.showbar: 1
 
 dmenu.normfgcolor: fg
 dmenu.normbgcolor: bg
 dmenu.selfgcolor: bg
 dmenu.selbgcolor: main
+dmenu.baralpha: 0xe6
 
 st.font: MesloLGS Nerd Font:size=11
 st.cursorColor: fg
-st.shell: /bin/zsh
-st.cwscale: 1.05
+st.cwscale: 0.95
 
 
 ! for font render

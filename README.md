@@ -35,6 +35,7 @@ pipewire-pulse
 pipewire-alsa
 
 (aur) picom-jonaburg-git    # compositor
+xcompmgr                    # compositor
 nitrogen            # wallpaper
 setxkbmap           # uses it to remap capslock to ctrl
 
@@ -241,13 +242,13 @@ downgrade cairo
 Open `about:config` page.
 ```
     toolkit.legacyUserProfileCustomizations.stylesheets
-    layers.acceleration.force-enabled
-    gfx.webrender.all
-    gfx.webrender.enabled
-    layout.css.backdrop-filter.enabled
-    svg.context-properties.content.enabled
-
     layout.css.color-mix.enabled
+
+    layers.acceleration.force-enabled
+
+    <!-- gfx.webrender.all -->
+    <!-- gfx.webrender.enabled -->
+    <!-- svg.context-properties.content.enabled -->
 ```
 Then make sure to enable them all.
 

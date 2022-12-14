@@ -11,7 +11,6 @@ return function()
     File = "",
     Folder = "",
     Reference = "",
-
     Snippet = "",
     Function = "",
     Method = "m",

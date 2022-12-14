@@ -9,7 +9,6 @@ else
   findcmd="find $PWD -type f"
 fi
 
-# show '~' or '.' instead of full path
 if [ "$PWD" = "$HOME" ]; then
   file="$($findcmd | sed "s#^$HOME#~#" |
     dmenu -i -l 25 -p "Pick a File" | sed "s#^~#$HOME#")"

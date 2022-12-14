@@ -34,18 +34,12 @@ Opt.splitright = true
 Opt.swapfile = false
 Opt.updatetime = 100
 -- Opt.linebreak = true
--- Opt.clipboard = 'unnamedplus'
 
 -- Special Char Visualization --
 Opt.list = true
-Opt.listchars = { tab = '▸ ' }
+Opt.listchars = { tab = '▸ ', trail = '·' }
 -- Opt.showbreak = '↪'
 Opt.fillchars='eob: '    -- disable filler '~' at blank line
-
-if vim.o.filetype ~= 'dashboard' then
-  vim.fn.matchadd('ColorColumn', '\\%81v', 100)   -- Highlight 81 column
-  vim.fn.matchadd('ColorColumn', '\\s$', 100)     -- Show extra space
-end
 
 -- Fold --
 Opt.foldlevel = 9999

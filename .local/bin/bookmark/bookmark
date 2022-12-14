@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# pick url in bookmark file, and print to stdout
+
+bookmark_file="${1:-$HOME/bm/bookmark}"
+
+# delete the line start in '#' or '--' and empty line
+chosen="$(sed "/^\s*\(#\)\|\(--\)/d; /^\$/d" "$bookmark_file" |
+  dmenu -i -l 20 -p 'OPEN')"
+
+[ -z "$chosen" ] && exit 1
+
+if grep -qF "$chosen" "$bookmark_file"; then
+  echo "${chosen##* }"
+else
+  engine="$(grep "^\s*--\s*${chosen%% *}\s" "$bookmark_file")"
+  if [ -n "$engine" ]; then
+    echo "${engine##* }" | sed "s/{}/${chosen#* }/g; s/\s/+/g"
+  else
+    engine="$(grep "^\s*--\s*DEFAULT" "$bookmark_file")"
+    echo "${engine##* }" | sed "s/{}/$chosen/g; s/\s/+/g"
+  fi
+fi

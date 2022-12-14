@@ -13,12 +13,12 @@ down() {
   pactl set-sink-volume @DEFAULT_SINK@ -"$STEP"%
 }
 
-mute() {
-  pactl set-sink-mute @DEFAULT_SINK@ 1
+sink_mute() {
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
 }
 
-toggle() {
-  pactl set-sink-mute @DEFAULT_SINK@ toggle
+source_mute() {
+  pactl set-source-mute @DEFAULT_SOURCE@ toggle
 }
 
 switch() {
@@ -32,8 +32,7 @@ _get_default_volume() {
   pactl get-sink-volume @DEFAULT_SINK@ | sed 's/.* \([0-9]*\)% .*/\1/; q'
 }
 
-
 "$@"
 
 # update bar
-kill -36 "$(pidof dwm)"
+kill -55 "$(pidof dwmblocks)"

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+readlater_file="$HOME/bm/readlater"
+browser_open="firefox --new-tab"
+
+add() {
+  cur_tab="$(get-cur-tab)"
+  [ -z "$cur_tab" ] && exit 2
+
+  if grep "$cur_tab" "$readlater_file"; then
+    notify-send "Readlater" "Already had this page!"
+    exit 2
+  fi
+
+  echo "$cur_tab" >>"$readlater_file"
+  notify-send "Readlater" "Add page\n$(echo "$cur_tab" | cut -d';' -f1)"
+}
+
+pop() {
+  chosen="$(column -t -s "$(printf '\t')" "$readlater_file" | tac | dmenu -i -F -l 20 -p "Readlater")"
+  [ -z "$chosen" ] && exit
+
+  url="${chosen##* }"
+
+  $browser_open "$url"
+
+  # rm the item in list
+  url="$(echo "$url" | sed 's#/#\\/#g')"
+  sed -i "/.*\t$url/d" "$readlater_file"
+}
+
+"$@"

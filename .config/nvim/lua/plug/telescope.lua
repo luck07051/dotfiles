@@ -119,24 +119,24 @@ return function()
 
 
 
-  Find_file_under_cursor = function() -- {{{
-    require 'telescope.builtin'.find_files({
-      find_command = { 'fd', vim.fn.expand("<cword>") },
-      on_complete = {
-        function(picker)
-          -- remove this on_complete callback
-          picker:clear_completion_callbacks()
-          -- if we have no match, dont open menu
-          if picker.manager.linked_states.size == 0 then
-            require("telescope.actions").close(picker.prompt_bufnr)
-          -- if we have exactly one match, select it
-          -- elseif picker.manager.linked_states.size == 1 then
-          --   require("telescope.actions").select_default(picker.prompt_bufnr)
-          end
-        end,
-      },
-    })
-  end -- }}}
+  -- Find_file_under_cursor = function() -- {{{
+  --   require 'telescope.builtin'.find_files({
+  --     find_command = { 'fd', vim.fn.expand("<cword>") },
+  --     on_complete = {
+  --       function(picker)
+  --         -- remove this on_complete callback
+  --         picker:clear_completion_callbacks()
+  --         -- if we have no match, dont open menu
+  --         if picker.manager.linked_states.size == 0 then
+  --           require("telescope.actions").close(picker.prompt_bufnr)
+  --         -- if we have exactly one match, select it
+  --         -- elseif picker.manager.linked_states.size == 1 then
+  --         --   require("telescope.actions").select_default(picker.prompt_bufnr)
+  --         end
+  --       end,
+  --     },
+  --   })
+  -- end -- }}}
   -- Keymap('n', 'gf', ':lua Find_file_under_cursor()<CR>', Silent)
 
 end

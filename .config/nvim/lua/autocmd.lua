@@ -2,14 +2,8 @@
 --          AUTOCMD          --
 -------------------------------
 
--- Disable auto comment new lin
+-- Disable auto comment new line
 Au('BufEnter', { command = [[ set formatoptions-=cro ]] })
-
--- Specify indent width by filetype
-Au('FileType', {
-  pattern = { 'c', 'h', 'cpp' },
-  command = [[ setlocal sw=4 ts=4 sts=4 ]]
-})
 
 -- Delete trailing spaces and extra line when save file
 local DeleteExtraSpaces = function() --{{{
@@ -19,8 +13,7 @@ local DeleteExtraSpaces = function() --{{{
     %s/\n\+\%$//e
     execute "to ".b:nline
   ]]
-end
---}}}
+end --}}}
 Au('BufWrite', { callback = DeleteExtraSpaces })
 
 -- Setting for terminal mode
@@ -32,6 +25,14 @@ Au('WinEnter', { command = 'setlocal cursorline' })
 Au('WinLeave', { command = 'setlocal nocursorline' })
 
 
+-- Use marker foldding in nvim config file
+Au('BufEnter', {
+  pattern = { '*/nvim/*' },
+  command = [[
+     set foldmethod=marker
+     set foldlevel=0
+  ]]
+})
 
 -- Update xresource when write the xresource file
 Au('BufWritePost', {
@@ -40,18 +41,30 @@ Au('BufWritePost', {
 })
 
 
--- 4 width indent for 'yt-local'
+-- Indent --
+
+-- Use 4-width indent depand on filetype
+Au('FileType', {
+  pattern = { 'c', 'h', 'cpp' },
+  command = [[ setlocal sw=4 ts=4 sts=4 ]]
+})
+
+-- Use 4-width indent
 Au('BufEnter', {
   pattern = { '*/yt-local/*', '*/youtube-local/*' },
   command = [[ setlocal sw=4 ts=4 sts=4 ]]
 })
 
-
--- use marker fold in nvim config file
+-- Use 8-width indent
 Au('BufEnter', {
-  pattern = { '*/nvim/*' },
+  pattern = { '*/linux/*', '*/suckless/*' },
+  command = [[ setlocal sw=8 ts=8 sts=8 ]]
+})
+
+-- Use tab indent
+Au('BufEnter', {
+  pattern = { '*/linux/*', '*/suckless/*' },
   command = [[
-     set foldmethod=marker
-     set foldlevel=0
+    setlocal noexpandtab
   ]]
 })
