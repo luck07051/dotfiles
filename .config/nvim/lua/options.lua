@@ -41,6 +41,7 @@ Opt.listchars = { tab = '▸ ', trail = '·' }
 -- Opt.showbreak = '↪'
 Opt.fillchars='eob: '    -- disable filler '~' at blank line
 
+
 -- Fold --
 Opt.foldlevel = 9999
 Opt.foldmethod = 'expr'

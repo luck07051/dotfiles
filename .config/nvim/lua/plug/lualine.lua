@@ -2,8 +2,23 @@ return function()
   local lualine = require "lualine"
 
   -- Customize module
+  local function workdir()
+    local dir = vim.fn.getcwd()
+    dir = dir:gsub(os.getenv('HOME'), '~')
+    if dir:len() > 20 then
+      dir = '../' .. dir:match('([^/]*/[^/]*)$')
+    end
+    return ' ' .. dir
+  end
+  local function relative_path()
+    local dir = vim.fn.getcwd()
+    return vim.fn.expand('%:' .. dir .. ':.')
+  end
   local function tabsize()
     return ' '..vim.o.tabstop
+  end
+  local function line_count()
+    return '' .. vim.api.nvim_buf_line_count(0)
   end
 
   lualine.setup {
@@ -18,7 +33,7 @@ return function()
     -- | A | B | C         X | Y | Z |
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = { 'filename' },
+      lualine_b = { relative_path },
       lualine_c = {
         'branch',
         'diff',
@@ -28,10 +43,11 @@ return function()
       },
 
       lualine_x = {
+        -- workdir,
         tabsize,
         'encoding',
         { 'filetype', colored = false },
-        '%L'
+        line_count,
       },
       lualine_y = {},
       lualine_z = { 'progress', 'location' }

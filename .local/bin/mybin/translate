@@ -9,11 +9,11 @@ EOF
 default_opt=":zh-TW"
 
 
-chosen="$(echo "$option" | sed 's/\s*;;.*$//' | dmenu -i -l 20 -p "TRANS")"
-[ -z "$chosen" ] && exit 1
+selected="$(echo "$option" | sed 's/\s*;;.*$//' | dmenu -i -l 20 -p "TRANS")"
+[ -z "$selected" ] && exit 1
 
-tr_arg="$(echo "$option" | grep -F "$chosen" | sed 's/^.*;;\s*//')"
-[ -z "$tr_arg" ] && text="$chosen" && tr_arg="$default_opt"
+tr_arg="$(echo "$option" | grep -F "$selected" | sed 's/^.*;;\s*//')"
+[ -z "$tr_arg" ] && text="$selected" && tr_arg="$default_opt"
 
 [ -z "$text" ] && text="$(dmenu -p "ENTER TEXT" </dev/null)"
 [ -z "$text" ] && text="$(xclip -o)"

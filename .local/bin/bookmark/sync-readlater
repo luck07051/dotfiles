@@ -1,0 +1,17 @@
+#!/bin/sh
+
+readlater="$HOME/bm/readlater"
+cache_readlater="$HOME/.cache/readlater"
+
+: > "$cache_readlater"
+
+printf '{"readlater": [\n' >> "$cache_readlater"
+
+sed 's/"/\\"/g' "$readlater" |
+  sed 's/^\(.*\)\t\(.*\)$/{ "name": "\1", "url": "\2" },/' >> "$cache_readlater"
+
+sed -i '$s/,$//' "$cache_readlater"
+
+printf ']}' >> "$cache_readlater"
+
+rsync -azvP "$cache_readlater" root@uima.xyz:/root/container/dashboard/dashboard-data/readlater.json

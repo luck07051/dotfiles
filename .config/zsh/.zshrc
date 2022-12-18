@@ -39,6 +39,8 @@ bindkey -v
 export KEYTIMEOUT=1
 bindkey "^?" backward-delete-char   # Let backspace work normal
 bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
+bindkey "^J" down-line-or-search
+bindkey "^K" up-line-or-search
 
 # Edit line in vim by <C-e>:
 autoload edit-command-line; zle -N edit-command-line

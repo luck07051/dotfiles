@@ -4,7 +4,7 @@ printf "Beginning upgrade.\\n"
 
 yay -Syu
 
-kill -37 "$(pidof dwm)"
+kill -58 "$(pidof dwmblocks)"
 
 printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
 read -r _

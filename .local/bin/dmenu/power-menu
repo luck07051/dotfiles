@@ -10,11 +10,11 @@ hibernate;  systemctl hibernate
 EOF
 )"
 
-option=$(echo "$list" | sed 's/; .*//g' | dmenu -i -p "POWER")
+option=$(echo "$list" | cut -d';' -f1 | dmenu -i -p "POWER")
 
 # [ -n "$option" ] &&
 # [ "$(printf "No\nYes" | dmenu -i -p "Do you want to $option?")" = "Yes" ] &&
 #   eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//')"
 
 [ -n "$option" ] &&
-  eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//')"
+  eval "$(echo "$list" | grep "$option;" | sed 's/.*;\s\+//')"

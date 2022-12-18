@@ -3,21 +3,24 @@
 # pick url in bookmark file, and print to stdout
 
 bookmark_file="${1:-$HOME/bm/bookmark}"
+searchengine_file="${2:-$HOME/bm/searchengine}"
 
-# delete the line start in '#' or '--' and empty line
-chosen="$(sed "/^\s*\(#\)\|\(--\)/d; /^\$/d" "$bookmark_file" |
+# delete the line start in '#' or empty line
+selected="$(sed "/^\s*#/d; /^\$/d" "$bookmark_file" |
+  column -t -s "$(printf '\t')" |
   dmenu -i -l 20 -p 'OPEN')"
 
-[ -z "$chosen" ] && exit 1
+[ -z "$selected" ] && exit 1
 
-if grep -qF "$chosen" "$bookmark_file"; then
-  echo "${chosen##* }"
+if grep -qw "\(${selected##* }\)$" "$bookmark_file"; then
+  echo "${selected##* }"
 else
-  engine="$(grep "^\s*--\s*${chosen%% *}\s" "$bookmark_file")"
+  engine="$(grep "^${selected%% *}\s" "$searchengine_file" | cut -f2)"
+
   if [ -n "$engine" ]; then
-    echo "${engine##* }" | sed "s/{}/${chosen#* }/g; s/\s/+/g"
+    echo "$engine" | sed "s/{}/${selected#* }/g; s/\s/+/g"
   else
-    engine="$(grep "^\s*--\s*DEFAULT" "$bookmark_file")"
-    echo "${engine##* }" | sed "s/{}/$chosen/g; s/\s/+/g"
+    grep "^DEFAULT" "$searchengine_file" | cut -f2 |
+      sed "s/{}/$selected/g; s/\s/+/g"
   fi
 fi

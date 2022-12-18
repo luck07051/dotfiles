@@ -34,12 +34,6 @@ Au('BufEnter', {
   ]]
 })
 
--- Update xresource when write the xresource file
-Au('BufWritePost', {
-  pattern = { 'xresources', '.Xresources' },
-  command = [[ !xrdb -merge %; $XDG_CONFIG_HOME/X11/sync_xrdb ]]
-})
-
 
 -- Indent --
 
@@ -55,16 +49,11 @@ Au('BufEnter', {
   command = [[ setlocal sw=4 ts=4 sts=4 ]]
 })
 
--- Use 8-width indent
-Au('BufEnter', {
-  pattern = { '*/linux/*', '*/suckless/*' },
-  command = [[ setlocal sw=8 ts=8 sts=8 ]]
-})
-
--- Use tab indent
+-- Use 8-width tab indent
 Au('BufEnter', {
   pattern = { '*/linux/*', '*/suckless/*' },
   command = [[
     setlocal noexpandtab
+    setlocal sw=8 ts=8 sts=8
   ]]
 })

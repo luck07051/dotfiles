@@ -23,13 +23,16 @@ while true; do
   xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
   setwallpaper &
 
+
   pidof -q dunst     || dunst &
   pidof -q unclutter || unclutter &
   pidof -q xcompmgr  || xcompmgr -n &
   pidof -q fcitx5    || fcitx5 -d &
 
+  killall entr >/dev/null 2>&1; entr-list &
+
   killall dwmblocks >/dev/null 2>&1; dwmblocks &
-  (sleep 2s && kill -55 "$(pidof dwm)") &
+  (sleep 2s; kill -55 "$(pidof dwmblocks)") &
 
   dwm
 

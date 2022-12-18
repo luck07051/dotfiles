@@ -42,6 +42,7 @@ setxkbmap           # uses it to remap capslock to ctrl
 cronie              # auto exec tasks at pre-determined times
 ntp                 # clock fixer
 xclip               # let nvim can use system clipboard
+entr                # run commands wen fils change
 
 #(aur) quickemu quickgui     # virtual machines
 qemu

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "$XDG_CONFIG_HOME/X11/xresources\n$XDG_CONFIG_HOME/X11/color" | entr -n sync-xrdb &
+
+echo "$HOME/bm/readlater" | entr -n sync-readlater &
+echo "$HOME/bm/bookmark" | entr -n sync-bookmark &

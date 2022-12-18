@@ -1,6 +1,7 @@
 #!/bin/sh
 
-host='0x0.st'
+# cmd='curl -F "file=@$file" "0x0.st"'
+cmd='xbackbone_uploader_admin.sh $file'
 
 # use `fd` if have
 if [ -x "$(which fd)" ]; then
@@ -19,8 +20,8 @@ else
 fi
 [ -z "$file" ] && exit 0
 
-url="$(curl -F "file=@$file" "$host")"
+url="$(eval "$cmd")"
+echo "$url"
 
 echo "$url" | xclip -selection clipboard
-echo "Your file ${file##*/} now in '$url'"
-notify-send "0x0.st" "Your file '${file##*/}' now in '$url'"
+notify-send "Share" "Your file '${file##*/}' uploaded to '$url'"

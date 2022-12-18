@@ -1,6 +1,8 @@
 #!/bin/sh
 # vim:foldmethod=marker:foldlevel=0
 
+xrdb -merge ${1:-$XDG_CONFIG_HOME/X11/xresources}
+
 # Get color from xresources
 color0=$(xrdb -get color0)
 color1=$(xrdb -get color1)
@@ -30,8 +32,8 @@ backup() {
   cp "$1" "$bakloc/$(basename "$1").bak"
 }
 
+vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
 ## Vim Color {{{
-# vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
 # backup "$vim_color_file"
 #
 # # ['#XXXXXX', '1'] -> ['#YYYYYY', '1']
@@ -44,8 +46,8 @@ backup() {
 # echo "sync vim color!"
 # }}}
 
-# Firefox chrome {{{
 firefox_color_file="$HOME/.mozilla/chrome/colors.css"
+# Firefox chrome {{{
 backup "$firefox_color_file"
 
 # --background: #XXXXXX -> --background: #YYYYYY
@@ -55,8 +57,8 @@ sed -i "s/--pr-color:\ #\S\{6\}/--pr-color: $pr/" "$firefox_color_file"
 echo "sync firefox chrome color!"
 # }}}
 
-# Alacritty {{{
 alacritty_color_file="$XDG_CONFIG_HOME/alacritty/alacritty.yml"
+# Alacritty {{{
 backup "$alacritty_color_file"
 
 # background: '#XXXXXX' -> background: '#YYYYYY'
@@ -95,8 +97,8 @@ sed -i "s/\(family:\s*\).*/\1$(xrdb -get alacritty.font)/"     "$alacritty_color
 echo "sync alacritty color!"
 # }}}
 
-# Picom {{{
 picom_file="$XDG_CONFIG_HOME/picom/picom.conf"
+# Picom {{{
 backup "$picom_file"
 
 # transition-length = XX -> transition-length = YY
