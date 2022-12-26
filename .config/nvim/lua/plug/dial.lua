@@ -1,4 +1,14 @@
-return function()
+local M = {
+  'monaqa/dial.nvim',
+  keys = {
+    { '<C-a>', mode = { 'n', 'v' } },
+    { '<C-x>', mode = { 'n', 'v' } },
+    { 'g<C-a>', mode = { 'v' } },
+    { 'g<C-x>', mode = { 'v' } },
+  }
+}
+
+M.config = function()
   local augend = require("dial.augend")
   require('dial.config').augends:register_group{
     default = {
@@ -23,6 +33,7 @@ return function()
       },
     },
   }
+
   Keymap('n', '<C-a>', require('dial.map').inc_normal())
   Keymap('n', '<C-x>', require('dial.map').dec_normal())
   Keymap('v', '<C-a>', require('dial.map').inc_visual())
@@ -30,3 +41,5 @@ return function()
   Keymap('v', 'g<C-a>', require('dial.map').inc_gvisual())
   Keymap('v', 'g<C-x>', require('dial.map').dec_gvisual())
 end
+
+return M

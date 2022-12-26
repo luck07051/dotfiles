@@ -5,8 +5,8 @@ selected="$(dmenu -i -F -p "ICON" -l 20 < ~/.local/share/icons/nerd_icons | cut 
 [ -z "$selected" ] && exit
 
 if [ "$1" = "-a" ]; then
-  xdotool type "$selected"
+	xdotool type "$selected"
 else
-  printf "%s" "$selected" | xclip -selection clipboard
-  notify-send "'$selected' copied to clipboard." &
+	printf "%s" "$selected" | xclip -selection clipboard
+	notify-send "'$selected' copied to clipboard." &
 fi

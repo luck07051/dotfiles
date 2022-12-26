@@ -6,12 +6,12 @@ cache_bookmark="$HOME/.cache/bookmark"
 : > "$cache_bookmark"
 
 sed '/^# vim.*$/d' "$bookmark" |
-  sed '1a{"groups": [' |
-  sed 's/^\([^#].*\)\t\(\S*\)$/  { "name": "\1", "url": "\2" },/' |
-  sed 's/^# \(.*\)/]},{ "name": "\1", "items": [ /' |
-  sed '$a]}]}' |
-  tr '\n' ' ' |
-  sed 's/\[\s*\]},/[/' |
-  sed 's/},\s*]/}\n]/g' > "$cache_bookmark"
+	sed '1a{"groups": [' |
+	sed 's/^\([^#].*\)\t\(\S*\)$/  { "name": "\1", "url": "\2" },/' |
+	sed 's/^# \(.*\)/]},{ "name": "\1", "items": [ /' |
+	sed '$a]}]}' |
+	tr '\n' ' ' |
+	sed 's/\[\s*\]},/[/' |
+	sed 's/},\s*]/}\n]/g' > "$cache_bookmark"
 
 rsync -azvP "$cache_bookmark" root@uima.xyz:/root/container/dashboard/dashboard-data/bookmarks.json

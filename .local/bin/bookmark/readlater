@@ -4,40 +4,40 @@ readlater_file="$HOME/bm/readlater"
 browser_open="firefox --new-tab"
 
 add() {
-  cur_tab="$(get-cur-tab)"
-  [ -z "$cur_tab" ] && exit 2
+	cur_tab="$(get-cur-tab)"
+	[ -z "$cur_tab" ] && exit 2
 
-  if grep "$cur_tab" "$readlater_file"; then
-    notify-send "Readlater" "Already have this page!"
-    exit 2
-  fi
+	if grep "$cur_tab" "$readlater_file"; then
+		notify-send "Readlater" "Already have this page!"
+		exit 2
+	fi
 
-  echo "$cur_tab" >>"$readlater_file"
-  notify-send "Readlater: Add page" "$(echo "$cur_tab" | cut -f1)"
+	echo "$cur_tab" >>"$readlater_file"
+	notify-send "Readlater: Add page" "$(echo "$cur_tab" | cut -f1)"
 }
 
 pop() {
-  selected="$(column -t -s "$(printf '\t')" "$readlater_file" | tac |
-    dmenu -i -F -l 20 -p "Readlater")"
-  [ -z "$selected" ] && exit
+	selected="$(column -t -s "$(printf '\t')" "$readlater_file" | tac |
+		dmenu -i -F -l 20 -p "Readlater")"
+	[ -z "$selected" ] && exit
 
-  url="${selected##* }"
+	url="${selected##* }"
 
-  $browser_open "$url"
+	$browser_open "$url"
 }
 
 rm() {
-  tab="$(get-cur-tab)"
+	tab="$(get-cur-tab)"
 
-  if [ -z "$tab" ] || ! grep -q "$tab" "$readlater_file"; then
-    tab="$(column -t -s "$(printf '\t')" "$readlater_file" | tac |
-      dmenu -i -F -l 20 -p "Delete page" | sed 's/\s\+\(\S\+\)$/\t\1/')"
-    [ -z "$selected" ] && exit 2
-  fi
+	if [ -z "$tab" ] || ! grep -q "$tab" "$readlater_file"; then
+		tab="$(column -t -s "$(printf '\t')" "$readlater_file" | tac |
+		dmenu -i -F -l 20 -p "Delete page" | sed 's/\s\+\(\S\+\)$/\t\1/')"
+		[ -z "$selected" ] && exit 2
+	fi
 
-  url="$(echo "$tab" | cut -f2 | sed 's#/#\\/#g')"
-  sed -i "/.*\t$url/d" "$readlater_file"
-  notify-send "Readlater: Delete page" "$(echo "$tab" | cut -f1)"
+	url="$(echo "$tab" | cut -f2 | sed 's#/#\\/#g')"
+	sed -i "/.*\t$url/d" "$readlater_file"
+	notify-send "Readlater: Delete page" "$(echo "$tab" | cut -f1)"
 }
 
 "$@"

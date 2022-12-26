@@ -5,18 +5,18 @@ cmd='xbackbone_uploader_admin.sh $file'
 
 # use `fd` if have
 if [ -x "$(which fd)" ]; then
-  findcmd="fd . $PWD -t f"
+	findcmd="fd . $PWD -t f"
 else
-  findcmd="find $PWD -type f"
+	findcmd="find $PWD -type f"
 fi
 
 if [ "$PWD" = "$HOME" ]; then
-  file="$($findcmd | sed "s#^$HOME#~#" |
-    dmenu -i -l 25 -p "Pick a File" | sed "s#^~#$HOME#")"
+	file="$($findcmd | sed "s#^$HOME#~#" |
+		dmenu -i -l 25 -p "Pick a File" | sed "s#^~#$HOME#")"
 else
-  pwd="$(echo "$PWD" | sed "s#^$HOME#~#")"
-  file="$($findcmd | sed "s#^$PWD#.#" |
-    dmenu -i -l 25 -p "Pick a File from $pwd" | sed "s#^\.#$PWD#")"
+	pwd="$(echo "$PWD" | sed "s#^$HOME#~#")"
+	file="$($findcmd | sed "s#^$PWD#.#" |
+		dmenu -i -l 25 -p "Pick a File from $pwd" | sed "s#^\.#$PWD#")"
 fi
 [ -z "$file" ] && exit 0
 

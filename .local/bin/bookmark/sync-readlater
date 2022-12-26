@@ -8,7 +8,7 @@ cache_readlater="$HOME/.cache/readlater"
 printf '{"readlater": [\n' >> "$cache_readlater"
 
 sed 's/"/\\"/g' "$readlater" |
-  sed 's/^\(.*\)\t\(.*\)$/{ "name": "\1", "url": "\2" },/' >> "$cache_readlater"
+	sed 's/^\(.*\)\t\(.*\)$/{ "name": "\1", "url": "\2" },/' >> "$cache_readlater"
 
 sed -i '$s/,$//' "$cache_readlater"
 

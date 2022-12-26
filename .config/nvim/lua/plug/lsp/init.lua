@@ -1,6 +1,19 @@
-return function()
+local M = {
+  'neovim/nvim-lspconfig',
+  name = "lsp",
+  event = "BufReadPre",
+  dependencies = {
+    'williamboman/nvim-lsp-installer',
+    'jose-elias-alvarez/null-ls.nvim',
+
+    'hrsh7th/cmp-nvim-lsp',
+  },
+}
+
+M.config = function()
   local lspconfig = require 'lspconfig'
   local lsp_installer = require 'nvim-lsp-installer'
+
   local handlers = require 'plug.lsp.handlers'
 
   handlers.setup()
@@ -24,3 +37,5 @@ return function()
   end
 
 end
+
+return M

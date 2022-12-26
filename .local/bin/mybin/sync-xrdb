@@ -26,10 +26,10 @@ pr=$(xrdb -get primary)
 
 bakloc="$XDG_CACHE_HOME/backup/x_xync_xrdb"
 if [ ! -d "$bakloc" ]; then
-  mkdir -p "$bakloc"
+	mkdir -p "$bakloc"
 fi
 backup() {
-  cp "$1" "$bakloc/$(basename "$1").bak"
+	cp "$1" "$bakloc/$(basename "$1").bak"
 }
 
 vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"

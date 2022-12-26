@@ -24,12 +24,20 @@ Keymap('', '<Leader>P', '"+P')
 Keymap('v', '<C-c>', '"+y')
 Keymap('v', '<C-v>', '"+p')
 
+-- Delete with black hole --
+-- Keymap('', '<Leader>d', '"_d')
+-- Keymap('', '<Leader>D', '"_D')
+
 -- Copy whole file to clipboard --
 Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Paste in visual mode do not change register --
 Keymap('v', 'p', '"_dP')
 Keymap('v', 'gp', '"_d"+P')
+
+-- Cool thing you can do in visual mode --
+Keymap('v', 'J', ":m '>+1<CR>gv=gv")
+Keymap('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- Quick replace --
 Keymap('n', 's', ':%s/')

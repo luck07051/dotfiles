@@ -1,4 +1,17 @@
-return function()
+local M = {
+  'nvim-treesitter/nvim-treesitter',
+  event = "BufReadPost",
+  build = ':TSUpdate',
+  dependencies = {
+    { 'nvim-treesitter/playground', cmd = "TSPlaygroundToggle" },
+    -- 'nvim-treesitter/nvim-treesitter-textobjects',
+    'windwp/nvim-ts-autotag',
+    'RRethy/nvim-treesitter-endwise',
+    -- 'ray-x/cmp-treesitter',
+  },
+}
+
+M.config = function()
   local treesitter = require "nvim-treesitter.configs"
 
   treesitter.setup {
@@ -44,3 +57,5 @@ return function()
   Keymap('n', '<Leader>ts', ':TSCaptureUnderCursor<CR>', Silent)
 
 end
+
+return M

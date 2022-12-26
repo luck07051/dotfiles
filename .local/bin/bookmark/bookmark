@@ -7,20 +7,20 @@ searchengine_file="${2:-$HOME/bm/searchengine}"
 
 # delete the line start in '#' or empty line
 selected="$(sed "/^\s*#/d; /^\$/d" "$bookmark_file" |
-  column -t -s "$(printf '\t')" |
-  dmenu -i -l 20 -p 'OPEN')"
+	column -t -s "$(printf '\t')" |
+	dmenu -i -l 20 -p 'OPEN')"
 
 [ -z "$selected" ] && exit 1
 
 if grep -qw "\(${selected##* }\)$" "$bookmark_file"; then
-  echo "${selected##* }"
+	echo "${selected##* }"
 else
-  engine="$(grep "^${selected%% *}\s" "$searchengine_file" | cut -f2)"
+	engine="$(grep "^${selected%% *}\s" "$searchengine_file" | cut -f2)"
 
-  if [ -n "$engine" ]; then
-    echo "$engine" | sed "s/{}/${selected#* }/g; s/\s/+/g"
-  else
-    grep "^DEFAULT" "$searchengine_file" | cut -f2 |
-      sed "s/{}/$selected/g; s/\s/+/g"
-  fi
+	if [ -n "$engine" ]; then
+		echo "$engine" | sed "s/{}/${selected#* }/g; s/\s/+/g"
+	else
+		grep "^DEFAULT" "$searchengine_file" | cut -f2 |
+			sed "s/{}/$selected/g; s/\s/+/g"
+	fi
 fi

@@ -1,34 +1,34 @@
+local M = {
+  'L3MON4D3/LuaSnip',
+  event = 'VeryLazy',
+}
+
 -- snippets collection:
 -- https://github.com/rafamadriz/friendly-snippets
 -- https://github.com/molleweide/LuaSnip-snippets.nvim
-return function()
+M.config = function()
   local ls = require "luasnip"
 
-  -- My snippets --
   require('luasnip.loaders.from_lua').load({ paths = '~/.config/nvim/snippets/' })
-  -- Use snip from friendly-snippets --
   -- require('luasnip.loaders.from_vscode').lazy_load()
 
-
-  local types = require("luasnip.util.types")
-  ls.config.set_config {
+  ls.setup({
     history = true,
-    updateevents = 'TextChanged,TextChangedI',
+    -- updateevents = 'TextChanged,TextChangedI',
     enable_autosnippets = true,
-    ext_opts = {
-      [types.choiceNode] = {
-        active = {
-          virt_text = { { "●", "Type" } },
-        },
-      },
-      -- [types.insertNode] = {
-      --   active = {
-      --     virt_text = { { "●", "Statement" } },
-      --   },
-      -- },
-    },
-  }
-
+    -- ext_opts = {
+    --   [ls.util.types.choiceNode] = {
+    --     active = {
+    --       virt_text = { { "●", "Type" } },
+    --     },
+    --   },
+    --   -- [types.insertNode] = {
+    --   --   active = {
+    --   --     virt_text = { { "●", "Statement" } },
+    --   --   },
+    --   -- },
+    -- },
+  })
 
   -- Keymapping --
   Keymap({ 'i', 's' }, 'jj', function()
@@ -61,3 +61,5 @@ return function()
     ]]
   })
 end
+
+return M

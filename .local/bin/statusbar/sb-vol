@@ -10,7 +10,7 @@ esac
 
 
 [ "$(pamixer --get-mute)" = "true" ] &&
-  printf " " && exit
+	printf " " && exit
 
 vol=$(pamixer --get-volume)
 #   

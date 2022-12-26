@@ -2,203 +2,34 @@
 --          PLUGINS          --
 -------------------------------
 
--- Setting -- {{{
--- Automatically install packer
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  Packer_bootstrap = vim.fn.system({
-    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-    install_path,
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none", "--single-branch",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
   })
-  vim.cmd [[packadd packer.nvim]]
 end
+vim.opt.runtimepath:prepend(lazypath)
 
-if not pcall(require, 'packer') then return end
-local packer = require 'packer'
-
-local packer_group = vim.api.nvim_create_augroup('packer_user_config', {})
-
-vim.api.nvim_create_autocmd('BufwritePost',
-  { group = packer_group,
-    pattern = { 'plugins.lua' },
-    command = [[ source <afile> | PackerSync ]] })
-
-vim.api.nvim_create_autocmd('BufwritePost',
-  { group = packer_group,
-    pattern = { '*plug/*.lua' },
-    command = [[ PackerCompile ]] })
-
-packer.init {
-  display = {
-    open_fn = function()
-      return require('packer.util').float { border = 'rounded' }
-    end
+require("lazy").setup('plug', {
+  defaults = { lazy = true },
+  install = { colorscheme = { 'uicolors' } },
+  change_detection = { notify = false },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    }
   }
-}
+})
 
-local function conf(name)
-  return require(string.format('plug.%s', name))
-end
-
---}}}
-
-return packer.startup(function(use)
-  use {
-    'wbthomason/packer.nvim',
-    'lewis6991/impatient.nvim',
-    'luck07051/uima-colors.nvim'
-  }
-
-  use { -- Treesitter -- --{{{
-    'nvim-treesitter/nvim-treesitter',
-    requires = {
-      'nvim-treesitter/playground',
-      -- 'nvim-treesitter/nvim-treesitter-textobjects',
-      'windwp/nvim-ts-autotag',
-      'RRethy/nvim-treesitter-endwise',
-    },
-    config = conf 'treesitter',
-    run = ':TSUpdate',
-  }
-  --}}}
-
-  use { -- LSP -- --{{{
-    'neovim/nvim-lspconfig',
-    requires = {
-      'williamboman/nvim-lsp-installer',
-      'jose-elias-alvarez/null-ls.nvim',
-    },
-    config = conf 'lsp',
-  }
-  --}}}
-
-  use { -- Completion -- --{{{
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-nvim-lsp',
-
-      'saadparwaiz1/cmp_luasnip',
-      'ray-x/cmp-treesitter',
-
-      'hrsh7th/cmp-nvim-lua',
-      'kdheepak/cmp-latex-symbols'
-    },
-    config = conf 'cmp',
-  }
-  --}}}
-
-  use { -- Snipptes -- --{{{
-    'L3MON4D3/LuaSnip',
-    config = conf 'luasnip'
-  }
-  --}}}
-
-  use { -- Fuzzy Finder -- --{{{
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'ahmedkhalf/project.nvim',
-    },
-    config = conf 'telescope',
-  }
-  --}}}
-
-  use { -- Dashboard -- --{{{
-    'glepnir/dashboard-nvim',
-    config = conf 'dashboard'
-  }
-  --}}}
-
-  use { -- Status Line -- --{{{
-    'nvim-lualine/lualine.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = conf 'lualine',
-  }
-  --}}}
-
-
-  ---------------------------
-  --    Editing Ability    --
-  ---------------------------
-
-  use { -- `gc` to comment text --
-    'numToStr/Comment.nvim',
-    config = function() require('Comment').setup() end
-  }
-
-  use { -- Surround selections --
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = function() require("nvim-surround").setup() end
-  }
-
-  use { -- Enhanced <C-A> and <C-X> --
-    'monaqa/dial.nvim',
-    config = conf 'dial'
-  }
-
-  use { -- Align stuff --
-    'junegunn/vim-easy-align',
-    config = function()
-      Keymap('n', 'ga', '<Plug>(EasyAlign)')
-      Keymap('x', 'ga', '<Plug>(EasyAlign)')
-    end
-  }
-
-
-  --------------------------
-  --    Other Function    --
-  --------------------------
-
-  use { -- Git sign --
-    'lewis6991/gitsigns.nvim',
-    config = conf 'gitsigns'
-  }
-
-  use { -- Focus mode --
-    'Pocco81/true-zen.nvim',
-    requires = {
-      'folke/twilight.nvim',
-    },
-    config = conf 'zen'
-  }
-
-  use { -- Scroll animation --
-    'karb94/neoscroll.nvim',
-    config = conf 'neoscroll'
-  }
-
-  use {
-    'jghauser/follow-md-links.nvim',
-    ft = { 'markdown' }
-  }
-
-  use { -- <C-t> to call a terminal --
-    'akinsho/toggleterm.nvim',
-    config = conf 'toggleterm'
-  }
-
-  use { -- Color picker and color highlight --
-    'uga-rosa/ccc.nvim',
-    config = function()
-      require('ccc').setup({
-        highlighter = {
-          auto_enable = true,
-          filetypes = {},
-          excludes = {},
-        },
-      })
-      Keymap('n', '<Leader>cc', ':CccPick<CR>')
-      Keymap('i', '<A-c>', '<Plug>(ccc-insert)')
-    end
-  }
-
-  if Packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+Keymap('n', '<Leader>l', ':Lazy<CR>')

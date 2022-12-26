@@ -6,7 +6,7 @@ pcall(require, 'impatient')
 Opt    = vim.opt
 Au     = vim.api.nvim_create_autocmd
 Keymap = vim.keymap.set
-Silent = { noremap = true, silent = true }
+Silent = { silent = true }
 
 
 require 'options'
@@ -14,5 +14,4 @@ require 'keymaps'
 require 'plugins'
 require 'autocmd'
 
-
-vim.cmd [[ colorscheme uima-colors ]]
+vim.cmd.colorscheme('uicolors')

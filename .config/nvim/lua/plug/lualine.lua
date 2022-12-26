@@ -1,4 +1,12 @@
-return function()
+local M = {
+  "nvim-lualine/lualine.nvim",
+  lazy = false,
+  dependencies = {
+    'kyazdani42/nvim-web-devicons',
+  },
+}
+
+M.config = function()
   local lualine = require "lualine"
 
   -- Customize module
@@ -10,13 +18,19 @@ return function()
     end
     return ' ' .. dir
   end
+
   local function relative_path()
+    if vim.fn.expand('%'):match('^term://') then
+      return ''
+    end
     local dir = vim.fn.getcwd()
     return vim.fn.expand('%:' .. dir .. ':.')
   end
+
   local function tabsize()
     return ' '..vim.o.tabstop
   end
+
   local function line_count()
     return '' .. vim.api.nvim_buf_line_count(0)
   end
@@ -24,7 +38,7 @@ return function()
   lualine.setup {
     options = {
       icons_enabled = true,
-      theme = 'uima-colors',
+      theme = 'uicolors',
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       globalstatus = true,
@@ -65,3 +79,5 @@ return function()
   }
   vim.opt.showmode = false
 end
+
+return M

@@ -1,11 +1,26 @@
-return function()
+local M = {
+  'hrsh7th/nvim-cmp',
+  event = "VeryLazy",
+  dependencies = {
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+
+    'hrsh7th/cmp-nvim-lua',
+    'kdheepak/cmp-latex-symbols',
+
+    "hrsh7th/cmp-nvim-lsp",
+    -- 'saadparwaiz1/cmp_luasnip',
+  },
+}
+
+M.config = function()
   local cmp = require 'cmp'
 
-  if not pcall(require, 'luasnip') then return end
-  local luasnip = require 'luasnip'
+  -- if not pcall(require, 'luasnip') then return end
+  -- local luasnip = require 'luasnip'
 
-  -- Kind icons --{{{
-  local kind_icons = {
+  local kind_icons = { --{{{
     Text = "",
     Variable = "",
     File = "",
@@ -31,8 +46,7 @@ return function()
     Event = "",
     Operator = "",
     TypeParameter = "",
-  }
-  --}}}
+  } --}}}
 
   cmp.setup {
     mapping = {
@@ -86,12 +100,12 @@ return function()
       end,
     },
 
-    snippet = {
-      expand = function(args)
-        -- For luasnip --
-        luasnip.lsp_expand(args.body)
-      end,
-    },
+    -- snippet = {
+    --   expand = function(args)
+    --     -- For luasnip --
+    --     luasnip.lsp_expand(args.body)
+    --   end,
+    -- },
   }
 
 
@@ -126,3 +140,5 @@ return function()
   -- Close cmp menu when press <C-f> --
   Keymap('c', '<C-f>', '<C-f>a<Esc>')
 end
+
+return M

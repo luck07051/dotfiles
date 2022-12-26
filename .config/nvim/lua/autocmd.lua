@@ -36,24 +36,7 @@ Au('BufEnter', {
 
 
 -- Indent --
-
--- Use 4-width indent depand on filetype
-Au('FileType', {
-  pattern = { 'c', 'h', 'cpp' },
-  command = [[ setlocal sw=4 ts=4 sts=4 ]]
-})
-
--- Use 4-width indent
-Au('BufEnter', {
-  pattern = { '*/yt-local/*', '*/youtube-local/*' },
-  command = [[ setlocal sw=4 ts=4 sts=4 ]]
-})
-
--- Use 8-width tab indent
 Au('BufEnter', {
   pattern = { '*/linux/*', '*/suckless/*' },
-  command = [[
-    setlocal noexpandtab
-    setlocal sw=8 ts=8 sts=8
-  ]]
+  command = [[ setlocal noet sw=8 ts=8 sts=8 ]]
 })

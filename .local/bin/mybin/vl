@@ -3,33 +3,33 @@
 STEP=5
 
 up() {
-  [ -n "$1" ] && STEP=$1
-  vol="$(_get_default_volume)"
-  pactl set-sink-volume @DEFAULT_SINK@ "$(( STEP * (vol / STEP +1) ))"%
+	[ -n "$1" ] && STEP=$1
+	vol="$(_get_default_volume)"
+	pactl set-sink-volume @DEFAULT_SINK@ "$(( STEP * (vol / STEP +1) ))"%
 }
 
 down() {
-  [ -n "$1" ] && STEP=$1
-  pactl set-sink-volume @DEFAULT_SINK@ -"$STEP"%
+	[ -n "$1" ] && STEP=$1
+	pactl set-sink-volume @DEFAULT_SINK@ -"$STEP"%
 }
 
 sink_mute() {
-  pactl set-sink-mute @DEFAULT_SINK@ toggle
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
 }
 
 source_mute() {
-  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 }
 
 switch() {
-  def=$(pactl get-default-sink)
-  pactl list short sinks | cut -f2 | tr '\n' ' ' |
-    sed "s/^.*$def\s\(\S*\)\s.*/\1/; s/^\(\S*\)\s.*/\1/" | # looking for next sink
-    xargs pactl set-default-sink
+	def=$(pactl get-default-sink)
+	pactl list short sinks | cut -f2 | tr '\n' ' ' |
+		sed "s/^.*$def\s\(\S*\)\s.*/\1/; s/^\(\S*\)\s.*/\1/" | # looking for next sink
+		xargs pactl set-default-sink
 }
 
 _get_default_volume() {
-  pactl get-sink-volume @DEFAULT_SINK@ | sed 's/.* \([0-9]*\)% .*/\1/; q'
+	pactl get-sink-volume @DEFAULT_SINK@ | sed 's/.* \([0-9]*\)% .*/\1/; q'
 }
 
 "$@"

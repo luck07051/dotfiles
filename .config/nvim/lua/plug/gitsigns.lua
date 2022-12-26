@@ -1,4 +1,9 @@
-return function()
+local M = {
+  'lewis6991/gitsigns.nvim',
+  event = "VeryLazy",
+}
+
+M.config = function()
   local gitsigns = require "gitsigns"
 
   gitsigns.setup {
@@ -43,3 +48,5 @@ return function()
     },
   }
 end
+
+return M

@@ -5,18 +5,18 @@ ex="$(dmenu -l 10 -p "Do some math" </dev/null)"
 
 while :
 do
-  if ! echo "$ex" | grep 'f\s*$' >/dev/null ; then
-    ex="$(echo "$ex" | sed 's/$/ f/')"
-  fi
+	if ! echo "$ex" | grep 'f\s*$' >/dev/null ; then
+		ex="$(echo "$ex" | sed 's/$/ f/')"
+	fi
 
-  output="$(dc --expression="$ex")"
+	output="$(dc --expression="$ex")"
 
-  ex="$(echo "$output" | dmenu -l 10 -p "Do some math")"
-  [ -z "$ex" ] && exit 0
+	ex="$(echo "$output" | dmenu -l 10 -p "Do some math")"
+	[ -z "$ex" ] && exit 0
 
-  if echo "$output" | grep -Fx -- "$ex" >/dev/null ; then
-    echo "$ex" | xclip -sel clip
-    notify-send "Copy!" -- "$ex"
-    break
-  fi
+	if echo "$output" | grep -Fx -- "$ex" >/dev/null ; then
+		echo "$ex" | xclip -sel clip
+		notify-send "Copy!" -- "$ex"
+		break
+	fi
 done

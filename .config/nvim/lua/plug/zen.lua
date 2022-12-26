@@ -1,11 +1,24 @@
-return function()
+local M = {
+  'Pocco81/true-zen.nvim',
+  cmd = {
+    'TZNarrow',
+    'TZFocus',
+    'TZMinimalist',
+    'TZAtaraxis',
+    'Twilight',
+  },
+  dependencies = {
+    'folke/twilight.nvim',
+  },
+}
+
+M.config = function()
 
   local fix_cursorline = function()
     vim.opt_local.cursorline = true
   end
 
   require('true-zen').setup {
-
     modes = {
       ataraxis = {
         callbacks = { -- run functions when opening/closing Ataraxis mode
@@ -20,7 +33,6 @@ return function()
       },
     },
 
-
     integrations = {
       -- tmux = false,
       -- twilight = true,
@@ -34,6 +46,12 @@ return function()
     -- refer to the configuration section below
   }
 
+  -- fix ataraxis mode use '^' fillchars in statusbar
+  vim.cmd [[ hi StatusLine ctermfg=1 ]]
+
+end
+
+M.init = function()
   -- Narrow a text region for better focus
   Keymap("n", "<leader>zn", ":TZNarrow<CR>", Silent)
   Keymap("v", "<leader>zn", ":'<,'>TZNarrow<CR>", Silent)
@@ -45,5 +63,6 @@ return function()
   Keymap("n", "<leader>za", ":TZAtaraxis<CR>", Silent)
   -- Toggle twilight
   Keymap("n", "<leader>zt", ":Twilight<CR>", Silent)
-
 end
+
+return M

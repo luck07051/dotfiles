@@ -17,4 +17,4 @@ option=$(echo "$list" | cut -d';' -f1 | dmenu -i -p "POWER")
 #   eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//')"
 
 [ -n "$option" ] &&
-  eval "$(echo "$list" | grep "$option;" | sed 's/.*;\s\+//')"
+	eval "$(echo "$list" | grep "$option;" | sed 's/.*;\s\+//')"

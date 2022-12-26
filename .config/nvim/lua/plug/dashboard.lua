@@ -1,4 +1,9 @@
-return function()
+local M = {
+  'glepnir/dashboard-nvim',
+  lazy = false,
+}
+
+M.config = function()
   local db = require('dashboard')
 
   db.custom_center = {
@@ -43,3 +48,5 @@ return function()
   db.center_pad = 3
 
 end
+
+return M

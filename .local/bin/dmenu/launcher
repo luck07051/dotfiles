@@ -1,8 +1,8 @@
 #!/bin/sh
 
 dmenu_path() {
-  echo "$PATH $XDG_DATA_HOME/applications" | tr ':' '\n' | uniq |
-    xargs ls | sed '/\//d ; /^$/d' | sort
+	echo "$PATH $XDG_DATA_HOME/applications" | tr ':' '\n' | uniq |
+		xargs ls | sed '/\//d ; /^$/d' | sort
 }
 
 TERM="$TERMINAL -e sh -c"
@@ -10,11 +10,11 @@ TERM="$TERMINAL -e sh -c"
 RUN="$(dmenu_path | dmenu -i -F -p "RUN" "$@")"
 
 case "$RUN" in
-  # run command in terminal if end with ';'
-  *\;) $TERM "${RUN%;}" ;;
+	# run command in terminal if end with ';'
+	*\;) $TERM "${RUN%;}" ;;
 
-  # run .desktop file
-  *.desktop) gtk-launch "$RUN" ;;
+	# run .desktop file
+	*.desktop) gtk-launch "$RUN" ;;
 
-  *) $RUN ;;
+	*) $RUN ;;
 esac

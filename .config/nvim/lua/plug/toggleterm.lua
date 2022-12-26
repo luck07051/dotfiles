@@ -1,4 +1,9 @@
-return function()
+local M = {
+  'akinsho/toggleterm.nvim',
+  event = 'VeryLazy',
+}
+
+M.config = function()
   local toggleterm = require 'toggleterm'
 
   toggleterm.setup({
@@ -31,6 +36,8 @@ return function()
     hidden = true,
   })
   function _lazygit_toggle() lazygit:toggle() end
-  Keymap('n', '<Leader>git', ':lua _lazygit_toggle()<CR>', Silent)
 
+  Keymap('n', '<Leader>git', ':lua _lazygit_toggle()<CR>', Silent)
 end
+
+return M

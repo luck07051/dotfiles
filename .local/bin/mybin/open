@@ -2,28 +2,28 @@
 
 case $(file --mime-type "$1" -bL) in
 
-   video/* | audio/*)
-      devour mpv "$@"
-      ;;
+	video/* | audio/*)
+		devour mpv "$@"
+		;;
 
-   image/*)
-      devour nsxiv "$@"
-      ;;
+	image/*)
+		devour nsxiv "$@"
+		;;
 
-   application/pdf | application/postscript)
-      devour zathura "$@"
-      ;;
+	application/pdf | application/postscript)
+		devour zathura "$@"
+		;;
 
-   application/*wordprocessingml.document* )
-      devour libreoffice "$@"
-      ;;
+	application/*wordprocessingml.document* )
+		devour libreoffice "$@"
+		;;
 
   text/*)
-      nvim "$@"
-      ;;
+		nvim "$@"
+		;;
 
-   *)
-     echo "File type not support!" 1>&2
-     exit 1
-     ;;
+	*)
+		echo "File type not support!" 1>&2
+		exit 1
+		;;
 esac
