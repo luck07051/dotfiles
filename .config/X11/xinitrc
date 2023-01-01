@@ -1,9 +1,11 @@
 #!/bin/sh
 
-# set wacom area
-if xinput list | grep 'Wacom'; then
-  xsetwacom set "Wacom One by Wacom S Pen stylus" Area 15200 9500 10132 6332
-fi
+run() {
+	if [ -x "$(which "$1")" ] && ! pidof -q "$1"
+	then
+		"$@" &
+	fi
+}
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
@@ -15,25 +17,23 @@ xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
 xset s off
 xset -dpms
 
+xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
+setwallpaper
+
 # Startup app
-pgrep "$BROWSER" > /dev/null || $BROWSER &
-syncthing serve --no-browser &
+run $BROWSER
+run dunst
+run unclutter
+run xcompmgr -n
+run fcitx5 -d
+run entr-list
+run syncthing serve --no-browser
+run otd
 
 while true; do
-  xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
-  setwallpaper &
+	killall dwmblocks >/dev/null 2>&1
+	dwmblocks &
+	(sleep 2s; kill -55 "$(pidof dwmblocks)") &
 
-
-  pidof -q dunst     || dunst &
-  pidof -q unclutter || unclutter &
-  pidof -q xcompmgr  || xcompmgr -n &
-  pidof -q fcitx5    || fcitx5 -d &
-
-  killall entr >/dev/null 2>&1; entr-list &
-
-  killall dwmblocks >/dev/null 2>&1; dwmblocks &
-  (sleep 2s; kill -55 "$(pidof dwmblocks)") &
-
-  dwm
-
+	dwm
 done

@@ -138,7 +138,7 @@ M.config = function()
   })
 
   -- Close cmp menu when press <C-f> --
-  Keymap('c', '<C-f>', '<C-f>a<Esc>')
+  vim.keymap.set('c', '<C-f>', '<C-f>a<Esc>')
 end
 
 return M

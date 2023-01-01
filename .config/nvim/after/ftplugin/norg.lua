@@ -1,2 +1,2 @@
-Opt.foldlevel = 999
--- Opt.wrap = false
+vim.opt.foldlevel = 999
+-- vim.opt.wrap = false

@@ -23,9 +23,9 @@ M.config = function()
     },
   })
 
-  Keymap('n', '<Leader>th', ':ToggleTerm size=15 direction=horizontal<CR>', Silent)
-  Keymap('n', '<Leader>tf', ':ToggleTerm direction=float<CR>', Silent)
-  Keymap('n', '<Leader>te', ':TermExec cmd="!!"<CR>', Silent)
+  vim.keymap.set('n', '<Leader>th', ':ToggleTerm size=15 direction=horizontal<CR>', { silent = true } )
+  vim.keymap.set('n', '<Leader>tf', ':ToggleTerm direction=float<CR>', { silent = true } )
+  vim.keymap.set('n', '<Leader>te', ':TermExec cmd="!!"<CR>', { silent = true } )
 
 
   local Terminal  = require('toggleterm.terminal').Terminal
@@ -37,7 +37,7 @@ M.config = function()
   })
   function _lazygit_toggle() lazygit:toggle() end
 
-  Keymap('n', '<Leader>git', ':lua _lazygit_toggle()<CR>', Silent)
+  vim.keymap.set('n', '<Leader>git', ':lua _lazygit_toggle()<CR>', { silent = true } )
 end
 
 return M

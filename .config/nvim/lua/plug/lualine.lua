@@ -10,23 +10,6 @@ M.config = function()
   local lualine = require "lualine"
 
   -- Customize module
-  local function workdir()
-    local dir = vim.fn.getcwd()
-    dir = dir:gsub(os.getenv('HOME'), '~')
-    if dir:len() > 20 then
-      dir = '../' .. dir:match('([^/]*/[^/]*)$')
-    end
-    return ' ' .. dir
-  end
-
-  local function relative_path()
-    if vim.fn.expand('%'):match('^term://') then
-      return ''
-    end
-    local dir = vim.fn.getcwd()
-    return vim.fn.expand('%:' .. dir .. ':.')
-  end
-
   local function tabsize()
     return ' '..vim.o.tabstop
   end
@@ -47,7 +30,7 @@ M.config = function()
     -- | A | B | C         X | Y | Z |
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = { relative_path },
+      lualine_b = { { 'filename', path = 1 } },
       lualine_c = {
         'branch',
         'diff',
@@ -67,7 +50,7 @@ M.config = function()
       lualine_z = { 'progress', 'location' }
     },
     inactive_sections = {
-      lualine_a = { 'filename' },
+      lualine_a = { { 'filename', path = 1 } },
       lualine_b = {},
       lualine_c = {},
       lualine_x = {},

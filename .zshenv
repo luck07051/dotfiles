@@ -10,21 +10,22 @@ export XDG_DOCUMENTS_DIR="$HOME/doc"
 export XDG_MUSIC_DIR="$HOME/mu"
 export XDG_PICTURES_DIR="$HOME/img"
 export XDG_VIDEOS_DIR="$HOME/vid"
-
 # export XDG_RUNTIME_DIR=
+
 
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and it's subdir to path
 export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//g')"
 
+# The cargo stuff
 [ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
 
 
 #==================== Main ====================#
 export WM='dwm'
 export EDITOR='nvim'
-export TERMINAL='alacritty'
-export TERM='alacritty'
+export TERMINAL='st'
+export TERM='st'
 export BROWSER='firefox'
 
 export LANG='en_US.UTF-8'

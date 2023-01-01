@@ -3,7 +3,6 @@ local M = {
   cmd = { 'Telescope' },
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'ahmedkhalf/project.nvim',
   }
 }
 
@@ -33,7 +32,6 @@ M.config = function()
     },
   })
 
-  require("project_nvim").setup()
   telescope.load_extension('projects')
 
 end

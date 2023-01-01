@@ -53,8 +53,8 @@ M.config = function()
     },
   }
 
-  Keymap('n', '<Leader>tp', ':TSPlaygroundToggle<CR>', Silent)
-  Keymap('n', '<Leader>ts', ':TSCaptureUnderCursor<CR>', Silent)
+  vim.keymap.set('n', '<Leader>tp', ':TSPlaygroundToggle<CR>', { silent = true } )
+  vim.keymap.set('n', '<Leader>ts', ':TSCaptureUnderCursor<CR>', { silent = true } )
 
 end
 

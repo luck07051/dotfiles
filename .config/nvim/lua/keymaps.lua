@@ -3,82 +3,82 @@
 -------------------------------
 
 -- Make space as leader key --
-Keymap('', '<Space>', '<Nop>')
+vim.keymap.set('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Swap ';' and ':' --
-Keymap('', ';', ':')
-Keymap('', ':', ';')
-Keymap('n', 'q;', 'q:')
+vim.keymap.set('', ';', ':')
+vim.keymap.set('', ':', ';')
+vim.keymap.set('n', 'q;', 'q:')
 
 -- Move Quickly --
-Keymap('', '<C-E>', '3<C-E>')
-Keymap('', '<C-Y>', '3<C-Y>')
+vim.keymap.set('', '<C-E>', '3<C-E>')
+vim.keymap.set('', '<C-Y>', '3<C-Y>')
 
 -- Copy with clipboard --
-Keymap('', '<Leader>y', '"+y')
-Keymap('', '<Leader>Y', '"+y$')
-Keymap('', '<Leader>p', '"+p')
-Keymap('', '<Leader>P', '"+P')
-Keymap('v', '<C-c>', '"+y')
-Keymap('v', '<C-v>', '"+p')
+vim.keymap.set('', '<Leader>y', '"+y')
+vim.keymap.set('', '<Leader>Y', '"+y$')
+vim.keymap.set('', '<Leader>p', '"+p')
+vim.keymap.set('', '<Leader>P', '"+P')
+vim.keymap.set('v', '<C-c>', '"+y')
+vim.keymap.set('v', '<C-v>', '"+p')
 
 -- Delete with black hole --
--- Keymap('', '<Leader>d', '"_d')
--- Keymap('', '<Leader>D', '"_D')
+-- vim.keymap.set('', '<Leader>d', '"_d')
+-- vim.keymap.set('', '<Leader>D', '"_D')
 
 -- Copy whole file to clipboard --
-Keymap('', '<Leader><Leader>y', 'gg"+yG\'\'')
+vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Paste in visual mode do not change register --
-Keymap('v', 'p', '"_dP')
-Keymap('v', 'gp', '"_d"+P')
+vim.keymap.set('v', 'p', '"_dP')
+vim.keymap.set('v', 'gp', '"_d"+P')
 
 -- Cool thing you can do in visual mode --
-Keymap('v', 'J', ":m '>+1<CR>gv=gv")
-Keymap('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- Quick replace --
-Keymap('n', 's', ':%s/')
-Keymap('v', 's', ':s/')
+vim.keymap.set('n', 's', ':%s/')
+vim.keymap.set('v', 's', ':s/')
 
 -- Center the search --
-Keymap('n', 'n', 'nzzzv')
-Keymap('n', 'N', 'Nzzzv')
-Keymap('c', '<CR>', function()
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('c', '<CR>', function()
   return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>'
 end, { expr = true })
 
 -- Wizard --
-Keymap('n', '<Leader>r', '!!$SHELL<CR>')
-Keymap('v', '<Leader>r', '!$SHELL<CR>')
+vim.keymap.set('n', '<Leader>r', '!!$SHELL<CR>')
+vim.keymap.set('v', '<Leader>r', '!$SHELL<CR>')
 
 -- Spell check --
-Keymap('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
+vim.keymap.set('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Compiler script --
--- Keymap('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
--- Keymap('n', '<Leader>do', ':!open "%:p"<CR>')
+-- vim.keymap.set('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
+-- vim.keymap.set('n', '<Leader>do', ':!open "%:p"<CR>')
 
--- Goback prev file --
-Keymap('n', '<BS>', ':edit #<CR>', Silent)
+-- Goto prev file --
+vim.keymap.set('n', '<BS>', ':edit #<CR>', { silent = true } )
 
 -- Terminal --
-Keymap('t', '<C-[>', '<C-\\><C-n>', Silent)
-Keymap('t', '<C-w>', '<C-\\><C-n><C-w>', Silent)
--- Keymap('t', '<CR>', '<CR><C-\\><C-n>', Silent)
+vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', { silent = true } )
+vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { silent = true } )
+-- vim.keymap.set('t', '<CR>', '<CR><C-\\><C-n>', { silent = true } )
 
 
 -- Navigate windows --
 local function win_focus_resize(dir, cmd)
-  Keymap('n', '<A-'..dir..'>', '<C-w>'..dir)
-  Keymap('i', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
-  Keymap('t', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
+  vim.keymap.set('n', '<A-'..dir..'>', '<C-w>'..dir)
+  vim.keymap.set('i', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
+  vim.keymap.set('t', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
   dir = string.upper(dir)
-  Keymap('n', '<A-'..dir..'>', '3<C-w>'..cmd)
-  Keymap('i', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'gi')
-  Keymap('t', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'i')
+  vim.keymap.set('n', '<A-'..dir..'>', '3<C-w>'..cmd)
+  vim.keymap.set('i', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'gi')
+  vim.keymap.set('t', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'i')
 end
 win_focus_resize('h', '<')
 win_focus_resize('j', '+')
@@ -87,13 +87,13 @@ win_focus_resize('l', '>')
 
 
 -- Switch conceal --
-Keymap("n", "<Leader>zc", function()
+vim.keymap.set("n", "<Leader>zc", function()
   if vim.o.conceallevel > 0 then
     vim.o.conceallevel = 0
   else
     vim.o.conceallevel = 2
   end
-end, Silent)
+end, { silent = true } )
 
 -- Alias for command mode --
 local function cabbrev(lhs, rhs)

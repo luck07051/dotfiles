@@ -30,24 +30,24 @@ M.config = function()
     -- },
   })
 
-  -- Keymapping --
-  Keymap({ 'i', 's' }, 'jj', function()
+  -- vim.keymap.setping --
+  vim.keymap.set({ 'i', 's' }, 'jj', function()
     if ls.expand_or_jumpable() then
       ls.expand_or_jump()
     end
-  end, Silent)
+  end, { silent = true } )
 
-  Keymap({ 'i', 's' }, 'JJ', function()
+  vim.keymap.set({ 'i', 's' }, 'JJ', function()
     if ls.jumpable(-1) then
       ls.jump(-1)
     end
-  end, Silent)
+  end, { silent = true } )
 
-  Keymap('i', '<C-l>', function()
+  vim.keymap.set('i', '<C-l>', function()
     if ls.choice_active() then
       ls.change_choice(1)
     end
-  end, Silent)
+  end, { silent = true } )
 
   -- Autocmd --
   vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {

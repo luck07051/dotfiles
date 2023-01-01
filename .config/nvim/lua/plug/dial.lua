@@ -34,12 +34,12 @@ M.config = function()
     },
   }
 
-  Keymap('n', '<C-a>', require('dial.map').inc_normal())
-  Keymap('n', '<C-x>', require('dial.map').dec_normal())
-  Keymap('v', '<C-a>', require('dial.map').inc_visual())
-  Keymap('v', '<C-x>', require('dial.map').dec_visual())
-  Keymap('v', 'g<C-a>', require('dial.map').inc_gvisual())
-  Keymap('v', 'g<C-x>', require('dial.map').dec_gvisual())
+  vim.keymap.set('n', '<C-a>', require('dial.map').inc_normal())
+  vim.keymap.set('n', '<C-x>', require('dial.map').dec_normal())
+  vim.keymap.set('v', '<C-a>', require('dial.map').inc_visual())
+  vim.keymap.set('v', '<C-x>', require('dial.map').dec_visual())
+  vim.keymap.set('v', 'g<C-a>', require('dial.map').inc_gvisual())
+  vim.keymap.set('v', 'g<C-x>', require('dial.map').dec_gvisual())
 end
 
 return M

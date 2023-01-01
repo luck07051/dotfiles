@@ -1,12 +1,10 @@
 abbr c='cd'
-abbr o='open'
-abbr z='cd $(dirmark)'
-
 abbr c.='cd ..'
 abbr c-='cd -'
-
-abbr v='vim'
-abbr n='vim $HOME/notes/index.md'
+abbr z='cd $(dirmark)'
+abbr o='open'
+abbr e='$EDITOR'
+abbr n='$EDITOR $HOME/notes/index.md'
 
 abbr sp='sudo pacman'
 abbr sps='sudo pacman -S'

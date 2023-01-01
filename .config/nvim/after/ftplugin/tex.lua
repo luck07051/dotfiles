@@ -1,3 +1,5 @@
 -- Clear nonessential files when leave Tex file
-Au('VimLeave', { pattern = '*.tex',
-    command = [[ !latexmk -c % ]] })
+vim.api.nvim_create_autocmd('VimLeave', {
+  pattern = '*.tex',
+  command = [[ !latexmk -c % ]]
+})

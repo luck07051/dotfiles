@@ -44,6 +44,10 @@ return {
   { -- Color picker and color highlight --
     'uga-rosa/ccc.nvim',
     event = 'VeryLazy',
+    keys = {
+      { '<Leader>cc', ':CccPick<CR>' },
+      { '<A-c>', '<Plug>(ccc-insert)' }
+    },
     config = function()
       require('ccc').setup({
         highlighter = {
@@ -52,20 +56,28 @@ return {
           excludes = {},
         },
       })
-      Keymap('n', '<Leader>cc', ':CccPick<CR>')
-      Keymap('i', '<A-c>', '<Plug>(ccc-insert)')
     end
+  },
+
+  {
+    'ahmedkhalf/project.nvim',
+    event = 'BufReadPre',
+    config = function()
+      require("project_nvim").setup()
+    end,
+  },
+
+  {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime'
   },
 
   {
     'lukas-reineke/indent-blankline.nvim',
     enabled = false,
     event = 'BufReadPre',
-    config = true
-  },
-
-  {
-    'dstein64/vim-startuptime',
-    cmd = 'StartupTime'
+    config = {
+      show_first_indent_level = false,
+    }
   },
 }

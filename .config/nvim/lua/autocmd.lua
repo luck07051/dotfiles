@@ -2,8 +2,10 @@
 --          AUTOCMD          --
 -------------------------------
 
+local au = vim.api.nvim_create_autocmd
+
 -- Disable auto comment new line
-Au('BufEnter', { command = [[ set formatoptions-=cro ]] })
+au('BufEnter', { command = [[ set formatoptions-=cro ]] })
 
 -- Delete trailing spaces and extra line when save file
 local DeleteExtraSpaces = function() --{{{
@@ -14,19 +16,19 @@ local DeleteExtraSpaces = function() --{{{
     execute "to ".b:nline
   ]]
 end --}}}
-Au('BufWrite', { callback = DeleteExtraSpaces })
+au('BufWrite', { callback = DeleteExtraSpaces })
 
 -- Setting for terminal mode
-Au('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
+au('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
 -- autocmd('TermOpen', { command = 'startinsert' })
 
 -- Cursorline on focused window
-Au('WinEnter', { command = 'setlocal cursorline' })
-Au('WinLeave', { command = 'setlocal nocursorline' })
+au('WinEnter', { command = 'setlocal cursorline' })
+au('WinLeave', { command = 'setlocal nocursorline' })
 
 
 -- Use marker foldding in nvim config file
-Au('BufEnter', {
+au('BufEnter', {
   pattern = { '*/nvim/*' },
   command = [[
      set foldmethod=marker
@@ -36,7 +38,7 @@ Au('BufEnter', {
 
 
 -- Indent --
-Au('BufEnter', {
+au('BufEnter', {
   pattern = { '*/linux/*', '*/suckless/*' },
   command = [[ setlocal noet sw=8 ts=8 sts=8 ]]
 })

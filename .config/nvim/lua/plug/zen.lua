@@ -53,16 +53,16 @@ end
 
 M.init = function()
   -- Narrow a text region for better focus
-  Keymap("n", "<leader>zn", ":TZNarrow<CR>", Silent)
-  Keymap("v", "<leader>zn", ":'<,'>TZNarrow<CR>", Silent)
+  vim.keymap.set("n", "<leader>zn", ":TZNarrow<CR>", { silent = true } )
+  vim.keymap.set("v", "<leader>zn", ":'<,'>TZNarrow<CR>", { silent = true } )
   -- Focus on current window
-  Keymap("n", "<leader>zf", ":TZFocus<CR>", Silent)
+  vim.keymap.set("n", "<leader>zf", ":TZFocus<CR>", { silent = true } )
   -- Disable ui components
-  Keymap("n", "<leader>zm", ":TZMinimalist<CR>", Silent)
+  vim.keymap.set("n", "<leader>zm", ":TZMinimalist<CR>", { silent = true } )
   -- Classic zen mode
-  Keymap("n", "<leader>za", ":TZAtaraxis<CR>", Silent)
+  vim.keymap.set("n", "<leader>za", ":TZAtaraxis<CR>", { silent = true } )
   -- Toggle twilight
-  Keymap("n", "<leader>zt", ":Twilight<CR>", Silent)
+  vim.keymap.set("n", "<leader>zt", ":Twilight<CR>", { silent = true } )
 end
 
 return M

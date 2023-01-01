@@ -2,52 +2,47 @@
 --          OPTIONS          --
 -------------------------------
 
-Opt.number = true
-Opt.relativenumber = true
-Opt.signcolumn = 'yes'
-Opt.cursorline = true
-Opt.scrolloff = 5
-Opt.conceallevel = 0
-Opt.laststatus = 3    -- global statusline
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = 'yes'
+vim.opt.cursorline = true
+vim.opt.scrolloff = 5
+vim.opt.conceallevel = 0
+vim.opt.laststatus = 3    -- global statusline
 
 -- Indent --
-Opt.shiftwidth = 4
-Opt.tabstop = 4
-Opt.softtabstop = 4
-Opt.autoindent = true
-Opt.smartindent = true
-Opt.shiftround = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.shiftround = true
 
 -- Menu --
-Opt.ignorecase = true
-Opt.smartcase = true
-Opt.wildignorecase = true
-Opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
-Opt.path:append('**')
-Opt.pumheight = 10
-Opt.inccommand = 'split'
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.wildignorecase = true
+vim.opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
+vim.opt.path:append('**')
+vim.opt.pumheight = 10
+vim.opt.inccommand = 'split'
 
 -- Msic --
-Opt.splitbelow = true
-Opt.splitright = true
-Opt.swapfile = false
-Opt.updatetime = 100
--- Opt.linebreak = true
--- let `gf` working nice with .md extension
-Opt.suffixesadd = '.md'
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.swapfile = false
+vim.opt.updatetime = 100
+-- vim.opt.linebreak = true
+vim.opt.suffixesadd = '.md'
 
 -- Special Char Visualization --
-Opt.list = true
-Opt.listchars = { tab = '▸ ', trail = '·' }
--- Opt.showbreak = '↪'
-Opt.fillchars='eob: '    -- disable filler '~' at blank line
+vim.opt.list = true
+vim.opt.listchars = { tab = '▸ ', trail = '·' }
+vim.opt.fillchars='eob: '
 
 
 -- Fold --
-Opt.foldlevel = 9999
-Opt.foldmethod = 'expr'
-Opt.foldexpr = 'nvim_treesitter#foldexpr()'
-Opt.foldtext = 'MyFoldText()'
+vim.opt.foldlevel = 9999
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldtext = 'MyFoldText()'
 vim.cmd [[
 function! MyFoldText() "{{{
   let foldedlinecount = '[ ' . (v:foldend - v:foldstart) . ' ]'

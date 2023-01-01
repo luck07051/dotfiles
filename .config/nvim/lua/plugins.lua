@@ -32,4 +32,4 @@ require("lazy").setup('plug', {
   }
 })
 
-Keymap('n', '<Leader>l', ':Lazy<CR>')
+vim.keymap.set('n', '<Leader>l', ':Lazy<CR>')
