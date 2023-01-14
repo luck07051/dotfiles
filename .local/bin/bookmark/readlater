@@ -1,24 +1,24 @@
 #!/bin/sh
 
 readlater_file="$HOME/bm/readlater"
-browser_open="firefox --new-tab"
+browser_open="librewolf --new-tab"
 
 add() {
 	cur_tab="$(get-cur-tab)"
-	[ -z "$cur_tab" ] && exit 2
+	[ -z "$cur_tab" ] && exit
 
 	if grep "$cur_tab" "$readlater_file"; then
 		notify-send "Readlater" "Already have this page!"
-		exit 2
+		exit
 	fi
 
-	echo "$cur_tab" >>"$readlater_file"
+	echo "$cur_tab" >> "$readlater_file"
 	notify-send "Readlater: Add page" "$(echo "$cur_tab" | cut -f1)"
 }
 
 pop() {
 	selected="$(column -t -s "$(printf '\t')" "$readlater_file" | tac |
-		dmenu -i -F -l 20 -p "Readlater")"
+		dmenu -i -F -l 20 -p "Open page")"
 	[ -z "$selected" ] && exit
 
 	url="${selected##* }"
@@ -27,12 +27,14 @@ pop() {
 }
 
 rm() {
+	# TODO: only get url
 	tab="$(get-cur-tab)"
 
 	if [ -z "$tab" ] || ! grep -q "$tab" "$readlater_file"; then
 		tab="$(column -t -s "$(printf '\t')" "$readlater_file" | tac |
-		dmenu -i -F -l 20 -p "Delete page" | sed 's/\s\+\(\S\+\)$/\t\1/')"
-		[ -z "$selected" ] && exit 2
+			dmenu -i -l 20 -p "Delete page" | sed 's/\s\+\(\S\+\)$/\t\1/')"
+		echo "$tab"
+		[ -z "$tab" ] && exit
 	fi
 
 	url="$(echo "$tab" | cut -f2 | sed 's#/#\\/#g')"

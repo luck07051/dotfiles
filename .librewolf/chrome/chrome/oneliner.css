@@ -10,54 +10,10 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/* Hide buttons **/
-#nav-bar-customization-target toolbarbutton,
-#nav-bar-customization-target #page-action-buttons {
-  margin-left: calc(-2 * var(--toolbarbutton-inner-padding) - 12px - (2 * var(--toolbarbutton-outer-padding))) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: all 100ms var(--animation-easing-function) !important;
-}
-
-/* Show on hover or focus */
-#nav-bar-customization-target:hover toolbarbutton,
-#nav-bar-customization-target:hover #page-action-buttons {
-  margin-left: 0 !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
 /* Hide controls when urlbar focused */
-#navigator-toolbox #nav-bar #nav-bar-customization-target:focus-within toolbarbutton,
-#navigator-toolbox #nav-bar #nav-bar-customization-target:focus-within ~ toolbarbutton,
-#navigator-toolbox #nav-bar #nav-bar-customization-target:focus-within ~ toolbaritem,
-#navigator-toolbox #nav-bar #nav-bar-customization-target:focus-within #page-action-buttons {
+#navigator-toolbox #nav-bar #nav-bar-customization-target:focus-within toolbarbutton {
   display: none !important;
 }
-
-@media (max-width: 900px) {
-#nav-bar-customization-target:hover #back-button,
-#nav-bar-customization-target:hover #forward-button,
-#nav-bar-customization-target:hover #stop-reload-button {
-  display: none !important;
-}
-}
-@media (max-width: 1000px) {
-#nav-bar-customization-target:hover #page-action-buttons {
-  display: none !important;
-}
-}
-
-/* Some button on urlbar */
-/* #identity-icon-box, */
-#tracking-protection-icon-container
-/* #identity-box, */
-/* #page-action-buttons */
-{
-  visibility: collapse;
-  opacity: 0;
-}
-
 
 /* Change tab height to new-tab-height */
 #tabbrowser-tabs,

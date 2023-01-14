@@ -7,37 +7,26 @@ vim.keymap.set('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Swap ';' and ':' --
-vim.keymap.set('', ';', ':')
-vim.keymap.set('', ':', ';')
-vim.keymap.set('n', 'q;', 'q:')
-
--- Move Quickly --
-vim.keymap.set('', '<C-E>', '3<C-E>')
-vim.keymap.set('', '<C-Y>', '3<C-Y>')
-
--- Copy with clipboard --
+-- Copy paste with clipboard --
 vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>Y', '"+y$')
 vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
 vim.keymap.set('v', '<C-c>', '"+y')
 vim.keymap.set('v', '<C-v>', '"+p')
+vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Delete with black hole --
 -- vim.keymap.set('', '<Leader>d', '"_d')
 -- vim.keymap.set('', '<Leader>D', '"_D')
 
--- Copy whole file to clipboard --
-vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
-
 -- Paste in visual mode do not change register --
 vim.keymap.set('v', 'p', '"_dP')
-vim.keymap.set('v', 'gp', '"_d"+P')
+vim.keymap.set('v', '<Leader>p', '"_d"+P')
 
--- Cool thing you can do in visual mode --
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+-- Move line in visual mode --
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { silent = true })
 
 -- Quick replace --
 vim.keymap.set('n', 's', ':%s/')
@@ -105,3 +94,4 @@ end
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('za', '!zathura')
 cabbrev('pa', 'so % \\| PackerCompile')
+cabbrev('f', 'find')

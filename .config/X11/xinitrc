@@ -19,6 +19,7 @@ xset -dpms
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
+doas wg-quick up uivpn
 
 # Startup app
 run $BROWSER

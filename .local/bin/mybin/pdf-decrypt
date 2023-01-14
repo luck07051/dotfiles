@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# pdf-decrypt password /path/to/pdf
+[ -z "$1" ] && { echo "${0##*/} password /path/to/pdf" >&2; exit 2; }
 
 if [ -z "$3" ] || [ "$2" = "$3" ]; then
 	opt='--replace-input'

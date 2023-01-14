@@ -1,9 +1,7 @@
+/* svg.context-properties.content.enable */
+
 @import "colors.css";
-
-/* @import "chrome/navbar_tabs_oneliner.css"; */
-/* @import "chrome/responsive_oneliner.css"; */
 @import "chrome/oneliner.css";
-
 
 :root {
   --background: var(--bg-color) !important;
@@ -50,4 +48,24 @@ menupopup, panel {
 
 spacer {
   border: none !important;
+}
+
+#titlebar,
+#PersonalToolbar,
+.toolbar-items {
+  background: var(--bg-color);
+}
+
+/* Hide some button */
+.unified-extensions-item-open-menu.subviewbutton.subviewbutton-iconic,
+#tracking-protection-icon-container,
+#pageAction-urlbar-_testpilot-containers,
+#star-button-box
+{
+  display: none;
+}
+#new-tab-button,
+#alltabs-button {
+  opacity: 0;
+  width: 0;
 }

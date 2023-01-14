@@ -25,8 +25,9 @@ export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//
 export WM='dwm'
 export EDITOR='nvim'
 export TERMINAL='st'
-export TERM='st'
-export BROWSER='firefox'
+export BROWSER='librewolf'
+
+[ -x "$(which nvim)" ] && export MANPAGER='nvim +Man!'
 
 export LANG='en_US.UTF-8'
 
@@ -84,3 +85,6 @@ export CONDARC=$XDG_CONFIG_HOME/conda/condarc
 export test5="test"
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+# pylint
+export PYLINTHOME="$XDG_CACHE_HOME"/pylint
+export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc

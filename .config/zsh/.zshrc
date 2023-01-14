@@ -1,7 +1,7 @@
 # vim:foldmethod=marker:foldlevel=0
 
 unsetopt autocd beep        # No beep sound
-set -o ignoreeof            # Prevent <C-D> to colse window
+set -o ignoreeof            # Prevent <C-D> to close window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 
 # Source function
@@ -42,7 +42,7 @@ bindkey -M viins -s "^N" "^I"       # Use <C-N> to complete (map <C-N> to tab)
 bindkey "^J" down-line-or-search
 bindkey "^K" up-line-or-search
 
-# Edit line in vim by <C-e>:
+# Edit command in vim by <C-e>:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 bindkey -M vicmd '^e' edit-command-line
@@ -61,15 +61,14 @@ fi
 
 
 # Alias
-zsh_add_util abbr
+zsh_add_file "functions/abbr.zsh"
 zsh_add_file "alias.zsh"
 zsh_add_file "local_alias.zsh"
 
 # Util
-zsh_add_util lf                # lf with several setup
-zsh_add_util nvim_man          # using nvim to read `man`
-zsh_add_util yank              # <C-y> to yank prev command
-# zsh_add_util auto_ls           # run ls when $PWD changed
+zsh_add_file "functions/lf.zsh"            # lf with several setup
+zsh_add_file "functions/yank.zsh"          # <C-y> to yank prev command
+# zsh_add_file "functions/auto_ls.zsh"       # run ls when $PWD changed
 
 # Plugins
 zsh_add_plug "Aloxaf/fzf-tab"
@@ -79,11 +78,3 @@ zsh_add_plug "zsh-users/zsh-completions"
 #   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
 #   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"
-
-# Functions
-ot() {
-  setsid -f "$@" >/dev/null 2>&1
-}
-sa() {
-  devour "$@"
-}

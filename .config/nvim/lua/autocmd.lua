@@ -35,10 +35,3 @@ au('BufEnter', {
      set foldlevel=0
   ]]
 })
-
-
--- Indent --
-au('BufEnter', {
-  pattern = { '*/linux/*', '*/suckless/*' },
-  command = [[ setlocal noet sw=8 ts=8 sts=8 ]]
-})

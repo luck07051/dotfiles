@@ -4,4 +4,4 @@ color="$(xcolor)"
 
 echo "$color" | xclip -sel clip
 
-notify-send "Copy!" "$color"
+notify-send "Copy the color!" "$color"

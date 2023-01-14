@@ -49,6 +49,7 @@ M.config = function()
       lualine_y = {},
       lualine_z = { 'progress', 'location' }
     },
+
     inactive_sections = {
       lualine_a = { { 'filename', path = 1 } },
       lualine_b = {},

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) bookmark | xargs "$BROWSER" ;;
+	3) edit-bookmark ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+printf " "

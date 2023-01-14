@@ -123,13 +123,20 @@
   }
 
   /* wiki navigation */
-  .toc {
-    background: var(--box-background-color) !important;
-    border: 1px solid var(--box-border-color) !important;
-  }
-  .tocnumber {
+  #mw-panel-toc {
+    background-color: var(--box-background-color) !important;
     color: var(--color) !important;
   }
+  #mw-panel-toc .sidebar-toc-title,
+  #mw-panel-toc a {
+    color: var(--color) !important;
+  }
+  #mw-panel-toc::after {
+    display: none !important;
+  }
+
+  /* #vector-toc-collapsed-button { */
+  /* } */
 
   /* view source box */
     /* border dont work */

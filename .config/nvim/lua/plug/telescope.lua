@@ -38,6 +38,7 @@ end
 
 M.keys = {
   { '<M-f>',      function() require('telescope.builtin').find_files() end },
+  { '<Leader>fe', function() require('telescope.builtin').find_files() end },
   { '<Leader>fj', ':Telescope projects<CR>' },
   { '<Leader>fb', function() require('telescope.builtin').buffers() end },
   { '<Leader>fq', function() require('telescope.builtin').quickfix() end },

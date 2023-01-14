@@ -1,0 +1,20 @@
+#!/bin/sh
+
+get_vpn_name() {
+	name="$(doas wg | grep interface: | sed 's/interface:\s*//')"
+	[ -z "$name" ] && name="--"
+	echo "$name"
+}
+
+vpn="$(get_vpn_name)"
+action="down"
+[ "$vpn" = "--" ] && action="up"
+
+case $BLOCK_BUTTON in
+	3) doas wg-quick "$action" uivpn >/dev/null
+	   vpn="$(get_vpn_name)"
+	   ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+printf " %s" "$vpn"

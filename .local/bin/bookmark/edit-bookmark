@@ -2,6 +2,6 @@
 
 bookmark_file="${1:-$HOME/bm/bookmark}"
 
-get-cur-tab | cut -f2 | xclip -sel clip
+get-cur-tab >> "$bookmark_file"
 
-"$TERMINAL" -e "$EDITOR" "$bookmark_file"
+"$TERMINAL" -c float -e "${EDITOR-:vim}" "$bookmark_file" -c "normal G"

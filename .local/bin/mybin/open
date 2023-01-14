@@ -18,7 +18,7 @@ case $(file --mime-type "$1" -bL) in
 		devour libreoffice "$@"
 		;;
 
-  text/*)
+	text/*)
 		nvim "$@"
 		;;
 

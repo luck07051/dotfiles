@@ -9,8 +9,7 @@ searchengine_file="${2:-$HOME/bm/searchengine}"
 selected="$(sed "/^\s*#/d; /^\$/d" "$bookmark_file" |
 	column -t -s "$(printf '\t')" |
 	dmenu -i -l 20 -p 'OPEN')"
-
-[ -z "$selected" ] && exit 1
+[ -z "$selected" ] && exit
 
 if grep -qw "\(${selected##* }\)$" "$bookmark_file"; then
 	echo "${selected##* }"

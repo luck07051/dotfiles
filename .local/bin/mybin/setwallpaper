@@ -12,64 +12,66 @@
 # `setwallpaper /img/path -f zoom`
 #   use `-f` to specify fill method
 
+change_img() {
+# default value
+screen=0
+fill="zoom"
+
+while [ $# -gt 0 ]; do
+	case $1 in
+		-h|--help)
+			echo "no help"
+			exit
+			;;
+
+		-s|--screen)
+			screen="$2"
+			shift 2
+			;;
+		-s*)
+			screen="${1#-s}"
+			shift
+			;;
+
+		-f|--fill)
+			fill="$2"
+			shift 2
+			;;
+		-f*)
+			fill="${1#-f}"
+			shift
+			;;
+
+		-*)
+			echo "Unknown option $1"
+			exit 1
+			;;
+
+		*)
+			if [ -n "$img" ]; then
+				echo "Unknow option $1"
+				exit 1
+			elif [ ! -f "$1" ]; then
+				echo "File not exists $1"
+				exit 1
+			else
+				img="$1"
+				shift
+			fi
+			;;
+	esac
+done
+
+# file name should looks like `0_zoom.jpg`
+# first char `0` stand for screen, `zoom` stand for fill method.
+rm -f "$wall_dir"/"$screen"_*
+cp "$(readlink -f "$img")" "$wall_dir"/"$screen"_"$fill"."${img##*.}"
+}
+
 wall_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper"
 [ ! -d "$wall_dir" ] && mkdir -p "$wall_dir"
 
-if [ -n "$1" ]; then
-	# default value
-	screen=0
-	fill="zoom"
-
-	while [ $# -gt 0 ]; do
-		case $1 in
-			-h|--help)
-				echo "no help"
-				exit
-				;;
-
-			-s|--screen)
-				screen="$2"
-				shift 2
-				;;
-			-s*)
-				screen="${1#-s}"
-				shift
-				;;
-
-			-f|--fill)
-				fill="$2"
-				shift 2
-				;;
-			-f*)
-				fill="${1#-f}"
-				shift
-				;;
-
-			-*)
-				echo "Unknown option $1"
-				exit 1
-				;;
-
-			*)
-				if [ -n "$img" ]; then
-					echo "Unknow option $1"
-					exit 1
-				elif [ ! -f "$1" ]; then
-					echo "File not exists $1"
-					exit 1
-				else
-					img="$1"
-					shift
-				fi
-				;;
-		esac
-	done
-
-	# file name look like `0_zoom.jpg`
-	# which first char `0` stand for screen, `zoom` stand for fill method.
-	rm -f "$wall_dir"/"$screen"_*
-	cp "$(readlink -f "$img")" "$wall_dir"/"$screen"_"$fill"."${img##*.}"
-fi
+[ -n "$1" ] && change_img "$@"
 
 # change wallpaper
 for file in "$wall_dir"/*; do

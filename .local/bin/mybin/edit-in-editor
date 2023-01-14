@@ -1,0 +1,9 @@
+#!/bin/sh
+
+xdotool key --window "$(xdotool getwindowfocus)" --clearmodifiers ctrl+a ctrl+x
+
+TMPFILE="$(mktemp /tmp/edit-in-editor.XXXXXXXX)"
+xclip -selection clipboard -o > "$TMPFILE"
+$TERMINAL -c float -e "${EDITOR:-vim}" "$TMPFILE"
+xclip -selection clipboard "$TMPFILE"
+rm "$TMPFILE"

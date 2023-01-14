@@ -1,7 +1,24 @@
 return {
   'luck07051/uicolors.nvim',
 
-  { -- `gc` to comment text --
+  { -- File explorer
+    'stevearc/oil.nvim',
+    event = "Syntax",
+    config = function() require('oil').setup({
+      view_options = { show_hidden = true },
+      win_options = { conceallevel = 0 },
+      keymaps = {
+        ["<BS>"] = "actions.parent",
+      },
+      float = {
+        win_options = {
+          winblend = 0,
+        },
+      }
+    }) end
+  },
+
+  { -- `gc` to comment text
     'numToStr/Comment.nvim',
     keys = {
       { 'gc', mode = { 'n', 'v' } },
@@ -10,38 +27,34 @@ return {
     config = true
   },
 
-  { -- Surround selections --
+  { -- Surround selections
     "kylechui/nvim-surround",
     keys = { 'cs', 'ds', 'ys' },
     config = true
   },
 
-  { -- Align stuff --
+  { -- Align stuff
     'junegunn/vim-easy-align',
     keys = { { 'ga', '<Plug>(EasyAlign)', mode = { 'n', 'x' } } }
   },
 
-  { -- Auto figure out what indent used in file --
+  { -- Auto figure out what indent used in file
     'nmac427/guess-indent.nvim',
     event = "BufReadPre",
     config = true
   },
 
-  {
-    'jghauser/follow-md-links.nvim',
-    ft = { 'markdown' }
+  { -- Enhanced gx
+    'stsewd/gx-extended.vim',
+    keys = { 'gx' },
   },
 
-  {
-    'jiaoshijie/undotree',
-    keys = {
-      { '<Leader>u', function() require('undotree').toggle() end }
-    },
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = true
+  { -- Enhanced quickfix
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf'
   },
 
-  { -- Color picker and color highlight --
+  { -- Color picker and color highlight
     'uga-rosa/ccc.nvim',
     event = 'VeryLazy',
     keys = {
@@ -59,7 +72,7 @@ return {
     end
   },
 
-  {
+  { -- Project management
     'ahmedkhalf/project.nvim',
     event = 'BufReadPre',
     config = function()
@@ -67,17 +80,18 @@ return {
     end,
   },
 
-  {
+  { -- Show undo tree
+    'jiaoshijie/undotree',
+    keys = {
+      { '<Leader>u', function() require('undotree').toggle() end }
+    },
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = true
+  },
+
+  { -- Profiling startup time
     'dstein64/vim-startuptime',
     cmd = 'StartupTime'
   },
 
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
-    event = 'BufReadPre',
-    config = {
-      show_first_indent_level = false,
-    }
-  },
 }
