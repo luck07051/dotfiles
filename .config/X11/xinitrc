@@ -8,7 +8,12 @@ run() {
 }
 
 # Remap caps lock to Ctrl
-setxkbmap -option ctrl:nocaps
+if [ "$(hostname)" = "uicom" ]; then
+	setxkbmap -option ctrl:nocaps
+elif [ "$(hostname)" = "uilap" ]; then
+	setxkbmap -option caps:shiftlock
+fi
+
 
 # Set screen to 144 rate
 xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
