@@ -57,6 +57,8 @@ spacer {
 }
 
 /* Hide some button */
+#new-tab-button,
+#tabs-newtab-button,
 .unified-extensions-item-open-menu.subviewbutton.subviewbutton-iconic,
 #tracking-protection-icon-container,
 #pageAction-urlbar-_testpilot-containers,
@@ -64,7 +66,6 @@ spacer {
 {
   display: none;
 }
-#new-tab-button,
 #alltabs-button {
   opacity: 0;
   width: 0;

@@ -2,7 +2,13 @@
 
 printf "Beginning upgrade.\\n"
 
-yay -Syu
+if [ -x "$(which paru)" ]; then
+	paru
+elif [ -x "$(which yay)" ]; then
+	yay
+else
+	pacman -Syu
+fi
 
 kill -58 "$(pidof dwmblocks)"
 
