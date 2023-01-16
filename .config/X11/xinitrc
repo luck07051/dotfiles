@@ -7,16 +7,18 @@ run() {
 	fi
 }
 
-# Remap caps lock to Ctrl
-if [ "$(hostname)" = "uicom" ]; then
+case $(hostname) in
+uicom)
+	# Remap caps lock to Ctrl
 	setxkbmap -option ctrl:nocaps
-elif [ "$(hostname)" = "uilap" ]; then
+	# Set screen to 144 rate
+	xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
+	;;
+uilap)
 	setxkbmap -option caps:shiftlock
-fi
+	;;
+esac
 
-
-# Set screen to 144 rate
-xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
 
 # No screen saver
 xset s off
@@ -24,7 +26,6 @@ xset -dpms
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
-doas wg-quick up uivpn
 
 # Startup app
 run $BROWSER

@@ -59,8 +59,8 @@ if [ -x "$(command -v exa)" ]; then
     exa -a --icons --group-directories-first'
   alias ll='exa -al --icons --group-directories-first --git -H'
 else
-  alias ls='ls -A color=auto --group-directories-first'
-  alias ll='ls -Al color=auto --group-directories-first'
+  alias ls='ls -A --color=auto --group-directories-first'
+  alias ll='ls -Al --color=auto --group-directories-first'
 fi
 
 # use bare Git repository to manage dotfiles
