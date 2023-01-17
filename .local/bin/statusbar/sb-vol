@@ -9,10 +9,10 @@ case $BLOCK_BUTTON in
 esac
 
 
-[ "$(pamixer --get-mute)" = "true" ] &&
+[ "$(pactl get-sink-mute @DEFAULT_SINK@)" = "Mute: yes" ] &&
 	printf " " && exit
 
-vol=$(pamixer --get-volume)
+vol="$(vl get_volume)"
 #   
 icon=" "
 printf "$icon$vol%%"

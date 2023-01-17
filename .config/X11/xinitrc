@@ -7,15 +7,24 @@ run() {
 	fi
 }
 
-case $(hostname) in
+case $(cat /etc/hostname) in
 uicom)
 	# Remap caps lock to Ctrl
 	setxkbmap -option ctrl:nocaps
 	# Set screen to 144 rate
 	xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
+	# Input method
+	run fcitx5 -d
+	# Tablet driver
+	run otd
 	;;
 uilap)
-	setxkbmap -option caps:shiftlock
+	#setxkbmap -option caps:shiftlock
+	setxkbmap -option ctrl:nocaps
+	# pipewire (uicom using systemd to hendle this)
+	pipewire &
+	pipewire-pulse &
+	pipewire-media-session &
 	;;
 esac
 
@@ -28,19 +37,17 @@ xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
 
 # Startup app
-run $BROWSER
 run dunst
-run unclutter
 run xcompmgr -n
-run fcitx5 -d
-run entr-list
-run syncthing serve --no-browser
-run otd
+run unclutter
+
+run syncthing serve --no-browser --no-default-folder
+# run entr-list
 
 while true; do
 	killall dwmblocks >/dev/null 2>&1
 	dwmblocks &
-	(sleep 2s; kill -55 "$(pidof dwmblocks)") &
+	(sleep 3s; kill -55 "$(pidof dwmblocks)") &
 
 	dwm
 done

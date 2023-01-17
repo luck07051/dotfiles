@@ -4,7 +4,7 @@ STEP=5
 
 up() {
 	[ -n "$1" ] && STEP=$1
-	vol="$(_get_default_volume)"
+	vol="$(get_volume)"
 	pactl set-sink-volume @DEFAULT_SINK@ "$(( STEP * (vol / STEP +1) ))"%
 }
 
@@ -28,7 +28,7 @@ switch() {
 		xargs pactl set-default-sink
 }
 
-_get_default_volume() {
+get_volume() {
 	pactl get-sink-volume @DEFAULT_SINK@ | sed 's/.* \([0-9]*\)% .*/\1/; q'
 }
 
