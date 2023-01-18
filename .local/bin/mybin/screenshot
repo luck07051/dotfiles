@@ -16,4 +16,4 @@ case "$1" in
 		;;
 esac
 
-[ "$?" = "0" ] && notify-send "Screenshot taked" "$filename"
+[ "$?" = "0" ] && notify-send "Screenshot taked" ""

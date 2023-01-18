@@ -21,7 +21,7 @@ uicom)
 uilap)
 	#setxkbmap -option caps:shiftlock
 	setxkbmap -option ctrl:nocaps
-	# pipewire (uicom using systemd to hendle this)
+	# pipewire
 	pipewire &
 	pipewire-pulse &
 	pipewire-media-session &

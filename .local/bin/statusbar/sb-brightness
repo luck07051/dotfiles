@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+#	1) vl sink_mute ;;
+#	3) vl switch ;;
+#	4) vl up ;;
+#	5) vl down ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+sys_backlight='/sys/class/backlight/intel_backlight'
+val="$(cat $sys_backlight/brightness)"
+max="$(cat $sys_backlight/max_brightness)"
+
+# kill -57 $(pidof dwmblocks)
+
+printf " %s" "$((val * 15 / max))"

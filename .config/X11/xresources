@@ -38,7 +38,7 @@ dmenu.baralpha: 0xe6
 st.font: MesloLGS Nerd Font:size=11
 st.cursorColor: fg
 st.cwscale: 0.95
-
+st.shell: /bin/zsh
 
 ! for font render
 Xft.dpi: 96

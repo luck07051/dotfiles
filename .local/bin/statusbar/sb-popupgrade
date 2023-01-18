@@ -10,7 +10,7 @@ else
 	pacman -Syu
 fi
 
-kill -58 "$(pidof dwmblocks)"
+kill -61 "$(pidof dwmblocks)"
 
 printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
 read -r _

@@ -10,7 +10,6 @@ export XDG_DOCUMENTS_DIR="$HOME/doc"
 export XDG_MUSIC_DIR="$HOME/mu"
 export XDG_PICTURES_DIR="$HOME/img"
 export XDG_VIDEOS_DIR="$HOME/vid"
-# export XDG_RUNTIME_DIR=
 
 
 #==================== Bin Paths ====================#
@@ -23,9 +22,10 @@ export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//
 
 #==================== Main ====================#
 export WM='dwm'
-export EDITOR='nvim'
 export TERMINAL='st'
 export BROWSER='librewolf'
+export EDITOR='nvim'
+export SHELL='/bin/zsh'
 
 [ -x "$(which nvim)" ] && export MANPAGER='nvim +Man!'
 
@@ -40,7 +40,7 @@ export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
 
 # FZF
 export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
-    --color=pointer:5,gutter:-1,prompt:15 --no-separator --info=default"
+     --color=pointer:5,gutter:-1,prompt:15 --no-separator --info=default"
 export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
@@ -82,9 +82,14 @@ export CUDA_CACHE_PATH=$XDG_CACHE_HOME/nv
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
 # conda
 export CONDARC=$XDG_CONFIG_HOME/conda/condarc
-export test5="test"
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 # pylint
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
+
+
+#=== Auto startx ===#
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  startx "$XINITRC"
+fi
