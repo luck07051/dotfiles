@@ -52,7 +52,8 @@ bindkey -M vicmd '^e' edit-command-line
 if [ -x "$(which starship)" ]; then
   eval "$(starship init zsh)"
 else
-  PS1="%B%F{cyan}%4~%f%b$ "
+  PS1="%B%F{cyan}%4~%f%b%(?.%F{white}.%F{red})$%f "
+  PS2=">"
 fi
 
 # cd Alternatives

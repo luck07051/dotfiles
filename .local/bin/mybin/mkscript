@@ -1,0 +1,22 @@
+#!/bin/sh
+
+file="${1}"
+
+[ -z "${file}" ] && { echo "Please supply a script name to create" >&2; return 1; }
+[ -f "${file}" ] && { echo "${file} already exists, aborting" >&2; return 1; }
+
+mkdir -p "$(dirname "${file}")"
+
+cat > "${file}" << EOF
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+echo "hello world"
+EOF
+
+chmod +x "${file}"
+
+"$EDITOR" "${file}"

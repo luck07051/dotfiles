@@ -21,10 +21,7 @@ uicom)
 uilap)
 	#setxkbmap -option caps:shiftlock
 	setxkbmap -option ctrl:nocaps
-	# pipewire
-	pipewire &
-	pipewire-pulse &
-	pipewire-media-session &
+	setsid -f start-pipewire
 	;;
 esac
 
@@ -42,7 +39,7 @@ run xcompmgr -n
 run unclutter
 
 run syncthing serve --no-browser --no-default-folder
-# run entr-list
+run entr-list
 
 while true; do
 	killall dwmblocks >/dev/null 2>&1

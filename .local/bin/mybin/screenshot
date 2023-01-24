@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -o errexit
+
 dir="${XDG_PICTURES_DIR:-$HOME/downloads}/screenshots"
 [ ! -d "$dir" ] && mkdir -p "$dir"
 filename='screenshot_%Y-%m-%d_%H-%M-%S.png'
@@ -11,9 +13,9 @@ case "$1" in
 	cur)
 		scrot -u "$dir/$filename" -e 'xclip -selection clipboard -target image/png < $f'
 		;;
-	* | full)
+	full)
 		scrot "$dir/$filename" -e 'xclip -selection clipboard -target image/png < $f'
 		;;
 esac
 
-[ "$?" = "0" ] && notify-send "Screenshot taked" ""
+notify-send "Screenshot taked" ""

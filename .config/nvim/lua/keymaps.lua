@@ -12,8 +12,8 @@ vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>Y', '"+y$')
 vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
-vim.keymap.set('v', '<C-c>', '"+y')
-vim.keymap.set('v', '<C-v>', '"+p')
+vim.keymap.set('v', '<C-s-c>', '"+y')
+vim.keymap.set('v', '<C-s-v>', '"+p')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Delete with black hole --
@@ -92,6 +92,4 @@ local function cabbrev(lhs, rhs)
 end
 
 cabbrev('sudow', 'w !sudo tee %')
-cabbrev('za', '!zathura')
-cabbrev('pa', 'so % \\| PackerCompile')
 cabbrev('f', 'find')

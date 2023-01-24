@@ -1,6 +1,7 @@
 abbr c='cd'
 abbr c.='cd ..'
 abbr c-='cd -'
+abbr c_='cd $_'
 abbr z='cd $(dirmark)'
 abbr o='open'
 abbr e='$EDITOR'
@@ -23,11 +24,8 @@ abbr nb='newsboat'
 abbr slidev='npx slidev'
 abbr lzg='lazygit'
 abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
-abbr dmci='doas make clean install'
-
-# Alias for open programs
-ot() { setsid -f "$@" >/dev/null 2>&1 }
-sa() { devour "$@" }
+abbr mi='doas make install clean'
+abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
 
 # Change dir when left lf, and use given colors
 lf() {
@@ -53,10 +51,13 @@ alias grep='grep --color=auto'
   alias vim='nvim' vimdiff='nvim -d'
 
 # ls
-if [ -x "$(command -v exa)" ]; then
-  # limit the columns to 80
-  alias ls='[ "$COLUMNS" -gt "80" ] && export COLUMNS=80;
-    exa -a --icons --group-directories-first'
+if [ -x "$(command -v lsd)" ]; then
+  alias ls='lsd -A --group-directories-first'
+  alias ll='lsd -Al --group-directories-first'
+elif [ -x "$(command -v exa)" ]; then
+  # alias ls='[ "$COLUMNS" -gt "80" ] && export COLUMNS=80;
+  #   exa -a --icons --group-directories-first'
+  alias ls='exa -a --icons --group-directories-first'
   alias ll='exa -al --icons --group-directories-first --git -H'
 else
   alias ls='ls -A --color=auto --group-directories-first'
@@ -71,27 +72,3 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 alias yarn="yarn --use-yarnrc '$XDG_CONFIG_HOME/yarn/config'"
-
-
-mkscript () {
-  local file="${1}"
-
-  [ -z "${file}" ] && { echo "Please supply a script name to create" >&2; return 1; }
-  [ -f "${file}" ] && { echo "${file} already exists, aborting" >&2; return 1; }
-
-  mkdir -p "$(dirname "${file}")"
-
-  cat > "${file}" << EOF
-#!/bin/sh
-
-set -o errexit
-set -o nounset
-set -o pipefail
-
-echo "hello world"
-EOF
-
-  chmod +x "${file}"
-
-  "$EDITOR" "${file}"
-}

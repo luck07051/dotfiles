@@ -1,7 +1,7 @@
 #!/bin/sh
 # vim:foldmethod=marker:foldlevel=0
 
-xrdb -merge ${1:-$XDG_CONFIG_HOME/X11/xresources}
+xrdb -merge "${1:-$XDG_CONFIG_HOME/X11/xresources}"
 
 # Get color from xresources
 color0=$(xrdb -get color0)
@@ -33,40 +33,45 @@ backup() {
 }
 
 vim_color_file="$XDG_DATA_HOME/nvim/site/pack/packer/start/ui-colors/colors/ui_colors.vim"
-## Vim Color {{{
-# backup "$vim_color_file"
-#
-# # ['#XXXXXX', '1'] -> ['#YYYYYY', '1']
-# sed -i "s/\['#\S\{6\}',\ '1'\]/['$color1', '1']/" "$vim_color_file"
-# sed -i "s/\['#\S\{6\}',\ '2'\]/['$color2', '2']/" "$vim_color_file"
-# sed -i "s/\['#\S\{6\}',\ '3'\]/['$color3', '3']/" "$vim_color_file"
-# sed -i "s/\['#\S\{6\}',\ '4'\]/['$color4', '4']/" "$vim_color_file"
-# sed -i "s/\['#\S\{6\}',\ '5'\]/['$color5', '5']/" "$vim_color_file"
-# sed -i "s/\['#\S\{6\}',\ '6'\]/['$color6', '6']/" "$vim_color_file"
-# echo "sync vim color!"
+# Vim Color {{{
+if [ -f "$vim_color_file" ]; then
+	backup "$vim_color_file"
+
+	# ['#XXXXXX', '1'] -> ['#YYYYYY', '1']
+	sed -i "s/\['#\S\{6\}',\ '1'\]/['$color1', '1']/" "$vim_color_file"
+	sed -i "s/\['#\S\{6\}',\ '2'\]/['$color2', '2']/" "$vim_color_file"
+	sed -i "s/\['#\S\{6\}',\ '3'\]/['$color3', '3']/" "$vim_color_file"
+	sed -i "s/\['#\S\{6\}',\ '4'\]/['$color4', '4']/" "$vim_color_file"
+	sed -i "s/\['#\S\{6\}',\ '5'\]/['$color5', '5']/" "$vim_color_file"
+	sed -i "s/\['#\S\{6\}',\ '6'\]/['$color6', '6']/" "$vim_color_file"
+	echo "sync vim color!"
+fi
 # }}}
 
-firefox_color_file="$HOME/.mozilla/chrome/colors.css"
+firefox_color_file="$HOME/.librewolf/chrome/colors.css"
 # Firefox chrome {{{
-backup "$firefox_color_file"
+if [ -f "$firefox_color_file" ]; then
+	backup "$firefox_color_file"
 
-# --background: #XXXXXX -> --background: #YYYYYY
-sed -i "s/--bg-color:\ #\S\{6\}/--bg-color: $bg/" "$firefox_color_file"
-sed -i "s/--fg-color:\ #\S\{6\}/--fg-color: $fg/" "$firefox_color_file"
-sed -i "s/--pr-color:\ #\S\{6\}/--pr-color: $pr/" "$firefox_color_file"
-echo "sync firefox chrome color!"
+	# --background: #XXXXXX -> --background: #YYYYYY
+	sed -i "s/--bg-color:\ #\S\{6\}/--bg-color: $bg/" "$firefox_color_file"
+	sed -i "s/--fg-color:\ #\S\{6\}/--fg-color: $fg/" "$firefox_color_file"
+	sed -i "s/--pr-color:\ #\S\{6\}/--pr-color: $pr/" "$firefox_color_file"
+	echo "sync firefox chrome color!"
+fi
 # }}}
 
 alacritty_color_file="$XDG_CONFIG_HOME/alacritty/alacritty.yml"
 # Alacritty {{{
-backup "$alacritty_color_file"
+if [ -f "$alacritty_color_file" ]; then
+	backup "$alacritty_color_file"
 
-# background: '#XXXXXX' -> background: '#YYYYYY'
-sed -i "s/background:\ '#\S\{6\}'/background: '$bg'/" "$alacritty_color_file"
-sed -i "s/foreground:\ '#\S\{6\}'/foreground: '$fg'/" "$alacritty_color_file"
-sed -i "s/cursor:\ '#\S\{6\}'/cursor: '$fg'/"         "$alacritty_color_file"
+	# background: '#XXXXXX' -> background: '#YYYYYY'
+	sed -i "s/background:\ '#\S\{6\}'/background: '$bg'/" "$alacritty_color_file"
+	sed -i "s/foreground:\ '#\S\{6\}'/foreground: '$fg'/" "$alacritty_color_file"
+	sed -i "s/cursor:\ '#\S\{6\}'/cursor: '$fg'/"         "$alacritty_color_file"
 
-replacement="\
+	replacement="\
   normal:
     black:    '$color0'
     red:      '$color1'
@@ -87,26 +92,29 @@ replacement="\
     cyan:     '$color14'
     white:    '$color15'
 "
-# delete color block
-sed -i "/^colors:/,\$ { /normal:$/,/white:$/ d }" "$alacritty_color_file"
-printf '%s' "$replacement" >> "$alacritty_color_file"
+	# delete color block
+	sed -i "/^colors:/,\$ { /normal:$/,/white:$/ d }" "$alacritty_color_file"
+	printf '%s' "$replacement" >> "$alacritty_color_file"
 
-# opacity: '#XXXXXX' -> opacity: '#YYYYYY'
-sed -i "s/\(opacity:\s*\).*/\1$(xrdb -get alacritty.alpha)/" "$alacritty_color_file"
-sed -i "s/\(family:\s*\).*/\1$(xrdb -get alacritty.font)/"     "$alacritty_color_file"
-echo "sync alacritty color!"
+	# opacity: '#XXXXXX' -> opacity: '#YYYYYY'
+	sed -i "s/\(opacity:\s*\).*/\1$(xrdb -get alacritty.alpha)/" "$alacritty_color_file"
+	sed -i "s/\(family:\s*\).*/\1$(xrdb -get alacritty.font)/"     "$alacritty_color_file"
+	echo "sync alacritty color!"
+fi
 # }}}
 
 picom_file="$XDG_CONFIG_HOME/picom/picom.conf"
 # Picom {{{
-backup "$picom_file"
+if [ -f "$picom_file" ]; then
+	backup "$picom_file"
 
-# transition-length = XX -> transition-length = YY
-sed -i "s/\(^transition-length\s*=\s*\)\S*;/\1$(xrdb -get picom.transition_length);/" "$picom_file"
-sed -i "s/\(^corner-radius\s*=\s*\)\S*;/\1$(xrdb -get picom.corner_radius);/"         "$picom_file"
-sed -i "s/\(^inactive-dim\s*=\s*\)\S*;/\1$(xrdb -get picom.inactive_dim);/"           "$picom_file"
-sed -i "s/\(^inactive-opacity\s*=\s*\)\S*;/\1$(xrdb -get picom.inactive_opacity);/"   "$picom_file"
-echo "sync picom!"
+	# transition-length = XX -> transition-length = YY
+	sed -i "s/\(^transition-length\s*=\s*\)\S*;/\1$(xrdb -get picom.transition_length);/" "$picom_file"
+	sed -i "s/\(^corner-radius\s*=\s*\)\S*;/\1$(xrdb -get picom.corner_radius);/"         "$picom_file"
+	sed -i "s/\(^inactive-dim\s*=\s*\)\S*;/\1$(xrdb -get picom.inactive_dim);/"           "$picom_file"
+	sed -i "s/\(^inactive-opacity\s*=\s*\)\S*;/\1$(xrdb -get picom.inactive_opacity);/"   "$picom_file"
+	echo "sync picom!"
+fi
 # }}}
 
 # refresh WM

@@ -14,7 +14,7 @@ export XDG_VIDEOS_DIR="$HOME/vid"
 
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and it's subdir to path
-export PATH="${PATH}:$(find $XDG_BIN_HOME -type d -printf "%p:" | sed -e 's/:$//g')"
+export PATH="${PATH}:$(find "$XDG_BIN_HOME" -type d -printf "%p:" | sed -e 's/:$//g')"
 
 # The cargo stuff
 [ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
@@ -26,6 +26,7 @@ export TERMINAL='st'
 export BROWSER='librewolf'
 export EDITOR='nvim'
 export SHELL='/bin/zsh'
+export PKGMAN='paru'
 
 [ -x "$(which nvim)" ] && export MANPAGER='nvim +Man!'
 
@@ -89,7 +90,7 @@ export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
 
 
-#=== Auto startx ===#
+#==================== Auto Startx ====================#
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   startx "$XINITRC"
 fi
