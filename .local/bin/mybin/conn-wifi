@@ -1,0 +1,221 @@
+#!/bin/sh
+
+help(){
+	cat <<EOF
+help...
+EOF
+}
+err(){
+	echo "$@" >&2
+	echo 'Terminating...' >&2
+	exit 1
+}
+dep(){
+	if type "$@" | grep 'not found'; then
+		err 'Dependce not found.'
+	fi
+}
+check_kill(){
+	if ! pidof "$1" >/dev/null; then
+		return
+	fi
+	if [ -z "$NOCONFIRM" ]; then
+		printf "Detecte $1 running. Killall $1? [Y/n] "
+		read ans
+		case $ans in
+			'n'|'N'|'no'|'No'|'NO') return ;;
+		esac
+	fi
+	killall "$1" >/dev/null 2>&1
+}
+get_interface(){
+	INTERFACE=$(iw dev | grep Interface | sed 's/.*Interface \(\S*\)/\1/')
+	[ -z "$INTERFACE" ] && err 'No interface fond'
+	if [ "$(echo "$INTERFACE" | wc -l)" -gt 1 ]; then
+		echo "Available interface: $INTERFACE" | tr '\n' ' '
+		printf '\nSelect a Interface: '
+		read ans
+		while [ -z "$ans" ] || ! echo "$INTERFACE" | grep -x -q -F "$ans"; do
+			printf 'Interface not found, enter anain: '
+			read ans
+		done
+		INTERFACE=$ans
+	fi
+}
+set_up_device(){
+	if ip link set up "$INTERFACE" 2>&1 | grep -q '^RTNETLINK.*RF-kill$'; then
+		echo "
+Interface $INTERFACE is down, and can not set up due to RF-KILL
+Select one to unblock soft-lock or left empty to skip rfkill."
+		rfkill
+		printf 'Enter the ID or TYPE to unblock: '
+		read ans
+		rfkill unblock "$ans"
+		ip link set up "$INTERFACE"
+	fi
+
+	if ! ip link show "$INTERFACE" | grep -q UP; then
+		err "Interface $INTERFACE is down.
+Run 'rfkill unblock ...' to unblock soft-lock,
+and 'ip link set up $INTERFACE' to enable device."
+	fi
+}
+get_ssid(){
+	echo 'Scanning available wifi...'
+	TMPFILE=$(mktemp /tmp/wifi.XXXXXXX)
+	iw "$INTERFACE" scan | grep '^\s*SSID' | sed 's/^\s*SSID:\s*//' |
+		sort | uniq | sed '/^$/d' >"$TMPFILE"
+	if [ $? -ne 0 ]; then
+		rm "$TMPFILE"
+		err 'Can not scan.'
+	fi
+
+	if type "$(echo "$FZF" | cut -d' ' -f1)" >/dev/null 2>&1; then
+		SSID=$(cat "$TMPFILE" | $FZF --prompt 'Select Wifi: ')
+	else
+		echo 'Available wifi:'
+		cat "$TMPFILE" | tr '\n' '\t' | fmt -w 50
+		printf 'Select a wifi: '
+		read ans
+		while [ -z "$ans" ] || ! grep -x -q -F "$ans" "$TMPFILE"; do
+			printf 'Wifi not found, enter again: '
+			read ans
+		done
+		SSID=$ans
+	fi
+	rm "$TMPFILE"
+	[ -z "$SSID" ] && err  # for fzf
+}
+gen_conf(){
+	# generate passphrase
+	printf 'Enter Password: '
+	read PASSWORD
+	wpa_passphrase "$SSID" "$PASSWORD" >"$WPA_CONF/$SSID.conf"
+	[ $? -ne 0 ] && err 'Can not generate passphrase.'
+}
+check_conn(){
+	SEC=10
+	endTime=$(( $(date +%s) + SEC ))
+	while iw "$INTERFACE" link | grep -q 'Not connected.'; do
+		if [ "$(date +%s)" -gt "$endTime" ]; then
+			return 1
+		fi
+		sleep 0.2s
+	done
+}
+
+# default options
+NOGEN=''
+NOCONFIRM=''
+NOSELECTSSID=''
+INTERFACE=''
+DRIVER='wext'
+WPA_CONF='/etc/wpa_supplicant'
+FZF='fzf --height=20'
+
+# parse options
+TEMP=$(getopt -o 'hgfsi:d:c:' --long 'help,nogen,noconfirm,noselectssid,interface:,driver:,config:,fzf:' -n "$0" -- "$@")
+[ $? -ne 0 ] && err
+eval set -- "$TEMP"
+unset TEMP
+
+while true; do
+	case "$1" in
+		'-h'|'--help')
+			help
+			exit
+			;;
+		'-g'|'--nogen')
+			NOGEN='true'
+			shift
+			;;
+		'-f'|'--noconfirm')
+			NOCONFIRM='true'
+			shift
+			;;
+		'-s'|'--noselectssid')
+			NOSELECTSSID='true'
+			shift
+			;;
+		'-i'|'--interface')
+			INTERFACE="$2"
+			shift 2
+			continue
+			;;
+		'-d'|'--driver')
+			DRIVER="$2"
+			shift 2
+			continue
+			;;
+		'-c'|'--config')
+			WPA_CONF="$2"
+			shift 2
+			continue
+			;;
+		'--fzf')
+			FZF="$2"
+			shift 2
+			continue
+			;;
+		'--')
+			shift
+			[ -n "$2" ] && err 'Too many options!'
+			[ -n "$1" ] && SSID="$1"
+			break
+			;;
+		*)
+			err 'Internal error!'
+			;;
+	esac
+done
+
+
+# check dependce
+dep ip iw wpa_passphrase wpa_supplicant dhclient
+
+# kill wpa and dhclient
+check_kill wpa_supplicant
+check_kill dhclient
+sleep 0.5s
+
+# get interface
+if [ -z "$INTERFACE" ]; then
+	get_interface
+fi
+echo "Interface: $INTERFACE"
+
+# check device
+if ! ip link show "$INTERFACE" | grep -q UP; then
+	set_up_device
+fi
+
+# get ssid
+if [ -z "$NOSELECTSSID" ] && [ -z "$SSID" ]; then
+	get_ssid
+fi
+if [ -n "$SSID" ]; then
+	echo "SSID: $SSID"
+else
+	echo "SSID: $(grep 'ssid' "$WPA_CONF/wpa.conf" | sed 's/.*ssid="\(\S*\)".*$/\1/')"
+fi
+
+# generate wpa config
+if [ -n "$SSID" ]; then
+	if [ ! -f "$WPA_CONF/$SSID.conf" ] || [ -z "$NOGEN" ]; then
+		gen_conf
+	fi
+	ln -sf "$WPA_CONF/$SSID.conf" "$WPA_CONF/wpa.conf"
+fi
+
+# connect to wifi
+setsid -f wpa_supplicant -D "$DRIVER" -i "$INTERFACE" -c "$WPA_CONF/wpa.conf" >/dev/null 2>&1
+setsid -f dhclient -d "$INTERFACE" >/dev/null 2>&1
+
+# check connection
+echo 'Checking connection...'
+if check_conn; then
+	echo 'Successful connected.'
+else
+	echo 'Connection failed.' >&2
+	exit 1
+fi

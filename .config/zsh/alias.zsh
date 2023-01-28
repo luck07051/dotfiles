@@ -14,6 +14,8 @@ abbr dps='doas pacman -S'
 abbr cs='config status'
 abbr ca='config add'
 
+abbr df='df -h'
+abbr du='du -h'
 abbr cr='cargo run'
 abbr tt='trans :zh-TW'
 abbr za='zathura'
@@ -25,7 +27,11 @@ abbr slidev='npx slidev'
 abbr lzg='lazygit'
 abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
 abbr mi='doas make install clean'
+abbr clip='xclip -selection clipboard'
+
 abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
+abbr svln='doas ln -s /etc/runit/sv/"$(ls /etc/runit/sv/ | fzf)" /run/runit/service/'
+abbr svrm='doas rm /run/runit/service/"$(ls /run/runit/service/ | fzf)"'
 
 # Change dir when left lf, and use given colors
 lf() {

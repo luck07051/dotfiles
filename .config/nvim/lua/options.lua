@@ -46,11 +46,11 @@ vim.opt.foldtext = 'MyFoldText()'
 vim.cmd [[
 function! MyFoldText() "{{{
   let foldedlinecount = '[ ' . (v:foldend - v:foldstart) . ' ]'
+  let startline = getline(v:foldstart)
   let endline = trim(getline(v:foldend))
-  let line = getline(v:foldstart)
-  let line = line . ' ... '
+  let line = startline . ' ... '
   " add end of fold
-  if getline(v:foldstart) !~ ':$'  " dont add if it end with ':', for py
+  if startline !~ ':$'  " dont add if it end with ':'(for py)
       let line = line . endline
   endif
   " remove marker

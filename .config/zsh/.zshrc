@@ -9,11 +9,6 @@ function zsh_add_file() { #{{{
   [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
 }
 #}}}
-function zsh_add_util() { #{{{
-  file="functions/$1.zsh"
-  zsh_add_file "$file"
-}
-#}}}
 function zsh_add_plug() { #{{{
   PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
   if [[ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]]; then
@@ -75,7 +70,6 @@ zsh_add_file "functions/yank.zsh"          # <C-y> to yank prev command
 zsh_add_plug "Aloxaf/fzf-tab"
 zsh_add_plug "zsh-users/zsh-completions"
 # zsh_add_plug "zsh-users/zsh-autosuggestions"
-#   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
-#   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
-#   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind"
+#    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
+#    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"
