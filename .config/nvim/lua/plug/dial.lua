@@ -1,10 +1,12 @@
 local M = {
   'monaqa/dial.nvim',
   keys = {
-    { '<C-a>', mode = { 'n', 'v' } },
-    { '<C-x>', mode = { 'n', 'v' } },
-    { 'g<C-a>', mode = { 'v' } },
-    { 'g<C-x>', mode = { 'v' } },
+    { '<C-a>',  mode = 'n', desc = 'Enhanced <C-a>' },
+    { '<C-x>',  mode = 'n', desc = 'Enhanced <C-x>' },
+    { '<C-a>',  mode = 'v', desc = 'Enhanced <C-a>' },
+    { '<C-x>',  mode = 'v', desc = 'Enhanced <C-x>' },
+    { 'g<C-a>', mode = 'v', desc = 'Enhanced g<C-a>' },
+    { 'g<C-x>', mode = 'v', desc = 'Enhanced g<C-x>' },
   }
 }
 
@@ -34,12 +36,12 @@ M.config = function()
     },
   }
 
-  vim.keymap.set('n', '<C-a>', require('dial.map').inc_normal())
-  vim.keymap.set('n', '<C-x>', require('dial.map').dec_normal())
-  vim.keymap.set('v', '<C-a>', require('dial.map').inc_visual())
-  vim.keymap.set('v', '<C-x>', require('dial.map').dec_visual())
-  vim.keymap.set('v', 'g<C-a>', require('dial.map').inc_gvisual())
-  vim.keymap.set('v', 'g<C-x>', require('dial.map').dec_gvisual())
+  vim.keymap.set('n', '<C-a>', require('dial.map').inc_normal() )
+  vim.keymap.set('n', '<C-x>', require('dial.map').dec_normal() )
+  vim.keymap.set('v', '<C-a>', require('dial.map').inc_visual() )
+  vim.keymap.set('v', '<C-x>', require('dial.map').dec_visual() )
+  vim.keymap.set('v', 'g<C-a>', require('dial.map').inc_gvisual() )
+  vim.keymap.set('v', 'g<C-x>', require('dial.map').dec_gvisual() )
 end
 
 return M

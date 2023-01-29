@@ -1,41 +1,30 @@
 return {
   'luck07051/uicolors.nvim',
 
-  { -- File explorer
-    'stevearc/oil.nvim',
-    event = "Syntax",
-    config = function() require('oil').setup({
-      view_options = { show_hidden = true },
-      win_options = { conceallevel = 0 },
-      keymaps = {
-        ["<BS>"] = "actions.parent",
-      },
-      float = {
-        win_options = {
-          winblend = 0,
-        },
-      }
-    }) end
-  },
-
   { -- `gc` to comment text
     'numToStr/Comment.nvim',
     keys = {
-      { 'gc', mode = { 'n', 'v' } },
-      { 'gb', mode = { 'n', 'v' } },
+      { 'gc', mode = { 'n', 'v' }, desc = 'Line comment' },
+      { 'gb', mode = { 'n', 'v' }, desc = 'Block comment' },
     },
     config = true
   },
 
   { -- Surround selections
     "kylechui/nvim-surround",
-    keys = { 'cs', 'ds', 'ys' },
+    keys = {
+      { 'cs', desc = 'Change the surround' },
+      { 'ds', desc = 'Delete the surround' },
+      { 'ys', desc = 'Add the surround' },
+    },
     config = true
   },
 
   { -- Align stuff
     'junegunn/vim-easy-align',
-    keys = { { 'ga', '<Plug>(EasyAlign)', mode = { 'n', 'x' } } }
+    keys = {
+      { 'ga', '<Plug>(EasyAlign)', mode = { 'n', 'x' }, desc = 'Aligning stuff' }
+    }
   },
 
   { -- Auto figure out what indent used in file
@@ -46,30 +35,14 @@ return {
 
   { -- Enhanced gx
     'stsewd/gx-extended.vim',
-    keys = { 'gx' },
+    keys = {
+      { 'gx', desc = 'Enhanced gx' },
+    },
   },
 
   { -- Enhanced quickfix
     'kevinhwang91/nvim-bqf',
     ft = 'qf'
-  },
-
-  { -- Color picker and color highlight
-    'uga-rosa/ccc.nvim',
-    event = 'VeryLazy',
-    keys = {
-      { '<Leader>cc', ':CccPick<CR>' },
-      { '<A-c>', '<Plug>(ccc-insert)' }
-    },
-    config = function()
-      require('ccc').setup({
-        highlighter = {
-          auto_enable = true,
-          filetypes = {},
-          excludes = {},
-        },
-      })
-    end
   },
 
   { -- Project management
@@ -83,7 +56,7 @@ return {
   { -- Show undo tree
     'jiaoshijie/undotree',
     keys = {
-      { '<Leader>u', function() require('undotree').toggle() end }
+      { '<Leader>u', function() require('undotree').toggle() end, desc = 'Open the undotree' }
     },
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = true
@@ -93,5 +66,18 @@ return {
     'dstein64/vim-startuptime',
     cmd = 'StartupTime'
   },
+
+  -- {
+  --   'danymat/neogen',
+  --   config = true,
+  -- },
+  --
+  -- {
+  --   'ckolkey/ts-node-action',
+  --   keys = {
+  --     { 'K' , function() require("ts-node-action").node_action() end, desc = 'Trigger Node Action' },
+  --   },
+  --   config = true,
+  -- },
 
 }

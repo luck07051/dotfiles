@@ -14,6 +14,8 @@ local M = {
   },
 }
 
+-- TODO: a loat to do
+
 M.config = function()
   local cmp = require 'cmp'
 
@@ -138,7 +140,7 @@ M.config = function()
   })
 
   -- Close cmp menu when press <C-f> --
-  vim.keymap.set('c', '<C-f>', '<C-f>a<Esc>')
+  vim.keymap.set('c', '<C-f>', '<C-f>a<Esc>', { desc = 'Close cmp menu' } )
 end
 
 return M

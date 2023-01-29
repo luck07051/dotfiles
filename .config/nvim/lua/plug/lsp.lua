@@ -46,32 +46,30 @@ M.config = function()
   --}}}
 
   local on_attach = function(client, bufnr) --{{{
-    if not pcall(require, 'telescope') then
-      vim.keymap.set('n', '<space>gd', vim.diagnostic.setloclist)
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
-      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-      vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-    end
+    -- vim.keymap.set('n', '<space>gd', vim.diagnostic.setloclist, { desc = '' } )
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition,           { desc = '' } )
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,          { desc = '' } )
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,       { desc = '' } )
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references,           { desc = '' } )
 
-    vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev,         { desc = 'Move to the prev diagnostic' } )
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next,         { desc = 'Move to the next diagnostic' } )
 
     -- Show help
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-    vim.keymap.set('n', '<Leader>k', vim.lsp.buf.signature_help)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover,                  { desc = 'Displays hover information' } )
+    vim.keymap.set('n', '<Leader>k', vim.lsp.buf.signature_help, { desc = 'Displays signature information' } )
 
     -- Root dir
-    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder)
-    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder)
+    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder,    { desc = 'Add the folder at path to the workspace folders' } )
+    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'Remove the folder at path from the workspace folders' } )
     vim.keymap.set('n', '<Leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end)
-    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename)
+    end, { desc = 'Print out workspace folders' } )
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, { desc = 'Renames all references to the symbol under the cursor' } )
 
     -- Formatting
-    vim.keymap.set('n', '<Leader>=', vim.lsp.buf.format)
+    vim.keymap.set('n', '<Leader>=', vim.lsp.buf.format, { desc = 'Formats a buffer using the language server clients' } )
   end --}}}
 
   local server_settings = {

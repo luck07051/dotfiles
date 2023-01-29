@@ -1,12 +1,17 @@
 local M = {
   'akinsho/toggleterm.nvim',
-  event = 'VeryLazy',
+}
+
+M.keys = {
+  { '<C-t>', desc = 'Toggle terminal' },
+  { '<Leader>th', '<cmd>ToggleTerm size=15 direction=horizontal<cr>', desc = 'Open terminal in a horizontal window' },
+  { '<Leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Open terminal in a floating window' },
+  { '<Leader>te', '<cmd>TermExec cmd="!!"<cr>', desc = 'Exec previous command' },
+  { '<Leader>git', '<cmd>lua _lazygit_toggle()<cr>', desc = 'Open lazygit in a floating window' },
 }
 
 M.config = function()
-  local toggleterm = require 'toggleterm'
-
-  toggleterm.setup({
+  require('toggleterm').setup({
     size = 20,
     open_mapping = [[<c-t>]],
     direction = "float",
@@ -23,11 +28,6 @@ M.config = function()
     },
   })
 
-  vim.keymap.set('n', '<Leader>th', ':ToggleTerm size=15 direction=horizontal<CR>', { silent = true } )
-  vim.keymap.set('n', '<Leader>tf', ':ToggleTerm direction=float<CR>', { silent = true } )
-  vim.keymap.set('n', '<Leader>te', ':TermExec cmd="!!"<CR>', { silent = true } )
-
-
   local Terminal  = require('toggleterm.terminal').Terminal
 
   -- LazyGit
@@ -36,8 +36,6 @@ M.config = function()
     hidden = true,
   })
   function _lazygit_toggle() lazygit:toggle() end
-
-  vim.keymap.set('n', '<Leader>git', ':lua _lazygit_toggle()<CR>', { silent = true } )
 end
 
 return M

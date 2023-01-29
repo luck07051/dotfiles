@@ -1,24 +1,25 @@
 local M = {
   'glepnir/dashboard-nvim',
+  name = 'dashboard',
   lazy = false,
 }
 
-M.config = function()
-  local db = require('dashboard')
+-- FIX: dont work now
 
-  db.custom_center = {
-    {
-      icon = '  ',
-      desc = 'Find  File                              ',
-      action = 'Telescope find_files',
-      shortcut = 'f  '
-    },
-    {
-      icon = '  ',
-      desc = 'Find  Project                           ',
-      action = 'Telescope projects',
-      shortcut = 'p  '
-    },
+M.opts = {
+  custom_center = {
+    -- {
+    --   icon = '  ',
+    --   desc = 'Find  File                              ',
+    --   action = 'FzfLua files',
+    --   shortcut = 'f  '
+    -- },
+    -- {
+    --   icon = '  ',
+    --   desc = 'Find  Project                           ',
+    --   action = 'Telescope projects',
+    --   shortcut = 'p  '
+    -- },
     {
       icon = '  ',
       desc = 'New File                                ',
@@ -31,22 +32,21 @@ M.config = function()
       action = 'quit',
       shortcut = 'q  '
     },
-  }
+  },
 
-  db.custom_header = {
+  custom_header = {
     '███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
     '████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
     '██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
     '██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
     '██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
     '╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-  }
+  },
 
-  db.custom_footer = {}
+  custom_footer = {},
 
-  db.header_pad = 3
-  db.center_pad = 3
-
-end
+  header_pad = 3,
+  center_pad = 3,
+}
 
 return M

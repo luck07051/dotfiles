@@ -12,6 +12,15 @@ local M = {
   },
 }
 
+M.keys = {
+  { '<leader>zn', ':TZNarrow<cr>',                  silent = true, desc = 'Narrow a text region for better focus' },
+  { '<leader>zn', ":'<,'>TZNarrow<cr>", mode = 'v', silent = true, desc = 'Narrow a text region for better focus' },
+  { '<leader>zf', ':TZFocus<cr>',                   silent = true, desc = 'Focus on current window' },
+  { '<leader>zm', ':TZMinimalist<cr>',              silent = true, desc = 'Disable ui components' },
+  { '<leader>za', ':TZAtaraxis<cr>',                silent = true, desc = 'Classic zen mode' },
+  { '<leader>zt', ':Twilight<cr>',                  silent = true, desc = 'Toggle twilight' },
+}
+
 M.config = function()
 
   local fix_cursorline = function()
@@ -49,20 +58,6 @@ M.config = function()
   -- fix ataraxis mode use '^' fillchars in statusbar
   vim.cmd [[ hi StatusLine ctermfg=1 ]]
 
-end
-
-M.init = function()
-  -- Narrow a text region for better focus
-  vim.keymap.set("n", "<leader>zn", ":TZNarrow<CR>", { silent = true } )
-  vim.keymap.set("v", "<leader>zn", ":'<,'>TZNarrow<CR>", { silent = true } )
-  -- Focus on current window
-  vim.keymap.set("n", "<leader>zf", ":TZFocus<CR>", { silent = true } )
-  -- Disable ui components
-  vim.keymap.set("n", "<leader>zm", ":TZMinimalist<CR>", { silent = true } )
-  -- Classic zen mode
-  vim.keymap.set("n", "<leader>za", ":TZAtaraxis<CR>", { silent = true } )
-  -- Toggle twilight
-  vim.keymap.set("n", "<leader>zt", ":Twilight<CR>", { silent = true } )
 end
 
 return M

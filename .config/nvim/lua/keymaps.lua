@@ -12,7 +12,7 @@ vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>Y', '"+y$')
 vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
-vim.keymap.set('v', '<C-s-c>', '"+y')
+vim.keymap.set('v', '<C-s-c>', '"+y')  -- terminal support needed
 vim.keymap.set('v', '<C-s-v>', '"+p')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
@@ -24,10 +24,6 @@ vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 vim.keymap.set('v', 'p', '"_dP')
 vim.keymap.set('v', '<Leader>p', '"_d"+P')
 
--- Move line in visual mode --
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { silent = true })
-
 -- Quick replace --
 vim.keymap.set('n', 's', ':%s/')
 vim.keymap.set('v', 's', ':s/')
@@ -38,6 +34,10 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('c', '<CR>', function()
   return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>'
 end, { expr = true })
+
+-- [ ] --
+vim.keymap.set('n', ']<Space>', 'm`o<Esc>``')
+vim.keymap.set('n', '[<Space>', 'm`O<Esc>``')
 
 -- Wizard --
 vim.keymap.set('n', '<Leader>r', '!!$SHELL<CR>')
@@ -82,7 +82,7 @@ vim.keymap.set("n", "<Leader>zc", function()
   else
     vim.o.conceallevel = 2
   end
-end, { silent = true } )
+end, { silent = true, desc = 'Toggle conceal' } )
 
 -- Alias for command mode --
 local function cabbrev(lhs, rhs)

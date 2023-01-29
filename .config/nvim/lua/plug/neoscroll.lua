@@ -1,21 +1,18 @@
 local M = {
   'karb94/neoscroll.nvim',
-  keys = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
+  config = true,
 }
 
-M.config = function()
-  require('neoscroll').setup({})
-  local t = {}
-  t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '130'}}
-  t['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '130'}}
-  t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '250'}}
-  t['<C-f>'] = {'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '250'}}
-  t['<C-y>'] = {'scroll', {'-0.10', 'false', '50'}}
-  t['<C-e>'] = {'scroll', { '0.10', 'false', '50'}}
-  t['zt']    = {'zt', {'100'}}
-  t['zz']    = {'zz', {'100'}}
-  t['zb']    = {'zb', {'100'}}
-  require('neoscroll.config').set_mappings(t)
-end
+M.keys = {
+  { '<C-u>', function() require('neoscroll').scroll(-vim.wo.scroll, true, 130) end, desc = 'Neoscroll <C-u>' },
+  { '<C-d>', function() require('neoscroll').scroll( vim.wo.scroll, true, 130) end, desc = 'Neoscroll <C-d>' },
+  { '<C-b>', function() require('neoscroll').scroll(-vim.api.nvim_win_get_height(0), true, 250) end, desc = 'Neoscroll <C-b>' },
+  { '<C-f>', function() require('neoscroll').scroll( vim.api.nvim_win_get_height(0), true, 250) end, desc = 'Neoscroll <C-f>' },
+  { '<C-y>', function() require('neoscroll').scroll(-0.10, false, 50) end, desc = 'Neoscroll <C-y>' },
+  { '<C-e>', function() require('neoscroll').scroll( 0.10, false, 50) end, desc = 'Neoscroll <C-e>' },
+  { 'zt',    function() require('neoscroll').zt(100) end, desc = 'Neoscroll zt' },
+  { 'zz',    function() require('neoscroll').zz(100) end, desc = 'Neoscroll zz' },
+  { 'zb',    function() require('neoscroll').zb(100) end, desc = 'Neoscroll zb' },
+}
 
 return M

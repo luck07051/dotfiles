@@ -2,7 +2,7 @@ local M = {
   "nvim-lualine/lualine.nvim",
   lazy = false,
   dependencies = {
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
   },
 }
 
@@ -61,6 +61,7 @@ M.config = function()
     tabline = {},
     extensions = {}
   }
+
   vim.opt.showmode = false
 end
 

@@ -3,12 +3,16 @@ local M = {
   event = "BufReadPost",
   build = ':TSUpdate',
   dependencies = {
-    { 'nvim-treesitter/playground', cmd = "TSPlaygroundToggle" },
-    -- 'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/playground',
     'windwp/nvim-ts-autotag',
     'RRethy/nvim-treesitter-endwise',
     -- 'ray-x/cmp-treesitter',
   },
+}
+
+M.keys = {
+  { '<Leader>tp', '<cmd>TSPlaygroundToggle<cr>',   desc = 'View treesitter information' },
+  { '<Leader>ts', '<cmd>TSCaptureUnderCursor<cr>', desc = 'View treesitter under the cursor' },
 }
 
 M.config = function()
@@ -52,10 +56,6 @@ M.config = function()
       filetypes = { "html", "javascript", "javascriptreact", "typescriptreact", "svelte", "vue", "markdown" },
     },
   }
-
-  vim.keymap.set('n', '<Leader>tp', ':TSPlaygroundToggle<CR>', { silent = true } )
-  vim.keymap.set('n', '<Leader>ts', ':TSCaptureUnderCursor<CR>', { silent = true } )
-
 end
 
 return M
