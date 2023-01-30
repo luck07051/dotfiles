@@ -1,4 +1,6 @@
 #!/bin/sh
-( while : ; do pipewire >/dev/null 2>&1; done ) &
-( while : ; do pipewire-pulse >/dev/null 2>&1; done ) &
-( while : ; do pipewire-media-session >/dev/null 2>&1; done ) &
+exec >/dev/null
+exec 2>&1
+( while :; do pipewire; done ) &
+( while :; do pipewire-pulse; done ) &
+( while :; do pipewire-media-session; done ) &

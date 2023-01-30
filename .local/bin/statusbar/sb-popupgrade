@@ -1,7 +1,5 @@
 #!/bin/sh
 
-printf "Beginning upgrade.\\n"
-
 if [ -x "$(which paru)" ]; then
 	paru
 elif [ -x "$(which yay)" ]; then
@@ -10,7 +8,7 @@ else
 	pacman -Syu
 fi
 
-kill -61 "$(pidof dwmblocks)"
-
 printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
 read -r _
+
+sb-update sb-pacman

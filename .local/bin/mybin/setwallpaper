@@ -12,60 +12,53 @@
 # `setwallpaper /img/path -f zoom`
 #   use `-f` to specify fill method
 
+help(){
+	cat << EOF
+no help
+EOF
+}
+
 change_img() {
-# default value
-screen=0
-fill="zoom"
+	TEMP=$(getopt -o 'hs:f:' --long 'help,screen:,fill:' -n "$0" -- "$@")
+	[ $? -ne 0 ] && err
+	eval set -- "$TEMP"
+	unset TEMP
 
-while [ $# -gt 0 ]; do
-	case $1 in
-		-h|--help)
-			echo "no help"
-			exit
-			;;
+	# default value
+	screen=0
+	fill="zoom"
 
-		-s|--screen)
-			screen="$2"
-			shift 2
-			;;
-		-s*)
-			screen="${1#-s}"
-			shift
-			;;
-
-		-f|--fill)
-			fill="$2"
-			shift 2
-			;;
-		-f*)
-			fill="${1#-f}"
-			shift
-			;;
-
-		-*)
-			echo "Unknown option $1"
-			exit 1
-			;;
-
-		*)
-			if [ -n "$img" ]; then
-				echo "Unknow option $1"
+	while [ $# -gt 0 ]; do
+		case $1 in
+			'-h'|'--help')
+				help
+				exit
+				;;
+			'-s'|'--screen')
+				screen="$2"
+				shift 2
+				;;
+			'-f'|'--fill')
+				fill="$2"
+				shift 2
+				;;
+			'--')
+				img="$2"
+				break
+				;;
+			*)
+				echo 'Internal error!' >&2
 				exit 1
-			elif [ ! -f "$1" ]; then
-				echo "File not exists $1"
-				exit 1
-			else
-				img="$1"
-				shift
-			fi
-			;;
-	esac
-done
+				;;
+		esac
+	done
+	[ -z "$img" ] && { echo 'Please provide image' >&2; exit 1; }
+	[ ! -f "$img" ] && { echo "Image $img not found!" >&2; exit 1; }
 
-# file name should looks like `0_zoom.jpg`
-# first char `0` stand for screen, `zoom` stand for fill method.
-rm -f "$wall_dir"/"$screen"_*
-cp "$(readlink -f "$img")" "$wall_dir"/"$screen"_"$fill"."${img##*.}"
+	# file name looks like `0-zoom.jpg`
+	# first char `0` for screen and `zoom` for fill method.
+	rm -f "$wall_dir"/"$screen"-*
+	cp "$(readlink -f "$img")" "$wall_dir/$screen-$fill.${img##*.}"
 }
 
 wall_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper"
@@ -76,11 +69,6 @@ wall_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper"
 # change wallpaper
 for file in "$wall_dir"/*; do
 	# get base name of `file`
-	file_base="$(basename "$file")"
-	# remove suffix
-	file_base=${file_base%%.*}
-
-	screen=${file_base%%_*}
-	fill=${file_base##*_}
-	xwallpaper --screen "$screen" --"$fill" "$file"
+	file_base="$(basename "${file%.*}")"
+	xwallpaper --screen "${file_base%%-*}" --"${file_base##*-}" "$file"
 done

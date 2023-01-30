@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -z "$1" ] && { echo "${0##*/} password /path/to/pdf" >&2; exit 2; }
+[ -z "$1" ] && { echo "${0##*/} password /path/to/pdf [/path/to/the/output]" >&2; exit 1; }
 
 if [ -z "$3" ] || [ "$2" = "$3" ]; then
 	opt='--replace-input'

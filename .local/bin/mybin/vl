@@ -35,4 +35,4 @@ get_volume() {
 "$@"
 
 # update bar
-kill -55 "$(pidof dwmblocks)"
+sb-update sb-vol

@@ -1,20 +1,21 @@
 #!/bin/sh
 
+dmenu="${DMENU:-dmenu -i}"
+term="$TERMINAL -e sh -c"
+
 dmenu_path() {
-	echo "$PATH:$XDG_DATA_HOME/applications" | tr ':' '\n' | uniq |
+	echo "$PATH:$XDG_DATA_HOME/applications" | tr ':' '\n' | sort | uniq |
 		xargs ls | sed '/\//d ; /^$/d' | sort
 }
 
-TERM="$TERMINAL -e sh -c"
+run="$(dmenu_path | $dmenu -p "RUN" "$@")"
 
-RUN="$(dmenu_path | dmenu -i -p "RUN" "$@")"
-
-case "$RUN" in
+case "$run" in
 	# run command in terminal if end with ';'
-	*\;) $TERM "${RUN%;}" ;;
+	*\;) $term "${run%;}" ;;
 
 	# run .desktop file
-	*.desktop) gtk-launch "$RUN" ;;
+	*.desktop) gtk-launch "$run" ;;
 
-	*) $RUN ;;
+	*) $run ;;
 esac

@@ -14,5 +14,5 @@ esac
 
 vol="$(vl get_volume)"
 #   
-icon=" "
-printf "$icon$vol%%"
+icon=""
+printf "$icon $vol%%"

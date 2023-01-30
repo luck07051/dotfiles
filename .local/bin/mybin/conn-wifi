@@ -158,9 +158,8 @@ while true; do
 			continue
 			;;
 		'--')
-			shift
-			[ -n "$2" ] && err 'Too many options!'
-			[ -n "$1" ] && SSID="$1"
+			[ -n "$3" ] && err 'Too many SSID!'
+			[ -n "$2" ] && SSID="$2"
 			break
 			;;
 		*)

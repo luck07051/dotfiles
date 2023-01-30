@@ -1,6 +1,9 @@
 #!/bin/sh
 
-if [ -x "$(which systemctl)" ]; then
+dmenu="${DMENU:-dmenu -i}"
+
+case "$(ps h 1 | awk '{print $NF}')" in
+	systemd)
 list="$(cat <<EOF
 lock;       slock
 shut down;  systemctl poweroff
@@ -10,20 +13,22 @@ suspend;    systemctl suspend
 hibernate;  systemctl hibernate
 EOF
 )"
-elif [ -x "$(which sv)" ]; then
+	;;
+	runit)
 list="$(cat <<EOF
 shut down;  doas poweroff
 reboot;     doas reboot
 log out;    loginctl terminate-session ${XDG_SESSION_ID-}
 EOF
 )"
-fi
+	;;
+esac
 
-option=$(echo "$list" | cut -d';' -f1 | dmenu -i -p "POWER")
+selected=$(echo "$list" | cut -d';' -f1 | $dmenu -p "POWER")
 
 # [ -n "$option" ] &&
 # [ "$(printf "No\nYes" | dmenu -i -p "Do you want to $option?")" = "Yes" ] &&
 #   eval "$(echo "$list" | grep "$option" | sed 's/.*;\ \+//')"
 
-[ -n "$option" ] &&
-	eval "$(echo "$list" | grep "$option;" | sed 's/.*;\s\+//')"
+[ -n "$selected" ] &&
+	eval "$(echo "$list" | grep "$selected;" | sed 's/.*;\s\+//')"

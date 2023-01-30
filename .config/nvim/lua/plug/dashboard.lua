@@ -1,52 +1,65 @@
 local M = {
   'glepnir/dashboard-nvim',
-  name = 'dashboard',
-  lazy = false,
+  event = 'VimEnter',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+  },
 }
 
--- FIX: dont work now
-
 M.opts = {
-  custom_center = {
-    -- {
-    --   icon = '  ',
-    --   desc = 'Find  File                              ',
-    --   action = 'FzfLua files',
-    --   shortcut = 'f  '
-    -- },
-    -- {
-    --   icon = '  ',
-    --   desc = 'Find  Project                           ',
-    --   action = 'Telescope projects',
-    --   shortcut = 'p  '
-    -- },
-    {
-      icon = '  ',
-      desc = 'New File                                ',
-      action = 'DashboardNewFile',
-      shortcut = 'e  '
+  -- doom or hyper
+  theme = 'hyper',
+
+  config = {
+    header = {
+      '', '', '',
+      '███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+      '████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+      '██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+      '██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+      '██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+      '╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+      '', '', '',
     },
-    {
-      icon = '  ',
-      desc = 'Quit                                    ',
-      action = 'quit',
-      shortcut = 'q  '
+
+    footer = {},
+
+    shortcut = {
+      { desc = ' Find File', key = 'f', group = 'diffFile', action = 'FzfLua files' },
+      { desc = ' New File',  key = 'e', group = 'diffFile', action = 'enew', },
+      { desc = ' Quit',      key = 'q', group = 'diffFile', action = 'quit' },
+    },
+    project = { limit = 8, icon = '  ', label = 'Recent Projects:', action = 'FzfLua files cwd=' },
+    mru = { limit = 10, icon = '  ', label = 'Most Recent Files:', },
+
+    center = {
+      {
+        icon = '  ',
+        desc = 'Find  File                     ',
+        action = 'FzfLua files',
+        key = 'f',
+      },
+      {
+        icon = '  ',
+        desc = 'Find  Project                  ',
+        action = 'Telescope projects',
+        key = 'p'
+      },
+      {
+        icon = '  ',
+        desc = 'New File                       ',
+        action = 'DashboardNewFile',
+        key = 'e'
+      },
+      {
+        icon = '  ',
+        desc = 'Quit                           ',
+        action = 'quit',
+        key = 'q'
+      },
     },
   },
 
-  custom_header = {
-    '███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-    '████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-    '██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-    '██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-    '██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-    '╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-  },
-
-  custom_footer = {},
-
-  header_pad = 3,
-  center_pad = 3,
 }
 
 return M

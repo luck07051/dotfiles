@@ -1,10 +1,11 @@
 #!/bin/sh
 
-# cmd='curl -F "file=@$file" "0x0.st"'
-cmd='xbackbone_uploader_admin.sh $file'
+dmenu="${DMENU:-dmenu -i}"
+# uploadcmd='curl -F "file=@$file" "0x0.st"'
+uploadcmd='xbackbone_uploader_admin.sh $file'
 
 # use `fd` if have
-if [ -x "$(which fd)" ]; then
+if type fd >/dev/null 2>&1; then
 	findcmd="fd . $PWD -t f"
 else
 	findcmd="find $PWD -type f"
@@ -12,15 +13,15 @@ fi
 
 if [ "$PWD" = "$HOME" ]; then
 	file="$($findcmd | sed "s#^$HOME#~#" |
-		dmenu -i -l 25 -p "Pick a File" | sed "s#^~#$HOME#")"
+		$dmenu -l 25 -p "Pick a File" | sed "s#^~#$HOME#")"
 else
 	pwd="$(echo "$PWD" | sed "s#^$HOME#~#")"
 	file="$($findcmd | sed "s#^$PWD#.#" |
-		dmenu -i -l 25 -p "Pick a File from $pwd" | sed "s#^\.#$PWD#")"
+		$dmenu -l 25 -p "Pick a File from $pwd" | sed "s#^\.#$PWD#")"
 fi
 [ -z "$file" ] && exit 0
 
-url="$(eval "$cmd")"
+url="$(eval "$uploadcmd")"
 echo "$url"
 
 echo "$url" | xclip -selection clipboard

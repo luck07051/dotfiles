@@ -1,12 +1,15 @@
 #!/bin/sh
 
-selected="$(dmenu -i -F -p "ICON" -l 20 < ~/.local/share/icons/nerd_icons | cut -d' ' -f1)"
+dmenu="${DMENU:-dmenu -i}"
+icon_file="$XDG_DATA_HOME/icons/nerd_icons"
+
+selected="$($dmenu -p -l 20 "ICON" < "$icon_file" | cut -d' ' -f1)"
 
 [ -z "$selected" ] && exit
 
 if [ "$1" = "-a" ]; then
 	xdotool type "$selected"
 else
-	printf "%s" "$selected" | xclip -selection clipboard
-	notify-send "'$selected' copied to clipboard." &
+	printf "$selected" | xclip -selection clipboard
+	notify-send "Icons" "'$selected' copied to clipboard."
 fi

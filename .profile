@@ -27,10 +27,14 @@ export BROWSER='librewolf'
 export EDITOR='nvim'
 export SHELL='/bin/zsh'
 export PKGMAN='paru'
+export DMENU='dmenu -i'
 
 [ -x "$(which nvim)" ] && export MANPAGER='nvim +Man!'
 
 export LANG='en_US.UTF-8'
+
+# The path you can always cd to
+export CDPATH="/:$HOME:$HOME/.config"
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

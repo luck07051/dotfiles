@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# $ sb-update 'module name'
+
+[ -z "$1" ] && exit
+
+dwmblocks_config="$HOME/src/dwmblocks/config.h"
+
+signal=$(grep "^\s*BLOCK(" "$dwmblocks_config" | grep -F "\"$1\"" | cut -d, -f3 | sed 's/^\s*\([0-9]*\))$/\1/')
+[ -z "$signal" ] && exit
+
+kill -$(( 34 + signal )) "$(pidof dwmblocks)"
