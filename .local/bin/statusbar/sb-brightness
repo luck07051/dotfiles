@@ -1,25 +1,12 @@
 #!/bin/sh
 
-sys_backlight='/sys/class/backlight/intel_backlight'
-val="$(cat $sys_backlight/brightness)"
-max="$(cat $sys_backlight/max_brightness)"
-step=$(( max / 15 ))
-
-chbri(){
-	next=$((val + $1))
-	if [ "$next" -ge "$max" ]; then
-		echo "$max" > "$sys_backlight/brightness"
-	elif [ "$next" -le "$step" ]; then
-		echo "$step" > "$sys_backlight/brightness"
-	else
-		echo "$next" > "$sys_backlight/brightness"
-	fi
-}
+val="$(bright get)"
+max="$(bright max)"
 
 case $BLOCK_BUTTON in
 	3) notify-send 'Brightness' "$val / $max" ;;
-	4) chbri "+$step";;
-	5) chbri "-$step";;
+	4) bright up;;
+	5) bright down;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

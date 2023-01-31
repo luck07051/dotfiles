@@ -51,7 +51,7 @@ vim.keymap.set('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 -- vim.keymap.set('n', '<Leader>do', ':!open "%:p"<CR>')
 
 -- Goto prev file --
-vim.keymap.set('n', '<BS>', ':edit #<CR>', { silent = true } )
+vim.keymap.set('n', '<BS>', '<C-^>', { silent = true } )
 
 -- Terminal --
 vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', { silent = true } )
@@ -92,4 +92,5 @@ local function cabbrev(lhs, rhs)
 end
 
 cabbrev('sudow', 'w !sudo tee %')
+cabbrev('doasw', 'w !doas tee %')
 cabbrev('f', 'find')

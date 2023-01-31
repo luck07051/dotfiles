@@ -29,24 +29,18 @@ export SHELL='/bin/zsh'
 export PKGMAN='paru'
 export DMENU='dmenu -i'
 
-[ -x "$(which nvim)" ] && export MANPAGER='nvim +Man!'
+type nvim >/dev/null && export MANPAGER='nvim +Man!'
 
 export LANG='en_US.UTF-8'
 
 # The path you can always cd to
 export CDPATH="/:$HOME:$HOME/.config"
 
-# zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+# Shell
 export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTFILE="$XDG_CACHE_HOME/history"
 export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
-
-# FZF
-export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up --height 40% \
-     --color=pointer:5,gutter:-1,prompt:15 --no-separator --info=default"
-export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
 #==================== Lets Paths Right ====================#
@@ -54,6 +48,8 @@ export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
 export XSERVERRC=$XDG_CONFIG_HOME/X11/xserverrc
 export XAUTHORITY=$XDG_CONFIG_HOME/X11/xauthority
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # cabal
 export CABAL_CONFIG=$XDG_CONFIG_HOME/cabal/config
 export CABAL_DIR=$XDG_CACHE_HOME/cabal
