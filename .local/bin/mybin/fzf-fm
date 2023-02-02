@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# in your shellrc: `source fzf-fm`
+# and type `a` to use.
+
+if type lsd >/dev/null; then
+	lscmd='lsd -A --group-directories-first --icon=always --color=always'
+elif type exa >/dev/null; then
+	lscmd='exa -a --group-directories-first --icons --color=always'
+else
+	lscmd='ls -A --group-directories-first --color=always'
+fi
+
+if type bat >/dev/null; then
+	catcmd='bat --color=always -n'
+else
+	catcmd='cat'
+fi
+
+preview_cmd="
+if [ -d \$PWD/{} ]; then
+	$lscmd \$PWD/{}
+else
+	$catcmd \$PWD/{}
+fi"
+
+a(){
+	[ -n "$1" ] && { cd "$1"; return; }
+	temp="$(mktemp)"
+
+	while :; do
+		ls "$PWD" -A --group-directories-first --color=always |
+			fzf --prompt "$PWD/" --preview "$preview_cmd" \
+			--preview-window '70%,border-left' \
+			--ansi --height 100 --info inline --color prompt:245 \
+			--bind left:"execute(echo '..' >$temp)+abort",right:accept \
+			--bind ctrl-h:"execute(echo '..' >$temp)+abort",ctrl-l:accept \
+			>"$temp"
+
+		if [ -z "$(cat "$temp")" ]; then
+			rm "$temp"
+			return
+		fi
+
+		file=$PWD/$(cat "$temp")
+		if [ -d $file ]; then
+			cd "$file"
+		else
+			open "$file"
+		fi
+	done
+}

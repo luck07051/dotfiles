@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# dev='/sys/class/backlight/intel_backlight'
+dev="$(echo /sys/class/backlight/*)"
+
+val="$(cat "$dev/brightness")"
+max="$(cat "$dev/max_brightness")"
+step=$(( max / 15 ))
+
+chbri(){
+	next=$((val + $1))
+	if [ "$next" -ge "$max" ]; then
+		echo "$max" > "$dev/brightness"
+	elif [ "$next" -le "$step" ]; then
+		echo "$step" > "$dev/brightness"
+	else
+		echo "$next" > "$dev/brightness"
+	fi
+}
+
+get(){
+	echo "$val"
+}
+max(){
+	echo "$max"
+}
+up(){
+	chbri "+$step"
+}
+down(){
+	chbri "-$step"
+}
+
+"$@"
+
+# update bar
+sb-update sb-brightness

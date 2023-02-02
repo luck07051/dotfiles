@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for file in $(ls -A --group-directories-first); do
+	printf '%s\t%s\n' "$file" "$(xdg-mime query filetype "$file")"
+done | column -t -s "$(printf '\t')"
