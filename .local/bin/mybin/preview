@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# TODO: img preview
+
+file="$1"
+
+if [ -d "$file" ]; then
+	if type lsd >/dev/null; then
+		lsd -A --group-directories-first --color=always "$file"
+	elif type exa >/dev/null; then
+		exa -a --group-directories-first --icons --color=always "$file"
+	else
+		ls -A --group-directories-first --color=always --color=always "$file"
+	fi
+	exit
+fi
+
+if [ ! -f "$file" ]; then
+	echo 'File not found!' >&2
+	exit 1
+fi
+
+case $(readlink -f "$file" | tr '[:upper:]' '[:lower:]') in
+	*.tgz|*.tar.gz) tar tzf "$file" ;;
+	*.tar.bz2|*.tbz2) tar tjf "$file" ;;
+	*.tar.txz|*.txz) xz --list "$file" ;;
+	*.tar) tar tf "$file" ;;
+	*.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$file" ;;
+	*.rar) unrar l "$file" ;;
+	*.7z) 7z l "$file" ;;
+
+	*.[1-8]) man "$file" | col -b ;;
+
+	*)
+	if type bat >/dev/null; then
+		bat -n --style=plain --pager=never --color=always "$file"
+	else
+		cat "$file"
+	fi
+esac

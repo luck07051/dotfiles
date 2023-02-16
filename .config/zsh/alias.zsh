@@ -40,6 +40,9 @@ lf() {
   cd "$(cat /tmp/lfcd)"
 }
 
+# use bare Git repository to manage dotfiles
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
 type fzf-fm >/dev/null &&
   source fzf-fm
 
@@ -64,17 +67,12 @@ if [ -x "$(command -v lsd)" ]; then
   alias ls='lsd -A --group-directories-first'
   alias ll='lsd -Al --group-directories-first'
 elif [ -x "$(command -v exa)" ]; then
-  # alias ls='[ "$COLUMNS" -gt "80" ] && export COLUMNS=80;
-  #   exa -a --icons --group-directories-first'
   alias ls='exa -a --icons --group-directories-first'
   alias ll='exa -al --icons --group-directories-first --git -H'
 else
   alias ls='ls -A --color=auto --group-directories-first'
   alias ll='ls -Al --color=auto --group-directories-first'
 fi
-
-# use bare Git repository to manage dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 
 # Fix config file path

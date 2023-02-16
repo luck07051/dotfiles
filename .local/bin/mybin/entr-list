@@ -3,3 +3,5 @@
 echo "$XDG_CONFIG_HOME/X11/xresources\n$XDG_CONFIG_HOME/X11/color" | entr -n sync-xrdb &
 
 echo "$HOME/bm/bookmark" | entr -n sync-bookmark &
+
+echo "$XDG_CONFIG_HOME/pkg-mgr/packages" | entr -np pkg-mgr &

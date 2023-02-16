@@ -3,26 +3,16 @@
 # in your shellrc: `source fzf-fm`
 # and type `a` to use.
 
-if type lsd >/dev/null; then
-	lscmd='lsd -A --group-directories-first --icon=always --color=always'
-elif type exa >/dev/null; then
-	lscmd='exa -a --group-directories-first --icons --color=always'
+if type preview >/dev/null; then
+	preview_cmd='preview $PWD/{}'
 else
-	lscmd='ls -A --group-directories-first --color=always'
+	preview_cmd='
+if [ -d $PWD/{} ]; then
+	ls -a $PWD/{}
+else
+	cat $PWD/{}
+fi'
 fi
-
-if type bat >/dev/null; then
-	catcmd='bat --color=always -n'
-else
-	catcmd='cat'
-fi
-
-preview_cmd="
-if [ -d \$PWD/{} ]; then
-	$lscmd \$PWD/{}
-else
-	$catcmd \$PWD/{}
-fi"
 
 a(){
 	[ -n "$1" ] && { cd "$1"; return; }

@@ -1,0 +1,15 @@
+#!/bin/sh
+if type xdotool >/dev/null; then
+	winid="$(xdotool getactivewindow)"
+	xdotool windowunmap "$winid"
+	"$@"
+	xdotool windowmap "$winid"
+elif type xdo >/dev/null; then
+	winid="$(xdo id)"
+	xdo hide
+	"$@"
+	xdo show "$winid"
+else
+	echo "Dependce 'xdo' or 'xdotool' not founded." >&2
+	exit 1
+fi

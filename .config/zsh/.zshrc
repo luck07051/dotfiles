@@ -3,8 +3,7 @@
 # Source function
 function zsh_add_file() { #{{{
   [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
-}
-#}}}
+} #}}}
 function zsh_add_plug() { #{{{
   PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
   if [[ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]]; then
@@ -14,8 +13,7 @@ function zsh_add_plug() { #{{{
   else
     git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
   fi
-}
-#}}}
+} #}}}
 
 unsetopt autocd beep        # No beep sound
 set -o ignoreeof            # Prevent <C-D> to close window
@@ -44,10 +42,6 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 bindkey -M vicmd '^e' edit-command-line
 
-# Time command format
-# [time format](https://zsh.sourceforge.io/Doc/Release/Parameters.html)
-# TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
-
 # Prompt
 if [ -x "$(which starship)" ]; then
   eval "$(starship init zsh)"
@@ -55,9 +49,9 @@ else
   setopt PROMPT_SUBST  # enable function in prompt
   PS1="%B%F{cyan}%4~%f%b%(?.%F{white}.%F{red})$%f "
   PS2=">"
-  # zsh_add_file "functions/timer.zsh"
+  zsh_add_file "functions/timer.zsh"
   # zsh_add_file "functions/vcs.zsh"
-  # RPS1='${vcs} ${timer}'
+  RPS1='${timer}'
 fi
 
 # cd Alternatives
@@ -74,14 +68,11 @@ zsh_add_file "alias.zsh"
 zsh_add_file "local_alias.zsh"
 
 # Util
-zsh_add_file "functions/lf.zsh"            # lf with several setup
 zsh_add_file "functions/yank.zsh"          # <C-y> to yank prev command
+# zsh_add_file "functions/lf.zsh"            # file manager 'lf'
 # zsh_add_file "functions/auto_ls.zsh"       # run ls when $PWD changed
 
 # Plugins
 zsh_add_plug "Aloxaf/fzf-tab"
 zsh_add_plug "zsh-users/zsh-completions"
-# zsh_add_plug "zsh-users/zsh-autosuggestions"
-#    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind_return"
-#    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+="_abbr_keybind"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"

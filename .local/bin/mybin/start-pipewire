@@ -4,3 +4,6 @@ exec 2>&1
 ( while :; do pipewire; done ) &
 ( while :; do pipewire-pulse; done ) &
 ( while :; do pipewire-media-session; done ) &
+
+sleep 5s
+sb-update sb-vol

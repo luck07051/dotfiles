@@ -1,21 +1,23 @@
 #!/bin/sh
 
+swallower='swallower'
+
 case $(file --mime-type "$1" -bL) in
 
 	video/* | audio/*)
-		devour mpv "$@"
+		$swallower mpv "$@"
 		;;
 
 	image/*)
-		devour nsxiv "$@"
+		$swallower nsxiv "$@"
 		;;
 
 	application/pdf | application/postscript)
-		devour zathura "$@"
+		$swallower zathura "$@"
 		;;
 
 	application/*wordprocessingml.document* )
-		devour libreoffice "$@"
+		$swallower libreoffice "$@"
 		;;
 
 	text/*)

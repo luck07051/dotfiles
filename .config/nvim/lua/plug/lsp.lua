@@ -87,8 +87,9 @@ M.config = function()
     }, --}}}
   }
 
+  --[[
   require('mason-lspconfig').setup( {
-    ensure_installed = { "sumneko_lua", "rust_analyzer" },
+    ensure_installed = { "sumneko_lua", "rust_analyzer", "bashls" },
   })
 
   require('mason-lspconfig').setup_handlers({
@@ -104,6 +105,18 @@ M.config = function()
     --     require("rust-tools").setup {}
     -- end
   })
+  ]]
+
+  local server_list = { 'sumneko_lua', 'rust_analyzer', 'bashls' }
+
+  for _, server_name in pairs(server_list) do
+    lspconfig[server_name].setup {
+      on_attach = on_attach,
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      settings = server_settings[server_name],
+    }
+  end
+
 
 end
 

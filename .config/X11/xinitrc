@@ -21,7 +21,6 @@ uicom)
 uilap)
 	#setxkbmap -option caps:shiftlock
 	setxkbmap -option ctrl:nocaps
-	setsid -f start-pipewire
 	;;
 esac
 
@@ -32,6 +31,9 @@ xset -dpms
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
+
+# start audio
+setsid -f start-pipewire
 
 # Startup app
 run dunst
@@ -44,7 +46,6 @@ run entr-list
 while true; do
 	killall dwmblocks >/dev/null 2>&1
 	dwmblocks &
-	(sleep 3s; kill -55 "$(pidof dwmblocks)") &
 
 	dwm
 done

@@ -19,15 +19,12 @@ batorcat() {
     file="$1"
     shift
 
-    if file -i "$file" | grep "charset=binary" > /dev/null 2>&1
-    then
-        if command -v hexyl > /dev/null 2>&1
-        then
+    if file -i "$file" | grep "charset=binary" > /dev/null 2>&1; then
+        if command -v hexyl > /dev/null 2>&1; then
             hexyl --border=none -P "$file"
         fi
     else
-        if command -v bat > /dev/null 2>&1
-        then
+        if command -v bat > /dev/null 2>&1; then
             bat --color=always --style=plain --pager=never "$file" "$@"
         else
             cat "$file"
