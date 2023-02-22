@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# usages:
 # $ sb-update 'module name'
 
 [ -z "$1" ] && exit

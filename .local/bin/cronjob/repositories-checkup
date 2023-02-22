@@ -1,17 +1,14 @@
 #!/bin/sh
-
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
-PKGMAN=${PKGMAN:-pacman}
 
-$PKGMAN -Syyuw --noconfirm ||
-	notify-send "Error downloading updates." "Check your internet connection, if $PKGMAN is already running, or run update manually to see errors."
+sync_cmd="${1:-${PKGMAN:-pacman} -Syyuw --noconfirm}"
+sb_update_cmd="$HOME/.local/bin/statusbar/sb-update sb-pacman"
 
-# update statusbar
-kill -61 "$(pidof dwmblocks)"
+touch /tmp/sb-repo-syncing
+$sb_update_cmd
 
-if $PKGMAN -Qu | grep -v "\[ignored\]"
-then
-	notify-send "📦 Repository Sync" "Updates available. Click statusbar icon (📦) for update."
-else
-	notify-send "📦 Repository Sync" "Sync complete. No new packages for update."
-fi
+$sync_cmd ||
+	notify-send "📦 Repository Sync" "Error downloading updates."
+
+rm /tmp/sb-repo-syncing
+$sb_update_cmd

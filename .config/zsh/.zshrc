@@ -49,9 +49,9 @@ else
   setopt PROMPT_SUBST  # enable function in prompt
   PS1="%B%F{cyan}%4~%f%b%(?.%F{white}.%F{red})$%f "
   PS2=">"
-  zsh_add_file "functions/timer.zsh"
+  # zsh_add_file "functions/timer.zsh"
   # zsh_add_file "functions/vcs.zsh"
-  RPS1='${timer}'
+  # RPS1='${timer}'
 fi
 
 # cd Alternatives

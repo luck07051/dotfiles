@@ -3,6 +3,7 @@
 [ -z "$1" ] && { echo "${0##*/} password /path/to/pdf [/path/to/the/output]" >&2; exit 1; }
 
 if [ -z "$3" ] || [ "$2" = "$3" ]; then
+	# replace decrypted-pdf with crypted-pdf
 	opt='--replace-input'
 	qpdf "$opt" -password="$1" -decrypt "$2"
 else

@@ -6,4 +6,10 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-printf " %s" "$(pacman -Qu | grep -Fcv "[ignored]")"
+if [ -f /tmp/sb-repo-syncing ]; then
+	packages="󰇚"
+else
+	packages="$(pacman -Qu | grep -Fcv "[ignored]")"
+fi
+
+printf " %s" "$packages"

@@ -28,7 +28,7 @@ change_img() {
 	screen=0
 	fill="zoom"
 
-	while [ $# -gt 0 ]; do
+	while :; do
 		case $1 in
 			'-h'|'--help')
 				help

@@ -36,7 +36,7 @@ setwallpaper
 setsid -f start-pipewire
 
 # Startup app
-run dunst
+#run dunst
 run xcompmgr -n
 run unclutter
 

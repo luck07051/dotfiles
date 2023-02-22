@@ -1,39 +1,56 @@
 #!/bin/sh
 
-# in your shellrc: `source fzf-fm`
+# add `source fzf-fm` in your shellrc.
 # and type `a` to use.
 
+_fzf_fm_lscmd(){
+	if type lsd >/dev/null; then
+		lsd -A --group-directories-first --color=always "$*"
+	elif type exa >/dev/null; then
+		exa -a --group-directories-first --icons --color=always "$*"
+	else
+		ls -A --group-directories-first --color=always "$*"
+	fi
+}
+
 if type preview >/dev/null; then
-	preview_cmd='preview $PWD/{}'
+	_fzf_fm_preview_cmd='preview $PWD/{}'
 else
-	preview_cmd='
+	_fzf_fm_preview_cmd='
 if [ -d $PWD/{} ]; then
-	ls -a $PWD/{}
+	_fzf_fm_lscmd $PWD/{}
 else
 	cat $PWD/{}
 fi'
 fi
 
 a(){
-	[ -n "$1" ] && { cd "$1"; return; }
-	temp="$(mktemp)"
+	_fzf_fm_temp_file='/tmp/fzf-fm-up-dir'
 
 	while :; do
-		ls "$PWD" -A --group-directories-first --color=always |
-			fzf --prompt "$PWD/" --preview "$preview_cmd" \
+		selected="$(_fzf_fm_lscmd "$PWD" |
+			fzf --prompt "$PWD/" \
+			--preview "$_fzf_fm_preview_cmd" \
 			--preview-window '70%,border-left' \
-			--ansi --height 100 --info inline --color prompt:245 \
-			--bind left:"execute(echo '..' >$temp)+abort",right:accept \
-			--bind ctrl-h:"execute(echo '..' >$temp)+abort",ctrl-l:accept \
-			>"$temp"
+			--ansi \
+			--height 100 \
+			--info inline \
+			--color prompt:245 \
+			--cycle \
+			--bind left:"execute(touch $_fzf_fm_temp_file)+abort",right:accept \
+			--bind ctrl-h:"execute(touch $_fzf_fm_temp_file)+abort",ctrl-l:accept
+		)"
 
-		if [ -z "$(cat "$temp")" ]; then
-			rm "$temp"
-			return
+		if [ -f "$_fzf_fm_temp_file" ]; then
+			rm "$_fzf_fm_temp_file"
+			cd ..
+			continue
 		fi
 
-		file=$PWD/$(cat "$temp")
-		if [ -d $file ]; then
+		[ -z "$selected" ] && return
+
+		file="$PWD/$selected"
+		if [ -d "$file" ]; then
 			cd "$file"
 		else
 			open "$file"

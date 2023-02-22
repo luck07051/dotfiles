@@ -2,7 +2,7 @@ abbr c='cd'
 abbr c.='cd ..'
 abbr c-='cd -'
 abbr c_='cd $_'
-abbr z='cd $(dirmark)'
+abbr z='cd $(dirmark || echo $PWD)'
 abbr o='open'
 abbr e='$EDITOR'
 abbr e.='$EDITOR .'
@@ -20,6 +20,7 @@ abbr cr='cargo run'
 abbr tt='trans :zh-TW'
 abbr za='zathura'
 abbr py='python3'
+abbr pip='pip3'
 abbr rc='rsync -vhP'
 abbr syncb='syncthing serve --browser-only'
 abbr nb='newsboat'
@@ -30,8 +31,8 @@ abbr mi='doas make install clean'
 abbr clip='xclip -selection clipboard'
 
 abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
-abbr svln='doas ln -s /etc/runit/sv/"$(ls /etc/runit/sv/ | fzf)" /run/runit/service/'
-abbr svrm='doas rm /run/runit/service/"$(ls /run/runit/service/ | fzf)"'
+abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
+abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/service/{}'
 
 # Change dir when left lf, and use given colors
 lf() {
@@ -43,8 +44,7 @@ lf() {
 # use bare Git repository to manage dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-type fzf-fm >/dev/null &&
-  source fzf-fm
+type fzf-fm >/dev/null && source fzf-fm
 
 # Confirm before overwriting something
 alias cp='cp -iv'

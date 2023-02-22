@@ -2,7 +2,7 @@
 
 dirmark_file="${1:-$HOME/bm/dirmark}"
 
-chosen="$(sed '/^\s*#/d; /^$/d' "$dirmark_file" | fzf)"
-[ -z "$chosen" ] && exit
+selected="$(sed '/^\s*#/d; /^$/d' "$dirmark_file" | fzf)"
+[ -z "$selected" ] && exit 1
 
-echo "$chosen" | sed "s#^~#$HOME#"
+echo "$selected" | sed "s#^~#$HOME#"

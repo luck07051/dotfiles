@@ -24,7 +24,8 @@ source_mute() {
 switch() {
 	def=$(pactl get-default-sink)
 	pactl list short sinks | cut -f2 | tr '\n' ' ' |
-		sed "s/^.*$def\s\(\S*\)\s.*/\1/; s/^\(\S*\)\s.*/\1/" | # looking for next sink
+		sed "s/^.*$def \(\S*\) .*/\1/" | # look for next sink
+		sed "s/^\(\S*\) .*/\1/" | # if $def is last, look for first
 		xargs pactl set-default-sink
 }
 

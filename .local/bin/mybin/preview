@@ -4,14 +4,54 @@
 
 file="$1"
 
-if [ -d "$file" ]; then
-	if type lsd >/dev/null; then
-		lsd -A --group-directories-first --color=always "$file"
-	elif type exa >/dev/null; then
-		exa -a --group-directories-first --icons --color=always "$file"
-	else
-		ls -A --group-directories-first --color=always --color=always "$file"
+directory(){
+	normal=$(tput sgr0)
+	green=$(tput setaf 2 bold)
+	# print infomation of directory
+	printf "%s %s %s %s %s %s" \
+		"${green}Total:${normal}" \
+		"$(find -L "$1" -maxdepth 1 -mindepth 1 | wc -l)" \
+		"${green}Dir:${normal}" \
+		"$(find -L "$1" -maxdepth 1 -mindepth 1 -type d | wc -l)" \
+		"${green}File:${normal}" \
+		"$(find -L "$1" -maxdepth 1 -mindepth 1 -type f | wc -l)"
+
+	# if directory is symbolic link
+	if [ -h "$1" ]; then
+		blue=$(tput setaf 4 bold)
+		printf "\t\t->${blue}%s${normal}" "$(realpath "$1")"
 	fi
+
+	printf '\n'
+
+	if type lsd >/dev/null; then
+		lsd -A --group-directories-first --color=always "$1"
+	elif type exa >/dev/null; then
+		exa -a --group-directories-first --icons --color=always "$1"
+	else
+		ls -A --group-directories-first --color=always "$1"
+	fi
+}
+ls_file(){
+	if type lsd >/dev/null; then
+		lsd -l --color=always "$1"
+	elif type exa >/dev/null; then
+		exa -l --icons --color=always "$1"
+	else
+		ls -l --color=always "$1"
+	fi
+}
+cat_file(){
+	if type bat >/dev/null; then
+		bat -n --style=plain --pager=never --color=always "$1"
+	else
+		cat "$1"
+	fi
+}
+
+
+if [ -d "$file" ]; then
+	directory "$file"
 	exit
 fi
 
@@ -19,6 +59,9 @@ if [ ! -f "$file" ]; then
 	echo 'File not found!' >&2
 	exit 1
 fi
+
+ls_file "$file"
+echo
 
 case $(readlink -f "$file" | tr '[:upper:]' '[:lower:]') in
 	*.tgz|*.tar.gz) tar tzf "$file" ;;
@@ -31,10 +74,5 @@ case $(readlink -f "$file" | tr '[:upper:]' '[:lower:]') in
 
 	*.[1-8]) man "$file" | col -b ;;
 
-	*)
-	if type bat >/dev/null; then
-		bat -n --style=plain --pager=never --color=always "$file"
-	else
-		cat "$file"
-	fi
+	*) cat_file "$file"
 esac

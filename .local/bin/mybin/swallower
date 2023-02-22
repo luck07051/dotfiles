@@ -1,4 +1,5 @@
 #!/bin/sh
+
 if type xdotool >/dev/null; then
 	winid="$(xdotool getactivewindow)"
 	xdotool windowunmap "$winid"

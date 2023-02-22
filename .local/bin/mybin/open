@@ -25,7 +25,7 @@ case $(file --mime-type "$1" -bL) in
 		;;
 
 	*)
-		echo "File type not support!" 1>&2
+		echo "File type '$(file --mime-type "$1" -bL)' not support!" >&2
 		exit 1
 		;;
 esac

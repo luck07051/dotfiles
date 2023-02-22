@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: check dhclient or chcpcd
+
 help(){
 	cat <<EOF
 help...
@@ -103,6 +105,15 @@ check_conn(){
 		sleep 0.2s
 	done
 }
+conn_dhcp(){
+	if type dhclient 2>&1; then
+		setsid -f dhclient -d "$INTERFACE" >/dev/null 2>&1
+	elif type dhcpcd 2>&1; then
+		setsid -f dhcpcd -q -b "$INTERFACE" 2>&1
+	else
+		err 'dhclient or dhcpcd not found.'
+	fi
+}
 
 # default options
 NOGEN=''
@@ -170,7 +181,7 @@ done
 
 
 # check dependce
-dep ip iw wpa_passphrase wpa_supplicant dhclient
+dep ip iw wpa_passphrase wpa_supplicant
 
 # kill wpa and dhclient
 check_kill wpa_supplicant
@@ -208,7 +219,7 @@ fi
 
 # connect to wifi
 setsid -f wpa_supplicant -D "$DRIVER" -i "$INTERFACE" -c "$WPA_CONF/wpa.conf" >/dev/null 2>&1
-setsid -f dhclient -d "$INTERFACE" >/dev/null 2>&1
+conn_dhcp
 
 # check connection
 echo 'Checking connection...'

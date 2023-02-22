@@ -107,7 +107,8 @@ M.config = function()
   })
   ]]
 
-  local server_list = { 'sumneko_lua', 'rust_analyzer', 'bashls' }
+  -- local server_list = { 'sumneko_lua', 'rust_analyzer', 'bashls' }
+  local server_list = { 'bashls' }
 
   for _, server_name in pairs(server_list) do
     lspconfig[server_name].setup {

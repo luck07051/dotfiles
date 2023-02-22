@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# HACK:
+
 xdotool key --window "$(xdotool getwindowfocus)" --clearmodifiers ctrl+a ctrl+x
 
 TMPFILE="$(mktemp /tmp/edit-in-editor.XXXXXXXX)"

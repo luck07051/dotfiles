@@ -15,9 +15,10 @@
 # If you don't want to open a new terminal to install packages, use:
 # $ pkg-mgr --no-terminal
 
-install_cmd='paru -S'
-remove_cmd='paru -Rns'
-list_local_packages_cmd='pacman -Qq'
+pkgman="${PKGMAN:-pacman}"
+install_cmd="$pkgman -S"
+remove_cmd="$pkgman -Rns"
+list_local_packages_cmd="$pkgman -Qq"
 terminal_cmd="${TERMINAL:-st} -t pkg-mgr -e"
 
 # config file
