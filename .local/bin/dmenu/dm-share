@@ -5,7 +5,7 @@ dmenu="${DMENU:-dmenu -i}"
 uploadcmd='xbackbone_uploader_admin.sh $file'
 
 # use `fd` if have
-if type fd >/dev/null 2>&1; then
+if type fd >/dev/null; then
 	findcmd="fd . $PWD -t f"
 else
 	findcmd="find $PWD -type f"

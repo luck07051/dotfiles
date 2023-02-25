@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: bookmark
 
 dmenu="${DMENU:-dmenu -i}"
 term="${TERMINAL-st} -e sh -c"

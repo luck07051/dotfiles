@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cd notes
-$EDITOR index.md -c 'TZMinimalist'

@@ -6,8 +6,6 @@ local M = {
   }
 }
 
--- TODO: keymap desc
-
 M.keys = {
   { '<Leader>fe', function() require('fzf-lua').files() end,     desc = 'FzfLua for files' },
   { '<Leader>fs', function() require('fzf-lua').live_grep() end, desc = 'FzfLua for live_grep' },
@@ -41,7 +39,7 @@ M.opts = {
       scrollborder_e = 'FloatBorder',   -- scrollbar "empty" section highlight
       scrollborder_f = 'FloatBorder',   -- scrollbar "full" section highlight
     },
-  }
+  },
 }
 
 return M

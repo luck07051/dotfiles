@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ -x "$(which paru)" ]; then
+if type paru >/dev/null; then
 	paru
-elif [ -x "$(which yay)" ]; then
+elif type yay >/dev/null; then
 	yay
 else
 	pacman -Syu
@@ -11,4 +11,4 @@ fi
 printf "\\nUpgrade complete.\\nPress <Enter> to exit window.\\n\\n"
 read -r _
 
-sb-update sb-pacman
+{ sleep 1s; sb-update sb-pacman; } &

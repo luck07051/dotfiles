@@ -1,10 +1,7 @@
 #!/bin/sh
+# vim:foldmethod=marker:foldlevel=0
 
-# TODO: img preview
-
-file="$1"
-
-directory(){
+directory(){ #{{{
 	normal=$(tput sgr0)
 	green=$(tput setaf 2 bold)
 	# print infomation of directory
@@ -31,8 +28,8 @@ directory(){
 	else
 		ls -A --group-directories-first --color=always "$1"
 	fi
-}
-ls_file(){
+} #}}}
+file_info(){ #{{{
 	if type lsd >/dev/null; then
 		lsd -l --color=always "$1"
 	elif type exa >/dev/null; then
@@ -40,15 +37,20 @@ ls_file(){
 	else
 		ls -l --color=always "$1"
 	fi
-}
-cat_file(){
+	printf '\n'
+} #}}}
+cat_file(){ #{{{
 	if type bat >/dev/null; then
 		bat -n --style=plain --pager=never --color=always "$1"
 	else
 		cat "$1"
 	fi
-}
+} #}}}
+image(){ #{{{
+	chafa "$1"
+} #}}}
 
+file="$1"
 
 if [ -d "$file" ]; then
 	directory "$file"
@@ -60,8 +62,7 @@ if [ ! -f "$file" ]; then
 	exit 1
 fi
 
-ls_file "$file"
-echo
+file_info "$file"
 
 case $(readlink -f "$file" | tr '[:upper:]' '[:lower:]') in
 	*.tgz|*.tar.gz) tar tzf "$file" ;;
@@ -73,6 +74,10 @@ case $(readlink -f "$file" | tr '[:upper:]' '[:lower:]') in
 	*.7z) 7z l "$file" ;;
 
 	*.[1-8]) man "$file" | col -b ;;
+
+	*.png|*.jpg|*.jpeg|*.webp) image "$file" ;;
+	# *.gif) ;;
+	# *.pdf) ;;
 
 	*) cat_file "$file"
 esac

@@ -15,11 +15,13 @@ tealdeer
 htop
 fastfetch-git
 qpdf
+chafa
 
 # language
 rust
 python
 python-pip
+# language server
 shellcheck
 bash-language-server
 

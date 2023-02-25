@@ -27,7 +27,8 @@ export BROWSER='librewolf'
 export EDITOR='nvim'
 export SHELL='/bin/zsh'
 export PKGMAN='paru'
-export DMENU='dmenu -i'
+# export DMENU='dmenu -i'
+export DMENU='fmenu'
 
 type nvim >/dev/null && export MANPAGER='nvim +Man!'
 

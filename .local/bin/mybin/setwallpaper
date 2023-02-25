@@ -16,6 +16,7 @@ help(){
 	cat << EOF
 no help
 EOF
+	exit
 }
 
 change_img() {
@@ -30,26 +31,11 @@ change_img() {
 
 	while :; do
 		case $1 in
-			'-h'|'--help')
-				help
-				exit
-				;;
-			'-s'|'--screen')
-				screen="$2"
-				shift 2
-				;;
-			'-f'|'--fill')
-				fill="$2"
-				shift 2
-				;;
-			'--')
-				img="$2"
-				break
-				;;
-			*)
-				echo 'Internal error!' >&2
-				exit 1
-				;;
+			'-h'|'--help')   help;;
+			'-s'|'--screen') screen="$2"; shift 2 ;;
+			'-f'|'--fill')   fill="$2";   shift 2 ;;
+			'--')            img="$2";    break ;;
+			*) echo 'Internal error!' >&2; exit 1 ;;
 		esac
 	done
 	[ -z "$img" ] && { echo 'Please provide image' >&2; exit 1; }

@@ -132,50 +132,20 @@ unset TEMP
 
 while true; do
 	case "$1" in
-		'-h'|'--help')
-			help
-			exit
-			;;
-		'-g'|'--nogen')
-			NOGEN='true'
-			shift
-			;;
-		'-f'|'--noconfirm')
-			NOCONFIRM='true'
-			shift
-			;;
-		'-s'|'--noselectssid')
-			NOSELECTSSID='true'
-			shift
-			;;
-		'-i'|'--interface')
-			INTERFACE="$2"
-			shift 2
-			continue
-			;;
-		'-d'|'--driver')
-			DRIVER="$2"
-			shift 2
-			continue
-			;;
-		'-c'|'--config')
-			WPA_CONF="$2"
-			shift 2
-			continue
-			;;
-		'--fzf')
-			FZF="$2"
-			shift 2
-			continue
-			;;
+		'-h'|'--help')         help;                exit ;;
+		'-g'|'--nogen')        NOGEN='true';        shift ;;
+		'-f'|'--noconfirm')    NOCONFIRM='true';    shift ;;
+		'-s'|'--noselectssid') NOSELECTSSID='true'; shift ;;
+		'-i'|'--interface')    INTERFACE="$2";      shift 2 ;;
+		'-d'|'--driver')       DRIVER="$2";         shift 2 ;;
+		'-c'|'--config')       WPA_CONF="$2";       shift 2 ;;
+		'--fzf')               FZF="$2";            shift 2 ;;
 		'--')
 			[ -n "$3" ] && err 'Too many SSID!'
 			[ -n "$2" ] && SSID="$2"
 			break
 			;;
-		*)
-			err 'Internal error!'
-			;;
+		*) err 'Internal error!' ;;
 	esac
 done
 
