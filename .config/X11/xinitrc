@@ -1,26 +1,19 @@
 #!/bin/sh
 
 run() {
-	if [ -x "$(which "$1")" ] && ! pidof -q "$1"
-	then
+	if [ -x "$(which "$1")" ] && ! pidof -q "$1"; then
 		"$@" &
 	fi
 }
 
 case $(cat /etc/hostname) in
 uicom)
-	# Remap caps lock to Ctrl
-	setxkbmap -option ctrl:nocaps
 	# Set screen to 144 rate
 	xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
-	# Input method
-	run fcitx5 -d
 	# Tablet driver
 	run otd
 	;;
 uilap)
-	#setxkbmap -option caps:shiftlock
-	setxkbmap -option ctrl:nocaps
 	;;
 esac
 
@@ -28,6 +21,11 @@ esac
 # No screen saver
 xset s off
 xset -dpms
+
+# Remap caps lock to Ctrl
+setxkbmap -option ctrl:nocaps
+# Input method
+run fcitx5 -d
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper

@@ -4,4 +4,21 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-printf "  "
+dev='/sys/class/power_supply/BAT0'
+cap="$(cat "$dev/capacity")"
+
+case $(( cap / 20 )) in
+	0) icon=' ' ;;
+	1) icon=' ' ;;
+	2) icon=' ' ;;
+	3) icon=' ' ;;
+	4|5) icon=' ' ;;
+esac
+
+if [ "$(cat "$dev/status")" = 'Charging' ]; then
+	charging=' '
+else
+	charging=''
+fi
+
+printf '%s%s %s%%' "$charging" "$icon" "$cap"
