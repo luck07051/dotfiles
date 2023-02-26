@@ -7,15 +7,38 @@ file="${1}"
 
 mkdir -p "$(dirname "${file}")"
 
-cat > "${file}" << EOF
+cat > "${file}" << EOB
 #!/bin/sh
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
-echo "hello world"
+usage(){
+	cat <<EOF
+Usage: ${0##*/} [OPTION]... [FILE]
+Some text here.
+
+  -h, --help            display this help and exit
 EOF
+	exit
+}
+
+# parse options
+TEMP=\$(getopt -o 'h' -l 'help' -n "\$0" -- "\$@")
+[ \$? -ne 0 ] && exit 1
+eval set -- "\$TEMP"
+unset TEMP
+while true; do
+	case "\$1" in
+		'-h'|'--help') usage ;;
+		'--')          break ;;
+		*) echo 'Internal error!' >&2; exit 1 ;;
+	esac
+done
+
+echo "hello world"
+EOB
 
 chmod +x "${file}"
 
