@@ -158,9 +158,11 @@ unset TEMP
 while true; do
 	case "$1" in
 		'-h'|'--help')        usage ;;
-		'-n'|'--new-cache')   rm "$installed_packages"; shift ;;
-		'-t'|'--no-terminal') no_terminal='true';       shift ;;
-		'--')  [ -n "$2" ] && packages_list="$2";       break ;;
+		'-n'|'--new-cache')   rm -f "$installed_packages"; shift ;;
+		'-t'|'--no-terminal') no_terminal='true';          shift ;;
+		'--')   [ $# -gt 2 ] && echo 'Too many args!' >&2 && exit 1
+			[ -n "$2" ] && packages_list="$2"
+			break ;;
 		*) echo 'Internal error!' >&2; exit 1 ;;
 	esac
 done

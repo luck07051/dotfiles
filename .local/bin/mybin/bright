@@ -2,6 +2,7 @@
 
 # dev='/sys/class/backlight/intel_backlight'
 dev="$(echo /sys/class/backlight/*)"
+[ ! -d "$dev" ] && exit 1
 
 val="$(cat "$dev/brightness")"
 max="$(cat "$dev/max_brightness")"

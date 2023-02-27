@@ -6,6 +6,9 @@ get_vpn_name() {
 	echo "$name"
 }
 
+# if don't have vpn installed, exit
+type wg-quick >/dev/null || exit
+
 vpn="$(get_vpn_name)"
 action="down"
 [ "$vpn" = "--" ] && action="up"

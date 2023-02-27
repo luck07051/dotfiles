@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+dev="$(ip route | sed -n '/^default/s/.*dev \(\S*\).*/\1/p')"
+
+case $dev in
+	eth*) icon='󰲝' ;;
+	wlan*) icon='' ;;
+esac
+
+printf '%s %s' "$icon" "$dev"

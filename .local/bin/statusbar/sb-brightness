@@ -1,5 +1,7 @@
 #!/bin/sh
 
+bright || exit
+
 val="$(bright get)"
 max="$(bright max)"
 

@@ -5,6 +5,8 @@ case $BLOCK_BUTTON in
 esac
 
 dev='/sys/class/power_supply/BAT0'
+[ ! -d "$dev" ] && exit
+
 cap="$(cat "$dev/capacity")"
 
 case $(( cap / 20 )) in
