@@ -9,8 +9,7 @@ if [ $(pgrep -c "$(basename "$0")") -gt 1 ]; then
 	exit 1
 fi
 
-# default_fzf_opt='--height=100% --layout=reverse --color=gutter:-1,pointer:5 --no-separator --info=inline --bind=enter:replace-query+print-query'
-default_fzf_opt='--height=100% --layout=reverse --no-separator --info=inline --bind=enter:replace-query+print-query'
+default_fzf_opt='--height=100% --layout=reverse --color=gutter:-1,pointer:5 --no-separator --info=inline --bind=enter:replace-query+print-query'
 prompt="> "
 line="25"
 column="50"
