@@ -1,0 +1,23 @@
+#!/bin/sh
+
+interface="$1"
+ssid="$2"
+wpa_dir='/etc/wpa_supplicant'
+wpa_conf='wpa.conf'
+
+killall wpa_supplicant dhcpcd dhclient 2>/dev/null
+
+if [ -n "$ssid" ]; then
+	if [ ! -f "$wpa_dir/$ssid.conf" ]; then
+		gen-wifi-pass "$ssid"
+	fi
+	cat "$wpa_dir/$ssid.conf" > "$wpa_dir/$wpa_conf"
+fi
+
+wpa_supplicant -B -i "$interface" -c "$wpa_dir/$wpa_conf" >/dev/null
+
+if type dhcpcd >/dev/null 2>&1; then
+	dhcpcd -q -b "$interface"
+elif type dhclient >/dev/null 2>&1; then
+	dhclient "$interface"
+fi

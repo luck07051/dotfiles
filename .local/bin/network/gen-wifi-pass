@@ -1,0 +1,11 @@
+#!/bin/sh
+
+ssid="$1"
+[ -z "$ssid" ] && echo 'Usage: gen-wifi-pass ssid' >&2 && exit 1
+
+wpa_dir='/etc/wpa_supplicant'
+
+printf 'Enter password for %s: ' "$ssid"
+read -r password
+
+wpa_passphrase "$ssid" "$password" > "$wpa_dir/$ssid.conf"

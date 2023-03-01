@@ -1,0 +1,21 @@
+#!/bin/sh
+
+check_conn(){
+	SEC=10
+	endTime=$(( $(date +%s) + SEC ))
+	while iw "$INTERFACE" link | grep -q 'Not connected.'; do
+		if [ "$(date +%s)" -gt "$endTime" ]; then
+			return 1
+		fi
+		sleep 0.2s
+	done
+}
+
+# check connection
+echo 'Checking connection...'
+if check_conn; then
+	echo 'Successful connected.'
+else
+	echo 'Connection failed.' >&2
+	exit 1
+fi

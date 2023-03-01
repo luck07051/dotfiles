@@ -9,18 +9,15 @@ dev='/sys/class/power_supply/BAT0'
 
 cap="$(cat "$dev/capacity")"
 
-case $(( cap / 20 )) in
-	0) icon=' ' ;;
-	1) icon=' ' ;;
-	2) icon=' ' ;;
-	3) icon=' ' ;;
-	4|5) icon=' ' ;;
-esac
-
-if [ "$(cat "$dev/status")" = 'Charging' ]; then
-	charging=' '
+# Discharging
+# Charging
+# Not charging
+if [ "$(cat "$dev/status")" = 'Discharging' ]; then
+	icon_list='󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰁹'
 else
-	charging=''
+	icon_list='󰢜 󰂆 󰂇 󰂈 󰢝 󰂉 󰢞 󰂊 󰂋 󰂅 󰂅'
 fi
 
-printf '%s%s %s%%' "$charging" "$icon" "$cap"
+icon="$(echo "$icon_list" | cut -d' ' -f$((cap / 10 +1)))"
+
+printf '%s %s%%' "$icon" "$cap"

@@ -12,12 +12,6 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-case $(( val * 7 / max )) in
-	0) printf '' ;;
-	1) printf '' ;;
-	2) printf '' ;;
-	3) printf '' ;;
-	4) printf '' ;;
-	5) printf '' ;;
-	6|7) printf '' ;;
-esac
+icon_list='󰛩 󱩎 󱩏 󱩐 󱩑 󱩒 󱩓 󱩔 󱩕 󱩖 󰛨'
+icon=$(echo "$icon_list" | cut -d' ' -f$((val * 10 / max + 1)))
+printf '%s' "$icon"

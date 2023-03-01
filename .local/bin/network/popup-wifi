@@ -1,0 +1,29 @@
+#!/bin/sh
+
+interface="$(iw dev | sed -n 's/\s*Interface \(.*\)$/\1/p')"
+if [ -z "$interface" ]; then
+	echo 'No interface found.' >&2
+	exit 1
+elif [ "$(echo "$interface" | wc -l)" != '1' ]; then
+	# TODO:
+	exit
+fi
+wpa_dir='/etc/wpa_supplicant'
+
+ssid="$(sele-wifi "$interface")"
+[ -z "$ssid" ] && echo 'No ssid selected.' >&2 && exit 1
+
+if [ -f "$wpa_dir/$ssid.conf" ]; then
+	printf 'Wifi %s have conf file exist, regenerate? [y/N] ' "$ssid"
+	read -r ans
+	case $ans in
+		y|Y|yes|Yes|YES) gen-wifi-pass "$ssid" ;;
+		*) ;;
+	esac
+else
+	gen-wifi-pass "$ssid"
+fi
+
+[ $? -ne 0 ] && echo 'Error at generate conf file.' >&2 && exit 1
+
+conn-wifi "$interface" "$ssid"

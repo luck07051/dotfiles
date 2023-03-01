@@ -3,10 +3,10 @@
 function _yank(){
   if [ -z "$BUFFER" ] && [ -z "$PREBUFFER" ]; then
     zle up-line-or-history
-    printf "%s%s" "$PREBUFFER" "$BUFFER" | xclip -selection clipboard
+    printf "%s%s\n" "$PREBUFFER" "$BUFFER" | xclip -selection clipboard
     zle down-line-or-history
   else
-    printf "%s%s" "$PREBUFFER" "$BUFFER" | xclip -selection clipboard
+    printf "%s%s\n" "$PREBUFFER" "$BUFFER" | xclip -selection clipboard
   fi
 }
 
