@@ -20,15 +20,14 @@ EOF
 }
 
 change_img() {
-	TEMP=$(getopt -o 'hs:f:' --long 'help,screen:,fill:' -n "$0" -- "$@")
-	[ $? -ne 0 ] && err
-	eval set -- "$TEMP"
-	unset TEMP
-
 	# default value
 	screen=0
 	fill="zoom"
 
+	TEMP=$(getopt -o 'hs:f:' --long 'help,screen:,fill:' -n "$0" -- "$@")
+	[ $? -ne 0 ] && err
+	eval set -- "$TEMP"
+	unset TEMP
 	while :; do
 		case $1 in
 			'-h'|'--help')   help;;

@@ -2,7 +2,7 @@
 
 export FZF_DEFAULT_OPTS='--bind ctrl-j:down,ctrl-k:up
 	--height 50%
-	--color=pointer:5,gutter:-1,prompt:15
+	--color=pointer:5,gutter:-1
 	--no-separator
 	--info=inline
 	--reverse'

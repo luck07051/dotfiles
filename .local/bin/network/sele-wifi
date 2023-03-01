@@ -44,9 +44,8 @@ done < "$ssid"
 # turn signal to icon
 icon_list='󰤯 󰤟 󰤢 󰤥 󰤨'
 set -- $icon_list
-cut -f1 "$scan" | awk '{print ($1 + 115) / 16}' | cut -d. -f1 | while read -r index; do
-	eval "echo \${${index}}"
-done > "$signal"
+cut -f1 "$scan" | awk '{print ($1 + 115) / 16}' | cut -d. -f1 |
+	while read -r index; do eval "echo \${${index}}"; done > "$signal"
 
 # menu to select ssid
 paste -d' ' "$signal" "$color_ssid" | fzf --ansi | sed 's/^\S* //'

@@ -11,12 +11,12 @@ step=$(( max / 15 ))
 chbri(){
 	next=$((val + $1))
 	if [ "$next" -ge "$max" ]; then
-		echo "$max" > "$dev/brightness"
+		echo "$max"
 	elif [ "$next" -le "$step" ]; then
-		echo "$step" > "$dev/brightness"
+		echo "$step"
 	else
-		echo "$next" > "$dev/brightness"
-	fi
+		echo "$next"
+	fi > "$dev/brightness"
 }
 
 get(){

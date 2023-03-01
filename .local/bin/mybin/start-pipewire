@@ -6,11 +6,9 @@ while :; do pipewire; done &
 while :; do pipewire-pulse; done &
 while :; do pipewire-media-session; done &
 
-sleep 1s
-sb-update sb-vol
-sleep 2s
-sb-update sb-vol
-sleep 2s
-sb-update sb-vol
+for _ in $(seq 5); do
+	sleep 1s
+	sb-update sb-vol
+done
 
 wait

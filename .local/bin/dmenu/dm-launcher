@@ -1,21 +1,44 @@
 #!/bin/sh
-# TODO: bookmark
 
 dmenu="${DMENU:-dmenu -i}"
-term="${TERMINAL-st} -e sh -c"
+term="${TERMINAL:-st} -e sh -c"
+cache='/tmp/launcher-cache'
 
-dmenu_path() {
-	echo "$PATH:$XDG_DATA_HOME/applications" | tr ':' '\n' | sort | uniq |
-		xargs ls | sed '/\//d ; /^$/d' | sort
+_path(){
+	echo "$PATH" | tr ':' '\n' | xargs ls | sed '/^\//d; /^$/d' | sort | uniq
+}
+_app(){
+	ls "$XDG_DATA_HOME/applications" | sort
+}
+_bookmark(){
+	bookmark_file="$HOME/bm/bookmark"
+	grep -v -e '^\s*#' -e '^$' "$bookmark_file" | case ${dmenu%% *} in
+		# fmenu) awk -F'\t' "{print \$1 \"$(tput setaf 247)  --  \" \$2 \"$(tput sgr0)\"}" ;;
+		fmenu) awk -F'\t' "{print \$1 \"[38;5;246m  --  \" \$2 \"[0m\"}" ;;
+		*) awk -F'\t' '{print $1 "  --  " $2}'
+	esac
 }
 
-run="$(dmenu_path | $dmenu -p "RUN" "$@")"
+_path > "$cache"
+_app >> "$cache"
+_bookmark >> "$cache"
 
-case "$run" in
-	# run command in terminal if end with ';'
-	*\;) $term "${run%\;}" ;;
+selected="$($dmenu -p "RUN" < "$cache")"
 
-	*.desktop) gtk-launch "$run" ;;
+rm "$cache"
 
-	*) $run ;;
+[ -z "$selected" ] && exit
+
+case "$selected" in
+	# exec command in terminal if end with ';'
+	*\;) $term "${selected%\;}" ;;
+
+	# desktop applications
+	*.desktop) gtk-launch "$selected" ;;
+
+	# bookmark url
+	*'  --  '*) xdg-open "$(echo "$selected" | sed 's/^.*  --  //')" ;;
+
+	# bin
+	*) $selected ;;
 esac
