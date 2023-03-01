@@ -43,8 +43,9 @@ done < "$ssid"
 
 # turn signal to icon
 icon_list='󰤯 󰤟 󰤢 󰤥 󰤨'
-for i in $(cut -f1 "$scan" | awk '{print ($1 + 115) / 16}' | cut -d. -f1 | tr '\n' ' '); do
-	echo "$icon_list" | cut -d' ' -f"$i"
+set -- $icon_list
+cut -f1 "$scan" | awk '{print ($1 + 115) / 16}' | cut -d. -f1 | while read -r index; do
+	eval "echo \${${index}}"
 done > "$signal"
 
 # menu to select ssid
