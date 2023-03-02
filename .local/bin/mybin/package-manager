@@ -136,7 +136,7 @@ comm $install_packages $local_packages -23 | tr '\n' ' ' |
 comm $remove_packages $local_packages -12 | tr '\n' ' ' |
 	xargs -r -I {} echo 'These package not been removed: {}'
 # freezing if uses terminal
-[ "\$1" = 'terminal' ] && echo '\nPress any key to finish' && read_char _
+[ "\$1" = 'terminal' ] && echo 'Press any key to finish' && read_char _
 EOF
 	chmod +x "$install_cmd_file"
 }
