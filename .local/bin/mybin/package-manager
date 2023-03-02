@@ -128,7 +128,7 @@ esac
 [ -s "$install_packages" ] && $install_cmd $install_list
 [ -s "$remove_packages" ] && $remove_cmd $remove_list
 # update local_packages
-$generate_local_packages_cmd > "$local_packages"
+$generate_local_packages_cmd | sort > "$local_packages"
 printf '\n\n'
 # show the packages that not install or remove successfully
 comm $install_packages $local_packages -23 | tr '\n' ' ' |
