@@ -175,7 +175,7 @@ if [ ! -f "$installed_packages" ]; then
 fi
 
 parse_config
-$generate_local_packages_cmd > "$local_packages"
+$generate_local_packages_cmd | sort > "$local_packages"
 update_installed_packages
 parse_packages
 

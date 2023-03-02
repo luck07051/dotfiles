@@ -4,4 +4,4 @@ echo "$XDG_CONFIG_HOME/X11/xresources\n$XDG_CONFIG_HOME/X11/color" | entr -n syn
 
 echo "$HOME/bm/bookmark" | entr -n sync-bookmark &
 
-echo "$XDG_CONFIG_HOME/package-manager/packages" | entr -np package-manager &
+echo "$HOME/pkg/$(cat /etc/hostname)" | entr -np package-manager "$HOME/pkg/$(cat /etc/hostname)" &
