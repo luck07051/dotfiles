@@ -34,9 +34,6 @@ type nvim >/dev/null && export MANPAGER='nvim +Man!'
 
 export LANG='en_US.UTF-8'
 
-# The path you can always cd to
-export CDPATH="/:$HOME:$HOME/.config"
-
 # Shell
 export HISTSIZE=100000
 export SAVEHIST=100000
@@ -89,6 +86,10 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 # pylint
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
+# conda
+export CONDA_BLD_PATH="$XDG_DATA_HOME/conda/conda-bld"
+export CONDA_ENVS_PATH="$XDG_DATA_HOME/conda/envs"
+export CONDA_PKGS_DIRS="$XDG_CACHE_HOME/conda/pkgs"
 
 
 #==================== Auto Startx ====================#

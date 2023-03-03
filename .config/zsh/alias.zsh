@@ -40,6 +40,12 @@ lf() {
     lf-imgview -last-dir-path="/tmp/lfcd"
   cd "$(cat /tmp/lfcd)"
 }
+# Dont gen ~/.conda/environments.txt file
+conda() {
+  /usr/bin/conda "$@"
+  rm -f ~/.conda/environments.txt
+  rm -fd ~/.conda
+}
 
 # use bare Git repository to manage dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
