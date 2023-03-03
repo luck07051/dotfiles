@@ -12,17 +12,13 @@ vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>Y', '"+y$')
 vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
-vim.keymap.set('v', '<C-s-c>', '"+y')  -- terminal support needed
+vim.keymap.set('v', '<C-s-c>', '"+y')  -- TODO: make terminal support
 vim.keymap.set('v', '<C-s-v>', '"+p')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Delete with black hole --
 -- vim.keymap.set('', '<Leader>d', '"_d')
 -- vim.keymap.set('', '<Leader>D', '"_D')
-
--- Paste in visual mode do not change register --
-vim.keymap.set('v', 'p', '"_dP')
-vim.keymap.set('v', '<Leader>p', '"_d"+P')
 
 -- Quick replace --
 vim.keymap.set('n', 's', ':%s/')
@@ -83,6 +79,7 @@ vim.keymap.set("n", "<Leader>zc", function()
     vim.o.conceallevel = 2
   end
 end, { silent = true, desc = 'Toggle conceal' } )
+
 
 -- Alias for command mode --
 local function cabbrev(lhs, rhs)
