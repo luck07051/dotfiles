@@ -1,15 +1,11 @@
 #!/bin/sh
 
-# TODO: compatible with dmenu opts
-# -p -l  -c -f(fzf-opt) -z(fontsize)
-# -b -i -f -m -fn -nb -nf -sb -sf -v -w
-
 if [ $(pgrep -c "$(basename "$0")") -gt 1 ]; then
 	echo 'Other fmenu is running!' >&2
 	exit 1
 fi
 
-default_fzf_opt='--height=100% --layout=reverse --color=gutter:-1,pointer:5 --no-separator --info=inline --ansi --bind=enter:replace-query+print-query'
+default_fzf_opt='--height=100% --layout=reverse --color=gutter:-1,pointer:5 --no-separator --info=inline --ansi --bind=enter:replace-query+print-query,alt-enter:print-query,tab:replace-query'
 prompt="> "
 line="25"
 column="50"
@@ -34,5 +30,5 @@ while :; do
 	esac
 done
 
-${TERMINAL:-st} -t "$(basename "$0")" -g "${column}x${line}" -z "$fontsize" \
+${TERMINAL:-st} -t "$(basename "$0")" -g "${column}x${line}" -z "$fontsize" -c float \
 	-e sh -c "fzf $default_fzf_opt --prompt \"$prompt \" $fzf_opt </proc/$$/fd/0 >/proc/$$/fd/1"

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pager='more'
+
+temp=$(mktemp)
+
+# TODO: use `vipipe`?
+nvim -c 'startinsert' $temp
+
+if ! grep -qv '^\s*$' $temp; then
+	rm "$temp"
+	exit
+fi
+
+# TODO: options to chose
+
+trans <$temp | $pager
+
+rm $temp

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+searchengine_file="${2:-$HOME/bm/searchengine}"
+
+if [ -z "$1" ]; then
+	grep -v -e '^\s*#' -e '^$' "$searchengine_file"
+	exit
+fi
+
+input="$1"
+
+if [ -n "$engine" ]; then
+	grep -w "^${input%% *}" "$searchengine_file" | cut -f2 | sed "s/{}/${input#* }/"
+else
+	grep "^DEFAULT\s" "$searchengine_file" | cut -f2 | sed "s/{}/$input"/
+fi

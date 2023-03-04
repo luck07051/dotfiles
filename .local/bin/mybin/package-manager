@@ -4,7 +4,7 @@
 install_cmd="${PKGMAN:-pacman} -S"
 remove_cmd="${PKGMAN:-pacman} -Rns"
 generate_local_packages_cmd="${PKGMAN:-pacman} -Qq"
-terminal_cmd="${TERMINAL:-st} -t installer -e"
+terminal_cmd="${TERMINAL:-st} -t installer -c float -e"
 
 packages_list="${XDG_CONFIG_HOME:-$HOME/.config}/package-manager/packages"
 # cache file
@@ -35,7 +35,7 @@ Example file:
 ##install_cmd="pacman -S"
 ##remove_cmd="pacman -Rns"
 ##generate_local_packages_cmd="pacman -Qq"
-##terminal_cmd="st -t installer -e"
+##terminal_cmd="st -t installer -c float -e"
 # line start with '#' will be ignore.
 package-to-install
 other-package-name
