@@ -28,6 +28,7 @@ a(){
 	_fzf_fm_temp_file='/tmp/fzf-fm-up-dir'
 
 	while :; do
+		# TODO: fzf prompt: limit dir length
 		selected="$(_fzf_fm_lscmd "$PWD" |
 			fzf --prompt "$PWD/" \
 			--preview "$_fzf_fm_preview_cmd" \

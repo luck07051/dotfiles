@@ -47,7 +47,7 @@ export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
 export XSERVERRC=$XDG_CONFIG_HOME/X11/xserverrc
 export XAUTHORITY=$XDG_CONFIG_HOME/X11/xauthority
 # zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 # cabal
 export CABAL_CONFIG=$XDG_CONFIG_HOME/cabal/config
 export CABAL_DIR=$XDG_CACHE_HOME/cabal
@@ -82,14 +82,14 @@ export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
 # conda
 export CONDARC=$XDG_CONFIG_HOME/conda/condarc
 # docker
-export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
 # pylint
-export PYLINTHOME="$XDG_CACHE_HOME"/pylint
-export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
+export PYLINTHOME=$XDG_CACHE_HOME/pylint
+export PYLINTRC=$XDG_CONFIG_HOME/pylint/pylintrc
 # conda
-export CONDA_BLD_PATH="$XDG_DATA_HOME/conda/conda-bld"
-export CONDA_ENVS_PATH="$XDG_DATA_HOME/conda/envs"
-export CONDA_PKGS_DIRS="$XDG_CACHE_HOME/conda/pkgs"
+export CONDA_BLD_PATH=$XDG_DATA_HOME/conda/conda-bld
+export CONDA_ENVS_PATH=$XDG_DATA_HOME/conda/envs
+export CONDA_PKGS_DIRS=$XDG_CACHE_HOME/conda/pkgs
 
 
 #==================== Auto Startx ====================#
