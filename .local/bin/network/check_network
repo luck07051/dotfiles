@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO:
 
 check_conn(){
 	SEC=10

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+dmenu="${DMENU:-dmenu -i}"
+
+# always print query if using fmenu
+[ "${dmenu%% *}" = 'fmenu' ] && dmenu="$dmenu -f --bind=enter:print-query"
+
+selected="$(search-query | grep -v '^DEFAULT' | cut -f1 | $dmenu -p "SEARCH")"
+
+[ -z "$selected" ] && exit
+
+xdg-open "$(search-query "$selected")"
