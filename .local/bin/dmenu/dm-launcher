@@ -18,10 +18,14 @@ _bookmark(){
 		*) awk -F'\t' '{print $1 "  --  " $2}'
 	esac
 }
+_search_engine(){
+	search-query | awk -F'\t' '{print ";" $1}' | grep -v ';DEFAULT'
+}
 
 _path > "$cache"
 _app >> "$cache"
 _bookmark >> "$cache"
+_search_engine >> "$cache"
 
 selected="$($dmenu -p "RUN" < "$cache")"
 
@@ -30,15 +34,18 @@ rm "$cache"
 [ -z "$selected" ] && exit
 
 case "$selected" in
-	# exec command in terminal if end with ';'
-	*\;) $term "${selected%\;}" ;;
-
 	# desktop applications
 	*.desktop) gtk-launch "$selected" ;;
 
-	# bookmark url
-	*'  --  '*) xdg-open "$(echo "$selected" | sed 's/^.*  --  //')" ;;
+	# bookmark
+	*'  --  '*) xdg-open "${selected#*  --  }" ;;
 
-	# bin
-	*) $selected ;;
+	# search if query start by ';'
+	\;*) xdg-open "$(search-query "${selected#\;}")" ;;
+
+	# exec command in terminal if query end with ';'
+	*\;) $term "${selected%\;}" ;;
+
+	# exec selected
+	*) $selected
 esac
