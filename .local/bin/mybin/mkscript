@@ -16,7 +16,7 @@ set -o pipefail
 
 usage(){
 	cat <<EOF
-Usage: ${0##*/} [OPTION]... [FILE]
+Usage: \${0##*/} [OPTION]... [FILE]
 Some text here.
 
   -h, --help            display this help and exit

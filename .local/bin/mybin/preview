@@ -5,7 +5,7 @@ directory(){ #{{{
 	normal=$(tput sgr0)
 	green=$(tput setaf 2 bold)
 	# print infomation of directory
-	printf "%s %s %s %s %s %s" \
+	printf '%s %s %s %s %s %s' \
 		"${green}Total:${normal}" \
 		"$(find -L "$1" -maxdepth 1 -mindepth 1 | wc -l)" \
 		"${green}Dir:${normal}" \

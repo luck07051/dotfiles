@@ -4,6 +4,8 @@ pager='more'
 
 temp=$(mktemp)
 
+# TODO: clipboard?
+
 # TODO: use `vipipe`?
 nvim -c 'startinsert' $temp
 

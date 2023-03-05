@@ -2,6 +2,6 @@
 
 bookmark_file="${1:-$HOME/bm/bookmark}"
 
-get-cur-tab >> "$bookmark_file"
+# get-cur-tab >> "$bookmark_file"
 
-"$TERMINAL" -c float -e "${EDITOR-:vim}" "$bookmark_file" -c "normal G"
+"$TERMINAL" -c float -e "${EDITOR-:vim}" "$bookmark_file"

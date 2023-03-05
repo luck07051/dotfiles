@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case "$1" in
+	in|-i|--in|'') xclip -i -selection clipboard ;;
+	out|-o|--out)  xclip -o -selection clipboard ;;
+esac
