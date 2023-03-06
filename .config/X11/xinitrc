@@ -1,7 +1,7 @@
 #!/bin/sh
 
 run() {
-	if [ -x "$(which "$1")" ] && ! pidof -q "$1"; then
+	if type "$1" >/dev/null && ! pidof -q "$1"; then
 		"$@" &
 	fi
 }
@@ -17,33 +17,30 @@ uilap)
 	;;
 esac
 
-
-# No screen saver
-xset s off
-xset -dpms
-
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
 # Input method
 run fcitx5 -d
 
+# No screen saver
+xset s off
+xset -dpms
+
+# x11
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
+run xcompmgr -n
+run unclutter
 
 # start audio
 setsid -f start-pipewire
 
 # Startup app
-#run dunst
-run xcompmgr -n
-run unclutter
-
 run syncthing serve --no-browser --no-default-folder
 run entr-list
 
 while true; do
 	killall dwmblocks >/dev/null 2>&1
 	dwmblocks &
-
 	dwm
 done

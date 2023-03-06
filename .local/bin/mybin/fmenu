@@ -30,5 +30,10 @@ while :; do
 	esac
 done
 
-${TERMINAL:-st} -t "$(basename "$0")" -g "${column}x${line}" -z "$fontsize" -c float \
-	-e sh -c "fzf $default_fzf_opt --prompt \"$prompt \" $fzf_opt </proc/$$/fd/0 >/proc/$$/fd/1"
+case $TERMINAL in
+	st) term_cmd="st -t $(basename "$0") -g ${column}x${line} -z $fontsize -c float" ;;
+	foot) term_cmd="foot -T $(basename "$0") -W ${column}x${line}" ;;
+	alacritty) term_cmd="alacritty -t $(basename "$0") -o window.dimensions.columns=${column} -o window.dimensions.lines=${line} -o font.size=${fontsize} -e" ;;
+esac
+
+$term_cmd sh -c "fzf $default_fzf_opt --prompt \"$prompt \" $fzf_opt </proc/$$/fd/0 >/proc/$$/fd/1"

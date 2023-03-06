@@ -2,9 +2,13 @@
 exec >/dev/null
 exec 2>&1
 
-while :; do pipewire; done &
-while :; do pipewire-pulse; done &
-while :; do pipewire-media-session; done &
+# while :; do pipewire; done &
+# while :; do pipewire-pulse; done &
+# while :; do pipewire-media-session; done &
+pipewire &
+pipewire-pulse &
+sleep 0.1
+pipewire-media-session &
 
 for _ in $(seq 5); do
 	sleep 1s
