@@ -10,8 +10,7 @@ if [ -f /tmp/sb-repo-syncing ]; then
 	packages="󰇚"
 else
 	packages="$(pacman -Qu | grep -Fcv "[ignored]")"
+	[ "$packages" = '0' ] && exit
 fi
-
-[ "$packages" = "0" ] && exit
 
 printf " %s" "$packages"

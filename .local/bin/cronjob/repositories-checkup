@@ -1,6 +1,12 @@
 #!/bin/sh
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
 
+cleanup(){
+	rm -r /tmp/sb-repo-syncing
+	exit
+}
+trap cleanup INT TERM
+
 sync_cmd="${1:-${PKGMAN:-pacman} -Syyuw --noconfirm}"
 sb_update_cmd="$HOME/.local/bin/statusbar/sb-update sb-pacman"
 
