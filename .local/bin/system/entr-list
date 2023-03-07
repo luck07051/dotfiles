@@ -1,9 +1,9 @@
 #!/bin/sh
 
-echo "$XDG_CONFIG_HOME/X11/xresources\n$XDG_CONFIG_HOME/X11/color" | entr -n sync-xrdb &
+printf "$XDG_CONFIG_HOME/X11/xresources\n$XDG_CONFIG_HOME/X11/color" | entr -np sync-xrdb &
 
-echo "$HOME/bm/bookmark" | entr -n sync-bookmark &
+printf "$HOME/bm/bookmark" | entr -np sync-bookmark &
 
-echo "$HOME/pkg/$(cat /etc/hostname)" | entr -np package-manager "$HOME/pkg/$(cat /etc/hostname)" &
+printf "$HOME/pkg/$(cat /etc/hostname)" | entr -np package-manager "$HOME/pkg/$(cat /etc/hostname)" &
 
 wait

@@ -58,8 +58,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # GunPG
 export GNUPGHOME=$XDG_DATA_HOME/gnupg
 # Java
-export _JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java\
-    -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
+export _JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 export JDK_JAVA_OPTIONS=$_JAVA_OPTIONS
 export JAVA_TOOL_OPTIONS=$_JAVA_OPTIONS
 # Stack (Haskell)
@@ -92,7 +91,23 @@ export CONDA_ENVS_PATH=$XDG_DATA_HOME/conda/envs
 export CONDA_PKGS_DIRS=$XDG_CACHE_HOME/conda/pkgs
 
 
-#==================== Auto Startx ====================#
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  startx "$XINITRC"
+#==================== Startup programs ====================#
+run(){
+	if type "$1" >/dev/null && ! pidof -q "$1"; then
+		"$@" &
+	fi
+}
+if [ "${XDG_VTNR}" -eq 1 ]; then
+	# input method
+	run fcitx5 -d
+	# audio
+	run start-pipewire
+	#
+	run syncthing serve --no-browser --no-default-folder >/dev/null
+	#
+	run entr-list
+
+	# if [ -z "${DISPLAY}" ]; then
+	# 	startx "$XINITRC"
+	# fi
 fi
