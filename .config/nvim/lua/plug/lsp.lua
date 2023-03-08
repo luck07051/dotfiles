@@ -3,7 +3,6 @@ local M = {
   name = "lsp",
   event = "BufReadPre",
   dependencies = {
-    'williamboman/mason-lspconfig.nvim',
     'hrsh7th/cmp-nvim-lsp',
   },
 }
@@ -73,42 +72,32 @@ M.config = function()
   end --}}}
 
   local server_settings = {
-    ["sumneko_lua"] = { --{{{
+    ['lua_ls'] = { --{{{
       Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+        },
         diagnostics = {
-          globals = { "vim" }
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
         },
         workspace = {
+          -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file("", true),
+          -- Stop asking about working environment on every startup
+          checkThirdParty = false,
         },
-        ['runtime.version'] = "LuaJIT",
-        ['workspace.checkThirdParty'] = false,
-      }
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
     }, --}}}
   }
 
-  --[[
-  require('mason-lspconfig').setup( {
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "bashls" },
-  })
-
-  require('mason-lspconfig').setup_handlers({
-    function(server_name)
-      lspconfig[server_name].setup {
-        on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-        settings = server_settings[server_name],
-      }
-    end,
-
-    -- ["rust_analyzer"] = function ()
-    --     require("rust-tools").setup {}
-    -- end
-  })
-  ]]
-
   -- local server_list = { 'sumneko_lua', 'rust_analyzer', 'bashls' }
-  local server_list = { 'bashls' }
+  local server_list = { 'bashls', 'lua_ls' }
 
   for _, server_name in pairs(server_list) do
     lspconfig[server_name].setup {

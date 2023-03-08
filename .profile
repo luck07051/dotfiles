@@ -11,6 +11,9 @@ export XDG_MUSIC_DIR="$HOME/mu"
 export XDG_PICTURES_DIR="$HOME/img"
 export XDG_VIDEOS_DIR="$HOME/vid"
 
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_NO_HARDWARE_CURSORS=1
 
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and it's subdir to path
@@ -106,6 +109,8 @@ if [ "${XDG_VTNR}" -eq 1 ]; then
 	run syncthing serve --no-browser --no-default-folder >/dev/null
 	#
 	run entr-list
+
+	#wlr-randr --output HDMI-A-1 --mode 1920x1080@144
 
 	# if [ -z "${DISPLAY}" ]; then
 	# 	startx "$XINITRC"

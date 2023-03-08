@@ -55,5 +55,9 @@ wall_dir="${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper"
 for file in "$wall_dir"/*; do
 	# get base name of `file`
 	file_base="$(basename "${file%.*}")"
-	xwallpaper --screen "${file_base%%-*}" --"${file_base##*-}" "$file"
+	if [ -n "$DISPLAY" ]; then
+		xwallpaper --screen "${file_base%%-*}" --"${file_base##*-}" "$file"
+	elif [ -n "$WAYLAND_DISPLAY" ]; then
+		swaybg -i "$file"
+	fi
 done
