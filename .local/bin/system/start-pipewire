@@ -1,14 +1,11 @@
 #!/bin/sh
+
 exec >/dev/null
 exec 2>&1
 
-# while :; do pipewire; done &
-# while :; do pipewire-pulse; done &
-# while :; do pipewire-media-session; done &
 pipewire &
 pipewire-pulse &
-sleep 0.1
-pipewire-media-session &
+while ! pipewire-media-session; do sleep 0.1; done &
 
 for _ in $(seq 5); do
 	sleep 1s
