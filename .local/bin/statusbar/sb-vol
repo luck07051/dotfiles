@@ -12,7 +12,7 @@ esac
 [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = "Mute: yes" ] &&
 	printf " " && exit
 
-vol="$(vl get_volume)"
+vol="$(vl)"
 #   
 icon=""
 printf "$icon $vol%%"

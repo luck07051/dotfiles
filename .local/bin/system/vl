@@ -33,7 +33,14 @@ get_volume() {
 	pactl get-sink-volume @DEFAULT_SINK@ | sed 's/.* \([0-9]*\)% .*/\1/; q'
 }
 
-"$@"
+case $1 in
+	u|up) up "$2" ;;
+	d|down) down "$2" ;;
+	sink-mute) sink_mute ;;
+	source-mute) source_mute ;;
+	switch) switch ;;
+	''|get-volume) get_volume ;;
+esac
 
 # update bar
 sb-update sb-vol

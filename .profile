@@ -47,7 +47,7 @@ export HISTORY_IGNORE="(ls|cd|history|lf|exit|reboot)"
 #==================== Lets Paths Right ====================#
 # X11
 export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
-export XSERVERRC=$XDG_CONFIG_HOME/X11/xserverrc
+#export XSERVERRC=$XDG_CONFIG_HOME/X11/xserverrc
 export XAUTHORITY=$XDG_CONFIG_HOME/X11/xauthority
 # zsh
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
