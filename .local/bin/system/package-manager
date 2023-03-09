@@ -189,7 +189,7 @@ generate_install_command
 if [ -z "$DISPLAY" ] || [ "$no_terminal" = 'true' ]; then
 	$install_cmd_file
 else
-	$terminal_cmd -e $install_cmd_file 'terminal'
+	$terminal_cmd $install_cmd_file 'terminal'
 fi
 
 update_installed_packages_after_install
