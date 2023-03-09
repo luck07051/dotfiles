@@ -101,18 +101,12 @@ run(){
 	fi
 }
 if [ "${XDG_VTNR}" -eq 1 ]; then
-	# input method
-	run fcitx5 -d
 	# audio
 	run start-pipewire
-	#
+	# syncthing
 	run syncthing serve --no-browser --no-default-folder >/dev/null
-	#
-	run entr-list
 
-	#wlr-randr --output HDMI-A-1 --mode 1920x1080@144
-
-	# if [ -z "${DISPLAY}" ]; then
-	# 	startx "$XINITRC"
-	# fi
+	if [ -z "${DISPLAY}" ]; then
+		startx "$XINITRC"
+	fi
 fi

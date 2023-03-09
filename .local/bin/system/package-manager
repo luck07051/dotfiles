@@ -108,7 +108,7 @@ generate_install_command(){
 	install_list="$(tr '\n' ' ' < "$install_packages")"
 	remove_list="$(tr '\n' ' ' < "$remove_packages")"
 	cat > "$install_cmd_file" << EOF
-#/bin/sh
+#!/bin/sh
 read_char() {
 	stty -icanon -echo
 	eval "\$1=\$(dd bs=1 count=1 2>/dev/null)"

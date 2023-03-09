@@ -19,6 +19,8 @@ esac
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
+# input method
+run fcitx5 -d
 
 # No screen saver
 xset s off
@@ -28,6 +30,8 @@ xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
 run xcompmgr -n
 run unclutter
+
+run entr-list
 
 # Run windows manager
 killall dwmblocks >/dev/null 2>&1
