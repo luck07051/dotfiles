@@ -5,6 +5,7 @@ xrdb -merge "${1:-$XDG_CONFIG_HOME/X11/xresources}"
 
 # Get color from xresources
 color0=$(xrdb -get color0)
+[ -z "$color0" ] && exit 1
 color1=$(xrdb -get color1)
 color2=$(xrdb -get color2)
 color3=$(xrdb -get color3)
