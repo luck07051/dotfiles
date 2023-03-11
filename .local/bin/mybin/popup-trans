@@ -1,21 +1,57 @@
 #!/bin/sh
 
-pager='more'
+pager='less'
+editor="nvim -c startinsert"
 
-temp=$(mktemp)
+read_char() {
+	old_stty_cfg=$(stty -g)
+	stty -icanon -echo
+	eval "$1=\$(dd ibs=1 count=1 2>/dev/null)"
+	stty $old_stty_cfg
+}
 
-# TODO: clipboard?
+# select language to trans
+printf ' -> '
+read -r lang
+case "$lang" in
+	'')	lang=en ;;
+	'zh')	lang=zh-TW ;;
+	*)	if ! trans -list-codes | grep -wq "$lang"; then
+			printf 'The language %s is not supported.\n' "$lang"
+			read_char _
+			exit
+		fi
+esac
 
-# TODO: use `vipipe`?
-nvim -c 'startinsert' $temp
+# clipboard / selection / editor
+printf 'Copy from Clipboard or Selection?[c/s/N] '
+while true; do
+	read_char ans
+	case "$ans" in
+		"$(printf '\n')") ans=n && break ;;
+		c|C|s|S|n|N) break ;;
+		q|Q) exit ;;
+		' ') continue ;;
+	esac
+	# quit when "$ans" is not '\n', ' ' or letter
+	echo "$ans" | grep -iq "[a-z]" || exit
+done
 
-if ! grep -qv '^\s*$' $temp; then
+temp=$(mktemp /tmp/trans.XXXXXXXXXXX)
+case "$ans" in
+	c|C) clip -o > "$temp" ;;
+	s|S) clip -s > "$temp" ;;
+	n|N) $editor "$temp" ;;
+esac
+
+printf '\n\n'
+if ! grep -qv '^\s*$' "$temp"; then
 	rm "$temp"
+	printf 'The content is empty.'
+	read_char _
 	exit
 fi
 
-# TODO: options to chose
+trans ":$lang" <"$temp" | $pager
 
-trans <$temp | $pager
-
-rm $temp
+rm "$temp"
