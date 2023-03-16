@@ -2,7 +2,9 @@
 
 killall fcitx5
 rime_deployer --build ~/.local/share/fcitx5/rime /usr/share/rime-data ~/.local/share/fcitx5/rime/build
-fcitx5 -d &
+
+sleep 1
+fcitx5 & nohup
 
 echo 'rime rebuilded'
 notify-send "rime" "Rebuild done."

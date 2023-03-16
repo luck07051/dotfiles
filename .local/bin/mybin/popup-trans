@@ -1,57 +1,36 @@
 #!/bin/sh
 
-pager='less'
+pager='less -R'
 editor="nvim -c startinsert"
-
-read_char() {
-	old_stty_cfg=$(stty -g)
-	stty -icanon -echo
-	eval "$1=\$(dd ibs=1 count=1 2>/dev/null)"
-	stty $old_stty_cfg
-}
-
-# select language to trans
-printf ' -> '
-read -r lang
-case "$lang" in
-	'')	lang=en ;;
-	'zh')	lang=zh-TW ;;
-	*)	if ! trans -list-codes | grep -wq "$lang"; then
-			printf 'The language %s is not supported.\n' "$lang"
-			read_char _
-			exit
-		fi
-esac
+lang='en+zh-TW+ja'
+trans_opt='-show-original n -show-original-phonetics n -show-translation y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary y -show-alternatives n'
 
 # clipboard / selection / editor
-printf 'Copy from Clipboard or Selection?[c/s/N] '
-while true; do
-	read_char ans
-	case "$ans" in
-		"$(printf '\n')") ans=n && break ;;
-		c|C|s|S|n|N) break ;;
-		q|Q) exit ;;
-		' ') continue ;;
+if [ -n "$1" ];then
+	source="$1"
+	case "$(echo "$source" | tr '[:upper:]' '[:lower:]')" in
+		editor|clip*|sele*) ;;
+		*) echo 'Input method not support.' >&2; exit 1;
 	esac
-	# quit when "$ans" is not '\n', ' ' or letter
-	echo "$ans" | grep -iq "[a-z]" || exit
-done
+else
+	source="$(printf 'Editor\nClipboard\nSelection\n' | fzf)"
+	[ -z "$source" ] && exit
+fi
 
 temp=$(mktemp /tmp/trans.XXXXXXXXXXX)
-case "$ans" in
-	c|C) clip -o > "$temp" ;;
-	s|S) clip -s > "$temp" ;;
-	n|N) $editor "$temp" ;;
+case "$(echo "$source" | tr '[:upper:]' '[:lower:]')" in
+	editor) $editor "$temp" ;;
+	clip*)  clip -o > "$temp" ;;
+	sele*)  clip -s > "$temp" ;;
 esac
 
-printf '\n\n'
 if ! grep -qv '^\s*$' "$temp"; then
 	rm "$temp"
 	printf 'The content is empty.'
-	read_char _
+	read -r _
 	exit
 fi
 
-trans ":$lang" <"$temp" | $pager
+trans ":$lang" $trans_opt <"$temp" | $pager
 
 rm "$temp"

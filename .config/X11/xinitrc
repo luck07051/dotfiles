@@ -20,7 +20,7 @@ esac
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
 # input method
-run fcitx5 -d
+fcitx5 &
 
 # No screen saver
 xset s off
