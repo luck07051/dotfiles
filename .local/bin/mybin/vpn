@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# wapper for wireguard vpn
+
+# quit if wg not installed
+type wg-quick >/dev/null || exit 1
+
+vpn_name="${2:-uivpn}"
+
+get_name(){
+	name="$(doas wg | grep interface: | sed 's/interface:\s*//')"
+	[ -z "$name" ] && exit 1
+	echo "$name"
+}
+
+up(){
+	doas wg-quick up "$vpn_name" >/dev/null 2>&1
+}
+
+down(){
+	doas wg-quick down "$vpn_name" >/dev/null 2>&1
+}
+
+toggle(){
+	if [ -z "$(get_name)" ]; then
+		up
+	else
+		down
+	fi
+}
+
+$1
+
+sb-update sb-vpn

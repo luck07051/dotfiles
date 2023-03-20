@@ -81,6 +81,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export CUDA_CACHE_PATH=$XDG_CACHE_HOME/nv
 # python
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
+export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
+export PYTHONUSERBASE=$XDG_DATA_HOME/python
 # conda
 export CONDARC=$XDG_CONFIG_HOME/conda/condarc
 # docker
