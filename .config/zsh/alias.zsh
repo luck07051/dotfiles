@@ -30,6 +30,7 @@ abbr lzd='lazygit'
 abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
 abbr mi='doas make install clean'
 abbr conrun='conda run --no-capture-output --name'
+abbr fclist='fc-list : family | grep -i'
 
 abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
 abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'

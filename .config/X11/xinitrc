@@ -17,14 +17,15 @@ uilap)
 	;;
 esac
 
-# Remap caps lock to Ctrl
-setxkbmap -option ctrl:nocaps
-# input method
-fcitx5 &
-
 # No screen saver
 xset s off
 xset -dpms
+
+# Remap caps lock to Ctrl
+setxkbmap -option ctrl:nocaps
+# input method # TODO:
+fcitx5 &
+(sleep 5; fcitx5 -r) &
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
