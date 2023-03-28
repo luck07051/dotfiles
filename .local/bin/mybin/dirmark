@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Selecting directory list by 'firmark_file' using fzf.
+
 dirmark_file="${1:-$HOME/bm/dirmark}"
 
 selected="$(grep -v -e '^\s*#' -e '^$' "$dirmark_file" | fzf)"

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Make the bookmark.json file and send to the server.
+
 bookmark="$HOME/bm/bookmark"
 cache_bookmark="$HOME/.cache/bookmark"
 

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Startup pipewire used by init programs.
+
 exec >/dev/null
 exec 2>&1
 

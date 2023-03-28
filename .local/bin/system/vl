@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# The script to control the volume stuff.
+
 STEP=5
 
 up() {

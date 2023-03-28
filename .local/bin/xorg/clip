@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Wrapper of clipboard.
+
 if [ -n "$WAYLAND_DISPLAY" ]; then
 	case "$1" in
 		in|-i|--in|'') wl-copy ;;

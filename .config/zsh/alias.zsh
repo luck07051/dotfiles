@@ -14,20 +14,16 @@ abbr dps='doas pacman -S'
 abbr cs='config status'
 abbr ca='config add'
 
-abbr df='df -h'
-abbr du='du -h'
-abbr cr='cargo run'
-abbr tt='trans :zh-TW'
 abbr za='zathura'
+abbr cr='cargo run'
 abbr py='python3'
-abbr pip='pip3'
 abbr rc='rsync -vhP'
 abbr syncb='syncthing serve --browser-only'
-abbr nb='newsboat'
 abbr slidev='npx slidev'
 abbr lzg='lazygit'
-abbr lzd='lazygit'
+abbr lzd='lazydocker'
 abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
+abbr weather='curl https://wttr.in'
 abbr mi='doas make install clean'
 abbr conrun='conda run --no-capture-output --name'
 abbr fclist='fc-list : family | grep -i'
@@ -62,6 +58,10 @@ alias mkdir='mkdir -pv'
 
 # grep color
 alias grep='grep --color=auto'
+
+# always human readable
+alias df='df -h'
+alias du='du -h'
 
 # Use doas instead of sudo
 [ -x "$(command -v doas)" ] && alias sudo='doas'

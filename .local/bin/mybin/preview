@@ -1,6 +1,8 @@
 #!/bin/sh
 # vim:foldmethod=marker:foldlevel=0
 
+# Preview the file, used by filemanager.
+
 directory(){ #{{{
 	normal=$(tput sgr0)
 	green=$(tput setaf 2 bold)

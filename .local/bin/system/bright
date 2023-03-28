@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# The script to control the bright of the screen.
+
 # dev='/sys/class/backlight/intel_backlight'
 dev="$(echo /sys/class/backlight/*)"
 [ ! -d "$dev" ] && exit 1

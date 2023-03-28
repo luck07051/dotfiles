@@ -1,5 +1,6 @@
 #!/bin/sh
 # TODO:
+# Checking network connection.
 
 check_conn(){
 	SEC=10

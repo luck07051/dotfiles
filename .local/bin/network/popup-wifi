@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Interface to connect wifi.
+
 interface="$(iw dev | sed -n 's/\s*Interface \(.*\)$/\1/p')"
 if [ -z "$interface" ]; then
 	echo 'No interface found.' >&2

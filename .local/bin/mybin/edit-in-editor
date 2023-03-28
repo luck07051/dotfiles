@@ -1,11 +1,30 @@
 #!/bin/sh
 
-# HACK:
+# Editing content in your favorite editor.
 
-xdotool key --window "$(xdotool getwindowfocus)" --clearmodifiers ctrl+a ctrl+x
+focus_id="$(xdotool getwindowfocus)"
+focus_name="$(xdotool getwindowname "$focus_id")"
 
+# get the content
+case $focus_name in
+# TODO: complete this
+	st|alacritty|foot) exit ;;
+	*) xdotool key --window "$focus_id" --clearmodifiers ctrl+a ctrl+x ;;
+esac
+
+# edit the content
 TMPFILE="$(mktemp /tmp/edit-in-editor.XXXXXXXX)"
 xclip -selection clipboard -o > "$TMPFILE"
-$TERMINAL -c float -e "${EDITOR:-vim}" "$TMPFILE"
+case $TERMINAL in
+	st) st -t "${0##*/}" -c float "${EDITOR:-vim}" "$TMPFILE" ;;
+	alacritty) alacritty -T "${0##*/}" --class float "${EDITOR:-vim}" "$TMPFILE" ;;
+	foot) foot -T "${0##*/}" "${EDITOR:-vim}" "$TMPFILE"
+esac
 xclip -selection clipboard "$TMPFILE"
 rm "$TMPFILE"
+
+# paste back the content
+case $focus_name in
+	st|alacritty|foot) exit ;;
+	*) xdotool key --window "$focus_id" --clearmodifiers ctrl+v ;;
+esac

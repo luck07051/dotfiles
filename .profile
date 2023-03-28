@@ -41,7 +41,7 @@ export LANG='en_US.UTF-8'
 export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTFILE="$XDG_CACHE_HOME/history"
-export HISTORY_IGNORE="(ls|cd|history|a|z|c|c.|c-|c_|e)"
+export HISTORY_IGNORE="(ls|cd|history|a|z|c|c.|c-|c_|e|e.|o|n)"
 
 
 #==================== Lets Paths Right ====================#

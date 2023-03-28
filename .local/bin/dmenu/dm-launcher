@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Programs launcher.
+
 dmenu="${DMENU:-dmenu -i}"
 term="${TERMINAL:-st} -e sh -c"
 cache='/tmp/launcher-cache'

@@ -1,11 +1,13 @@
 #!/bin/sh
 
+# Decrypt the pdf files.
+
 if [ $# -ne 2 ] && [ $# -ne 3 ];then
 	echo "Usage: ${0##*/} password /path/to/pdf [/path/to/the/output]" >&2
 	exit 1
 fi
 
-type qpdf >/dev/null 2>&1 || { echo "Dependence 'qpdf' is needed." >&2; exit 1; }
+type qpdf >/dev/null || { echo "Dependence 'qpdf' is needed." >&2; exit 1; }
 
 
 if [ -z "$3" ] || [ "$2" = "$3" ]; then

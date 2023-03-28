@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Search stuff.
+
 dmenu="${DMENU:-dmenu -i}"
 
 # always print query if using fmenu

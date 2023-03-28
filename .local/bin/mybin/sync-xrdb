@@ -1,6 +1,8 @@
 #!/bin/sh
 # vim:foldmethod=marker:foldlevel=0
 
+# Sync all config with xrdb resource.
+
 xrdb -merge "${1:-$XDG_CONFIG_HOME/X11/xresources}"
 
 # Get color from xresources

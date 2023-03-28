@@ -1,6 +1,10 @@
 #!/bin/sh
 
+# Taking screenshot.
+
 set -o errexit
+
+[ -z "$1" ] && { echo "Usage: ${0##*/} sel|cur|full" >&2; exit 1; }
 
 dir="${XDG_PICTURES_DIR:-$HOME/downloads}/screenshots"
 [ ! -d "$dir" ] && mkdir -p "$dir"

@@ -1,8 +1,10 @@
 #!/bin/sh
 
+# Wrapper of colorpicker. Output the output to clipboard and notify-send.
+
 color="$(xcolor)"
 [ -z "$color" ] && exit
 
-echo "$color" | xclip -sel clip
+echo "$color" | clip -i
 
 notify-send "Copy the color!" "$color"

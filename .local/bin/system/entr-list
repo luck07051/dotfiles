@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# List of entr to executed by init programs.
+
 echo "$XDG_CONFIG_HOME/X11/xresources" | entr -np sync-xrdb &
 echo "$XDG_CONFIG_HOME/X11/color" | entr -np sync-xrdb &
 

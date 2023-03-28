@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Extract the compressed file.
+
 [ -z "$1" ] && { echo "Usage: ${0##*/} [FILE]..."; return 1; }
 
 for n in "$@"; do

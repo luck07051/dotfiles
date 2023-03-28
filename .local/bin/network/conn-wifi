@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# connect to the wifi.
+#
+# Usage: conn-wifi wlan0 wifi-name
+
 interface="$1"
 ssid="$2"
 wpa_dir='/etc/wpa_supplicant'

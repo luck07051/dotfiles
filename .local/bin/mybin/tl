@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Translate content from clipboard, selection or editor, and output to the stdout.
+#
+# Usage: tl [clip|sele|editor]
+#   If no args given, 'clip' will be used.
+
 source='clip'
 pager='less -R'
 editor="nvim -c startinsert"

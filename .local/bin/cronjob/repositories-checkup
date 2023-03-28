@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
 
 cleanup(){

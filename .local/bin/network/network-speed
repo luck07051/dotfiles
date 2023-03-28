@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Scheduled output the network speed. Used by statusbar.
+
 interval=1
 dev="$(ip route | sed -n '/^default/s/.*dev \(\S*\).*/\1/p')"
 

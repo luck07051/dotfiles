@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# remove all tails space and tail blank lines in the file
+# Remove all the tails space and tail blank lines in the file.
 
 sed -i 's/\s\+$//' "$@"
 sed -i -z 's/\n*$//' "$@"

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Enhanced image preview function to lf.
+
 set -e
 
 cleanup() {

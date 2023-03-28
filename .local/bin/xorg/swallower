@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Swallower using xdotool or xdo for xorg's windows manager.
+
 if type xdotool >/dev/null; then
 	winid="$(xdotool getactivewindow)"
 	xdotool windowunmap "$winid"

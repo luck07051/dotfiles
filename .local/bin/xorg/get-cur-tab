@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Getting current tab of the browser.
+
+# TODO:
+
 # xdotool key --clearmodifiers --window "$winid" ctrl+l ctrl+v Return
 
 if [ "$(bt active | wc -l)" = "0" ]; then

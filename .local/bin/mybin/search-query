@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Gives url of search.
+#
+# Usage: search-query content to search
+#   If no args given, list all the search engine.
+
 searchengine_file="$HOME/bm/searchengine"
 
 if [ $# -eq 0 ]; then
@@ -7,7 +12,7 @@ if [ $# -eq 0 ]; then
 	exit
 fi
 
-input="$1"
+input="$*"
 
 engine="$(grep -w "^${input%% *}" "$searchengine_file")"
 

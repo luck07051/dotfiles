@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Pipe stdin to the editor and output the content to stdout.
+
 temp="$(mktemp /tmp/vipe.bashXXXXXXXX)"
 cat > "$temp"
 "${EDITOR:-vim}" "$temp" </dev/tty >/dev/tty

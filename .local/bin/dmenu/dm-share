@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Upload file to the specified server, and get the url of the file.
+
 dmenu="${DMENU:-dmenu -i}"
 # uploadcmd='curl -F "file=@$file" "0x0.st"'
 uploadcmd='xbackbone_uploader_admin.sh $file'

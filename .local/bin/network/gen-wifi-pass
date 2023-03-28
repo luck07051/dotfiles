@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Prompt to ask wifi password and generate the .conf file.
+#
+# Usage: gen-wifi-pass wifi-name
+
 ssid="$1"
 [ -z "$ssid" ] && echo 'Usage: gen-wifi-pass ssid' >&2 && exit 1
 

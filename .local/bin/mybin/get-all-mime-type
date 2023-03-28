@@ -1,5 +1,9 @@
 #!/bin/sh
 
-for file in $(ls -A --group-directories-first); do
+# Getting all mime-type of files that under given directory.
+
+dir="${1:-$(pwd)}"
+
+for file in $(find "$dir" -maxdepth 1 -type f); do
 	printf '%s\t%s\n' "$file" "$(xdg-mime query filetype "$file")"
 done | column -t -s "$(printf '\t')"

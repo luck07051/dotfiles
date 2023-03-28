@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # `setwallpaper`
 #   set wallpaper (put in ".xinit" or startup propram)
 #

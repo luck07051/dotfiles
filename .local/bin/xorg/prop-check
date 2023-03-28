@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Output property of the window to notify-send.
+
 notify-send "Property:" "$(xprop | awk '
 	/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
 	/^WM_NAME/{sub(/.* =/, "title:"); print}')"

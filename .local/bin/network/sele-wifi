@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Selecting the wifi name that is connectable.
+#
+# Usage: selewifi wlan0
+
 interface="$1"
 wpa_dir='/etc/wpa_supplicant'
 

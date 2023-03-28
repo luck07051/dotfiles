@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Rebuild rime and flash fcitx5.
+
 rime_deployer --build ~/.local/share/fcitx5/rime /usr/share/rime-data ~/.local/share/fcitx5/rime/build
 
 sleep 1

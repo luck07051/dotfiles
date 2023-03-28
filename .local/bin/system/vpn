@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# wapper for wireguard vpn
+# Wapper for wireguard vpn.
 
 # quit if wg not installed
 type wg-quick >/dev/null || exit 1
