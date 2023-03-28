@@ -2,7 +2,7 @@
 
 searchengine_file="$HOME/bm/searchengine"
 
-if [ -z "$1" ]; then
+if [ $# -eq 0 ]; then
 	grep -v -e '^\s*#' -e '^$' "$searchengine_file"
 	exit
 fi

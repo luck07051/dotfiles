@@ -1,5 +1,6 @@
 #!/bin/sh
 
+source='clip'
 pager='less -R'
 editor="nvim -c startinsert"
 lang='en+zh-TW+ja'
@@ -7,21 +8,19 @@ trans_opt='-show-original n -show-original-phonetics n -show-translation y -show
 
 # clipboard / selection / editor
 if [ -n "$1" ];then
-	source="$1"
-	case "$(echo "$source" | tr '[:upper:]' '[:lower:]')" in
+	source="$(echo "$1" | tr '[:upper:]' '[:lower:]')"
+	case $source in
 		editor|clip*|sele*) ;;
-		*) echo 'Input method not support.' >&2; exit 1;
+		*) echo "Usage: ${0##*/} editor|clip|sele" >&2; exit 1;
 	esac
-else
-	source="$(printf 'Editor\nClipboard\nSelection\n' | fzf)"
-	[ -z "$source" ] && exit
 fi
 
+# prepare comtent
 temp=$(mktemp /tmp/trans.XXXXXXXXXXX)
-case "$(echo "$source" | tr '[:upper:]' '[:lower:]')" in
-	editor) $editor "$temp" ;;
-	clip*)  clip -o > "$temp" ;;
-	sele*)  clip -s > "$temp" ;;
+case $source in
+	editor)         $editor "$temp" ;;
+	clip|clipboard) clip -o > "$temp" ;;
+	sele|select)    clip -s > "$temp" ;;
 esac
 
 if ! grep -qv '^\s*$' "$temp"; then

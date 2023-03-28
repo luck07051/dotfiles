@@ -1,7 +1,0 @@
-#!/bin/sh
-
-bookmark_file="${1:-$HOME/bm/bookmark}"
-
-# get-cur-tab >> "$bookmark_file"
-
-"$TERMINAL" -c float -e "${EDITOR-:vim}" "$bookmark_file"

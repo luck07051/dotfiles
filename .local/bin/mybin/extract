@@ -4,7 +4,7 @@
 
 for n in "$@"; do
 	if [ ! -f "$n" ];then
-		echo "'$n' - File does not exist"
+		echo "'${0##*/}': File '$n' do not exist" >&2
 		continue
 	fi
 

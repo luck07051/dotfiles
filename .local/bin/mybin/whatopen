@@ -1,0 +1,10 @@
+#!/bin/sh
+
+file="$1"
+# [ ! -f "$file" ] && echo "File '$1' not founded." >&2 && exit 1
+
+ft=$(xdg-mime query filetype "$file")
+[ -z "$ft" ] && echo "Failed to get filetype of '$file'." >&2 && exit 1
+
+echo "$ft"
+xdg-mime query default "$ft"
