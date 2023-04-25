@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Make QR Code from clipboard
+
+if ! type qrencode >/dev/null; then
+	notify-send 'QR Code' 'Please make sure `qrencode` is installed.'
+	exit 1
+fi
+
+output_file='/tmp/qr-output.png'
+viewer='nsxiv -N qrcode'
+
+clip -o | qrencode -s 8 -o "$output_file"
+[ $? != 0 ] && exit 1
+
+
+notify-send 'QR Code' "$(clip -o)"
+
+$viewer "$output_file"
+
+#cat "$output_file" | clip -i -t image/png

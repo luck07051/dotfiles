@@ -1,0 +1,15 @@
+#!/bin/sh
+
+dmenu="${DMENU:-dmenu -i}"
+
+selected=$(lsblk -nrpo 'type,mountpoint,name,size' |
+	grep '^part \S' |
+	cut -d' ' -f3,4,2 |
+	grep -v $(grep -oP '(?<=UUID=)(\S*)' /etc/fstab |
+		xargs -I{} blkid --uuid {} | sed 's/^/-e /') |
+	column -t -o ' ' |
+	$dmenu -p "MOUNT")
+
+[ -z "$selected" ] && exit
+
+# umount "$(echo "$selected" | awk '{ print $2 }')"
