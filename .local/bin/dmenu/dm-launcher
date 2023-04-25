@@ -12,22 +12,9 @@ _path(){
 _app(){
 	ls "$XDG_DATA_HOME/applications" | sort
 }
-_bookmark(){
-	bookmark_file="$HOME/bm/bookmark"
-	grep -v -e '^\s*#' -e '^$' "$bookmark_file" | case ${dmenu%% *} in
-		# fmenu) awk -F'\t' "{print \$1 \"$(tput setaf 247)  --  \" \$2 \"$(tput sgr0)\"}" ;;
-		fmenu) awk -F'\t' "{print \$1 \"[38;5;246m  --  \" \$2 \"[0m\"}" ;;
-		*) awk -F'\t' '{print $1 "  --  " $2}'
-	esac
-}
-_search_engine(){
-	search-query | awk -F'\t' '{print ";" $1}' | grep -v ';DEFAULT'
-}
 
 _path > "$cache"
 _app >> "$cache"
-_bookmark >> "$cache"
-_search_engine >> "$cache"
 
 selected="$($dmenu -p "RUN" < "$cache")"
 
@@ -38,12 +25,6 @@ rm "$cache"
 case "$selected" in
 	# desktop applications
 	*.desktop) gtk-launch "$selected" ;;
-
-	# bookmark
-	*'  --  '*) xdg-open "${selected#*  --  }" ;;
-
-	# search if query start by ';'
-	\;*) xdg-open "$(search-query "${selected#\;}")" ;;
 
 	# exec command in terminal if query end with ';'
 	*\;) $term "${selected%\;}" ;;

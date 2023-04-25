@@ -2,16 +2,35 @@
 
 # Wrapper of clipboard.
 
-if [ -n "$WAYLAND_DISPLAY" ]; then
+TEMP=$(getopt -o 'iost:' -n "$0" -- "$@")
+[ $? -ne 0 ] && echo 'Failed to parsing options!' >&2 && exit 1
+eval set -- "$TEMP"
+unset TEMP
+
+clipboard='intput'
+type=''
+
+while :; do
 	case "$1" in
-		in|-i|--in|'') wl-copy ;;
-		out|-o|--out)  wl-paste ;;
-		sele|-s|-sele) wl-paste -p ;; # TODO: check the primary clipboard is selection
+		'-i') clipboard='intput'; shift ;;
+		'-o') clipboard='output'; shift ;;
+		'-s') clipboard='select'; shift ;;
+		'-t') type="-t $2";       shift 2 ;;
+		'--') shift; break ;;
+		*)    echo 'Internal error!' >&2; exit 1 ;;
+	esac
+done
+
+if [ -n "$WAYLAND_DISPLAY" ]; then
+	case "$clipboard" in
+		intput) wl-copy $type ;;
+		output) wl-paste $type ;;
+		select) wl-paste -p $type ;; # TODO: check the primary clipboard is selection
 	esac
 else
-	case "$1" in
-		in|-i|--in|'') xclip -i -selection clipboard ;;
-		out|-o|--out)  xclip -o -selection clipboard ;;
-		sele|-s|-sele) xclip -o ;;
+	case "$clipboard" in
+		intput) xclip -i -selection clipboard $type ;;
+		output) xclip -o -selection clipboard $type ;;
+		select) xclip -o $type ;;
 	esac
 fi

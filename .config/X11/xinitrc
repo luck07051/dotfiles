@@ -37,4 +37,5 @@ run entr-list
 # Run windows manager
 killall dwmblocks >/dev/null 2>&1
 dwmblocks &
-exec dwm
+# exec dwm
+exec dbus-launch dwm

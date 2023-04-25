@@ -2,26 +2,39 @@
 
 # Open file using specified program.
 
-swallower='swallower'
+_open_with_swallower(){
+	if [ -n "$swallower" ]; then
+		$swallower "$@"
+	else
+		nohup "$@" >/dev/null 2>&1 &
+	fi
+}
+
+if [ "$1" = '-s' ]; then
+	swallower='swallower'
+	shift
+else
+	swallower=''
+fi
 
 case $(file --mime-type "$1" -bL) in
 
 	video/* | audio/*)
-		$swallower mpv "$@"
+		_open_with_swallower mpv "$@"
 		;;
 
 	image/*)
-		$swallower nsxiv "$@"
+		_open_with_swallower nsxiv "$@"
 		;;
 
 	application/pdf | application/postscript)
-		$swallower zathura "$@"
+		_open_with_swallower zathura "$@"
 		;;
 
 	application/msword |\
 	application/vnd.ms-powerpoint |\
 	application/vnd.openxmlformats-officedocument.presentationml.presentation)
-		$swallower libreoffice "$@"
+		_open_with_swallower libreoffice "$@"
 		;;
 
 	text/*)

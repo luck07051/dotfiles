@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Bookmark menu.
+
+dmenu="${DMENU:-dmenu -i}"
+bookmark_file="$HOME/bm/bookmark"
+
+selected="$(grep -v -e '^\s*#' -e '^$' "$bookmark_file" | case ${dmenu%% *} in
+	# fmenu) awk -F'\t' "{print \$1 \"$(tput setaf 247)  --  \" \$2 \"$(tput sgr0)\"}" ;;
+	fmenu) awk -F'\t' "{print \$1 \"[38;5;246m\t  --  \" \$2 \"[0m\"}" ;;
+	*) awk -F'\t' '{print $1 "\t  --  " $2}' ;;
+esac | column -t -s "$(printf '\t')" | $dmenu -p "BOOKMARK")"
+
+[ -z "$selected" ] && exit
+
+xdg-open "${selected##*  --  }"

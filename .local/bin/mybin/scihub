@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Open url in sci-hub.
+
+case $(xdotool getwindowclassname "$(xdotool getwindowfocus)") in
+	LibreWolf)
+		xdotool key --window "$(xdotool getwindowfocus)" --clearmodifiers --delay 50 F6 ctrl+a ctrl+c Esc
+		;;
+	*) ;;
+esac
+
+xdg-open "https://sci-hub.st/$(clip -o)"
