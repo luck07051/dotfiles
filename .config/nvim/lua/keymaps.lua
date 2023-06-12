@@ -12,8 +12,6 @@ vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>Y', '"+y$')
 vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
-vim.keymap.set('v', '<C-s-c>', '"+y')  -- TODO: make terminal support
-vim.keymap.set('v', '<C-s-v>', '"+p')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Delete with black hole --
@@ -42,7 +40,7 @@ vim.keymap.set('v', '<Leader>r', '!$SHELL<CR>')
 -- Spell check --
 vim.keymap.set('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
--- Compiler script --
+-- Compiler shortcut --
 -- vim.keymap.set('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
 -- vim.keymap.set('n', '<Leader>do', ':!open "%:p"<CR>')
 
@@ -56,19 +54,30 @@ vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { silent = true } )
 
 
 -- Navigate windows --
-local function win_focus_resize(dir, cmd)
-  vim.keymap.set('n', '<A-'..dir..'>', '<C-w>'..dir)
-  vim.keymap.set('i', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
-  vim.keymap.set('t', '<A-'..dir..'>', '<C-\\><C-N><C-w>'..dir)
-  dir = string.upper(dir)
-  vim.keymap.set('n', '<A-'..dir..'>', '3<C-w>'..cmd)
-  vim.keymap.set('i', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'gi')
-  vim.keymap.set('t', '<A-'..dir..'>', '<C-\\><C-N>3<C-w>'..cmd..'i')
+local function win_focus_resize(arr, dir, cmd)
+  vim.keymap.set('n', '<A-'..arr..'>', '<C-w>'..dir)
+  vim.keymap.set('i', '<A-'..arr..'>', '<C-\\><C-N><C-w>'..dir)
+  vim.keymap.set('t', '<A-'..arr..'>', '<C-\\><C-N><C-w>'..dir)
+  vim.keymap.set('n', '<A-S-'..arr..'>', '3<C-w>'..cmd)
+  vim.keymap.set('i', '<A-S-'..arr..'>', '<C-\\><C-N>3<C-w>'..cmd..'gi')
+  vim.keymap.set('t', '<A-S-'..arr..'>', '<C-\\><C-N>3<C-w>'..cmd..'i')
 end
-win_focus_resize('h', '<')
-win_focus_resize('j', '+')
-win_focus_resize('k', '-')
-win_focus_resize('l', '>')
+win_focus_resize('h', 'h', '<')
+win_focus_resize('j', 'j', '+')
+win_focus_resize('k', 'k', '-')
+win_focus_resize('l', 'l', '>')
+win_focus_resize('Left', 'h', '<')
+win_focus_resize('Down', 'j', '+')
+win_focus_resize('Up',   'k', '-')
+win_focus_resize('Right','l', '>')
+
+-- Remapping navigation keys --
+vim.keymap.set('', '<PageUp>', '<C-u>')
+vim.keymap.set('', '<PageDown>', '<C-d>')
+
+-- Make things consistent --
+-- <C-BS> to <C-w>
+vim.keymap.set('i', '<C-h>', '<C-w>')
 
 
 -- Switch conceal --

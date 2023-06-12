@@ -23,9 +23,10 @@ xset -dpms
 
 # Remap caps lock to Ctrl
 setxkbmap -option ctrl:nocaps
-# input method # TODO:
-fcitx5 &
-(sleep 5; fcitx5 -r) &
+
+# input method
+ibus-daemon -rxdR
+# hime &
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
@@ -34,8 +35,11 @@ run unclutter
 
 run entr-list
 
+run udiskie
+
 # Run windows manager
 killall dwmblocks >/dev/null 2>&1
 dwmblocks &
+
 # exec dwm
 exec dbus-launch dwm

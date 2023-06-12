@@ -8,14 +8,14 @@ cleanup(){
 }
 trap cleanup INT TERM
 
-sync_cmd="${1:-${PKGMAN:-pacman} -Syyuw --noconfirm}"
+sync_cmd="${1:-${PKGMAN:-pacman} -Syyw --noconfirm}"
 sb_update_cmd="$HOME/.local/bin/statusbar/sb-update sb-pacman"
 
 touch /tmp/sb-repo-syncing
 $sb_update_cmd
 
-$sync_cmd ||
-	notify-send "📦 Repository Sync" "Error downloading updates."
+# $sync_cmd || notify-send "📦 Repository Sync" "Error downloading updates."
+$sync_cmd
 
 rm /tmp/sb-repo-syncing
 $sb_update_cmd

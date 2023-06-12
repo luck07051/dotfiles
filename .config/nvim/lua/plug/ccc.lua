@@ -1,4 +1,5 @@
-local M = { -- Color picker and color highlight
+-- Color picker and color highlight --
+local M = {
   'uga-rosa/ccc.nvim',
   event = 'VeryLazy',
 }

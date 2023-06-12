@@ -1,0 +1,88 @@
+#!/bin/sh
+
+zmk_dir="$HOME/.local/share/zmk"
+output_dir="$HOME/.cache/zmk"
+[ -d "$output_dir" ] || mkdir "$output_dir"
+
+setup() {
+	# Install zephyr
+	paru -S zephyr-sdk
+
+	# Install west
+	pip3 install west --exists-action i
+
+	# Make sure west is executable
+	type west >/dev/null || { echo 'Cant execute west, please mkae sure ~/.local/bin or ~/.local/share/python/bin is in your PATH' >&2; exit 1; }
+
+	# Clone zmk
+	#[ -d "$zmk_dir" ] || git clone https://github.com/zmkfirmware/zmk.git "$zmk_dir"
+
+	cd "$zmk_dir" || exit 1
+
+	# West workspace stuff
+	west init -l app/
+
+	west update
+
+	west zephyr-export
+
+	# Install dependencies for zmk
+	pip3 install -r zephyr/scripts/requirements.txt
+}
+
+build(){
+	config_dir="${1:-$(pwd)}"
+	[ -f "$config_dir/build.yaml" ] || { echo 'build.yaml not found.' >&2; exit 1; }
+
+	cd "$zmk_dir/app" || { echo "Dir '$zmk_dir/app' not found." >&2; exit 1; }
+
+	# Parse build.yaml
+	grep -v -e '^\s*#' -e '^-*$' -e '^include:$' "$config_dir/build.yaml" |
+		sed -z 's/\n\s\+\([^- ]\)/ \1/g' |
+		sed 's/^\s*-\s*//' |
+		while read -r line; do
+			# Start building
+
+			board="$(echo "$line" | cut -d' ' -f2)"
+			shield="$(echo "$line" | cut -d' ' -f4)"
+			keymap="$config_dir/config"
+
+			printf "\nStart building '%s'\n\n" "$shield"
+
+			west build -p -d "build/$shield" -b "$board" -- -DSHIELD="$shield" -DZMK_CONFIG="$keymap"
+			[ $? -ne 0 ] && { echo "Error on building '$shield'" >&2; exit 1; }
+
+			cp "$zmk_dir/app/build/$shield/zephyr/zmk.uf2" "$output_dir/${shield}-${board}-zmk.uf2"
+
+			printf "\nBuild '%s' completed\n\n" "$shield"
+		done
+
+	[ $? -ne 0 ] && exit 1
+
+	printf "Build done.\n"
+}
+
+flash() {
+	nicenano="/run/media/$USER/NICENANO"
+
+	printf 'Left side.'
+	notify-send 'ZMK Flash' 'Left side.'
+	while [ ! -d "$nicenano" ]; do
+		sleep 1
+		printf '.'
+	done
+	cp "$output_dir/cradio_left-nice_nano_v2-zmk.uf2" "$nicenano"
+
+	sleep 2
+
+	printf '\nRight side.'
+	notify-send 'ZMK Flash' 'Right side.'
+	while [ ! -d "$nicenano" ]; do
+		sleep 1
+		printf '.'
+	done
+	cp "$output_dir/cradio_right-nice_nano_v2-zmk.uf2" "$nicenano"
+}
+
+
+"$@"

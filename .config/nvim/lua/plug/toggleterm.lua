@@ -7,6 +7,7 @@ M.keys = {
   { '<Leader>th', '<cmd>ToggleTerm size=15 direction=horizontal<cr>', desc = 'Open terminal in a horizontal window' },
   { '<Leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Open terminal in a floating window' },
   { '<Leader>te', '<cmd>TermExec cmd="!!"<cr>', desc = 'Exec previous command' },
+  { '<leader>tc', '<cmd>execute v:count1.\'TermExec cmd="<C-v><C-c>"\'<CR>', desc = 'Send <C-c> to terminal' },
   { '<Leader>git', '<cmd>lua _lazygit_toggle()<cr>', desc = 'Open lazygit in a floating window' },
 }
 

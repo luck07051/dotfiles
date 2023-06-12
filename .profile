@@ -19,6 +19,12 @@ export WLR_NO_HARDWARE_CURSORS=1
 # Add ~/.local/bin and it's subdir to path
 export PATH="${PATH}:$(find "$XDG_BIN_HOME" -type d -printf "%p:" | sed -e 's/:$//g')"
 
+# Add ~/.local/share/python/bin
+export PATH="${PATH}:$HOME/.local/share/python/bin"
+
+# Add conda
+export PATH="${PATH}:$HOME/.local/share/anaconda3/bin"
+
 # The cargo stuff
 [ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
 
@@ -36,6 +42,7 @@ export DMENU='fmenu'
 type nvim >/dev/null && export MANPAGER='nvim +Man!'
 
 export LANG='en_US.UTF-8'
+
 
 # Shell
 export HISTSIZE=1000000

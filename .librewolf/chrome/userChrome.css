@@ -29,6 +29,10 @@ menupopup, panel {
   --arrowpanel-border-radius: 0px !important;
 }
 
+.ContentSelectDropdown-item-0 {
+    color: var(--fg-color) !important;
+}
+
 #navigator-toolbox {
   border-bottom: none !important;
 }

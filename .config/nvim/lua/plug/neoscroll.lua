@@ -15,6 +15,9 @@ M.keys = {
   { 'zt',    function() require('neoscroll').zt(100) end, desc = 'Neoscroll zt' },
   { 'zz',    function() require('neoscroll').zz(100) end, desc = 'Neoscroll zz' },
   { 'zb',    function() require('neoscroll').zb(100) end, desc = 'Neoscroll zb' },
+
+  { '<PageUp>', function() require('neoscroll').scroll(-vim.wo.scroll, true, 150) end, desc = 'Neoscroll <C-u>' },
+  { '<PageDown>', function() require('neoscroll').scroll( vim.wo.scroll, true, 150) end, desc = 'Neoscroll <C-d>' },
 }
 
 return M

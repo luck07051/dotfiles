@@ -53,14 +53,14 @@ return {
     end,
   },
 
-  { -- Show undo tree
-    'jiaoshijie/undotree',
-    keys = {
-      { '<Leader>u', function() require('undotree').toggle() end, desc = 'Open the undotree' }
-    },
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = true
-  },
+  -- { -- Show undo tree
+  --   'jiaoshijie/undotree',
+  --   keys = {
+  --     { '<Leader>u', function() require('undotree').toggle() end, desc = 'Open the undotree' }
+  --   },
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  --   config = true
+  -- },
 
   { -- Profiling startup time
     'dstein64/vim-startuptime',
@@ -71,7 +71,7 @@ return {
   --   'danymat/neogen',
   --   config = true,
   -- },
-  --
+
   -- {
   --   'ckolkey/ts-node-action',
   --   keys = {

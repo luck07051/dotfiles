@@ -41,7 +41,7 @@ lf() {
 }
 # Dont gen ~/.conda/environments.txt file
 conda() {
-  /usr/bin/conda "$@"
+  $HOME/.local/share/anaconda3/bin/conda "$@"
   rm -f ~/.conda/environments.txt
   rm -fd ~/.conda
 }

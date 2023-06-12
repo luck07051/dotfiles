@@ -35,3 +35,8 @@ au('BufEnter', {
      set foldlevel=0
   ]]
 })
+
+au('BufEnter', {
+  pattern = { '*.keymap' },
+  command = [[ setf c ]]
+})
