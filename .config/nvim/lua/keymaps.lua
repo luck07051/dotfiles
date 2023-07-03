@@ -19,8 +19,8 @@ vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 -- vim.keymap.set('', '<Leader>D', '"_D')
 
 -- Quick replace --
-vim.keymap.set('n', 's', ':%s/')
-vim.keymap.set('v', 's', ':s/')
+-- vim.keymap.set('n', 's', ':%s/')
+-- vim.keymap.set('v', 's', ':s/')
 
 -- Center the search --
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -88,6 +88,13 @@ vim.keymap.set("n", "<Leader>zc", function()
     vim.o.conceallevel = 2
   end
 end, { silent = true, desc = 'Toggle conceal' } )
+
+
+-- Check hi group
+vim.keymap.set('n', '<Leader>hi', function()
+  local result = vim.treesitter.get_captures_at_cursor(0)
+  print(vim.inspect(result))
+end)
 
 
 -- Alias for command mode --

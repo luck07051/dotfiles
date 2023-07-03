@@ -2,9 +2,6 @@ local M = {
   'neovim/nvim-lspconfig',
   name = "lsp",
   event = "BufReadPre",
-  dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
-  },
 }
 
 M.config = function()
@@ -69,6 +66,16 @@ M.config = function()
 
     -- Formatting
     vim.keymap.set('n', '<Leader>=', vim.lsp.buf.format, { desc = 'Formats a buffer using the language server clients' } )
+
+
+    -- Statusline plugin that shows current code context
+    local has, navic = pcall(require, 'nvim-navic')
+    if has then
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
+    end
+
   end --}}}
 
   local server_settings = {
@@ -96,17 +103,16 @@ M.config = function()
     }, --}}}
   }
 
-  -- local server_list = { 'sumneko_lua', 'rust_analyzer', 'bashls' }
-  local server_list = { 'bashls', 'lua_ls' }
+  -- local server_list = { 'bashls', 'lua_ls', 'pylsp' }
+  local server_list = { 'bashls', 'lua_ls', 'pyright' }
 
-  for _, server_name in pairs(server_list) do
+  for _, server_name in ipairs(server_list) do
     lspconfig[server_name].setup {
       on_attach = on_attach,
       capabilities = require('cmp_nvim_lsp').default_capabilities(),
       settings = server_settings[server_name],
     }
   end
-
 
 end
 

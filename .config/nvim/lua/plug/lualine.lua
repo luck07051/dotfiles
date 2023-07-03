@@ -37,6 +37,7 @@ M.config = function()
         { 'diagnostics',
           symbols = { error = '✗', warn = '', info = '', hint = '' }
         },
+        'navic',
       },
 
       lualine_x = {

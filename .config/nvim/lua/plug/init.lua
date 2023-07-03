@@ -1,5 +1,8 @@
 return {
-  'luck07051/uicolors.nvim',
+  {
+    'luck07051/uicolors.nvim',
+    url = 'git@github.com:luck07051/uicolors.nvim.git',
+  },
 
   { -- `gc` to comment text
     'numToStr/Comment.nvim',
@@ -23,13 +26,16 @@ return {
   { -- Align stuff
     'junegunn/vim-easy-align',
     keys = {
-      { 'ga', '<Plug>(EasyAlign)', mode = { 'n', 'x' }, desc = 'Aligning stuff' }
+      { 'ga', '<Plug>(EasyAlign)', mode = { 'n', 'x' }, desc = 'Aligning stuff' },
     }
   },
 
   { -- Auto figure out what indent used in file
     'nmac427/guess-indent.nvim',
-    event = "BufReadPre",
+    event = 'BufReadPost',
+    keys = {
+      { '<Leader>ind', function() require("guess-indent").set_from_buffer(true) end, desc = 'Reset indent' },
+    },
     config = true
   },
 
@@ -38,6 +44,12 @@ return {
     keys = {
       { 'gx', desc = 'Enhanced gx' },
     },
+  },
+
+  {
+    'SmiteshP/nvim-navic',
+    event = 'LspAttach',
+    opts = {},
   },
 
   { -- Enhanced quickfix
@@ -53,31 +65,9 @@ return {
     end,
   },
 
-  -- { -- Show undo tree
-  --   'jiaoshijie/undotree',
-  --   keys = {
-  --     { '<Leader>u', function() require('undotree').toggle() end, desc = 'Open the undotree' }
-  --   },
-  --   dependencies = { 'nvim-lua/plenary.nvim' },
-  --   config = true
-  -- },
-
   { -- Profiling startup time
     'dstein64/vim-startuptime',
     cmd = 'StartupTime'
   },
-
-  -- {
-  --   'danymat/neogen',
-  --   config = true,
-  -- },
-
-  -- {
-  --   'ckolkey/ts-node-action',
-  --   keys = {
-  --     { 'K' , function() require("ts-node-action").node_action() end, desc = 'Trigger Node Action' },
-  --   },
-  --   config = true,
-  -- },
 
 }
