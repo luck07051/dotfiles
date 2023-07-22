@@ -2,23 +2,33 @@ local M = {
   'hrsh7th/nvim-cmp',
   event = "VeryLazy",
   dependencies = {
+    'lukas-reineke/cmp-under-comparator',
+
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
 
     'hrsh7th/cmp-nvim-lua',
     'kdheepak/cmp-latex-symbols',
 
     "hrsh7th/cmp-nvim-lsp",
-    -- 'saadparwaiz1/cmp_luasnip',
+    'saadparwaiz1/cmp_luasnip',
   },
 }
 
--- TODO: a loat to do
+local has_words_before = function()
+ local types = require("luasnip.util.types")
+
+ unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 M.config = function()
   local cmp = require 'cmp'
+  local luasnip = require 'luasnip'
 
   -- if not pcall(require, 'luasnip') then return end
   -- local luasnip = require 'luasnip'
@@ -66,19 +76,35 @@ M.config = function()
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
-      ["<Done>"] = cmp.mapping.select_next_item(),
-      ["<Up>"]   = cmp.mapping.select_prev_item(),
+      -- ["<Tab>"] = cmp.mapping.select_next_item(),
+      -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
     },
 
     sources = {
-      { name = 'neorg' },
+      -- { name = 'neorg' },
       { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
       { name = 'nvim_lua' },
+
       { name = 'latex_symbols' },
       { name = 'luasnip' },
+
       { name = 'treesitter' },
       { name = 'buffer' },
       { name = 'path' },
+    },
+
+    sorting = {
+        comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            require "cmp-under-comparator".under,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
     },
 
     preselect = cmp.PreselectMode.None,
@@ -99,19 +125,19 @@ M.config = function()
     },
 
     formatting = {
-      fields = { "kind", "abbr" },
+      fields = { 'kind', 'abbr' },
       format = function(entry, vim_item)
-        vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+        vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
         return vim_item
       end,
     },
 
-    -- snippet = {
-    --   expand = function(args)
-    --     -- For luasnip --
-    --     luasnip.lsp_expand(args.body)
-    --   end,
-    -- },
+    snippet = {
+      expand = function(args)
+        -- For luasnip --
+        luasnip.lsp_expand(args.body)
+      end,
+    },
   }
 
 
@@ -128,7 +154,6 @@ M.config = function()
       fields = { "abbr" },
     },
   })
-
 
   -- '/' mode
   cmp.setup.cmdline({ '/', '?' }, {

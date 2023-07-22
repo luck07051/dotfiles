@@ -19,7 +19,7 @@ vim.opt.shiftround = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wildignorecase = true
-vim.opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class' }
+vim.opt.wildignore = { '*.git/*', '*.tags', 'tags', '*.o', '*.class', '*models/*.pt' }
 vim.opt.path:append('**')
 vim.opt.pumheight = 10
 vim.opt.inccommand = 'split'

@@ -18,9 +18,10 @@ vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 -- vim.keymap.set('', '<Leader>d', '"_d')
 -- vim.keymap.set('', '<Leader>D', '"_D')
 
--- Quick replace --
--- vim.keymap.set('n', 's', ':%s/')
--- vim.keymap.set('v', 's', ':s/')
+-- Diagnostic
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )
+vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev,  { desc = 'Move to the prev diagnostic' } )
+vim.keymap.set('n', ']d',        vim.diagnostic.goto_next,  { desc = 'Move to the next diagnostic' } )
 
 -- Center the search --
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -34,20 +35,21 @@ vim.keymap.set('n', ']<Space>', 'm`o<Esc>``')
 vim.keymap.set('n', '[<Space>', 'm`O<Esc>``')
 
 -- Wizard --
-vim.keymap.set('n', '<Leader>r', '!!$SHELL<CR>')
-vim.keymap.set('v', '<Leader>r', '!$SHELL<CR>')
+-- vim.keymap.set('n', '<Leader>r', '!!$SHELL<CR>')
+-- vim.keymap.set('v', '<Leader>r', '!$SHELL<CR>')
 
 -- Spell check --
 vim.keymap.set('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
--- Compiler shortcut --
--- vim.keymap.set('n', '<Leader>dl', ':w | !compiler "%:p"<CR>')
--- vim.keymap.set('n', '<Leader>do', ':!open "%:p"<CR>')
-
 -- Goto prev file --
 vim.keymap.set('n', '<BS>', '<C-^>', { silent = true } )
 
+-- Buffer movement --
+vim.keymap.set('n', '<Tab>', ':bn<cr>', { silent = true } )
+vim.keymap.set('n', '<S-Tab>', ':bp<cr>', { silent = true } )
+
 -- Terminal --
+vim.keymap.set('', '<Leader>sh', ':terminal<cr>', { silent = true } )
 vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', { silent = true } )
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { silent = true } )
 -- vim.keymap.set('t', '<CR>', '<CR><C-\\><C-n>', { silent = true } )
@@ -71,13 +73,18 @@ win_focus_resize('Down', 'j', '+')
 win_focus_resize('Up',   'k', '-')
 win_focus_resize('Right','l', '>')
 
+vim.keymap.set('n', '<A-w>', '<C-w><C-w>')
+vim.keymap.set('i', '<A-w>', '<C-\\><C-N><C-w><C-w>')
+vim.keymap.set('t', '<A-w>', '<C-\\><C-N><C-w><C-w>')
+
+
 -- Remapping navigation keys --
 vim.keymap.set('', '<PageUp>', '<C-u>')
 vim.keymap.set('', '<PageDown>', '<C-d>')
+vim.keymap.set('', '<Home>', '^')
 
 -- Make things consistent --
--- <C-BS> to <C-w>
-vim.keymap.set('i', '<C-h>', '<C-w>')
+vim.keymap.set('i', '<C-h>', '<C-w>')  -- map <C-BS> to <C-w>
 
 
 -- Switch conceal --
@@ -97,7 +104,7 @@ vim.keymap.set('n', '<Leader>hi', function()
 end)
 
 
--- Alias for command mode --
+-- Abbr for command mode --
 local function cabbrev(lhs, rhs)
   -- only working on ':' mode
   local command = "cnoreabbrev <expr> %s ((getcmdtype() is# ':' && getcmdline() is# '%s')?('%s'):('%s'))"

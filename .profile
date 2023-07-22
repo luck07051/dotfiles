@@ -17,16 +17,15 @@ export WLR_NO_HARDWARE_CURSORS=1
 
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and it's subdir to path
-export PATH="${PATH}:$(find "$XDG_BIN_HOME" -type d -printf "%p:" | sed -e 's/:$//g')"
+PATH="${PATH}:$(find "$XDG_BIN_HOME" -type d -printf "%p:" | sed -e 's/:$//g')"
+export PATH
 
-# Add ~/.local/share/python/bin
-export PATH="${PATH}:$HOME/.local/share/python/bin"
-
-# Add conda
-export PATH="${PATH}:$HOME/.local/share/anaconda3/bin"
+export PATH="${PATH}:$XDG_DATA_HOME/python/bin"
+export PATH="${PATH}:$XDG_DATA_HOME/anaconda3/bin"
+export PATH="${PATH}:$XDG_DATA_HOME/cargo/bin"
 
 # The cargo stuff
-[ -f $XDG_DATA_HOME/cargo/env ] && . $XDG_DATA_HOME/cargo/env
+# [ -f "$XDG_DATA_HOME/cargo/env" ] && . "$XDG_DATA_HOME/cargo/env"
 
 
 #==================== Main ====================#

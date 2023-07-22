@@ -18,21 +18,6 @@ M.config = function()
       augend.integer.alias.hex,
       augend.constant.alias.bool,
       augend.date.alias["%Y/%m/%d"],  -- date (2022/02/19, etc.)
-      augend.constant.new{
-        elements = { "True", "False" },
-        word = false,
-        cyclic = true,
-      },
-      augend.constant.new{
-        elements = { "and", "or" },
-        word = false,
-        cyclic = true,
-      },
-      augend.constant.new{
-        elements = { "||", "&&" },
-        word = false,
-        cyclic = true,
-      },
     },
   }
 

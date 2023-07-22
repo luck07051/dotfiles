@@ -63,7 +63,7 @@ type zoxide >/dev/null &&
 # Alias
 zsh_add_file "functions/abbr.zsh"
 zsh_add_file "alias.zsh"
-zsh_add_file "local_alias.zsh"
+zsh_add_file "local.zsh"
 
 # Util
 zsh_add_file "functions/yank.zsh"          # <C-y> to yank prev command

@@ -3,7 +3,9 @@ local M = {
   dependencies = "nvim-treesitter/nvim-treesitter",
 }
 
-M.ft = { 'markdown' }
+M.ft = {
+  'markdown',
+}
 
 M.opts = {}
 

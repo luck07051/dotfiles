@@ -1,96 +1,82 @@
--- Some stuff {{{
-local ls = require 'luasnip'
+return {
 
-local s = ls.snippet
-local t = ls.text_node
-local i = ls.insert_node
+  s({
+    trig = 'sn',
+    name = 'Snipets',
+    dscr = 'Create a snippet',
+  }, fmta([[
+    <>({
+      trig = '<>',
+      <>name = '<>',
+      dscr = '<>',
+    }, <><>),
+    ]], {
+      c(1, { i(nil, 's'), i(nil, 'postfix') }),
+      i(2, 'Trig'),
+      c(3, { t(''), t({'regTrig = true,', '\t'}), }),
+      i(4, 'Name'),
+      i(5, 'Dscr'),
+      c(6, {
+        sn(nil, { t({'{'}), i(1), t({'}'}) }),
+        sn(nil, {
+          t({'fmta([[', ''}),
+          t('\t\t'), i(1, 'Text'),
+          t({'', '\t]], {', ''}),
+          t('\t'), i(2, 'Node'),
+          t({'', '})'}),
+        }),
+      }),
+      c(7, {
+        t(''),
+        sn(nil, {
+          t({', {', '\tcondition = '}),
+          i(1, 'cond'),
+          t({',', '}'}),
+        }),
+      }),
+    })
+  ),
 
-local f = ls.function_node
-local c = ls.choice_node
-local d = ls.dynamic_node
-local r = ls.restore_node
+  s({
+    trig = 'lf',
+    name = 'Local Function',
+    dscr = 'Create a local function',
+  }, fmta([[
+    local function <>(<>)
+    <><><>
+    end
+    ]], {
+      i(1, 'name'), i(2),
+      t('\t'), f(require('luasnip-util').get_visual), i(3),
+    })
+  ),
 
-local fmt = require("luasnip.extras.fmt").fmt
-local rep = require("luasnip.extras").rep
+  s({
+    trig = 'f',
+    name = 'For loop',
+    dscr = 'Create a for loop',
+  }, {
+      c(1, {
+        fmta('for <> in <> do', {i(1, 'i'), i(2, 'table')}),
+        fmta('for <>, <> in pairs(<>) do', {i(1, 'i'), i(2, 'j'), i(3, 'table')}),
+        fmta('for <>, <> in ipairs(<>) do', {i(1, 'i'), i(2, 'j'), i(3, 'table')}),
+        fmta('for <>=<>,<> do', {i(1, 'i'), i(2, '0'), i(3, '10')}),
+        fmta('for <>=<>,<>,<> do', {i(1, 'i'), i(2, '0'), i(3, '10'), i(4, '2')}),
+      }),
+      t({'', '\t'}), f(require('luasnip-util').get_visual), i(2),
+      t({'', 'end'})
+    }
+  ),
 
-local sn = ls.snippet_node
-local isn = ls.indent_snippet_node
-local events = require("luasnip.util.events")
-local ai = require("luasnip.nodes.absolute_indexer")
-local m = require("luasnip.extras").m
-local lambda = require("luasnip.extras").l
-local postfix = require("luasnip.extras.postfix").postfix
+  s({
+    trig = 'w',
+    name = 'While loop',
+    dscr = 'Create a while loop',
+  }, {
+      t('while '), i(1, 'cond'), t(' do'),
+      t({'', '\t'}), f(require('luasnip-util').get_visual), i(2),
+      t({'', 'end'})
+    }
+  ),
 
-local snippets, autosnippets = {}, {}
-local cs = function(tri, body, opt)
-  local snip = s(tri, body)
-  if not opt then
-    table.insert(snippets, snip)
-  else
-    table.insert(opt, snip)
-  end
-end
---}}}
-
-cs("ssnip", fmt([[
--- Coolest stuff {{{{{{
-local ls = require 'luasnip'
-
-local s = ls.snippet
-local t = ls.text_node
-local i = ls.insert_node
-
-local f = ls.function_node
-local c = ls.choice_node
-local d = ls.dynamic_node
-local r = ls.restore_node
-
-local fmt = require("luasnip.extras.fmt").fmt
-local rep = require("luasnip.extras").rep
-
-local sn = ls.snippet_node
-local isn = ls.indent_snippet_node
-local events = require("luasnip.util.events")
-local ai = require("luasnip.nodes.absolute_indexer")
-local m = require("luasnip.extras").m
-local lambda = require("luasnip.extras").l
-local postfix = require("luasnip.extras.postfix").postfix
-
-local snippets, autosnippets = {{}}, {{}}
-local cs = function(tri, body, opt)
-  local snip = s(tri, body)
-  if not opt then
-    table.insert(snippets, snip)
-  else
-    table.insert(opt, snip)
-  end
-end
---}}}}}}
-{}
-return snippet, autosnippets
-]], {
-    i(1, "")
-  }))
-
-cs("lf", fmt([[
-local {} = function({})
-  {}
-end
-]], {
-    i(1, "Name"),
-    i(2, ""),
-    i(3, "-- Content this")
-  }))
-
-cs("pc", fmt([[
-if not pcall(require, '{}') then return end
-local {} = require '{}'
-
-]], {
-    i(1, "Name"),
-    c(2, { rep(1), i(1, "") }),
-    rep(1),
-  }))
-
-
-return snippets, autosnippets
+}

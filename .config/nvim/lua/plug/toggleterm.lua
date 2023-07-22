@@ -1,18 +1,6 @@
 local M = {
   'akinsho/toggleterm.nvim',
-}
-
-M.keys = {
-  { '<C-t>', desc = 'Toggle terminal' },
-  { '<Leader>th', '<cmd>ToggleTerm size=15 direction=horizontal<cr>', desc = 'Open terminal in a horizontal window' },
-  { '<Leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Open terminal in a floating window' },
-  { '<Leader>te', '<cmd>TermExec cmd="!!"<cr>', desc = 'Exec previous command' },
-  { '<leader>tc', '<cmd>execute v:count1.\'TermExec cmd="<C-v><C-c>"\'<CR>', desc = 'Send <C-c> to terminal' },
-  { '<Leader>git', '<cmd>lua _lazygit_toggle()<cr>', desc = 'Open lazygit in a floating window' },
-}
-
-M.config = function()
-  require('toggleterm').setup({
+  opts = {
     size = 20,
     open_mapping = [[<c-t>]],
     direction = "float",
@@ -27,16 +15,18 @@ M.config = function()
         link = "FloatBorder",
       },
     },
-  })
+  }
+}
 
-  local Terminal  = require('toggleterm.terminal').Terminal
+M.keys = {
+  { '<C-t>', desc = 'Toggle terminal' },
+  { '<Leader>th', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', desc = 'Open terminal in a horizontal window' },
+  { '<Leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Open terminal in a floating window' },
 
-  -- LazyGit
-  local lazygit = Terminal:new({
-    cmd = "lazygit",
-    hidden = true,
-  })
-  function _lazygit_toggle() lazygit:toggle() end
-end
+  { '<Leader>te', '<cmd>TermExec cmd="!!"<cr>', desc = 'Exec previous command' },
+  { '<Leader>tp', '<cmd>TermExec cmd="run -i run.py"<cr>', desc = 'run run.py, use in ipy' },
+
+  { '<leader>tc', '<cmd>execute v:count1.\'TermExec cmd="<C-v><C-c>"\'<CR>', desc = 'Send <C-c> to terminal' },
+}
 
 return M
