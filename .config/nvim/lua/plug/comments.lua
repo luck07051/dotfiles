@@ -4,5 +4,5 @@ return {
     { 'gc', mode = { 'n', 'v' }, desc = 'Line comment' },
     { 'gb', mode = { 'n', 'v' }, desc = 'Block comment' },
   },
-  config = true
+  config = true,
 }

@@ -1,7 +1,6 @@
 return {
   {
     'ggandor/leap.nvim',
-    event = 'VimEnter',
     keys = {
       {
         "s",
@@ -40,8 +39,8 @@ return {
         desc = "Leap from window",
       },
     },
-    config = function()
 
+    config = function()
       -- fix cursor highlight
       vim.api.nvim_create_autocmd(
         "User",
@@ -61,7 +60,6 @@ return {
           pattern = "LeapLeave"
         }
       )
-
     end
   },
   {
