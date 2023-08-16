@@ -2,7 +2,8 @@
 
 # Source function
 function zsh_add_file() { #{{{
-  [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+  [ "$(printf %.1s "$1")" == '/' ] && file="$1" || file="$ZDOTDIR/$1"
+  [ -f "$file" ] && source "$file"
 } #}}}
 function zsh_add_plug() { #{{{
   PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
@@ -56,14 +57,13 @@ fi
 type zoxide >/dev/null &&
   eval "$(zoxide init zsh --cmd cd)"
 
-# fzf config
-[ -f "$XDG_CONFIG_HOME/fzf/config.sh" ] &&
-  source "$XDG_CONFIG_HOME/fzf/config.sh"
+
+shell_dir="$XDG_CONFIG_HOME/shell"
 
 # Alias
 zsh_add_file "functions/abbr.zsh"
-zsh_add_file "alias.zsh"
-zsh_add_file "local.zsh"
+zsh_add_file "$shell_dir/alias.zsh"
+zsh_add_file "$shell_dir/local.zsh"
 
 # Util
 zsh_add_file "functions/yank.zsh"          # <C-y> to yank prev command

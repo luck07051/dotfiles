@@ -37,17 +37,17 @@ abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/servi
 
 
 # Using bat for help highlight
-# if type bat >/dev/null; then
-#   alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
-#   alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
-# fi
+if [ "${0##*/}" == "zsh" ] && type bat >/dev/null; then
+	alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
+	alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
+fi
 
 
 # Change dir when left lf, and use given colors
 lf() {
-  source "$XDG_CONFIG_HOME/lf/colors";\
-    lf-imgview -last-dir-path="/tmp/lfcd"
-  cd "$(cat /tmp/lfcd)"
+	source "$XDG_CONFIG_HOME/lf/colors";\
+		lf-imgview -last-dir-path="/tmp/lfcd"
+	cd "$(cat /tmp/lfcd)"
 }
 
 # use bare Git repository to manage dotfiles
@@ -71,22 +71,22 @@ alias du='du -h'
 
 # ls
 if type lsd >/dev/null; then
-  alias ls='lsd -A --group-directories-first'
-  alias ll='lsd -Al --group-directories-first'
+	alias ls='lsd -A --group-directories-first'
+	alias ll='lsd -Al --group-directories-first'
 elif type exa >/dev/null; then
-  alias ls='exa -a --icons --group-directories-first'
-  alias ll='exa -al --icons --group-directories-first --git -H'
+	alias ls='exa -a --icons --group-directories-first'
+	alias ll='exa -al --icons --group-directories-first --git -H'
 else
-  alias ls='ls -A --color=auto --group-directories-first'
-  alias ll='ls -Al --color=auto --group-directories-first'
+	alias ls='ls -A --color=auto --group-directories-first'
+	alias ll='ls -Al --color=auto --group-directories-first'
 fi
 
 
 # Dont gen ~/.conda/environments.txt file
 conda() {
-  "$HOME/.local/share/anaconda3/bin/conda" "$@"
-  rm -f ~/.conda/environments.txt
-  rm -fd ~/.conda
+	"$HOME/.local/share/anaconda3/bin/conda" "$@"
+	rm -f ~/.conda/environments.txt
+	rm -fd ~/.conda
 }
 
 # Fix config file path
