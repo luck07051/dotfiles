@@ -1,21 +1,43 @@
+# Basic alias #
+
 alias c='cd'
 alias c.='cd ..'
 alias c-='cd -'
 alias c_='cd $_'
-alias z='cd $(dirmark || echo $PWD)'
-alias o='open'
-alias os='open -s'
 alias e='$EDITOR'
 alias e.='$EDITOR .'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -iv'
+alias mkdir='mkdir -pv'
+
+
+# Life Quality #
+
 alias n='$EDITOR $HOME/notes/index.md'
+alias o='open'
+alias os='open -s'
+alias z='cd $(dirmark || echo $PWD)'
 type fzf-fm >/dev/null && source fzf-fm && alias a='fzf_fm'
 
-abbr dp='doas pacman'
-abbr dps='doas pacman -S'
-
+# Use bare Git repository to manage dotfiles
+alias config="/usr/bin/git --git-dir=\$HOME/.dotfiles/ --work-tree=\$HOME"
 abbr cs='config status'
 abbr ca='config add'
 
+# Use doas instead of sudo
+type doas >/dev/null && alias sudo='doas'
+
+# Runit
+abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
+abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
+abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/service/{}'
+
+# Pacman
+abbr dp='doas pacman'
+abbr dps='doas pacman -S'
+
+# Misc
 abbr za='zathura'
 abbr cr='cargo run'
 abbr py='python3'
@@ -31,43 +53,15 @@ abbr conrun='conda run --no-capture-output --name'
 abbr fclist='fc-list : family | grep -i'
 abbr ipinfo='curl ipinfo.io'
 
-abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
-abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
-abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/service/{}'
 
-
-# Using bat for help highlight
-if [ "${0##*/}" == "zsh" ] && type bat >/dev/null; then
-	alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
-	alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
-fi
-
-
-# Change dir when left lf, and use given colors
-lf() {
-	source "$XDG_CONFIG_HOME/lf/colors";\
-		lf-imgview -last-dir-path="/tmp/lfcd"
-	cd "$(cat /tmp/lfcd)"
-}
-
-# use bare Git repository to manage dotfiles
-alias config="/usr/bin/git --git-dir=\$HOME/.dotfiles/ --work-tree=\$HOME"
-
-# Use doas instead of sudo
-type doas >/dev/null && alias sudo='doas'
-
-# Confirm before overwriting something
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -iv'
-alias mkdir='mkdir -pv'
-
-# grep color
-alias grep='grep --color=auto'
+# Color and Readability #
 
 # always human readable
 alias df='df -h'
 alias du='du -h'
+
+# grep color
+alias grep='grep --color=auto'
 
 # ls
 if type lsd >/dev/null; then
@@ -81,8 +75,23 @@ else
 	alias ll='ls -Al --color=auto --group-directories-first'
 fi
 
+# Using bat for help highlight
+if [ "${0##*/}" == "zsh" ] && type bat >/dev/null; then
+	alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
+	alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
+fi
 
-# Dont gen ~/.conda/environments.txt file
+
+# Fix Something #
+
+# Change dir when left lf, and use given colors
+lf() {
+	source "$XDG_CONFIG_HOME/lf/colors"; \
+		lf-imgview -last-dir-path="/tmp/lfcd"
+	cd "$(cat /tmp/lfcd)"
+}
+
+# Dont generate ~/.conda/environments.txt file
 conda() {
 	"$HOME/.local/share/anaconda3/bin/conda" "$@"
 	rm -f ~/.conda/environments.txt
