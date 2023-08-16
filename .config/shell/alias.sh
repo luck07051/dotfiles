@@ -37,10 +37,10 @@ abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/servi
 
 
 # Using bat for help highlight
-if type bat >/dev/null; then
-  alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
-  alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
-fi
+# if type bat >/dev/null; then
+#   alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
+#   alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
+# fi
 
 
 # Change dir when left lf, and use given colors

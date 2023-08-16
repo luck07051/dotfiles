@@ -10,8 +10,8 @@ vim.g.maplocalleader = ' '
 -- Copy paste with clipboard --
 vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>Y', '"+y$')
-vim.keymap.set('', '<Leader>p', '"+p')
-vim.keymap.set('', '<Leader>P', '"+P')
+vim.keymap.set('', '<Leader>p', '"+p=`]')
+vim.keymap.set('', '<Leader>P', '"+P=`]')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Delete with black hole --
@@ -22,6 +22,10 @@ vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )
 vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev,  { desc = 'Move to the prev diagnostic' } )
 vim.keymap.set('n', ']d',        vim.diagnostic.goto_next,  { desc = 'Move to the next diagnostic' } )
+
+-- Paste fit indent --
+vim.keymap.set('', 'p', 'p=`]')
+vim.keymap.set('', 'P', 'P=`]')
 
 -- Center the search --
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -38,21 +42,25 @@ vim.keymap.set('n', '[<Space>', 'm`O<Esc>``')
 -- vim.keymap.set('n', '<Leader>r', '!!$SHELL<CR>')
 -- vim.keymap.set('v', '<Leader>r', '!$SHELL<CR>')
 
+-- Substitute and search --
+vim.keymap.set("n", "<C-n>", "*Ncgn", { desc = "Substitute word under cursor" })
+
 -- Spell check --
 vim.keymap.set('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Goto prev file --
-vim.keymap.set('n', '<BS>', '<C-^>', { silent = true } )
+vim.keymap.set('n', '<BS>', '<C-^>')
 
 -- Buffer movement --
-vim.keymap.set('n', '<Tab>', ':bn<cr>', { silent = true } )
-vim.keymap.set('n', '<S-Tab>', ':bp<cr>', { silent = true } )
+vim.keymap.set('n', '<Tab>', ':bn<cr>')
+vim.keymap.set('n', '<S-Tab>', ':bp<cr>')
 
 -- Terminal --
-vim.keymap.set('', '<Leader>sh', ':terminal<cr>', { silent = true } )
-vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', { silent = true } )
-vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { silent = true } )
--- vim.keymap.set('t', '<CR>', '<CR><C-\\><C-n>', { silent = true } )
+vim.keymap.set('', '<Leader>sh', ':terminal<cr>')
+vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
+-- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>')
+vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
+-- vim.keymap.set('t', '<CR>', '<CR><C-\\><C-n>')
 
 
 -- Navigate windows --

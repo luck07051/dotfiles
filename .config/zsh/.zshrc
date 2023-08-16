@@ -67,10 +67,12 @@ zsh_add_file "local.zsh"
 
 # Util
 zsh_add_file "functions/yank.zsh"          # <C-y> to yank prev command
+zsh_add_file "functions/history.zsh"       # <C-r> to paste command from history
 # zsh_add_file "functions/lf.zsh"            # file manager 'lf'
 # zsh_add_file "functions/auto_ls.zsh"       # run ls when $PWD changed
 
 # Plugins
 zsh_add_plug "Aloxaf/fzf-tab"
+zsh_add_plug "marzocchi/zsh-notify"
 zsh_add_plug "zsh-users/zsh-completions"
 zsh_add_plug "zsh-users/zsh-syntax-highlighting"

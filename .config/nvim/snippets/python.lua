@@ -1,40 +1,83 @@
 
-local function d_else(args, snip)
-  return
+local util = require('luasnip-util')
 
+local function for_node(jump)
+  return c(jump, {
+    fmta('for <> in <>', {
+      r(1, 'i', i(nil, 'i')), r(2, 'iter', i(nil, 'iter')) }),
+    fmta('for <> in range(<>)', {
+      r(1, 'i'), r(2, 'iter') }),
+    fmta('for <>, <> in enumerate(<>)', {
+      r(1, 'i'), r(2, 'j', i(nil, 'j')), r(3, 'iter') }),
+    fmta('for <>, <> in zip(<>, <>)', {
+      r(1, 'i'), r(2, 'j'), r(3, 'iter'), r(4, 'sec_iter', i(nil, 'sec_iter')) }),
+  })
 end
+
 
 return {
 
   s({
     trig = 'fn',
-    name = 'Function',
-    dscr = 'Create a normal function',
-  }, fmta([[
-      def <>:
-      <><>
-    ]], {
-      i(1, 'name'), t('\t'), i(2, 'pass'),
-    })
-  ),
+    name = 'function',
+    dscr = 'Create a function',
+  }, {
+    t('def '), i(1, 'name'), t({':', ''}), util.input(2, {indent=1}),
+  }),
 
   s({
-    trig = 'f',
-    name = 'For loop',
+    trig = 'if',
+    name = 'if',
+    dscr = 'Create a if',
+  }, {
+    t('if '), i(1, 'cond'), t({':', ''}), util.input(2, {indent=1}),
+  }),
+
+  s({
+    trig = 'for',
+    name = 'for',
     dscr = 'Create a for loop',
   }, {
-      c(1, {
-        fmta('for <> in <>:', {
-          i(1, 'i'), i(2, 'list') }),
-        fmta('for <> in range(<>):', {
-          i(1, 'i'), i(2, 'num') }),
-        fmta('for <>, <> in enumerate(<>):', {
-          i(1, 'i'), i(2, 'j'), i(3, 'list') }),
-        fmta('for <>, <> in zip(<>, <>):', {
-          i(1, 'i'), i(2, 'j'), i(3, 'list'), i(4, 'list') }),
-      }),
-      t({'', '\t'}), i(2, 'pass'),
-    }
-  ),
+    for_node(1), t({':', ''}), util.input(2, {indent=1}),
+  }),
+
+  s({
+    trig = 'wh',
+    name = 'while',
+    dscr = 'Create a while',
+  }, {
+    t('while '), i(1, 'cond'), t({':', ''}), util.input(2, {indent=1}),
+  }),
+
+  s({
+    trig = 'main',
+    name = 'If main',
+    dscr = 'Create if name == main snippet',
+  }, {
+    t({'def main():', ''}), util.input(1, {indent=1}),
+    t({'', '', "if __name__ == '__main__':", '\tmain()'})
+  }),
+
+  s({
+    trig = 'lc',
+    name = 'list comprehension',
+    dscr = 'Create a list comprehension',
+  }, {
+    t('['),
+    i(1, 'exp'), t(' '), for_node(2),
+    c(3, { t(''), sn(nil, { t(' if '), i(1, 'cond') }), }),
+    t(']'),
+  }),
+
+  s({
+    trig = 'dc',
+    name = 'dictionary comprehension',
+    dscr = 'Create a dictionary comprehension',
+  }, {
+    t('{'),
+    i(1, 'key'), t(': '), i(2, 'value'), t(' '), for_node(3),
+    c(4, { t(''), sn(nil, { t(' if '), i(1, 'cond') }), }),
+    t('}'),
+  }),
 
 }

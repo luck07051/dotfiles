@@ -1,4 +1,6 @@
 
+local util = require('luasnip-util')
+
 local function mathzone()
   -- return vim.api.nvim_eval('vimtex#syntax#in_mathzone()') == 1
   return true
@@ -8,7 +10,7 @@ return {
 
   s({
     trig = 'doc',
-    name = 'Documentclass',
+    name = 'documentclass',
     dscr = 'Create a documentclass',
   }, {
     t('\\documentclass{article}')
@@ -16,26 +18,29 @@ return {
 
   s({
     trig = 'beg',
-    name = 'Environments',
+    name = 'environments',
     dscr = 'Create a begin/end environments',
   }, fmta([[
       \begin{<>}
-      <><><>
+      <>
       \end{<>}
     ]], {
-      i(1, 'document'), t('\t'), f(require('luasnip-util').get_visual), i(2), rep(1),
+      i(1, 'document'), util.input(2), rep(1),
+      -- i(1, 'document'), t('\t'), r(2), rep(1),
     })
   ),
 
   s({
-    trig='lrv',
+    trig='lr',
     name='left right',
     dscr='left right',
-  }, fmta([[
-      \left(<>\right)<>
-    ]], {
-      f(require('luasnip-util').get_visual), i(1),
-  }), {
+  }, {
+      c(1, {
+        sn(nil, { t('\\left( '), util.input(1), t(' \\right)') }),
+        sn(nil, { t('\\left{ '), util.input(1), t(' \\right}') }),
+        sn(nil, { t('\\left[ '), util.input(1), t(' \\right]') }),
+    }),
+  }, {
     condition = mathzone,
     show_condition = mathzone
   }),
@@ -56,12 +61,13 @@ return {
   -- }),
 
   s({
-    trig = '(%a)([_^])(%d%d+) ',
+    -- trig = '([%a%}]+)([_^])([%a%d][%a%d]+)([%s_^])',
+    trig = '([%a%}]+)([_^])(%w%w+)([%s_^])',
     regTrig = true,
-    name = 'Auto sub/superscript for multi digits',
-    dscr = 'Auto adding surround curly brace on multi digits sub/superscript',
+    name = 'auto sub/superscript',
+    dscr = 'Auto adding surround curly brace on multi chars sub/superscript',
   }, { f(function(_, snip)
-    return snip.captures[1] .. snip.captures[2] .. '{' .. snip.captures[3] .. '} '
+    return snip.captures[1] .. snip.captures[2] .. '{' .. snip.captures[3] .. '}' .. snip.captures[4]
   end),
   }, {
     condition = mathzone,
@@ -70,7 +76,7 @@ return {
 
   postfix({
     trig = '.hat ',
-    name = 'Auto hat',
+    name = 'auto hat',
     dscr = '',
   }, {
     l('\\hat{' .. l.POSTFIX_MATCH .. '} ')

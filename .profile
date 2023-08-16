@@ -33,7 +33,7 @@ export WM='dwm'
 export TERMINAL='st'
 export BROWSER='librewolf'
 export EDITOR='nvim'
-export SHELL='/bin/zsh'
+export SHELL='/bin/bash'
 export PKGMAN='paru'
 # export DMENU='dmenu -i'
 export DMENU='fmenu'
@@ -42,13 +42,14 @@ type nvim >/dev/null && export MANPAGER='nvim +Man!'
 
 export LANG='en_US.UTF-8'
 
-
 # Shell
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTFILE="$XDG_CACHE_HOME/history"
 export HISTORY_IGNORE="(ls|cd|history|a|z|c|c.|c-|c_|e|e.|o|n)"
 
+# Fzf Config
+test -f "$XDG_CONFIG_HOME/fzf/config.sh" && source "$_"
 
 #==================== Lets Paths Right ====================#
 # X11
