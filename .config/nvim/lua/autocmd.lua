@@ -5,17 +5,10 @@
 local au = vim.api.nvim_create_autocmd
 local ag = vim.api.nvim_create_augroup
 
--- Disable auto comment new line
-au('BufEnter', { command = 'set formatoptions-=cro' })
-
--- Delete trailing spaces and extra line when save file
-au('BufWrite', {
-  desc = 'Delete trailing spaces and extra line',
+au('FileType', {
+  pattern = { '*' },
   callback = function()
-    local pos = vim.fn.getpos('.')
-    vim.cmd [[ %s/\s\+$//e ]]
-    vim.cmd [[ %s/\n\+\%$//e ]]
-    vim.fn.setpos('.', pos)
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
   end
 })
 

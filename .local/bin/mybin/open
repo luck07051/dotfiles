@@ -27,7 +27,10 @@ case $(file --mime-type "$1" -bL) in
 		_open_with_swallower nsxiv "$@"
 		;;
 
-	application/pdf | application/postscript)
+	application/pdf |\
+	application/postscript |\
+	application/x-mobipocket-ebook |\
+	application/epub+zip)
 		_open_with_swallower zathura "$@"
 		;;
 

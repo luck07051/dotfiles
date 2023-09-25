@@ -65,23 +65,36 @@ build(){
 flash() {
 	nicenano="/run/media/$USER/NICENANO"
 
-	printf 'Left side.'
-	notify-send 'ZMK Flash' 'Left side.'
-	while [ ! -d "$nicenano" ]; do
-		sleep 1
-		printf '.'
-	done
-	cp "$output_dir/cradio_left-nice_nano_v2-zmk.uf2" "$nicenano"
+	case "$1" in
+	'sweep')
+		printf 'Left side.'
+		notify-send 'ZMK Flash' 'Left side.'
+		while [ ! -d "$nicenano" ]; do
+			sleep 1
+			printf '.'
+		done
+		cp "$output_dir/cradio_left-nice_nano_v2-zmk.uf2" "$nicenano"
 
-	sleep 2
+		sleep 2
 
-	printf '\nRight side.'
-	notify-send 'ZMK Flash' 'Right side.'
-	while [ ! -d "$nicenano" ]; do
-		sleep 1
-		printf '.'
-	done
-	cp "$output_dir/cradio_right-nice_nano_v2-zmk.uf2" "$nicenano"
+		printf '\nRight side.'
+		notify-send 'ZMK Flash' 'Right side.'
+		while [ ! -d "$nicenano" ]; do
+			sleep 1
+			printf '.'
+		done
+		cp "$output_dir/cradio_right-nice_nano_v2-zmk.uf2" "$nicenano"
+		;;
+	'uikey6')
+		printf 'Flashing'
+		notify-send 'ZMK Flash' 'Flashing.'
+		while [ ! -d "$nicenano" ]; do
+			sleep 1
+			printf '.'
+		done
+		cp "$output_dir/uikey6-nice_nano_v2-zmk.uf2" "$nicenano"
+	esac
+	printf ' done.\n'
 }
 
 

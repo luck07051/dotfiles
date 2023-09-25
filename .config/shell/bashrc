@@ -12,25 +12,6 @@ add_dl_file() {
 	source "$plug_dir/$file"
 }
 
-# Fzf Tab Completion
-if type fzf >/dev/null; then
-	add_dl_file 'https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/bash/fzf-bash-completion.sh'
-	bind -x '"\t": fzf_bash_completion'
-	# Hacky way to deal with the bash cleaning the prompt when complete
-	# Replace the loading msg and fzf prompt with ${PS1@P}
-	_fzf_bash_completion_loading_msg() { echo "${PS1@P}${READLINE_LINE}" | tail -n1; }
-	_fzf_bash_completion_selector() {
-		FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS" \
-			$(__fzfcmd 2>/dev/null || echo fzf) -1 -0 --prompt "${PS1@P}$line" --nth 2 -d "$_FZF_COMPLETION_SEP" --ansi \
-		| tr -d "$_FZF_COMPLETION_SEP"
-	}
-fi
-
-# Abbrev Support
-add_dl_file 'https://raw.githubusercontent.com/momo-lab/bash-abbrev-alias/master/abbrev-alias.plugin.bash'
-alias abbr=abbrev-alias
-
-
 # Common Config
 set -o vi
 set -o ignoreeof            # Prevent <C-D> to close window
@@ -39,6 +20,28 @@ stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 # Prompt
 PS1="\[\e[36m\e[1m\]\w\[\e[0m\]\$([ \$? -ne 0 ] && printf '\\[\\e[31m\\]')\$\[\e[0m\] "
 PS2='> '
+
+if type fzf >/dev/null; then
+	# Fzf Shell Keybind
+	add_dl_file 'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash'
+
+	# Fzf Tab Completion
+	add_dl_file 'https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/bash/fzf-bash-completion.sh'
+
+	bind -x '"\t": fzf_bash_completion'
+	# Hacky way to deal with the bash cleaning the prompt when complete
+	# Replace the loading msg and fzf prompt with ${PS1@P}
+	_fzf_bash_completion_loading_msg() { echo "${PS1@P}${READLINE_LINE}" | tail -n1; }
+	_fzf_bash_completion_selector() {
+		FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS" \
+			$(__fzfcmd 2>/dev/null || echo fzf) -1 -0 --prompt "${PS1@P}$line" --nth 2 -d "$_FZF_COMPLETION_SEP" --ansi \
+			| tr -d "$_FZF_COMPLETION_SEP"
+	}
+fi
+
+# Abbrev Support
+add_dl_file 'https://raw.githubusercontent.com/momo-lab/bash-abbrev-alias/master/abbrev-alias.plugin.bash'
+alias abbr=abbrev-alias
 
 # Source Something
 add_file "alias.sh"

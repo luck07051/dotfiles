@@ -15,8 +15,8 @@ vim.keymap.set('', '<Leader>P', '"+P=`]')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
 -- Delete with black hole --
--- vim.keymap.set('', '<Leader>d', '"_d')
--- vim.keymap.set('', '<Leader>D', '"_D')
+vim.keymap.set('', '_d', '"_d')
+vim.keymap.set('', '_D', '"_D')
 
 -- Diagnostic
 vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )

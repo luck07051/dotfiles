@@ -6,10 +6,12 @@ alias c-='cd -'
 alias c_='cd $_'
 alias e='$EDITOR'
 alias e.='$EDITOR .'
+alias ls='ls -A'
+alias ll='ls -Al'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -iv'
-alias mkdir='mkdir -pv'
+alias md='mkdir -pv'
 
 
 # Life Quality #
@@ -95,7 +97,7 @@ lf() {
 conda() {
 	"$HOME/.local/share/anaconda3/bin/conda" "$@"
 	rm -f ~/.conda/environments.txt
-	rm -fd ~/.conda
+	rmdir ~/.conda
 }
 
 # Fix config file path

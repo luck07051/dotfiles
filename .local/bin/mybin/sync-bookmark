@@ -16,4 +16,4 @@ sed '/^# vim.*$/d' "$bookmark" |
 	sed 's/\[\s*\]},/[/' |
 	sed 's/},\s*]/}\n]/g' > "$cache_bookmark"
 
-rsync -azvP "$cache_bookmark" root@uima.xyz:/root/container/dashboard/dashboard-data/bookmarks.json
+rsync -azvP "$cache_bookmark" ui@ui.pi:/home/ui/container/dashboard/data/bookmarks.json

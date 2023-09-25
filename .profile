@@ -49,7 +49,17 @@ export HISTFILE="$XDG_CACHE_HOME/history"
 export HISTORY_IGNORE="(ls|cd|history|a|z|c|c.|c-|c_|e|e.|o|n)"
 
 # Fzf Config
-test -f "$XDG_CONFIG_HOME/fzf/config.sh" && source "$_"
+export FZF_DEFAULT_OPTS='
+	--height 50%
+	--color=pointer:5,gutter:-1
+	--no-separator
+	--info=inline
+	--reverse
+	--bind=tab:down
+	'
+
+export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
+
 
 #==================== Lets Paths Right ====================#
 # X11

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+engine_list="$HOME/bm/ibus-engine"
+
+get() {
+	grep -v '^#' "$engine_list" | grep "^$(ibus engine)" | cut -f2
+}
+
+next() {
+	cat "$engine_list" "$engine_list" | grep -v '^#' | grep -A1 "^$(ibus engine)" | head -n2 | tail -n1 | cut -f1 | xargs -I{} ibus engine {}
+
+	sb-update sb-ibus
+}
+
+
+case "$1" in
+	'get') get;;
+	'next') next;;
+	*) util;;
+esac

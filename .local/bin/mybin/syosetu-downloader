@@ -1,0 +1,84 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit
+id="$1"
+
+url='https://ncode.syosetu.com/'
+
+source="${XDG_DATA_HOME}/syosetu/${id}/source"
+output="${XDG_DATA_HOME}/syosetu/${id}/output"
+
+[ ! -d "${source}" ] && mkdir -p "${source}"
+[ ! -d "${output}" ] && mkdir -p "${output}"
+
+curl -s "${url}/${id}" > "${source}/index.html"
+
+name="$(grep '<title>' "${source}/index.html" | sed 's/<title>\(.*\)<\/title>/\1/')"
+author="$(grep '作者：<a' "${source}/index.html" | sed 's/^.*>\(.*\)<\/a>.*$/\1/')"
+seqs="$(grep -A 6 novel_sublist2 "${source}/index.html" | grep '<a' | tail -n1 | sed 's/^.*\/\([0-9]\+\)\/.*$/\1/')"
+
+
+epub="${XDG_DATA_HOME}/syosetu/${id}/${name}"
+[ ! -d "${epub}" ] && mkdir -p "${epub}"
+
+
+for seq in $(seq "${seqs}"); do
+	printf '%d/%d ' "${seq}" "${seqs}"
+
+	if [ ! -f "${source}/${seq}.html" ]; then
+		printf 'downloading... '
+		curl -s "${url}/${id}/${seq}" > "${source}/${seq}.html"
+	else
+		printf 'skip download. '
+	fi
+
+	if [ ! -f "${output}/${seq}.html" ]; then
+		printf 'processing... '
+
+		sed '1,/class="novel_subtitle"/d; /class="novel_bn"/,$d' "${source}/${seq}.html" > "/tmp/${id}-${seq}.html"
+
+		title="$(grep '<title>' "${source}/${seq}.html" | sed 's/^.* - \(.*\)<\/title>.*$/\1/')"
+
+		cat > "${output}/${seq}.html" << EOB
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+<title>{{{title}}}</title>
+<meta name="belongs-to-collection" content="{{{name}}}">
+<meta name="display-seq" content="{{{seq}}}">
+<meta name="author" content="{{{author}}}">
+<meta charset="UTF-8">
+<meta name="language" content="ja">
+</head>
+<body>
+{{{}}}
+</body>
+EOB
+
+		sed -i "s/{{{title}}}/${title}/" "${output}/${seq}.html"
+		sed -i "s/{{{name}}}/${name}/" "${output}/${seq}.html"
+		sed -i "s/{{{seq}}}/${seq}/" "${output}/${seq}.html"
+		sed -i "s/{{{author}}}/${author}/" "${output}/${seq}.html"
+
+		sed -i "/{{{}}}/ {
+			r /tmp/${id}-${seq}.html
+			d
+		}" "${output}/${seq}.html"
+
+		rm "/tmp/${id}-${seq}.html"
+	else
+		printf 'skip process. '
+	fi
+
+	if [ ! -f "${epub}/${seq}.epub" ]; then
+		printf 'pandoc... '
+		pandoc --epub-title-page=false -o "${epub}/${seq}.epub" "${output}/${seq}.html"
+	else
+		printf 'skip pandoc. '
+	fi
+
+	printf 'done.\n'
+done
+
+printf 'upload to server.\n'
+rsync -au "${epub}" 'ui@uipi:~/data/web-novel'

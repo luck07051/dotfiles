@@ -43,7 +43,7 @@ fzf_fm(){
 		)"
 
 		if [ -f "$_fzf_fm_temp_file" ]; then
-			rm "$_fzf_fm_temp_file"
+			rm -f "$_fzf_fm_temp_file"
 			cd ..
 			continue
 		fi

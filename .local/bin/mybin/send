@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Wrapper for ffsend
+
+dmenu="${DMENU:-dmenu -i}"
+
+downloads_opts='1\n2\n3\n4\n5\n20\n50\n100'
+expires_time_opts='1d\n5m\n1h\n7d'
+
+
+_upload() {
+	if type fd >/dev/null; then
+		file="$(fd --type file | $dmenu)"
+	else
+		file="$(find . -type f | $dmenu)"
+	fi
+	[ -z "$file" ] && return 1
+
+	downloads="$(printf "$downloads_opts" | $dmenu -p 'Downloads:')"
+	[ -z "$downloads" ] && return 1
+
+	expires_time="$(printf "$expires_time_opts" | $dmenu -p 'Expires time:')"
+	[ -z "$expires_time" ] && return 1
+
+	ffsend upload --downloads "$downloads" --expiry-time "$expires_time" --copy "$file"
+}
+
+_delete() {
+	pass
+}
+
+_history() {
+	selected="$(ffsend history | tail -n +2 | fzf)"
+	[ -z "$selected" ] && return 1
+
+	ffsend history | head -n 1
+	printf '%s\n' "$selected"
+
+	printf '%s' "$selected" | awk '{print $2}' | clip
+}
+
+case "$1" in
+	'') _upload ;;
+	upload|u) _upload ;;
+	delete|d) _delete ;;
+	history|h) _history ;;
+esac

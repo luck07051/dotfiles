@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Print temperature
+
+# paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s "$(printf '\t')" -t | sed 's/\(.\)..$/.\1°C/'
+
+for dir in /sys/class/thermal/thermal_zone*; do
+	paste "$dir/type" "$dir/temp"
+done | column -s "$(printf '\t')" -t | sed 's/\(.\)..$/.\1°C/'
