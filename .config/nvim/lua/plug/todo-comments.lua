@@ -5,7 +5,7 @@ return {
     'nvim-lua/plenary.nvim'
   },
   keys = {
-    { '<Leader>xt', '<cmd>TodoTrouble<cr>', desc = 'List all project todos in trouble'},
+    { '<Leader>ft', '<cmd>TodoTelescope<cr>', desc = 'List all project todos in Tekescope'},
   },
   opts = {},
 }

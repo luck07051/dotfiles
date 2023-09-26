@@ -1,4 +1,5 @@
 require 'options'
+require 'status'
 require 'keymaps'
 require 'plugins'
 require 'autocmd'

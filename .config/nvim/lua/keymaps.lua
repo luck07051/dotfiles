@@ -46,7 +46,7 @@ vim.keymap.set('n', '[<Space>', 'm`O<Esc>``')
 vim.keymap.set("n", "<C-n>", "*Ncgn", { desc = "Substitute word under cursor" })
 
 -- Spell check --
-vim.keymap.set('n', '<Leader>s', ':setlocal spell! spelllang=en_us<CR>')
+vim.keymap.set('n', '<Leader>sp', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Goto prev file --
 vim.keymap.set('n', '<BS>', '<C-^>')

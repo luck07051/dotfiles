@@ -2,7 +2,8 @@ local M = {
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
-    'lukas-reineke/cmp-under-comparator',
+    'nvim-tree/nvim-web-devicons',
+    'onsails/lspkind.nvim',
 
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
@@ -18,46 +19,9 @@ local M = {
   },
 }
 
-local has_words_before = function()
- unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 M.config = function()
   local cmp = require 'cmp'
   local luasnip = require 'luasnip'
-
-  -- if not pcall(require, 'luasnip') then return end
-  -- local luasnip = require 'luasnip'
-
-  local kind_icons = { --{{{
-    Text = "",
-    Variable = "",
-    File = "",
-    Folder = "",
-    Reference = "",
-    Snippet = "",
-    Function = "",
-    Method = "m",
-    Value = "",
-    Keyword = "",
-    Constructor = "",
-    Field = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Enum = "",
-    Color = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-  } --}}}
 
   cmp.setup {
     mapping = {
@@ -92,19 +56,6 @@ M.config = function()
       { name = 'path' },
     },
 
-    sorting = {
-        comparators = {
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            require "cmp-under-comparator".under,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-        },
-    },
-
     preselect = cmp.PreselectMode.None,
 
     completion = {
@@ -125,9 +76,16 @@ M.config = function()
     formatting = {
       fields = { 'kind', 'abbr' },
       format = function(entry, vim_item)
-        vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
-        return vim_item
-      end,
+        if vim.tbl_contains({ 'path' }, entry.source.name) then
+          local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+          if icon then
+            vim_item.kind = icon
+            vim_item.kind_hl_group = hl_group
+            return vim_item
+          end
+        end
+        return require('lspkind').cmp_format({ with_text = false })(entry, vim_item)
+      end
     },
 
     snippet = {

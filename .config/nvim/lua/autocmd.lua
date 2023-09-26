@@ -5,10 +5,22 @@
 local au = vim.api.nvim_create_autocmd
 local ag = vim.api.nvim_create_augroup
 
+-- Disable auto comment new line
 au('FileType', {
   pattern = { '*' },
   callback = function()
     vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+  end
+})
+
+-- Delete trailing spaces and extra line when save file
+au('BufWrite', {
+  desc = 'Delete trailing spaces and extra line',
+  callback = function()
+    local pos = vim.fn.getpos('.')
+    vim.cmd [[ %s/\s\+$//e ]]
+    vim.cmd [[ %s/\n\+\%$//e ]]
+    vim.fn.setpos('.', pos)
   end
 })
 
@@ -61,13 +73,20 @@ au('BufEnter', {
     vim.opt.foldlevel = 0
   end
 })
-
+  
 -- Number line
 -- au('InsertEnter', { callback = function() vim.opt_local.relativenumber = false end })
 -- au('InsertLeave', { callback = function() vim.opt_local.relativenumber = true end })
 
 -- Correcting the filetype
-au('BufEnter', {
-  pattern = { '*.keymap' },
-  command = 'setf c'
-})
+local function corrft(pattern, ft)
+  au('BufEnter', {
+    pattern = { pattern },
+    command = 'setf ' .. ft
+  })
+end
+
+corrft('*qmk*/*.keymap', 'c') -- C for qmk file
+corrft('*qmk*/*.def', 'c')
+
+corrft('*manuscript/*.txt', 'markdown') -- Use md to open the book 'pure bash bible'

@@ -5,6 +5,10 @@ return {
     'kevinhwang91/promise-async',
   },
 
+  init = function()
+    vim.opt.foldlevel = 9999
+  end,
+
   opts = {
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
@@ -55,7 +59,6 @@ return {
     { '<enter>',  function()
         local winid = require('ufo').peekFoldedLinesUnderCursor()
         -- if not winid then vim.lsp.buf.hover() end
-        if not winid then require('ts-node-action').node_action() end
       end
     },
   },
