@@ -35,6 +35,11 @@ abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | 
 abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
 abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/service/{}'
 
+# Calibre
+cab(){
+	scp -r "$@" "ui@ui.pi:~/gate/calibre-import"
+}
+
 # Pacman
 abbr dp='doas pacman'
 abbr dps='doas pacman -S'
