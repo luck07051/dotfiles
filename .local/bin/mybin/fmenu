@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Alternative of dmenu but using terminal and fzf.
+# Alternative of dmenu with terminal and fzf.
 
 if [ $(pgrep -c "$(basename "$0")") -gt 1 ]; then
 	echo 'Other fmenu is running!' >&2
@@ -12,7 +12,7 @@ prompt="> "
 line="25"
 column="50"
 fzf_opt=""
-fontsize='20'
+fontsize='16'
 
 # parse options
 TEMP=$(getopt -o 'p:l:c:f:z:' -n "$0" -- "$@")
