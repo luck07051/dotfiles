@@ -13,10 +13,10 @@ window:
   dynamic_title: true
 
 key_bindings:
-  - { key: PageUp,   action: ScrollHalfPageUp }
-  - { key: PageDown, action: ScrollHalfPageDown }
-  - { key: H,   mods: Shift|Control,    action: DecreaseFontSize }
-  - { key: L,   mods: Shift|Control,    action: IncreaseFontSize }
+  - { key: K, mods: Shift|Control, action: ScrollHalfPageUp }
+  - { key: J, mods: Shift|Control, action: ScrollHalfPageDown }
+  - { key: H, mods: Shift|Control, action: DecreaseFontSize }
+  - { key: L, mods: Shift|Control, action: IncreaseFontSize }
 
 
 # place `colors` block at the end (for `sync_xrdb` script to automatically
