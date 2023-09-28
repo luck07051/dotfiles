@@ -77,6 +77,7 @@ export WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 # GunPG
 export GNUPGHOME=$XDG_DATA_HOME/gnupg
+gpg2 --homedir "$XDG_DATA_HOME"/gnupg
 # Java
 export _JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME/java -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java"
 export JDK_JAVA_OPTIONS=$_JAVA_OPTIONS
