@@ -13,18 +13,13 @@ window:
   dynamic_title: true
 
 key_bindings:
-  - { key: K,   mods: Shift|Control,    action: ScrollHalfPageUp }
-  - { key: J,   mods: Shift|Control,    action: ScrollHalfPageDown }
+  - { key: PageUp,   action: ScrollHalfPageUp }
+  - { key: PageDown, action: ScrollHalfPageDown }
   - { key: H,   mods: Shift|Control,    action: DecreaseFontSize }
   - { key: L,   mods: Shift|Control,    action: IncreaseFontSize }
-  - { key: Y,   mods: Alt,              action: Copy }
-  - { key: P,   mods: Alt,              action: Paste }
-    #- { key: C,   mods: Shift|Control,    chars: "\x1b[67;5u" }
-    #- { key: V,   mods: Shift|Control,    chars: "\x1b[86;5u" }
 
 
-
-# place `colors` block in the end (for `sync_xrdb` script to automatically
+# place `colors` block at the end (for `sync_xrdb` script to automatically
 # sync colors with xresource)
 colors:
   primary:
@@ -35,7 +30,7 @@ colors:
    text: CellBackground
    cursor: '#bcbcbc'
 
-  # place `normal` and `bright` block in the end of the file
+  # place `normal` and `bright` block at the end of the file
   normal:
     black:    '#161616'
     red:      '#c68586'

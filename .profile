@@ -30,7 +30,7 @@ export PATH="${PATH}:$XDG_DATA_HOME/cargo/bin"
 
 #==================== Main ====================#
 export WM='dwm'
-export TERMINAL='st'
+export TERMINAL='alacritty'
 export BROWSER='librewolf'
 export EDITOR='nvim'
 export SHELL='/bin/bash'
