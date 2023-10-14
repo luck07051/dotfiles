@@ -8,6 +8,7 @@ get() {
 
 next() {
 	next_engine="$(cat "$engine_list" "$engine_list" | grep -v '^#' | grep -A1 "^$(ibus engine)" | head -n2 | tail -n1 | cut -f1)"
+	# if current engine is not in list, return first engine
 	[ -z "$next_engine" ] && next_engine="$(grep -v '^#' "$engine_list" | head -n1 | cut -f1)"
 
 	ibus engine "$next_engine"

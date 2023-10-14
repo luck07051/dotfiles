@@ -13,6 +13,8 @@ alias mv='mv -iv'
 alias rm='rm -iv'
 alias md='mkdir -pv'
 
+alias emacs='emacsclient -c -a "emacs"'
+
 
 # Life Quality #
 

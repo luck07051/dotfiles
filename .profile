@@ -127,6 +127,8 @@ if [ "${XDG_VTNR}" -eq 1 ]; then
 	# syncthing
 	run syncthing serve --no-browser --no-default-folder >/dev/null
 
+	run /bin/emacs --daemon
+
 	if [ -z "${DISPLAY}" ]; then
 		startx "$XINITRC"
 	fi

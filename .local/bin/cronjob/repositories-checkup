@@ -2,7 +2,9 @@
 
 # Syncs repositories and downloads updates, meant to be run as a cronjob.
 
+# The command to download update file
 sync_cmd="${1:-${PKGMAN:-pacman} -Syyw --noconfirm}"
+# The command to update status bar
 sb_update_cmd="$HOME/.local/bin/statusbar/sb-update sb-pacman"
 
 cleanup(){
@@ -10,7 +12,7 @@ cleanup(){
 	$sb_update_cmd
 	exit
 }
-trap cleanup EXIT
+trap cleanup EXIT INT TERM
 
 touch /tmp/sb-repo-syncing
 $sb_update_cmd
