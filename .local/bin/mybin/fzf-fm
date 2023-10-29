@@ -13,7 +13,7 @@ _fzf_fm_lscmd(){
 	fi
 }
 
-if type preview >/dev/null; then
+if type preview >/dev/null 2>&1; then
 	_fzf_fm_preview_cmd='preview $PWD/{}'
 else
 	_fzf_fm_preview_cmd='

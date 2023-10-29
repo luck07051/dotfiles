@@ -4,29 +4,10 @@
         background: var(--bg-color) !important;
     }
 
-    /* Main Area */
-    #page-manager.ytd-app.style-scope,
-    .style-scope.ytd-page-manager,
-    /* Player */
-    #player-container,
-    /* Search Bar */
-    #container.ytd-masthead.style-scope,
-    /* channel banner */
-    #channel-header.style-scope,
-    #tabs-inner-container.style-scope,
-    /* Left Pane */
-    #sections,
-    /* Mini guide bar */
-    ytd-mini-guide-renderer,
-    ytd-mini-guide-entry-renderer {
-        background-color: var(--bg-color) !important;
-    }
-
-    /* Big banner on home page */
-    #foreground-content,
-    /* Topic Botton on Home Page */
-    #primary #header.ytd-rich-grid-renderer,
-    yt-related-chip-cloud-renderer {
+    ytd-reel-shelf-renderer,
+    yt-related-chip-cloud-renderer,
+    #player-ads,
+    #masthead-ad {
         visibility: collapse !important;
         display: none !important;
     }
@@ -34,5 +15,13 @@
     /* make element on video semiopacity */
     .ytp-ce-element.ytp-ce-element-show {
         opacity: 0.6;
+    }
+}
+
+@-moz-document url("https://www.youtube.com/feed/subscriptions"),
+@-moz-document url("https://www.youtube.com/") {
+    ytd-rich-section-renderer {
+        visibility: collapse !important;
+        display: none !important;
     }
 }

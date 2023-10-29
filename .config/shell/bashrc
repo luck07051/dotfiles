@@ -16,6 +16,7 @@ add_dl_file() {
 set -o vi
 set -o ignoreeof            # Prevent <C-D> to close window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
+bind 'set completion-ignore-case on' # Completion case-insensitive
 
 # Prompt
 PS1="\[\e[36m\e[1m\]\w\[\e[0m\]\$([ \$? -ne 0 ] && printf '\\[\\e[31m\\]')\$\[\e[0m\] "

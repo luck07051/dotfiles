@@ -15,7 +15,6 @@ alias md='mkdir -pv'
 
 alias emacs='emacsclient -c -a "emacs"'
 
-
 # Life Quality #
 
 alias n='$EDITOR $HOME/notes/index.md'
@@ -37,9 +36,24 @@ abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | 
 abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
 abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/service/{}'
 
+# Yt dlp
+abbr ytdm='yt-dlp --embed-thumbnail -f bestaudio -x --audio-format mp3'
+
+# Docker
+alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v /yourpath:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
+alias dp='docker ps'
+alias ds='docker stats'
+
+alias dc='docker-compose'
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
+alias dcp='docker-compose pull'
+alias dcr='docker-compose restart'
+alias dcl='docker-compose logs'
+
 # Calibre
-cab(){
-	scp -r "$@" "ui@ui.pi:~/gate/calibre-import"
+toser(){
+	scp -r "$@" "ui@ui.pi:~/data/downloads"
 }
 
 # Pacman
@@ -53,14 +67,14 @@ abbr py='python3'
 abbr rc='rsync -vhP'
 abbr syncb='syncthing serve --browser-only'
 abbr slidev='npx slidev'
-abbr lzg='lazygit'
-abbr lzd='lazydocker'
-abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
-abbr weather='curl https://wttr.in'
 abbr mi='doas make install clean'
 abbr conrun='conda run --no-capture-output --name'
 abbr fclist='fc-list : family | grep -i'
+
+# API
 abbr ipinfo='curl ipinfo.io'
+abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
+abbr weather='curl https://wttr.in'
 
 
 # Color and Readability #
