@@ -16,7 +16,15 @@ add_dl_file() {
 set -o vi
 set -o ignoreeof            # Prevent <C-D> to close window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
-bind 'set completion-ignore-case on' # Completion case-insensitive
+shopt -s cdspell            # Fix directory typos when cd
+shopt -s direxpand          # Expand directoryglobs when completing
+shopt -s globstar           # ** support
+shopt -s nocaseglob         # Case-insensitive globbing
+PROMPT_COMMAND="history -a; history -n"  # immediately append history
+
+# Readline
+bind 'set completion-ignore-case on'  # Completion case-insensitive
+bind 'set completion-map-case on'     # Treat hypen and underscores as equivalent
 
 # Prompt
 PS1="\[\e[36m\e[1m\]\w\[\e[0m\]\$([ \$? -ne 0 ] && printf '\\[\\e[31m\\]')\$\[\e[0m\] "
@@ -39,10 +47,6 @@ if type fzf >/dev/null; then
 			| tr -d "$_FZF_COMPLETION_SEP"
 	}
 fi
-
-# Abbrev Support
-add_dl_file 'https://raw.githubusercontent.com/momo-lab/bash-abbrev-alias/master/abbrev-alias.plugin.bash'
-alias abbr=abbrev-alias
 
 # Source Something
 add_file "alias.sh"

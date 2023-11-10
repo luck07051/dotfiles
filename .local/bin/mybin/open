@@ -23,15 +23,16 @@ case $(file --mime-type "$1" -bL) in
 		_open_with_swallower mpv "$@"
 		;;
 
-	image/*)
-		_open_with_swallower nsxiv "$@"
-		;;
-
 	application/pdf |\
 	application/postscript |\
 	application/x-mobipocket-ebook |\
-	application/epub+zip)
+	application/epub+zip |\
+	image/vnd.djvu)
 		_open_with_swallower zathura "$@"
+		;;
+
+	image/*)
+		_open_with_swallower nsxiv "$@"
 		;;
 
 	application/msword |\

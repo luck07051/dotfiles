@@ -13,34 +13,49 @@ alias mv='mv -iv'
 alias rm='rm -iv'
 alias md='mkdir -pv'
 
-alias emacs='emacsclient -c -a "emacs"'
-
 # Life Quality #
 
-alias n='$EDITOR $HOME/notes/index.md'
 alias o='open'
 alias os='open -s'
 alias z='cd $(dirmark || echo $PWD)'
-type fzf-fm >/dev/null && source fzf-fm && alias a='fzf_fm'
+type fzf-fm >/dev/null 2>&1 && source fzf-fm && alias a='fzf_fm'
+
+# Use doas instead sudo
+type doas >/dev/null 2>&1 && alias sudo='doas'
+
+# Misc
+alias za='zathura'
+alias py='python3'
+alias rc='rsync -vhP'
+alias syncb='syncthing serve --browser-only'
+alias mi='doas make install clean'
+alias conrun='conda run --no-capture-output --name'
+alias fclist='fc-list : family | grep -i'
+alias ytdm='yt-dlp --embed-thumbnail -f bestaudio -x --audio-format mp3'
+
+# API
+alias ipinfo='curl ipinfo.io'
+alias weather='curl wttr.in'
+alias unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
 
 # Use bare Git repository to manage dotfiles
 alias config="/usr/bin/git --git-dir=\$HOME/.dotfiles/ --work-tree=\$HOME"
-abbr cs='config status'
-abbr ca='config add'
-
-# Use doas instead of sudo
-type doas >/dev/null && alias sudo='doas'
+alias cs='config status'
+alias ca='config add'
 
 # Runit
-abbr svs='doas sv status /run/runit/service/* | sed "s#/run/runit/service/##" | column -t -s:'
-abbr svln='ls /etc/runit/sv/ | fzf | xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
-abbr svrm='ls /run/runit/service/ | fzf | xargs -r -I{} doas rm /run/runit/service/{}'
-
-# Yt dlp
-abbr ytdm='yt-dlp --embed-thumbnail -f bestaudio -x --audio-format mp3'
+alias svs='( cd /run/runit/service && doas sv status * ) | column -t -s:'
+# TODO not POSIX compliance
+alias svln='comm -13 <(ls /run/runit/service) <(ls /etc/runit/sv) | fzf |\
+	xargs -r -I{} doas ln -s /etc/runit/sv/{} /run/runit/service/'
+alias svrm='ls /run/runit/service/ | fzf |\
+	xargs -r -I{} doas rm /run/runit/service/{}'
 
 # Docker
-alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v /yourpath:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
+alias lzd='docker run --rm -it\
+ -v /var/run/docker.sock:/var/run/docker.sock\
+ -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker\
+ lazyteam/lazydocker'
 alias dp='docker ps'
 alias ds='docker stats'
 
@@ -50,31 +65,6 @@ alias dcd='docker-compose down'
 alias dcp='docker-compose pull'
 alias dcr='docker-compose restart'
 alias dcl='docker-compose logs'
-
-# Calibre
-toser(){
-	scp -r "$@" "ui@ui.pi:~/data/downloads"
-}
-
-# Pacman
-abbr dp='doas pacman'
-abbr dps='doas pacman -S'
-
-# Misc
-abbr za='zathura'
-abbr cr='cargo run'
-abbr py='python3'
-abbr rc='rsync -vhP'
-abbr syncb='syncthing serve --browser-only'
-abbr slidev='npx slidev'
-abbr mi='doas make install clean'
-abbr conrun='conda run --no-capture-output --name'
-abbr fclist='fc-list : family | grep -i'
-
-# API
-abbr ipinfo='curl ipinfo.io'
-abbr unitest='curl https://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt'
-abbr weather='curl https://wttr.in'
 
 
 # Color and Readability #
@@ -87,10 +77,11 @@ alias du='du -h'
 alias grep='grep --color=auto'
 
 # ls
-if type lsd >/dev/null; then
+if type lsd >/dev/null 2>&1; then
 	alias ls='lsd -A --group-directories-first'
 	alias ll='lsd -Al --group-directories-first'
-elif type exa >/dev/null; then
+	type tree >/dev/null 2>&1 || alias tree='lsd --tree'
+elif type exa >/dev/null 2>&1; then
 	alias ls='exa -a --icons --group-directories-first'
 	alias ll='exa -al --icons --group-directories-first --git -H'
 else
@@ -99,7 +90,7 @@ else
 fi
 
 # Using bat for help highlight
-if [ "${0##*/}" == "zsh" ] && type bat >/dev/null; then
+if [ "${0##*/}" == "zsh" ] && type bat >/dev/null 2>&1; then
 	alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
 	alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
 fi

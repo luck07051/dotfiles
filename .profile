@@ -46,7 +46,8 @@ export LANG='en_US.UTF-8'
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTFILE="$XDG_CACHE_HOME/history"
-export HISTORY_IGNORE="(ls|cd|history|a|z|c|c.|c-|c_|e|e.|o|n)"
+export HISTORY_IGNORE="?:??"
+export HISTCONTROL=ignoreboth:erasedups
 
 # Fzf Config
 export FZF_DEFAULT_OPTS='
