@@ -3,33 +3,30 @@
 # File browser using fzf.
 # Adding `source fzf-fm` in your shellrc. And run command 'fzf_fm'
 
-_fzf_fm_lscmd(){
-	if type lsd >/dev/null; then
-		lsd -A --group-directories-first --color=always "$*"
-	elif type exa >/dev/null; then
-		exa -a --group-directories-first --icons --color=always "$*"
-	else
-		ls -A --group-directories-first --color=always "$*"
-	fi
-}
+if type lsd >/dev/null; then
+	_fzf_fm_lscmd='lsd -A --group-directories-first --color=always'
+elif type exa >/dev/null; then
+	_fzf_fm_lscmd='exa -a --group-directories-first --icons --color=always'
+else
+	_fzf_fm_lscmd='ls -A --group-directories-first --color=always'
+fi
 
 if type preview >/dev/null 2>&1; then
 	_fzf_fm_preview_cmd='preview $PWD/{}'
 else
-	_fzf_fm_preview_cmd='
-if [ -d $PWD/{} ]; then
-	_fzf_fm_lscmd $PWD/{}
+	_fzf_fm_preview_cmd="
+if [ -d \$PWD/{} ]; then
+	$_fzf_fm_lscmd \$PWD/{}
 else
-	cat $PWD/{}
-fi'
+	cat \$PWD/{}
+fi"
 fi
 
 fzf_fm(){
 	_fzf_fm_temp_file='/tmp/fzf-fm-up-dir'
 
 	while :; do
-		# TODO: fzf prompt: limit dir length
-		selected="$(_fzf_fm_lscmd "$PWD" |
+		selected="$($_fzf_fm_lscmd "$PWD" |
 			fzf --prompt "$PWD/" \
 			--preview "$_fzf_fm_preview_cmd" \
 			--preview-window '70%,border-left' \
@@ -53,8 +50,10 @@ fzf_fm(){
 		file="$PWD/$selected"
 		if [ -d "$file" ]; then
 			cd "$file" || exit
-		else
+		elif type open >/dev/null 2>&1; then
 			open "$file"
+		else
+			$EDITOR "$file"
 		fi
 	done
 }
