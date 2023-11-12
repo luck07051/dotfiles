@@ -1,28 +1,27 @@
 #!/bin/sh
 
 # File browser using fzf.
-# Adding `source fzf-fm` in your shellrc. And run command 'fzf_fm'
-
-if type lsd >/dev/null; then
-	_fzf_fm_lscmd='lsd -A --group-directories-first --color=always'
-elif type exa >/dev/null; then
-	_fzf_fm_lscmd='exa -a --group-directories-first --icons --color=always'
-else
-	_fzf_fm_lscmd='ls -A --group-directories-first --color=always'
-fi
-
-if type preview >/dev/null 2>&1; then
-	_fzf_fm_preview_cmd='preview $PWD/{}'
-else
-	_fzf_fm_preview_cmd="
-if [ -d \$PWD/{} ]; then
-	$_fzf_fm_lscmd \$PWD/{}
-else
-	cat \$PWD/{}
-fi"
-fi
+# Adding `source fzf-fm` in your shellrc. And run command 'fzf_fm'.
+# You need source the file to actually cd to dir.
 
 fzf_fm(){
+	# Set ls command
+	if type lsd >/dev/null; then
+		_fzf_fm_lscmd='lsd -A --group-directories-first --color=always'
+	elif type exa >/dev/null; then
+		_fzf_fm_lscmd='exa -a --group-directories-first --icons --color=always'
+	else
+		_fzf_fm_lscmd='ls -A --group-directories-first --color=always'
+	fi
+
+	# Set preview command
+	if type preview >/dev/null 2>&1; then
+		_fzf_fm_preview_cmd='preview $PWD/{}'
+	else
+		_fzf_fm_preview_cmd="test -d \$PWD/{} && $_fzf_fm_lscmd \$PWD/{} || cat \$PWD/{}"
+	fi
+
+	# Temp file
 	_fzf_fm_temp_file='/tmp/fzf-fm-up-dir'
 
 	while :; do
@@ -52,7 +51,7 @@ fzf_fm(){
 			cd "$file" || exit
 		elif type open >/dev/null 2>&1; then
 			open "$file"
-		else
+		elif [ "$(file --mime-type "$file" -bL | sed 's#/.*$##')" = 'text' ]; then
 			$EDITOR "$file"
 		fi
 	done

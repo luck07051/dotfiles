@@ -30,14 +30,12 @@ ibus-daemon -rxdR
 
 xrdb -load "$XDG_CONFIG_HOME"/X11/xresources
 setwallpaper
+# compositing manager (opacity etc)
 run xcompmgr -n
+# Hide mouse cursor
 run unclutter
 
-run entr-list
-
-run udiskie
-
-# Run windows manager
+# Run dwm status bar
 killall dwmblocks >/dev/null 2>&1
 dwmblocks &
 

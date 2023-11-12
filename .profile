@@ -122,13 +122,20 @@ run(){
 		"$@" &
 	fi
 }
+# Run these if you login tty1
 if [ "${XDG_VTNR}" -eq 1 ]; then
 	# audio
 	run start-pipewire
-	# syncthing
+
 	run syncthing serve --no-browser --no-default-folder >/dev/null
 
 	run /bin/emacs --daemon
+
+	# auto mount usb
+	run udiskie
+
+	# run entr
+	run entr-list
 
 	if [ -z "${DISPLAY}" ]; then
 		startx "$XINITRC"
