@@ -17,7 +17,7 @@ set -o vi
 set -o ignoreeof            # Prevent <C-D> to close window
 stty -ixon                  # Disable <C-S> and <C-Q> to stop shell
 shopt -s cdspell            # Fix directory typos when cd
-shopt -s direxpand          # Expand directoryglobs when completing
+# shopt -s direxpand          # Expand directoryglobs when completing
 shopt -s globstar           # ** support
 shopt -s nocaseglob         # Case-insensitive globbing
 PROMPT_COMMAND="history -a; history -n"  # immediately append history

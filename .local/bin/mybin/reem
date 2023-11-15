@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Open the emacs client
+
+killall emacs
+
+if /bin/emacs --daemon --debug-init && pidof -q emacs; then
+	notify-send 'Emacs' 'Daemon started'
+else
+	notify-send 'Emacs' 'Daemon failed'
+fi

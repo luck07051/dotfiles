@@ -11,22 +11,14 @@ export XDG_MUSIC_DIR="$HOME/mu"
 export XDG_PICTURES_DIR="$HOME/img"
 export XDG_VIDEOS_DIR="$HOME/vid"
 
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export WLR_NO_HARDWARE_CURSORS=1
-
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and it's subdir to path
-PATH="${PATH}:$(find "$XDG_BIN_HOME" -type d -printf "%p:" | sed -e 's/:$//g')"
+PATH="${PATH}$(find "$XDG_BIN_HOME" -type d ! -path '*.git*' ! -path '*__pycache__*' -printf ':%p')"
 export PATH
 
 export PATH="${PATH}:$XDG_DATA_HOME/python/bin"
 export PATH="${PATH}:$XDG_DATA_HOME/anaconda3/bin"
 export PATH="${PATH}:$XDG_DATA_HOME/cargo/bin"
-
-# The cargo stuff
-# [ -f "$XDG_DATA_HOME/cargo/env" ] && . "$XDG_DATA_HOME/cargo/env"
-
 
 #==================== Main ====================#
 export WM='dwm'
@@ -35,7 +27,6 @@ export BROWSER='librewolf'
 export EDITOR='nvim'
 export SHELL='/bin/bash'
 export PKGMAN='paru'
-# export DMENU='dmenu -i'
 export DMENU='fmenu'
 
 type nvim >/dev/null && export MANPAGER='nvim +Man!'
@@ -46,7 +37,7 @@ export LANG='en_US.UTF-8'
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTFILE="$XDG_CACHE_HOME/history"
-export HISTORY_IGNORE="?:??"
+export HISTORY_IGNORE="?:??"  # ignore one or two char command
 export HISTCONTROL=ignoreboth:erasedups
 
 # Fzf Config
@@ -58,7 +49,6 @@ export FZF_DEFAULT_OPTS='
 	--reverse
 	--bind=tab:down
 	'
-
 export FZF_DEFAULT_COMMAND="fd -HL --exclude '.git' --type file"
 
 
@@ -139,5 +129,6 @@ if [ "${XDG_VTNR}" -eq 1 ]; then
 
 	if [ -z "${DISPLAY}" ]; then
 		startx "$XINITRC"
+		# river
 	fi
 fi

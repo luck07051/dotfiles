@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Open the emacs client
+
+emacsclient -c -a 'emacs'

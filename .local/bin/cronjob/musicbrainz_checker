@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# Help
+if [ "$1" = '-h' ] || [ "$1" = '--help' ]; then
+	# TODO complete help
+	printf 'Usage: %s [artist list file]\n' "${0##*/}"
+	exit
+fi
+
+# Default variable
+musicbrainz_url='https://musicbrainz.org'
+artist_list="${1:-$HOME/artist_list}"
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/musicbrainz_checker"
+temp_file='/tmp/musicbrainz_checker_temp'
+
+if [ ! -f "$artist_list" ]; then
+	printf '%s: Artist list: %s not found.\n' "${0##*/}" "$artist_list" >&2
+	exit 1
+fi
+test -d "$cache_dir" || mkdir -p "$cache_dir"
+
+# Clear temp file after exit
+cleanup() {
+	rm -f "$temp_file"
+	exit
+}
+trap cleanup EXIT INT TERM
+
+# Action for each new id
+action() {
+	artist="$1"
+	release_id="$2"
+
+	# get info
+	eval "$(jq -r ". | select(.id == $release_id) |"'
+	@sh "release_id=\(.id)",
+	@sh "title=\(.title)",
+	@sh "date=\(."first-release-date")",
+	@sh "primary_type=\(."primary-type")",
+	@sh "secondary_types=\(."secondary-types")"' "$temp_file")"
+
+	# ntfy
+	curl -H "Title: $artist - $title - $primary_type" -d \
+"$artist has new $primary_type $secondary_types at $date
+
+** $artist
+*** $primary_type
+- [ ] [[$musicbrainz_url/release-group/$release_id][$title]]" \
+	'https://ntfy.uima.duckdns.org/Musicbrainz'
+}
+
+# Main loop
+while read -r line; do
+	# Ingore emtpy line and line beggining with #
+	if printf '%s\n' "$line" | grep -q -e '^\s*#' -e '^\s*$'; then
+		continue
+	fi
+
+	printf '%s\n' "$line"
+
+	# Get info from artist_list
+	artist=${line%%	*}
+	artist_id=${line##*	}
+	old_json="$cache_dir/${artist_id}_${artist}.json"
+
+	# Get release group json file from musicbrainz and organize it
+	# TODO add fail check
+	curl -s "$musicbrainz_url/ws/2/release-group?artist=$artist_id&fmt=json" \
+	| jq '."release-groups"[] | {id, title, "first-release-date", "primary-type", "secondary-types"}' \
+	> $temp_file
+
+	# If no have cache yet, ceate one and continue
+	if [ ! -f "$old_json" ]; then
+		cp "$temp_file" "$old_json"
+		continue
+	fi
+
+	# Comparing old json and new json, pipe new id to while.
+	jq -n --slurpfile old "$old_json" \
+		--slurpfile new "$temp_file" \
+		'[$new[].id] - [$old[].id] | .[]' |
+		while read -r release_id; do
+			action "$artist" "$release_id"
+		done
+
+	# Update cache (no matter has new updated)
+	cp -f "$temp_file" "$old_json"
+done <"$artist_list"
