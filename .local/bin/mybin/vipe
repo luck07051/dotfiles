@@ -3,7 +3,12 @@
 # Pipe stdin to the editor and output the content to stdout.
 
 temp="$(mktemp /tmp/vipe.bashXXXXXXXX)"
+cleanup() {
+	rm -f "$temp"
+	exit
+}
+trap cleanup EXIT INT TERM
+
 cat > "$temp"
 "${EDITOR:-vim}" "$temp" </dev/tty >/dev/tty
 cat "$temp"
-rm "$temp"

@@ -35,6 +35,13 @@ run xcompmgr -n
 # Hide mouse cursor
 run unclutter
 
+# auto mount usb
+run udiskie
+
+# run entr
+run entr-list
+
+
 # Run dwm status bar
 killall dwmblocks >/dev/null 2>&1
 dwmblocks &

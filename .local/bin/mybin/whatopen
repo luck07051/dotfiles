@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Output the default program that designed to open the file.
+# Show the default program that designed to open the file.
 
 file="$1"
 # [ ! -f "$file" ] && echo "File '$1' not founded." >&2 && exit 1

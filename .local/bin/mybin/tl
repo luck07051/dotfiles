@@ -5,36 +5,50 @@
 # Usage: tl [clip|sele|editor]
 #   If no args given, 'clip' will be used.
 
-source='clip'
+source="$1"
+lang="$2"
 pager='less -R'
-editor="nvim -c startinsert"
-lang='en+zh-TW+ja'
+editor='nvim -c startinsert'
 trans_opt='-show-original n -show-original-phonetics n -show-translation y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary y -show-alternatives n'
+langs="$(cat << EOF
+English	en
+Chinese	zh-TW
+Japanese	ja
+EOF
+)"
 
-# clipboard / selection / editor
-if [ -n "$1" ];then
-	source="$(echo "$1" | tr '[:upper:]' '[:lower:]')"
-	case $source in
-		editor|clip*|sele*) ;;
-		*) echo "Usage: ${0##*/} editor|clip|sele" >&2; exit 1;
-	esac
+cleanup() {
+	rm -f "$temp"
+	exit
+}
+trap cleanup EXIT INT TERM
+
+# chose source if $1 is empty
+if [ -z "$source" ] || [ "$source" = '-' ]; then
+	source="$(printf 'Editor\nClipboard\nSelection\n' | fzf --prompt 'From: ')"
+	[ -z "$source" ] && exit
 fi
 
-# prepare comtent
+# prepare comtent form different input
 temp=$(mktemp /tmp/trans.XXXXXXXXXXX)
-case $source in
+case "$(printf '%s' "$source" | tr '[:upper:]' '[:lower:]')" in
 	editor)         $editor "$temp" ;;
 	clip|clipboard) clip -o > "$temp" ;;
 	sele|select)    clip -s > "$temp" ;;
+	*) echo "Usage: ${0##*/} editor|clip|sele" >&2; exit 1;
 esac
 
 if ! grep -qv '^\s*$' "$temp"; then
-	rm "$temp"
 	printf 'The content is empty.'
 	read -r _
 	exit
 fi
 
-trans ":$lang" $trans_opt <"$temp" | $pager
+# chose the language
+if [ -z "$lang" ]; then
+	lang="$(printf '%s\n' "$langs" | cut -f1 | fzf --prompt 'To: ')"
+	[ -z "$lang" ] && exit
+	lang="$(printf '%s\n' "$langs" | grep "^$lang" | cut -f2)"
+fi
 
-rm "$temp"
+trans ":$lang" $trans_opt <"$temp" | $pager

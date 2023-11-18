@@ -121,12 +121,6 @@ if [ "${XDG_VTNR}" -eq 1 ]; then
 
 	run /bin/emacs --daemon
 
-	# auto mount usb
-	run udiskie
-
-	# run entr
-	run entr-list
-
 	if [ -z "${DISPLAY}" ]; then
 		startx "$XINITRC"
 		# river

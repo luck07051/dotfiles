@@ -9,7 +9,7 @@ fi
 
 # Default variable
 musicbrainz_url='https://musicbrainz.org'
-artist_list="${1:-$HOME/artist_list}"
+artist_list="${1:-$HOME/artist-list}"
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/musicbrainz_checker"
 temp_file='/tmp/musicbrainz_checker_temp'
 
