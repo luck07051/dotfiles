@@ -38,5 +38,5 @@ set notification-fg         "#d0d0d0"
 
 # context color
 set recolor-lightcolor      rgba(18,18,18,0.75)
-set recolor-darkcolor       "#e4e4e4"
+set recolor-darkcolor       "#cccccc"
 set recolor-keephue         true      # keep original color

@@ -12,6 +12,6 @@ log out;    loginctl terminate-session ${XDG_SESSION_ID-}
 EOF
 )"
 
-selected=$(echo "$list" | cut -d';' -f1 | $dmenu -p "POWER")
+selected=$(printf '%s' "$list" | cut -d';' -f1 | $dmenu -p "POWER")
 
 [ -n "$selected" ] && $(echo "$list" | grep "^$selected;" | sed 's/.*;\s\+//')

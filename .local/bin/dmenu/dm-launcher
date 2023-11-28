@@ -4,7 +4,13 @@
 
 dmenu="${DMENU:-dmenu -i}"
 term="${TERMINAL:-st} -e sh -c"
-cache='/tmp/launcher-cache'
+temp_file='/tmp/launcher_temp'
+
+cleanup() {
+	rm -f $temp_file
+	exit
+}
+trap cleanup EXIT INT TERM
 
 _path(){
 	echo "$PATH" | tr ':' '\n' | xargs ls | sed '/^\//d; /^$/d' | sort | uniq
@@ -13,21 +19,28 @@ _app(){
 	ls "$XDG_DATA_HOME/applications" | sort
 }
 
-_path > "$cache"
-_app >> "$cache"
+printf 'b\n' > "$temp_file"
+_path >> "$temp_file"
+_app >> "$temp_file"
 
-selected="$($dmenu -p "RUN" < "$cache")"
-
-rm "$cache"
+selected="$($dmenu -p "RUN" < "$temp_file")"
 
 [ -z "$selected" ] && exit
 
 case "$selected" in
+	# exec command in terminal if query start or end with ';'
+	*\;) $term "${selected%\;}" ;;
+	\;*) $term "${selected#\;}" ;;
+
+	# search if query with ':'
+	*/) xdg-open "$(search-query ${selected%/})" ;;
+	/*) xdg-open "$(search-query ${selected#/})" ;;
+
+	# b for bookmark
+	b) dm-bookmark ;;
+
 	# desktop applications
 	*.desktop) gtk-launch "$selected" ;;
-
-	# exec command in terminal if query end with ';'
-	*\;) $term "${selected%\;}" ;;
 
 	# exec selected
 	*) $selected

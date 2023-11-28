@@ -18,7 +18,7 @@ alias md='mkdir -pv'
 alias o='open'
 alias os='open -s'
 alias z='cd $(dirmark || echo $PWD)'
-type fzf-fm >/dev/null 2>&1 && source fzf-fm && alias a='fzf_fm'
+alias a='. fff'
 
 # Use doas instead sudo
 type doas >/dev/null 2>&1 && alias sudo='doas'
@@ -52,9 +52,9 @@ alias svrm='ls /run/runit/service/ | fzf |\
 
 # Docker
 alias lzd='docker run --rm -it\
- -v /var/run/docker.sock:/var/run/docker.sock\
- -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker\
- lazyteam/lazydocker'
+	-v /var/run/docker.sock:/var/run/docker.sock\
+	-v ~/.config/lazydocker:/.config/jesseduffield/lazydocker\
+	lazyteam/lazydocker'
 alias dp='docker ps'
 alias ds='docker stats'
 
@@ -96,13 +96,6 @@ fi
 
 
 # Fix Something #
-
-# Change dir when left lf, and use given colors
-lf() {
-	source "$XDG_CONFIG_HOME/lf/colors"; \
-		lf-imgview -last-dir-path="/tmp/lfcd"
-	cd "$(cat /tmp/lfcd)"
-}
 
 # Dont generate ~/.conda/environments.txt file
 conda() {

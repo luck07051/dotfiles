@@ -1,9 +1,0 @@
-#!/bin/sh
-
-yt-dlp --print original_url,title,duration,channel "ytsearch1:over does"
-
-# query="$(printf '%s' "$*" | tr ' ' '+')"
-# search="$(curl -s "${instance}/search?q=${query}" | sed -n 's/.*watch?v=\([^"]*\).*/\1/p' | head -n1)"
-# url="$(yt-dlp -f bestaudio --get-url "${instance}/${search}")"
-
-mpv "$url"
