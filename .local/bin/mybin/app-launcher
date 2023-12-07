@@ -19,7 +19,7 @@ _app(){
 	ls "$XDG_DATA_HOME/applications" | sort
 }
 
-printf 'b\n' > "$temp_file"
+printf 'url-bookmark\n' > "$temp_file"
 _path >> "$temp_file"
 _app >> "$temp_file"
 
@@ -35,9 +35,6 @@ case "$selected" in
 	# search if query with ':'
 	*/) xdg-open "$(search-query ${selected%/})" ;;
 	/*) xdg-open "$(search-query ${selected#/})" ;;
-
-	# b for bookmark
-	b) dm-bookmark ;;
 
 	# desktop applications
 	*.desktop) gtk-launch "$selected" ;;

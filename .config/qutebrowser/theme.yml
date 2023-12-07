@@ -1,0 +1,122 @@
+colors:
+  completion:
+    even.bg: bg_trans
+    odd.bg: none
+    fg: fg
+    match.fg: magenta
+    item.selected:
+      bg: yellow
+      fg: black
+      match.fg: black
+      border.bottom: none
+      border.top: none
+    category:
+      bg: bg_trans
+      fg: fg
+      border.bottom: none
+      border.top: none
+    scrollbar:
+      bg: none
+      fg: fg
+
+  contextmenu:
+    menu.bg: bg
+    menu.fg: fg
+    disabled.bg: none
+    disabled.fg: gray
+    selected.bg: fg
+    selected.fg: bg
+
+  downloads:
+    bar.bg: bg
+    start.bg: blue
+    start.fg: black
+    stop.bg: yellow
+    stop.fg: black
+    error.bg: red
+    error.fg: black
+    # downloads.system.bg: 'none'
+    # downloads.system.fg: 'none'
+
+  hints:
+    bg: primary
+    fg: black
+    match.fg: gray
+  keyhint:
+    bg: bg_trans
+    fg: fg
+    suffix.fg: magenta
+
+  messages:
+    info.bg: bg
+    info.fg: fg
+    info.border: none
+    warning.bg: yellow
+    warning.fg: bg
+    warning.border: none
+    error.bg: red
+    error.fg: bg
+    error.border: none
+
+  prompts:
+    bg: bg_trans
+    fg: fg
+    border: none
+    selected.bg: gray
+    selected.fg: fg
+
+  statusbar:
+    normal.bg: bg_trans
+    normal.fg: fg
+    passthrough.bg: blue
+    passthrough.fg: black
+    command.bg: bg_trans
+    command.fg: fg
+    insert.bg: green
+    insert.fg: black
+    caret.bg: yellow
+    caret.fg: black
+    caret.selection.bg: magenta
+    caret.selection.fg: black
+    private.bg: bg
+    private.fg: fg
+    command.private.bg: bg
+    command.private.fg: fg
+    progress.bg: bg
+    url:
+      fg: fg
+      success.http.fg: fg
+      success.https.fg: fg
+      hover.fg: cyan
+      warn.fg: yellow
+      error.fg: red
+
+  tabs:
+    bar.bg: bg_trans
+    even.bg: none
+    even.fg: fg
+    odd.bg: none
+    odd.fg: fg
+    selected:
+      even.bg: gray
+      even.fg: fg
+      odd.bg: gray
+      odd.fg: fg
+    pinned:
+      even.bg: bg
+      even.fg: fg
+      odd.bg: none
+      odd.fg: fg
+      selected.even.bg: gray
+      selected.even.fg: fg
+      selected.odd.bg: none
+      selected.odd.fg: fg
+    indicator:
+      error: red
+      start: yellow
+      stop: green
+      # system: 'none'
+
+  tooltip:
+    bg: bg_trans
+    fg: fg

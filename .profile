@@ -23,7 +23,7 @@ export PATH="${PATH}:$XDG_DATA_HOME/cargo/bin"
 #==================== Main ====================#
 export WM='dwm'
 export TERMINAL='st'
-export BROWSER='librewolf'
+export BROWSER='qutebrowser'
 export EDITOR='nvim'
 export SHELL='/bin/bash'
 export PKGMAN='paru'

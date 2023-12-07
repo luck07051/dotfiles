@@ -7,6 +7,6 @@ echo "$XDG_CONFIG_HOME/X11/color" | entr -np sync-xrdb &
 
 echo "$HOME/bm/bookmark" | entr -np sync-bookmark &
 
-echo "$HOME/pkg/$(cat /etc/hostname)" | entr -np peger "$HOME/pkg/$(cat /etc/hostname)" &
+echo "$HOME/bm/pkg-$(cat /etc/hostname)" | entr -np peger "$HOME/bm/pkg-$(cat /etc/hostname)" &
 
 wait

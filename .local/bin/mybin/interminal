@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# TODO
+# Uni-port of terminal
+
+exit
+
+# title, instance, class, size(width, height)
+# font, font size
+
+getopts
+
+case $TERMINAL in
+	st) st -t "${0##*/}" -c float "${EDITOR:-vim}" "$TMPFILE" ;;
+	alacritty) alacritty -T "${0##*/}" --class float "${EDITOR:-vim}" "$TMPFILE" ;;
+	foot) foot -T "${0##*/}" "${EDITOR:-vim}" "$TMPFILE"
+esac

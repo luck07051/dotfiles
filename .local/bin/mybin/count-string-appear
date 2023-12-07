@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Count the string appear times
+
+str=$1
+shift
+
+for s in $(grep -ho "$str" "$@" | sort | uniq); do
+	times="$(grep -Fho "$s" "$@" | wc -l)"
+	printf "%08d\t%s\n" "$times" "$s"
+done | sort | sed 's/^0*//' | column -t -s "$(printf '\t')"

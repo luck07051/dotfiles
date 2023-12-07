@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Open url in system clipboard in mpv
+
+url="$(clip -o)"
+
+mpv "$url"
+
+if [ $? -ne 0 ]; then
+	notify-send 'MPV cant not open' "$url"
+fi

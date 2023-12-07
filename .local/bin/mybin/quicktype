@@ -1,0 +1,28 @@
+#!/bin/sh
+
+dmenu="${DMENU:-dmenu -i}"
+list="$HOME/bm/quicktype-list"
+
+get_list() {
+	grep -v -e '^\s*#' -e '^$' "$list" \
+	| case ${dmenu%% *} in
+		# fmenu) awk -F'\t' "{print \$1 \"$(tput setaf 247)  --  \" \$2 \"$(tput sgr0)\"}" ;;
+		fmenu) awk -F'\t' "{print \$1 \"[38;5;246m\t  --  \" \$2 \"[0m\"}" ;;
+		*) awk -F'\t' '{print $1 "\t  --  \t" $2}' ;;
+	esac | column -t -s "$(printf '\t')"
+}
+
+selected="$(get_list| $dmenu)"
+
+[ -z "$selected" ] && exit
+
+output="$(eval "${selected##*--  }")"
+
+case "$1" in
+	'type'|'')
+		xdotool type "$output"
+		;;
+	'clip')
+		printf '%s' "$output" | clip
+		;;
+esac

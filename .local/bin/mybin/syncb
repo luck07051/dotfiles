@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Open syncthing browser page
+
+syncthing serve --browser-only
