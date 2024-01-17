@@ -1,8 +1,9 @@
 #!/bin/sh
 
 if type paru >/dev/null; then
-	paru
-	paru -Sdcc
+	if paru; then
+		yes | paru -Sdcc
+	fi
 elif type yay >/dev/null; then
 	yay
 else

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 dmenu="${DMENU:-dmenu -i}"
-list="$HOME/bm/quicktype-list"
+list="${XDG_BOOKMARK_DIR-:$HOME/bookmark}/quicktype-list"
 
 get_list() {
 	grep -v -e '^\s*#' -e '^$' "$list" \

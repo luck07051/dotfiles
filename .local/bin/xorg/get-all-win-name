@@ -2,10 +2,13 @@
 
 # Getting all windows name.
 
+for id in $(xprop -root _NET_CLIENT_LIST | sed 's/^.\+# //; s/, \+/\n/g' | sort | uniq); do
+	printf '%s\t' "$id"
+	xprop -id "$id" _NET_WM_NAME | sed 's/^.\+ = //; s/^"//; s/"$//'
+done
+
 xprop -root _NET_CLIENT_LIST |
 	sed 's/^.\+# //; s/, \+/\n/g' |
-	sort |
-	uniq |
-	xargs -I {} xp
-	rop -id {} _NET_WM_NAME |
+	sort | uniq |
+	xargs -I {} xprop -id {} _NET_WM_NAME |
 	sed 's/^.\+ = //; s/^"//; s/"$//'

@@ -5,7 +5,7 @@
 # Usage: search-query content to search
 #   If no args given, list all the search engine.
 
-searchengine_file="$HOME/bm/searchengine"
+searchengine_file="${XDG_BOOKMARK_DIR:-$HOME/bookmark}/searchengine"
 
 if [ $# -eq 0 ]; then
 	grep -v -e '^\s*#' -e '^$' "$searchengine_file"

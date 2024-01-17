@@ -2,15 +2,8 @@ import os
 import subprocess
 import yaml
 
-# TODO: redirect
-
-# TODO: darkreader (custom user style sheet)
-
-# TODO: i-dont-care-about-cookies
-# https://reddit.uima.duckdns.org/r/qutebrowser/comments/mnptey/getting_rid_of_cookie_consent_barspopups/
-
-# TODO: cookies pre sites
-
+# i-dont-care-about-cookies
+# https://github.com/Schmiddiii/qute-cookie-block
 
 config.load_autoconfig(False)
 
@@ -18,8 +11,7 @@ c.url.default_page = 'https://dashboard.uima.duckdns.org'
 c.url.start_pages = 'https://dashboard.uima.duckdns.org'
 
 terminal = os.environ['TERMINAL']
-editor = os.environ['EDITOR']
-bm_dir = os.path.join(os.getenv('HOME'), 'bm')
+bm_dir = os.environ['XDG_BOOKMARK_DIR']
 
 # Read searchengine from bm/searchengine file.
 with open(os.path.join(bm_dir, 'searchengine'), 'r') as file:
@@ -32,19 +24,17 @@ with open(os.path.join(bm_dir, 'searchengine'), 'r') as file:
 
 # Auto ln quickmarks file.
 quickmarks_file = os.path.join(bm_dir, 'bookmark')
-config_quickmarks_file = os.path.join(config.configdir, 'quickmarks')
+config_quickmarks_file = config.configdir / 'quickmarks'
 if os.path.isfile(quickmarks_file) and not os.path.exists(config_quickmarks_file):
     subprocess.run(['ln', '-s', quickmarks_file, config_quickmarks_file])
 
 # User stylesheets
 # c.content.user_stylesheets = [
-#     os.path.join(config.configdir, 'css/uima-dark-all-sites.css')
+#     config.configdir / 'css/uima-dark-all-sites.css'
 # ]
 
 # Load keybind.
 config.source('keybind.py')
-
-# Alias
 
 
 # Content
@@ -52,9 +42,9 @@ config.source('keybind.py')
 common_user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)' \
     ' AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
 
-config.set('content.headers.user_agent', common_user_agent)
+c.content.headers.user_agent = common_user_agent
 
-config.set('content.javascript.enabled', False)
+c.content.javascript.enabled = False
 with open(os.path.join(bm_dir, 'allow-js'), 'r') as file:
     for line in file.readlines():
         line = line.strip()
@@ -62,21 +52,21 @@ with open(os.path.join(bm_dir, 'allow-js'), 'r') as file:
             continue
         config.set('content.javascript.enabled', True, line)
 
-
-# config.set('content.cookies.store', False)
-# config.set('content.cookies.store', True, '')
-
-config.set('content.cookies.accept', 'no-3rdparty')
-config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
-config.set('content.cookies.accept', 'all', 'devtools://*')
-
-# c.content.javascript.clipboard = 'access'
+c.content.cookies.accept = 'no-3rdparty'
+# c.content.cookies.accept = 'never'
+# with open(os.path.join(bm_dir, 'allow-cookies'), 'r') as file:
+#     for line in file.readlines():
+#         line = line.strip()
+#         if not line or line.startswith('#'):
+#             continue
+#         config.set('content.cookies.accept', 'no-3rdparty', line)
 
 c.content.blocking.method = 'both'
 c.content.blocking.whitelist = []
 c.content.fullscreen.overlay_timeout = 0
 c.content.fullscreen.window = True
-c.content.pdfjs = True
+# c.content.pdfjs = True
+c.content.autoplay = False
 
 
 # Fileselect
@@ -94,12 +84,17 @@ c.fileselect.single_file.command = [
     "ranger", "--choosefile={}"]
 c.editor.command = [
     terminal, '-t', 'qb editor',
-    editor, '-c', 'normal {line}G{column0}l', '{file}']
+    os.environ['EDITOR'], '-c', 'normal {line}G{column0}l', '{file}']
 
 
 # Misc
 
-c.downloads.location.directory = '~/dl'
+c.downloads.location.directory = terminal = os.environ['XDG_DOWNLOAD_DIR']
+c.fonts.default_family = [
+    "MesloLGS Nerd Font",
+    "Noto Sans CJK TC",
+    "monospace"
+]
 c.fonts.default_size = '10.5pt'
 # Open base URL of the searchengine if a searchengine shortcut is invoked without parameters.
 c.url.open_base_url = True
@@ -195,5 +190,5 @@ for k, v in dict_attrs(yaml_data):
 c.colors.downloads.system.bg            = 'none'
 c.colors.downloads.system.fg            = 'none'
 c.colors.tabs.indicator.system          = 'none'
-c.colors.webpage.preferred_color_scheme = 'dark'
+# c.colors.webpage.preferred_color_scheme = 'dark'
 # c.colors.webpage.bg = colors['bg_trans']

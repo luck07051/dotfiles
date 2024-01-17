@@ -3,7 +3,7 @@
 # Bookmark menu.
 
 dmenu="${DMENU:-dmenu -i}"
-bookmark_file="$HOME/bm/bookmark"
+bookmark_file="${XDG_BOOKMARK_DIR:-$HOME/bookmark}/bookmark"
 
 get_bookmark() {
 	grep -v -e '^\s*#' -e '^$' "$bookmark_file" \

@@ -2,7 +2,7 @@
 
 # Selecting directory list by 'firmark_file' using fzf.
 
-dirmark_file="${1:-$HOME/bm/dirmark}"
+dirmark_file="${1:-${XDG_BOOKMARK_DIR:-$HOME/bookmark}/dirmark}"
 
 selected="$(grep -v -e '^\s*#' -e '^$' "$dirmark_file" | fzf)"
 [ -z "$selected" ] && exit 1

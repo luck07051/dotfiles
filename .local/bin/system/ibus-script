@@ -1,6 +1,6 @@
 #!/bin/sh
 
-engine_list="$HOME/bm/ibus-engine"
+engine_list="${XDG_BOOKMARK_DIR:-$HOME/bm}/ibus-engine"
 
 get() {
 	grep -v '^#' "$engine_list" | grep "^$(ibus engine)" | cut -f2

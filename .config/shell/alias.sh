@@ -19,6 +19,7 @@ alias o='open'
 alias os='open -s'
 alias z='cd $(dirmark || echo $PWD)'
 alias a='. fff'
+# alias a='br'
 
 # Use doas instead sudo
 type doas >/dev/null 2>&1 && alias sudo='doas'
@@ -93,6 +94,21 @@ if [ "${0##*/}" == "zsh" ] && type bat >/dev/null 2>&1; then
 	alias -g -- -h='-h | bat --language=help --style=plain --wrap=never --paging=never'
 	alias -g -- --help='--help | bat --language=help --style=plain --wrap=never --paging=never'
 fi
+
+# broot
+function br {
+    local cmd cmd_file code
+    cmd_file=$(mktemp)
+    if broot --outcmd "$cmd_file" "$@"; then
+        cmd=$(<"$cmd_file")
+        command rm -f "$cmd_file"
+        eval "$cmd"
+    else
+        code=$?
+        command rm -f "$cmd_file"
+        return "$code"
+    fi
+}
 
 
 # Fix Something #

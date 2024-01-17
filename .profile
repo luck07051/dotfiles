@@ -10,6 +10,7 @@ export XDG_DOCUMENTS_DIR="$HOME/doc"
 export XDG_MUSIC_DIR="$HOME/mu"
 export XDG_PICTURES_DIR="$HOME/img"
 export XDG_VIDEOS_DIR="$HOME/vid"
+export XDG_BOOKMARK_DIR="$HOME/bm"
 
 #==================== Bin Paths ====================#
 # Add ~/.local/bin and it's subdir to path

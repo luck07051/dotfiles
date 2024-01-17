@@ -5,4 +5,4 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-printf " %s" "$(vpn get_name || echo '--')"
+printf ' %s' "$(vpn get_name || echo '--')"

@@ -11,7 +11,7 @@ uicom)
 	# Set screen to 144 rate
 	xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
 	# Tablet driver
-	run otd
+	# run otd
 	;;
 uilap)
 	;;
