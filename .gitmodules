@@ -1,0 +1,9 @@
+[submodule ".local/bin/repo/fff"]
+	path = .local/bin/repo/fff
+	url = git@github.com:luck07051/fff.git
+[submodule ".local/bin/repo/peger"]
+	path = .local/bin/repo/peger
+	url = git@github.com:luck07051/peger.git
+[submodule ".local/bin/repo/fmenu"]
+	path = .local/bin/repo/fmenu
+	url = git@github.com:luck07051/fmenu.git
