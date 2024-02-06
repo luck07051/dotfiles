@@ -51,6 +51,7 @@ with open(os.path.join(bm_dir, 'allow-js'), 'r') as file:
         if not line or line.startswith('#'):
             continue
         config.set('content.javascript.enabled', True, line)
+        config.set('content.javascript.clipboard', 'access', line)
 
 c.content.cookies.accept = 'no-3rdparty'
 # c.content.cookies.accept = 'never'
